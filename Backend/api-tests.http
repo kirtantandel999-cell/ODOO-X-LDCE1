@@ -977,6 +977,174 @@ Content-Type: {{contentType}}
 GET {{baseUrl}}/api/trips/{{tripId}}/itinerary
 Content-Type: {{contentType}}
 
+###
+
+
+### ====================================================================
+### SCREEN 10: COMMUNITY TAB (ALL SCENARIOS)
+### ====================================================================
+
+### STEP 1: Get All Community Posts (Public Feed)
+# @name getAllCommunityPosts
+GET {{baseUrl}}/api/community
+Content-Type: {{contentType}}
+
+### STEP 2: Search Community Posts by Term (e.g. tokyo, sunset, climb)
+# @name searchCommunityPosts
+GET {{baseUrl}}/api/community?search=tokyo
+Content-Type: {{contentType}}
+
+### STEP 3: Filter Community Posts by Destination ID
+# @name filterCommunityPostsDestination
+GET {{baseUrl}}/api/community?destinationId=1
+Content-Type: {{contentType}}
+
+### STEP 4: Filter Community Posts by Activity ID
+# @name filterCommunityPostsActivity
+GET {{baseUrl}}/api/community?activityId=3
+Content-Type: {{contentType}}
+
+### STEP 5: Filter Community Posts by Minimum Rating (e.g. 5 Stars)
+# @name filterCommunityPostsRating
+GET {{baseUrl}}/api/community?minRating=5
+Content-Type: {{contentType}}
+
+### STEP 6a: Sort Community Posts by Newest First
+# @name sortCommunityPostsNewest
+GET {{baseUrl}}/api/community?sort=newest
+Content-Type: {{contentType}}
+
+### STEP 6b: Sort Community Posts by Highest Rating
+# @name sortCommunityPostsRating
+GET {{baseUrl}}/api/community?sort=rating_desc
+Content-Type: {{contentType}}
+
+### STEP 7: Group Community Posts by Destination
+# @name groupCommunityPostsDestination
+GET {{baseUrl}}/api/community?groupBy=destination
+Content-Type: {{contentType}}
+
+### STEP 8: Paginate Community Posts (Page 1, Limit 2)
+# @name paginateCommunityPosts
+GET {{baseUrl}}/api/community?page=1&limit=2
+Content-Type: {{contentType}}
+
+### STEP 9: Create a New Community Post (Authenticated)
+# @name createCommunityPost
+POST {{baseUrl}}/api/community
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Amazing Tokyo Experience",
+  "content": "Tokyo was an amazing experience. The food, culture, and bustling streets were unforgettable.",
+  "destinationId": 1,
+  "activityId": 1,
+  "rating": 5,
+  "image": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=800"
+}
+
+### STEP 10: Get Single Community Post by ID
+# @name getSingleCommunityPost
+GET {{baseUrl}}/api/community/1
+Content-Type: {{contentType}}
+
+### STEP 11: Update Community Post (Owner Only)
+# @name updateCommunityPost
+PUT {{baseUrl}}/api/community/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Unforgettable Tokyo Neon & Culinary Tour (Updated)",
+  "content": "Tokyo's street food in Tsukiji outer market is unbeatable! Highly recommended for all travelers.",
+  "rating": 5
+}
+
+### STEP 12: Get My Community Posts (Authenticated User's Posts)
+# @name getMyCommunityPosts
+GET {{baseUrl}}/api/community/user/me
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 13: Combined Query (Search + Filter + Sort + Pagination)
+# @name combinedCommunityQuery
+GET {{baseUrl}}/api/community?search=tokyo&minRating=4&sort=newest&page=1&limit=10
+Content-Type: {{contentType}}
+
+### STEP 14: Delete Community Post (Owner Only)
+# @name deleteCommunityPost
+DELETE {{baseUrl}}/api/community/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### SCREEN 10 VALIDATION & SECURITY CHECKS
+### ====================================================================
+
+### 15a. Invalid Create: Empty Title -> Expects 400 Bad Request
+# @name testEmptyCommunityTitle
+POST {{baseUrl}}/api/community
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "",
+  "content": "Valid experience content."
+}
+
+### 15b. Invalid Create: Empty Content -> Expects 400 Bad Request
+# @name testEmptyCommunityContent
+POST {{baseUrl}}/api/community
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Valid Title",
+  "content": ""
+}
+
+### 15c. Invalid Filter: Rating > 5 -> Expects 400 Bad Request
+# @name testInvalidCommunityRating
+GET {{baseUrl}}/api/community?minRating=10
+Content-Type: {{contentType}}
+
+### 15d. Invalid Sort Parameter -> Expects 400 Bad Request
+# @name testInvalidCommunitySort
+GET {{baseUrl}}/api/community?sort=invalid_sort
+Content-Type: {{contentType}}
+
+### 15e. Invalid GroupBy Parameter -> Expects 400 Bad Request
+# @name testInvalidCommunityGroupBy
+GET {{baseUrl}}/api/community?groupBy=invalid_group
+Content-Type: {{contentType}}
+
+### 15f. Invalid Image URL Format -> Expects 400 Bad Request
+# @name testInvalidCommunityImage
+POST {{baseUrl}}/api/community
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Valid Title",
+  "content": "Valid Content",
+  "image": "not-a-url"
+}
+
+### 15g. Unauthorized Create Post (No Token) -> Expects 401 Unauthorized
+# @name testUnauthorizedCreatePost
+POST {{baseUrl}}/api/community
+Content-Type: {{contentType}}
+
+{
+  "title": "Title",
+  "content": "Content"
+}
+
+
 
 
 

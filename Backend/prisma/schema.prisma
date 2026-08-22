@@ -46,6 +46,7 @@ model User {
   updatedAt             DateTime @updatedAt
 
   trips                 Trip[]
+  communityPosts        CommunityPost[]
 }
 
 model Region {
@@ -78,6 +79,7 @@ model Destination {
   tripDestinations TripDestination[]
   tripSections     TripSection[]
   activities       Activity[]
+  communityPosts   CommunityPost[]
 }
 
 model Trip {
@@ -98,6 +100,7 @@ model Trip {
   tripDestinations TripDestination[]
   tripActivities   TripActivity[]
   sections         TripSection[]
+  communityPosts   CommunityPost[]
 
   @@index([userId, startDate, endDate])
   @@index([userId, status])
@@ -135,9 +138,10 @@ model Activity {
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
 
-  destination    Destination?   @relation(fields: [destinationId], references: [id])
+  destination    Destination?    @relation(fields: [destinationId], references: [id])
   tripActivities TripActivity[]
   tripSections   TripSection[]
+  communityPosts CommunityPost[]
 
   @@index([name])
   @@index([category])
@@ -202,5 +206,31 @@ model Banner {
   isActive   Boolean  @default(true)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model CommunityPost {
+  id            Int          @id @default(autoincrement())
+  userId        Int
+  title         String
+  content       String
+  tripId        Int?
+  destinationId Int?
+  activityId    Int?
+  rating        Int?
+  image         String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  trip          Trip?        @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  destination   Destination? @relation(fields: [destinationId], references: [id], onDelete: SetNull)
+  activity      Activity?    @relation(fields: [activityId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([tripId])
+  @@index([destinationId])
+  @@index([activityId])
+  @@index([createdAt])
+  @@index([rating])
 }
 

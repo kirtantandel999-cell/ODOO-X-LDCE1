@@ -276,6 +276,93 @@ async function main() {
     }
   }
 
+  // ── Community Posts (Screen 10) ──────────────
+  console.log("💬 Seeding community posts...");
+  const secondUser = await prisma.user.upsert({
+    where: { email: "elena@example.com" },
+    update: {},
+    create: {
+      firstName: "Elena",
+      lastName: "Gilbert",
+      email: "elena@example.com",
+      password: hashedPassword,
+      phoneNumber: "9876543299",
+      city: "Paris",
+      country: "France",
+      photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      additionalInformation: "Globe trotter and photography enthusiast.",
+    },
+  });
+
+  const communitySeedData = [
+    {
+      userId: testUser.id,
+      title: "Unforgettable Tokyo Neon & Culinary Tour",
+      content: "Tokyo's street food in Tsukiji outer market is unbeatable! The vibrant neon lights of Shibuya crossing at night gave an adrenaline rush like nowhere else.",
+      destName: "Tokyo",
+      actName: "Tsukiji Outer Market Sushi Tour",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=800",
+    },
+    {
+      userId: testUser.id,
+      title: "Magical Sunset at Tanah Lot Temple in Bali",
+      content: "Watching the tide rise as the golden sun set over Tanah Lot was surreal. Bali is definitely one of the most spiritual and scenic islands.",
+      destName: "Bali",
+      actName: "Tanah Lot Sunset Temple",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800",
+    },
+    {
+      userId: secondUser.id,
+      title: "Louvre Museum & Seine River Evening in Paris",
+      content: "Seeing the Mona Lisa in person and doing a Seine river sunset cruise was truly memorable. Paris has unmatched elegance and history.",
+      destName: "Paris",
+      actName: "Louvre Museum Guided Art Tour",
+      rating: 4,
+      image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800",
+    },
+    {
+      userId: secondUser.id,
+      title: "Thrilling Sydney Harbour Bridge Climb Experience",
+      content: "The 360-degree views from the top of Sydney Harbour Bridge are breathtaking. Worth every step of the climb!",
+      destName: "Sydney",
+      actName: "Sydney Harbour Bridge Climb",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800",
+    },
+    {
+      userId: testUser.id,
+      title: "Backpacking across Rome's Ancient Wonders",
+      content: "Standing inside the Colosseum transports you back thousands of years. Pair it with authentic Roman carbonara for a perfect day.",
+      destName: "Rome",
+      actName: "Colosseum & Roman Forum Tour",
+      rating: 4,
+      image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800",
+    },
+  ];
+
+  for (const postData of communitySeedData) {
+    const { destName, actName, ...pFields } = postData;
+    let existingPost = await prisma.communityPost.findFirst({
+      where: { title: pFields.title, userId: pFields.userId },
+    });
+
+    if (!existingPost) {
+      const dest = destinations[destName];
+      const act = await prisma.activity.findFirst({ where: { name: actName } });
+
+      existingPost = await prisma.communityPost.create({
+        data: {
+          ...pFields,
+          destinationId: dest ? dest.id : null,
+          activityId: act ? act.id : null,
+        },
+      });
+      console.log(`  ✅ Community Post: "${existingPost.title}" (Rating: ${existingPost.rating}★)`);
+    }
+  }
+
   console.log("\n✅ Seed completed successfully!");
   console.log(`   Regions:      ${Object.keys(regions).length}`);
   console.log(`   Destinations: ${Object.keys(destinations).length}`);

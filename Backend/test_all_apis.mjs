@@ -474,7 +474,56 @@ async function runCompleteTestSuite() {
   const delBanner = await request(`/api/banners/${bId}`, { method: "DELETE", headers: authHeaders });
   test(delBanner.status === 200, "DELETE /api/banners/:id");
 
-  // 13. SECURITY GUARDS
+  // 13. SCREEN 10: COMMUNITY TAB
+  const commPosts = await request("/api/community");
+  test(commPosts.status === 200 && Array.isArray(commPosts.data.data), "GET /api/community (Screen 10 Public Feed)");
+
+  const commSearch = await request("/api/community?search=tokyo");
+  test(commSearch.status === 200, "GET /api/community?search=tokyo");
+
+  const commFilter = await request("/api/community?destinationId=1&minRating=4");
+  test(commFilter.status === 200, "GET /api/community (Filter by destination & rating)");
+
+  const commSort = await request("/api/community?sort=rating_desc");
+  test(commSort.status === 200, "GET /api/community?sort=rating_desc");
+
+  const commGroup = await request("/api/community?groupBy=destination");
+  test(commGroup.status === 200, "GET /api/community?groupBy=destination");
+
+  const commCreate = await request("/api/community", {
+    method: "POST",
+    headers: authHeaders,
+    body: JSON.stringify({
+      title: "Master Suite Community Post",
+      content: "Testing community post creation in master suite.",
+      destinationId: 1,
+      activityId: 1,
+      rating: 5,
+    }),
+  });
+  test(commCreate.status === 201, "POST /api/community (Create post)");
+  const commPostId = commCreate.data.data.id;
+
+  const commSingle = await request(`/api/community/${commPostId}`);
+  test(commSingle.status === 200 && commSingle.data.data.id === commPostId, "GET /api/community/:id");
+
+  const commUpdate = await request(`/api/community/${commPostId}`, {
+    method: "PUT",
+    headers: authHeaders,
+    body: JSON.stringify({ title: "Updated Master Community Post", rating: 4 }),
+  });
+  test(commUpdate.status === 200, "PUT /api/community/:id");
+
+  const commMe = await request("/api/community/user/me", { headers: authHeaders });
+  test(commMe.status === 200 && Array.isArray(commMe.data.data), "GET /api/community/user/me");
+
+  const commDel = await request(`/api/community/${commPostId}`, {
+    method: "DELETE",
+    headers: authHeaders,
+  });
+  test(commDel.status === 200, "DELETE /api/community/:id");
+
+  // 14. SECURITY GUARDS
   const unauth = await request("/api/trips/my");
   test(unauth.status === 401, "Guard: 401 Unauthorized");
 

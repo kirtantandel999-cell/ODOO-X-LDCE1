@@ -11,6 +11,7 @@ import tripRoutes from "./routes/trip.routes.js";
 import bannerRoutes from "./routes/banner.routes.js";
 import homeRoutes from "./routes/home.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import communityRoutes from "./routes/community.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +28,7 @@ app.use("/api/regions", regionRoutes);
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/activities", activityRoutes);
 app.use("/api/trips", tripRoutes);
+app.use("/api/community", communityRoutes);
 app.use("/api/banners", bannerRoutes);
 app.use("/api/home", homeRoutes);
 
@@ -43,6 +45,7 @@ app.get("/", (req, res) => {
       "/api/destinations",
       "/api/activities",
       "/api/trips",
+      "/api/community",
       "/api/banners",
       "/api/home",
     ],
