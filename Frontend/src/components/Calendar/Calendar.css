@@ -1,0 +1,1918 @@
+/* ==========================================================================
+   GLOBETROTTER CALENDAR - WARM TRAVEL HOME PAGE DESIGN SYSTEM
+   Matches HomePage.css / ProfilePage.css with warm cream, terracotta & indigo
+   ========================================================================== */
+
+:root {
+  --cream: #faf6ef;
+  --sand: #f3e9d8;
+  --sand-light: #fbf7f0;
+  --indigo-deep: #122931;
+  --indigo: #1c3f4d;
+  --ocean: #2e7d9a;
+  --ocean-light: #e6f3f7;
+  --terracotta: #c1622d;
+  --terracotta-hover: #b05726;
+  --terracotta-light: #fcf1eb;
+  --rust: #8b3a3a;
+  --rust-light: #faeded;
+  --gold: #d9a441;
+  --gold-light: #fcf6eb;
+  --ink: #17262b;
+  --ink-muted: #64747b;
+  --white: #ffffff;
+  --line: rgba(23, 38, 43, 0.12);
+  --line-light: rgba(23, 38, 43, 0.06);
+  --shadow: 0 20px 40px -18px rgba(23, 38, 43, 0.15);
+  --shadow-card: 0 10px 30px -10px rgba(23, 38, 43, 0.08);
+  --shadow-hover: 0 16px 36px -10px rgba(23, 38, 43, 0.14);
+  --shadow-modal: 0 25px 60px -15px rgba(18, 41, 49, 0.35);
+  --radius: 18px;
+  --radius-sm: 10px;
+  --radius-pill: 9999px;
+
+  /* Color mapping aliases */
+  --primary: #c1622d;
+  --primary-hover: #b05726;
+  --primary-glow: #c1622d;
+  --bg-color: #faf6ef;
+  --card-bg: #ffffff;
+  --card-bg-hover: #fdfbf7;
+  --card-border: rgba(23, 38, 43, 0.12);
+  --text-main: #17262b;
+  --text-muted: #64747b;
+  --border-color: rgba(23, 38, 43, 0.12);
+  --error: #e11d48;
+  --success: #10b981;
+  --warning: #d9a441;
+  --accent: #2e7d9a;
+}
+
+/* ==========================================================================
+   LAYOUT & CONTAINER
+   ========================================================================== */
+.gt-app-layout {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.gt-app-layout a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gt-app-layout button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.gt-app-layout h1,
+.gt-app-layout h2,
+.gt-app-layout h3,
+.gt-app-layout h4 {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.gt-page-container {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+  box-sizing: border-box;
+}
+
+/* Global utility classes */
+.text-primary {
+  color: var(--terracotta) !important;
+}
+
+.text-primary-glow {
+  color: var(--terracotta) !important;
+}
+
+.text-success {
+  color: var(--success) !important;
+}
+
+.text-error {
+  color: var(--error) !important;
+}
+
+.text-muted {
+  color: var(--ink-muted) !important;
+}
+
+.text-muted-sm {
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+/* ==========================================================================
+   TOPBAR (MATCHING CREATE-TRIP & PROFILE PAGE AS IN SCREENSHOT)
+   ========================================================================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(250, 246, 239, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--indigo-deep);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo .mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg, var(--terracotta), var(--gold), var(--ocean), var(--terracotta));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.crumb {
+  font-size: 13.5px;
+  color: #6a787c;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.crumb a {
+  color: #6a787c;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.crumb a:hover {
+  color: var(--terracotta);
+}
+
+.crumb span {
+  color: var(--indigo-deep);
+  font-weight: 600;
+}
+
+.avatar-wrap {
+  position: relative;
+}
+
+.avatar-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--indigo-deep);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease;
+  padding: 0;
+}
+
+.avatar-btn:hover {
+  border-color: var(--terracotta);
+  background: var(--sand-light);
+}
+
+.avatar-menu {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px -10px rgba(23, 38, 43, 0.22);
+  min-width: 175px;
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 150;
+  animation: slideDown 0.18s ease;
+}
+
+.avatar-menu.open {
+  display: flex;
+}
+
+.avatar-menu a,
+.avatar-menu button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  border: none;
+  background: none;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+  cursor: pointer;
+  display: block;
+}
+
+.avatar-menu a:hover,
+.avatar-menu button:hover {
+  background: var(--sand);
+  color: var(--terracotta);
+}
+
+/* ==========================================================================
+   PAGE HEAD (DARK INDIGO/BLUE BANNER MATCHING SCREENSHOT)
+   ========================================================================== */
+.page-head {
+  background: var(--indigo-deep);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 34px 38px 30px;
+  margin: 28px 0 32px;
+  box-shadow: 0 14px 30px -18px rgba(18, 41, 49, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.page-head-content {
+  flex: 1;
+  min-width: 260px;
+}
+
+.page-head .eyebrow {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.page-head h1 {
+  font-size: clamp(26px, 3.6vw, 34px);
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.page-head p {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 15px;
+  max-width: 540px;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.page-head-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.gt-btn-plan-trip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--terracotta);
+  color: var(--white);
+  padding: 0.75rem 1.65rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -4px rgba(193, 98, 45, 0.6);
+  transition: all 0.25s ease;
+}
+
+.gt-btn-plan-trip:hover {
+  background: var(--terracotta-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px -4px rgba(193, 98, 45, 0.75);
+}
+
+/* ==========================================================================
+   CALENDAR CONTROLS & FILTER BAR
+   ========================================================================== */
+.gt-calendar-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--white);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.gt-search-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+}
+
+.gt-search-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+
+.gt-search-input {
+  width: 100%;
+  padding: 0.65rem 2.25rem 0.65rem 2.75rem;
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.92rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.gt-search-input:focus {
+  background: var(--white);
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(193, 98, 45, 0.15);
+}
+
+.gt-search-input::placeholder {
+  color: var(--ink-muted);
+}
+
+.gt-search-clear-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gt-search-clear-btn:hover {
+  color: var(--terracotta);
+}
+
+.gt-calendar-controls-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.gt-control-popover-wrapper {
+  position: relative;
+}
+
+/* Control Trigger Buttons (Group By, Filter, Sort) */
+.gt-control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--sand-light);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 0.6rem 1.15rem;
+  color: var(--indigo-deep);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.gt-control-btn:hover {
+  background: var(--white);
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+.gt-control-btn.active {
+  background: var(--terracotta-light);
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+.gt-control-btn svg {
+  flex-shrink: 0;
+}
+
+.chevron-icon {
+  transition: transform 0.2s ease, color 0.2s ease;
+  color: var(--ink-muted);
+}
+
+.chevron-icon.open {
+  transform: rotate(180deg);
+  color: var(--terracotta);
+}
+
+.gt-filter-count-badge {
+  background: var(--terracotta);
+  color: var(--white);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Common Control Menu Popovers (Group By, Sort) */
+.gt-control-menu-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 210px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px -10px rgba(23, 38, 43, 0.22);
+  padding: 8px;
+  z-index: 120;
+  animation: slideDown 0.18s ease;
+}
+
+.gt-popover-header {
+  padding: 6px 12px 8px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+
+.gt-popover-header h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.gt-popover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gt-popover-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.gt-popover-item:hover {
+  background: var(--sand);
+  color: var(--terracotta);
+}
+
+.gt-popover-item.selected {
+  background: var(--terracotta-light);
+  color: var(--terracotta);
+}
+
+.gt-item-check {
+  color: var(--terracotta);
+}
+
+/* Filter Modal Card */
+.gt-filter-modal-card {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 300px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 20px 40px -10px rgba(23, 38, 43, 0.25);
+  padding: 1.25rem;
+  z-index: 120;
+  animation: slideDown 0.18s ease;
+}
+
+.gt-filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.gt-filter-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  margin: 0;
+}
+
+.gt-btn-reset-filters {
+  background: none;
+  border: none;
+  color: var(--terracotta);
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+.gt-btn-reset-filters:hover {
+  background: var(--terracotta-light);
+}
+
+.gt-filter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.gt-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.gt-filter-group label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.gt-filter-select {
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  background: var(--sand-light);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gt-filter-select:focus,
+.gt-filter-select:hover {
+  border-color: var(--terracotta);
+  background: var(--white);
+}
+
+.gt-filter-footer {
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.gt-filter-footer .btn-primary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--terracotta);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  padding: 0.65rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gt-filter-footer .btn-primary:hover {
+  background: var(--terracotta-hover);
+}
+
+/* ==========================================================================
+   MONTH NAVIGATION
+   ========================================================================== */
+.gt-month-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.gt-month-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.gt-month-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--indigo-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+}
+
+.gt-month-nav-btn:hover {
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+  background: var(--sand-light);
+  transform: scale(1.05);
+}
+
+.gt-month-nav-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--indigo-deep);
+  margin: 0;
+  min-width: 220px;
+}
+
+.gt-month-nav-year {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+.gt-btn-today {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.5rem 1.15rem;
+  color: var(--indigo-deep);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+}
+
+.gt-btn-today:hover {
+  background: var(--terracotta-light);
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+/* ==========================================================================
+   CALENDAR GRID (MONTH VIEW)
+   ========================================================================== */
+.gt-calendar-grid-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.gt-calendar-weekdays-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--sand);
+  border-bottom: 1px solid var(--line);
+}
+
+.gt-weekday-col {
+  padding: 0.9rem 0.5rem;
+  text-align: center;
+}
+
+.gt-weekday-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  letter-spacing: 0.06em;
+}
+
+.gt-calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: rgba(23, 38, 43, 0.08);
+  gap: 1px;
+}
+
+/* Day Cell */
+.gt-day-cell {
+  background: var(--white);
+  min-height: 120px;
+  padding: 0.6rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.gt-day-cell:hover {
+  background: #fdfbf7;
+}
+
+.gt-day-cell.other-month {
+  background: #f8f6f0;
+  opacity: 0.55;
+}
+
+.gt-day-cell.today {
+  background: #fffdfa;
+}
+
+.gt-day-cell.selected {
+  background: var(--terracotta-light) !important;
+  box-shadow: inset 0 0 0 2px var(--terracotta);
+}
+
+.gt-day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.gt-day-num {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--indigo-deep);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.gt-day-cell.today .gt-day-num {
+  background: var(--terracotta);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.gt-today-indicator {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  text-transform: uppercase;
+}
+
+.gt-day-events {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow: hidden;
+}
+
+/* Trip Event Pill */
+.gt-calendar-event-pill {
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.25rem 0.45rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.gt-calendar-event-pill:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.95);
+}
+
+/* Event Pill Palette - Warm Travel Tones */
+.gt-calendar-event-pill.color-indigo,
+.gt-calendar-event-pill.color-default {
+  background: var(--indigo);
+  color: var(--white);
+}
+
+.gt-calendar-event-pill.color-emerald,
+.gt-calendar-event-pill.color-ocean {
+  background: var(--ocean);
+  color: var(--white);
+}
+
+.gt-calendar-event-pill.color-rose,
+.gt-calendar-event-pill.color-terracotta {
+  background: var(--terracotta);
+  color: var(--white);
+}
+
+.gt-calendar-event-pill.color-amber,
+.gt-calendar-event-pill.color-gold {
+  background: var(--gold);
+  color: #3b2a00;
+}
+
+.gt-calendar-event-pill.color-purple,
+.gt-calendar-event-pill.color-rust {
+  background: var(--rust);
+  color: var(--white);
+}
+
+.gt-calendar-event-pill.color-sky {
+  background: #388ba6;
+  color: var(--white);
+}
+
+.gt-more-trips-indicator {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  padding: 0.1rem 0.3rem;
+}
+
+/* ==========================================================================
+   SELECTED DATE PANEL
+   ========================================================================== */
+.gt-selected-date-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.gt-selected-date-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.gt-selected-date-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.gt-selected-date-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--terracotta-light);
+  color: var(--terracotta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gt-selected-date-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  margin: 0;
+}
+
+.gt-selected-date-sub {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.gt-btn-add-date-trip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--terracotta);
+  color: var(--white);
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.15rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gt-btn-add-date-trip:hover {
+  background: var(--terracotta-hover);
+  transform: translateY(-1px);
+}
+
+.gt-date-empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--ink-muted);
+}
+
+.gt-date-empty-text {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.gt-btn-schedule-quick {
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  color: var(--terracotta);
+  border-radius: 999px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gt-btn-schedule-quick:hover {
+  background: var(--terracotta-light);
+  border-color: var(--terracotta);
+}
+
+.gt-date-trips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.gt-date-trip-item {
+  display: flex;
+  align-items: center;
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0.85rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.gt-date-trip-item:hover {
+  background: var(--white);
+  border-color: var(--terracotta);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-card);
+}
+
+.gt-date-trip-color-strip {
+  width: 4px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.gt-date-trip-color-strip.color-indigo { background: var(--indigo); }
+.gt-date-trip-color-strip.color-emerald, .gt-date-trip-color-strip.color-ocean { background: var(--ocean); }
+.gt-date-trip-color-strip.color-rose, .gt-date-trip-color-strip.color-terracotta { background: var(--terracotta); }
+.gt-date-trip-color-strip.color-amber, .gt-date-trip-color-strip.color-gold { background: var(--gold); }
+.gt-date-trip-color-strip.color-purple, .gt-date-trip-color-strip.color-rust { background: var(--rust); }
+
+.gt-date-trip-content {
+  flex: 1;
+  margin-left: 0.5rem;
+}
+
+.gt-date-trip-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.gt-date-trip-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  margin: 0;
+}
+
+.status-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.status-tag.upcoming {
+  background: var(--terracotta-light);
+  color: var(--terracotta);
+}
+
+.status-tag.planned {
+  background: var(--ocean-light);
+  color: var(--ocean);
+}
+
+.status-tag.completed {
+  background: #e6f7ef;
+  color: var(--success);
+}
+
+.status-tag.cancelled {
+  background: #faeded;
+  color: var(--error);
+}
+
+.gt-date-trip-details {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.gt-date-trip-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.gt-date-trip-meta.budget {
+  font-weight: 700;
+  color: var(--terracotta);
+}
+
+.gt-date-trip-arrow {
+  color: var(--ink-muted);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.gt-date-trip-item:hover .gt-date-trip-arrow {
+  transform: translateX(4px);
+  color: var(--terracotta);
+}
+
+/* ==========================================================================
+   UPCOMING TRIPS SECTION
+   ========================================================================== */
+.gt-upcoming-section-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  padding: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.gt-upcoming-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.gt-upcoming-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.gt-upcoming-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--indigo-deep);
+  margin: 0;
+}
+
+.gt-upcoming-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  background: var(--terracotta-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+.gt-upcoming-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.gt-upcoming-item-card {
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.gt-upcoming-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--terracotta);
+  background: var(--white);
+}
+
+.gt-upcoming-item-thumb {
+  height: 140px;
+  position: relative;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.gt-upcoming-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.gt-upcoming-item-card:hover .gt-upcoming-item-thumb img {
+  transform: scale(1.06);
+}
+
+.thumb-gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--indigo) 0%, var(--terracotta) 100%);
+}
+
+.gt-upcoming-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.gt-upcoming-badge.upcoming {
+  background: rgba(193, 98, 45, 0.9);
+  color: var(--white);
+}
+
+.gt-upcoming-badge.planned {
+  background: rgba(46, 125, 154, 0.9);
+  color: var(--white);
+}
+
+.gt-upcoming-badge.completed {
+  background: rgba(16, 185, 129, 0.9);
+  color: var(--white);
+}
+
+.gt-upcoming-badge.cancelled {
+  background: rgba(225, 29, 72, 0.9);
+  color: var(--white);
+}
+
+.gt-upcoming-item-body {
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.gt-upcoming-item-name {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.gt-upcoming-item-dest,
+.gt-upcoming-item-dates {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.gt-upcoming-item-dest svg,
+.gt-upcoming-item-dates svg {
+  color: var(--terracotta);
+}
+
+.gt-upcoming-item-arrow {
+  display: none;
+}
+
+/* ==========================================================================
+   COMPACT & CLEAN GROUPED VIEW (DESTINATION, TRIP TYPE, ACTIVITY, MONTH, USER)
+   ========================================================================== */
+.gt-grouped-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+/* 1. Main Header Row */
+.gt-grouped-main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.gt-grouped-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gt-grouped-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.gt-grouped-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  font-family: 'Poppins', sans-serif;
+}
+
+.gt-grouped-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  background: var(--terracotta-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(193, 98, 45, 0.2);
+}
+
+/* 2. Group Sections List */
+.gt-grouped-sections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.gt-group-block {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.15rem 1.35rem;
+  box-shadow: var(--shadow-card);
+}
+
+.gt-group-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.gt-group-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.gt-group-subcount {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+/* 3. Cards Grid directly below group header */
+.gt-group-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.gt-grouped-card {
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.gt-grouped-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--terracotta);
+  background: var(--white);
+}
+
+.gt-grouped-card-thumb {
+  height: 120px;
+  position: relative;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.gt-grouped-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gt-grouped-card:hover .gt-grouped-card-thumb img {
+  transform: scale(1.05);
+}
+
+.gt-grouped-card-body {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.gt-grouped-card-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.gt-grouped-card-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+.gt-meta-icon {
+  color: var(--terracotta);
+  flex-shrink: 0;
+}
+
+.gt-grouped-card-budget {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  margin-top: 0.2rem;
+}
+
+.gt-grouped-empty-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   MODALS (TRIP DETAILS & ADD TRIP)
+   ========================================================================== */
+.gt-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 41, 49, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1.5rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.gt-trip-details-modal,
+.gt-add-trip-modal {
+  background: var(--white);
+  border-radius: 22px;
+  box-shadow: var(--shadow-modal);
+  border: 1px solid var(--line);
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.25s ease;
+}
+
+.gt-modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  color: var(--indigo-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.gt-modal-close-btn:hover {
+  background: var(--terracotta);
+  color: var(--white);
+  border-color: var(--terracotta);
+}
+
+.gt-modal-banner {
+  height: 180px;
+  position: relative;
+  background: var(--sand);
+}
+
+.gt-modal-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gt-modal-banner-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(0deg, rgba(18, 41, 49, 0.95) 0%, transparent 100%);
+  color: var(--white);
+}
+
+.gt-modal-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem 0;
+  color: var(--white);
+}
+
+.gt-modal-dest {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gt-modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.gt-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.gt-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.gt-detail-icon {
+  color: var(--terracotta);
+  margin-top: 0.15rem;
+}
+
+.gt-detail-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.gt-detail-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--indigo-deep);
+}
+
+.gt-activity-chip {
+  display: inline-block;
+  background: var(--terracotta-light);
+  color: var(--terracotta);
+  border: 1px solid rgba(193, 98, 45, 0.2);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.gt-desc-block {
+  padding: 1rem;
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.gt-desc-text {
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.gt-modal-footer {
+  padding: 1.25rem 1.5rem;
+  background: var(--sand-light);
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+.gt-btn-delete-trip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  color: var(--error);
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gt-btn-delete-trip:hover {
+  background: #faeded;
+  border-color: var(--error);
+}
+
+.gt-btn-close-modal {
+  background: var(--indigo-deep);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gt-btn-close-modal:hover {
+  background: var(--indigo);
+}
+
+/* ==========================================================================
+   FORMS (ADD TRIP MODAL)
+   ========================================================================== */
+.gt-form-header {
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.gt-form-header h3 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--indigo-deep);
+  margin: 0 0 0.25rem 0;
+}
+
+.gt-form-header p {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.gt-form-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gt-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.gt-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.gt-form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--indigo-deep);
+}
+
+.gt-form-input,
+.gt-form-select,
+.gt-form-textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.gt-form-input:focus,
+.gt-form-select:focus,
+.gt-form-textarea:focus {
+  background: var(--white);
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(193, 98, 45, 0.15);
+}
+
+.gt-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--sand-light);
+  border-top: 1px solid var(--line);
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+.gt-btn-cancel {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--indigo-deep);
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gt-btn-cancel:hover {
+  background: var(--white);
+}
+
+.gt-btn-submit {
+  background: var(--terracotta);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.6rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -4px rgba(193, 98, 45, 0.5);
+  transition: all 0.2s ease;
+}
+
+.gt-btn-submit:hover {
+  background: var(--terracotta-hover);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   ERROR BANNER & SKELETON STATES
+   ========================================================================== */
+.gt-error-banner {
+  background: #faeded;
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.gt-error-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gt-error-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--error);
+  margin: 0;
+}
+
+.gt-error-desc {
+  font-size: 0.85rem;
+  color: var(--ink);
+  margin: 0.15rem 0 0 0;
+}
+
+.gt-calendar-skeleton {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.gt-skeleton-bar {
+  height: 40px;
+  background: var(--sand);
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.gt-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.gt-skeleton-cell {
+  height: 100px;
+  background: var(--sand-light);
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .gt-calendar-controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .gt-controls-actions {
+    justify-content: space-between;
+  }
+  .gt-day-cell {
+    min-height: 85px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gt-nav-links,
+  .gt-auth-buttons {
+    display: none;
+  }
+  .gt-mobile-toggle {
+    display: block;
+  }
+  .gt-calendar-main-title {
+    font-size: 1.85rem;
+  }
+  .gt-month-nav-title {
+    font-size: 1.35rem;
+    min-width: unset;
+  }
+  .gt-day-cell {
+    min-height: 70px;
+    padding: 0.3rem;
+  }
+  .gt-calendar-event-pill {
+    font-size: 0.68rem;
+    padding: 0.15rem 0.3rem;
+  }
+  .gt-form-row,
+  .gt-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
