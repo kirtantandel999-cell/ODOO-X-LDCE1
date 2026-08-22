@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import './create-trip.css';
 
@@ -105,7 +104,6 @@ export default function CreateTrip({ onNavigate }) {
     setTripStartError(hasTripStartError);
     if (hasTripStartError || hasStopError) return;
 
-    // No backend wired up yet — this is where a real API call would go.
     flashConfirm('Trip created! Redirecting to your itinerary…');
   };
 
@@ -138,7 +136,7 @@ export default function CreateTrip({ onNavigate }) {
                 }}
               >
                 My Trips
-              </a>{" "}
+              </a>{' '}
               / New Trip
             </span>
             <div className="avatar-wrap">
