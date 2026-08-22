@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community · GlobalTrotter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="community.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">GT</span> GlobalTrotter</a>
+    <div class="topbar-right">
+      <span class="crumb"><a href="trip-listing.html">My Trips</a> / Community</span>
+      <div class="avatar-wrap">
+        <button class="avatar-btn" id="avatarBtn" aria-label="Account menu">A</button>
+        <div class="avatar-menu" id="avatarMenu">
+          <a href="profile.html">My Profile</a>
+          <a href="trip-listing.html">My Trips</a>
+          <a href="#">Log Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HEAD -->
+<div class="page-head">
+  <div class="wrap">
+    <h1>Community</h1>
+    <p>Community section where all the users can share their experience about a certain trip or activity. Search, group, filter, and sort to narrow down what you're looking for.</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-field">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="communitySearch" placeholder="Search bar ......" aria-label="Search community posts">
+    </div>
+    <div class="toolbar-selects">
+      <select id="groupBySelect" aria-label="Group by">
+        <option value="none">Group by: None</option>
+        <option value="category">Group by: Category</option>
+      </select>
+      <select id="filterSelect" aria-label="Filter">
+        <option value="all">Filter: All</option>
+        <option value="adventure">Filter: Adventure</option>
+        <option value="nature">Filter: Nature</option>
+        <option value="heritage">Filter: Heritage</option>
+        <option value="food">Filter: Food</option>
+        <option value="water">Filter: Water</option>
+      </select>
+      <select id="sortBySelect" aria-label="Sort by">
+        <option value="recent">Sort by: Most recent</option>
+        <option value="liked">Sort by: Most liked</option>
+        <option value="commented">Sort by: Most commented</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- FEED (flat, default) -->
+  <section class="feed-group" data-group="all">
+    <div class="section-head">
+      <h2>Community tab</h2>
+      <span class="section-count" data-count>4</span>
+    </div>
+    <div class="feed" data-list>
+
+      <div class="post-row" data-post data-tag="adventure" data-time="4" data-likes="128" data-comments="23">
+        <div class="post-avatar" style="background:var(--gold);">P</div>
+        <article class="post-card" tabindex="0" data-name="Priya Nair">
+          <div class="post-top">
+            <div class="post-who">
+              <span class="post-name">Priya Nair</span>
+              <span class="post-handle">@priyaflies</span>
+              <span class="post-time">4h ago</span>
+            </div>
+            <span class="status-pill adventure">Adventure</span>
+          </div>
+          <span class="post-trip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2 2 19h20L12 2z"/></svg>
+            Tandem Paragliding — Bir Billing
+          </span>
+          <p class="post-text">Launched right at golden hour and the whole Kangra valley just opened up below us. Terrified for the first ten seconds, then couldn't stop grinning. Worth every rupee.</p>
+          <div class="post-thumb"><img src="https://images.unsplash.com/photo-1521673461164-de300ebcfb17?auto=format&fit=crop&w=600&q=70" alt="Paragliding over hills"></div>
+          <div class="post-foot">
+            <span class="stat liked"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>128</span>
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.4A8.5 8.5 0 1 1 21 11.5z"/></svg>23</span>
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>Share</span>
+          </div>
+          <div class="author-flag"><span class="point"></span><span class="chip">Modern Goose</span></div>
+        </article>
+      </div>
+
+      <div class="post-row" data-post data-tag="food" data-time="9" data-likes="86" data-comments="14">
+        <div class="post-avatar" style="background:var(--rust);">R</div>
+        <article class="post-card" tabindex="0" data-name="Rohan Mehta">
+          <div class="post-top">
+            <div class="post-who">
+              <span class="post-name">Rohan Mehta</span>
+              <span class="post-handle">@rohan_eats</span>
+              <span class="post-time">9h ago</span>
+            </div>
+            <span class="status-pill food">Food</span>
+          </div>
+          <span class="post-trip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2 2 19h20L12 2z"/></svg>
+            Kangra Valley Food Trail
+          </span>
+          <p class="post-text">Three home kitchens, three completely different madra recipes, and a grandmother who refused to let us leave without seconds. Go hungry.</p>
+          <div class="post-foot">
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>86</span>
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.4A8.5 8.5 0 1 1 21 11.5z"/></svg>14</span>
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>Share</span>
+          </div>
+          <div class="author-flag"><span class="point"></span><span class="chip">Salty Almond</span></div>
+        </article>
+      </div>
+
+      <div class="post-row" data-post data-tag="heritage" data-time="26" data-likes="204" data-comments="31">
+        <div class="post-avatar" style="background:var(--terracotta);">S</div>
+        <article class="post-card" tabindex="0" data-name="Sana Iqbal">
+          <div class="post-top">
+            <div class="post-who">
+              <span class="post-name">Sana Iqbal</span>
+              <span class="post-handle">@sana.wanders</span>
+              <span class="post-time">Yesterday</span>
+            </div>
+            <span class="status-pill heritage">Heritage</span>
+          </div>
+          <span class="post-trip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2 2 19h20L12 2z"/></svg>
+            Bir Monastery &amp; Tibetan Colony
+          </span>
+          <p class="post-text">Sat in on evening prayers by accident and ended up staying an hour. The monks were happy to explain the murals afterward — bring small notes for the craft shops.</p>
+          <div class="post-thumb"><img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=600&q=70" alt="Hill town monastery"></div>
+          <div class="post-foot">
+            <span class="stat liked"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>204</span>
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.4A8.5 8.5 0 1 1 21 11.5z"/></svg>31</span>
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>Share</span>
+          </div>
+          <div class="author-flag"><span class="point"></span><span class="chip">Quiet Falcon</span></div>
+        </article>
+      </div>
+
+      <div class="post-row" data-post data-tag="water" data-time="48" data-likes="61" data-comments="8">
+        <div class="post-avatar" style="background:var(--ocean);">V</div>
+        <article class="post-card" tabindex="0" data-name="Vikram Rao">
+          <div class="post-top">
+            <div class="post-who">
+              <span class="post-name">Vikram Rao</span>
+              <span class="post-handle">@vikramrao</span>
+              <span class="post-time">2d ago</span>
+            </div>
+            <span class="status-pill water">Water</span>
+          </div>
+          <span class="post-trip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2 2 19h20L12 2z"/></svg>
+            Beas River Rafting
+          </span>
+          <p class="post-text">Grade III rapids felt bigger than advertised after the recent rain — instructor was solid throughout though. Pair it with a Bir stopover like the app suggests, it's a great combo day.</p>
+          <div class="post-foot">
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>61</span>
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.4A8.5 8.5 0 1 1 21 11.5z"/></svg>8</span>
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>Share</span>
+          </div>
+          <div class="author-flag"><span class="point"></span><span class="chip">Brave Lantern</span></div>
+        </article>
+      </div>
+
+    </div>
+    <p class="group-empty" data-empty>No posts match your search.</p>
+  </section>
+
+  <!-- CATEGORY GROUPS (populated by JS when "Group by: Category" is selected) -->
+  <section class="feed-group" data-group="adventure" style="display:none;">
+    <div class="section-head"><span class="status-dot adventure"></span><h2>Adventure</h2><span class="section-count" data-count>0</span></div>
+    <div class="feed" data-list></div>
+    <p class="group-empty" data-empty>No adventure posts match your search.</p>
+  </section>
+
+  <section class="feed-group" data-group="nature" style="display:none;">
+    <div class="section-head"><span class="status-dot nature"></span><h2>Nature</h2><span class="section-count" data-count>0</span></div>
+    <div class="feed" data-list></div>
+    <p class="group-empty" data-empty>No nature posts match your search.</p>
+  </section>
+
+  <section class="feed-group" data-group="heritage" style="display:none;">
+    <div class="section-head"><span class="status-dot heritage"></span><h2>Heritage</h2><span class="section-count" data-count>0</span></div>
+    <div class="feed" data-list></div>
+    <p class="group-empty" data-empty>No heritage posts match your search.</p>
+  </section>
+
+  <section class="feed-group" data-group="food" style="display:none;">
+    <div class="section-head"><span class="status-dot food"></span><h2>Food</h2><span class="section-count" data-count>0</span></div>
+    <div class="feed" data-list></div>
+    <p class="group-empty" data-empty>No food posts match your search.</p>
+  </section>
+
+  <section class="feed-group" data-group="water" style="display:none;">
+    <div class="section-head"><span class="status-dot water"></span><h2>Water</h2><span class="section-count" data-count>0</span></div>
+    <div class="feed" data-list></div>
+    <p class="group-empty" data-empty>No water posts match your search.</p>
+  </section>
+
+</main>
+
+<script src="community.js"></script>
+</body>
+</html>
