@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel · GlobalTrotter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin-panel.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">GT</span> GlobalTrotter</a>
+    <div class="topbar-right">
+      <span class="crumb">Admin</span>
+      <div class="avatar-wrap">
+        <button class="avatar-btn" id="avatarBtn" aria-label="Account menu">A</button>
+        <div class="avatar-menu" id="avatarMenu">
+          <a href="profile.html">My Profile</a>
+          <a href="trip-listing.html">My Trips</a>
+          <a href="#">Log Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HEAD -->
+<div class="page-head">
+  <div class="wrap">
+    <h1>Admin panel</h1>
+    <p>Manage users and their access, and track the cities, activities, and trends that matter most to the community.</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-field">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="adminSearch" placeholder="Search bar ......" aria-label="Search this section">
+    </div>
+    <div class="toolbar-selects">
+      <select id="groupBySelect" aria-label="Group by">
+        <option value="none">Group by: None</option>
+        <option value="status">Group by: Status</option>
+      </select>
+      <select id="filterSelect" aria-label="Filter">
+        <option value="all">Filter: All</option>
+        <option value="active">Filter: Active</option>
+        <option value="invited">Filter: Invited</option>
+        <option value="suspended">Filter: Suspended</option>
+      </select>
+      <select id="sortBySelect" aria-label="Sort by">
+        <option value="name">Sort by: Name</option>
+        <option value="trips">Sort by: Trips</option>
+        <option value="joined">Sort by: Joined</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- SECTION TABS -->
+  <div class="tabbar">
+    <button class="tab-btn" data-tab="users">Manage Users</button>
+    <button class="tab-btn" data-tab="cities">Popular cities</button>
+    <button class="tab-btn" data-tab="activities">Popular Activites</button>
+    <button class="tab-btn active" data-tab="trends">User Trends and Analytics</button>
+  </div>
+
+  <!-- ================= MANAGE USERS ================= -->
+  <section class="tab-panel" data-panel="users">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Status</th>
+          <th>Trips</th>
+          <th>Joined</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="usersTableBody">
+        <tr data-user data-name="Priya Nair" data-status="active" data-trips="12" data-joined="2024-01-14">
+          <td><div class="user-cell"><div class="mini-avatar" style="background:var(--ocean);">P</div><div class="who"><div class="name">Priya Nair</div><div class="email">priya.nair@mail.com</div></div></div></td>
+          <td><span class="status-pill active">Active</span></td>
+          <td>12</td>
+          <td>14 Jan 2024</td>
+          <td><div class="row-actions"><button type="button">View</button><button type="button">Suspend</button></div></td>
+        </tr>
+        <tr data-user data-name="Rohan Mehta" data-status="active" data-trips="7" data-joined="2024-03-02">
+          <td><div class="user-cell"><div class="mini-avatar" style="background:var(--rust);">R</div><div class="who"><div class="name">Rohan Mehta</div><div class="email">rohan.mehta@mail.com</div></div></div></td>
+          <td><span class="status-pill active">Active</span></td>
+          <td>7</td>
+          <td>02 Mar 2024</td>
+          <td><div class="row-actions"><button type="button">View</button><button type="button">Suspend</button></div></td>
+        </tr>
+        <tr data-user data-name="Sana Iqbal" data-status="invited" data-trips="0" data-joined="2024-07-19">
+          <td><div class="user-cell"><div class="mini-avatar" style="background:var(--terracotta);">S</div><div class="who"><div class="name">Sana Iqbal</div><div class="email">sana.iqbal@mail.com</div></div></div></td>
+          <td><span class="status-pill invited">Invited</span></td>
+          <td>0</td>
+          <td>19 Jul 2024</td>
+          <td><div class="row-actions"><button type="button">Resend</button><button type="button">Revoke</button></div></td>
+        </tr>
+        <tr data-user data-name="Vikram Rao" data-status="suspended" data-trips="3" data-joined="2023-11-08">
+          <td><div class="user-cell"><div class="mini-avatar" style="background:var(--gold);">V</div><div class="who"><div class="name">Vikram Rao</div><div class="email">vikram.rao@mail.com</div></div></div></td>
+          <td><span class="status-pill suspended">Suspended</span></td>
+          <td>3</td>
+          <td>08 Nov 2023</td>
+          <td><div class="row-actions"><button type="button">View</button><button type="button">Reinstate</button></div></td>
+        </tr>
+        <tr data-user data-name="Meera Das" data-status="active" data-trips="21" data-joined="2023-06-27">
+          <td><div class="user-cell"><div class="mini-avatar" style="background:var(--leaf);">M</div><div class="who"><div class="name">Meera Das</div><div class="email">meera.das@mail.com</div></div></div></td>
+          <td><span class="status-pill active">Active</span></td>
+          <td>21</td>
+          <td>27 Jun 2023</td>
+          <td><div class="row-actions"><button type="button">View</button><button type="button">Suspend</button></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="table-empty" id="usersEmpty" style="display:none;">No users match your search.</p>
+  </section>
+
+  <!-- ================= POPULAR CITIES ================= -->
+  <section class="tab-panel" data-panel="cities">
+    <div class="rank-board" id="citiesBoard">
+      <div class="rank-board-row" data-item data-name="Bir Billing" data-value="1840">
+        <div class="rank-board-num">1</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Bir Billing</div>
+          <div class="rank-board-sub">Himachal Pradesh · 1,840 visits this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:100%;"></div></div>
+        </div>
+        <div class="rank-board-count">1,840<span>visits</span></div>
+      </div>
+      <div class="rank-board-row" data-item data-name="Manali" data-value="1420">
+        <div class="rank-board-num">2</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Manali</div>
+          <div class="rank-board-sub">Himachal Pradesh · 1,420 visits this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:77%;"></div></div>
+        </div>
+        <div class="rank-board-count">1,420<span>visits</span></div>
+      </div>
+      <div class="rank-board-row" data-item data-name="Rishikesh" data-value="1105">
+        <div class="rank-board-num">3</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Rishikesh</div>
+          <div class="rank-board-sub">Uttarakhand · 1,105 visits this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:60%;"></div></div>
+        </div>
+        <div class="rank-board-count">1,105<span>visits</span></div>
+      </div>
+      <div class="rank-board-row" data-item data-name="Goa" data-value="960">
+        <div class="rank-board-num">4</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Goa</div>
+          <div class="rank-board-sub">Goa · 960 visits this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:52%;"></div></div>
+        </div>
+        <div class="rank-board-count">960<span>visits</span></div>
+      </div>
+      <div class="rank-board-row" data-item data-name="Udaipur" data-value="710">
+        <div class="rank-board-num">5</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Udaipur</div>
+          <div class="rank-board-sub">Rajasthan · 710 visits this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:39%;"></div></div>
+        </div>
+        <div class="rank-board-count">710<span>visits</span></div>
+      </div>
+    </div>
+    <p class="table-empty" id="citiesEmpty" style="display:none;">No cities match your search.</p>
+  </section>
+
+  <!-- ================= POPULAR ACTIVITIES ================= -->
+  <section class="tab-panel" data-panel="activities">
+    <div class="rank-board" id="activitiesBoard">
+      <div class="rank-board-row" data-item data-name="Tandem Paragliding" data-value="640">
+        <div class="rank-board-num">1</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Tandem Paragliding</div>
+          <div class="rank-board-sub">Adventure · 640 bookings this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:100%;background:var(--gold);"></div></div>
+        </div>
+        <div class="rank-board-count">640<span>bookings</span></div>
+      </div>
+      <div class="rank-board-row" data-item data-name="River Rafting" data-value="510">
+        <div class="rank-board-num">2</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">River Rafting</div>
+          <div class="rank-board-sub">Water · 510 bookings this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:80%;"></div></div>
+        </div>
+        <div class="rank-board-count">510<span>bookings</span></div>
+      </div>
+      <div class="rank-board-row" data-item data-name="Food Trails" data-value="455">
+        <div class="rank-board-num">3</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Food Trails</div>
+          <div class="rank-board-sub">Food · 455 bookings this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:71%;background:var(--rust);"></div></div>
+        </div>
+        <div class="rank-board-count">455<span>bookings</span></div>
+      </div>
+      <div class="rank-board-row" data-item data-name="Heritage Walks" data-value="330">
+        <div class="rank-board-num">4</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Heritage Walks</div>
+          <div class="rank-board-sub">Heritage · 330 bookings this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:52%;background:var(--terracotta);"></div></div>
+        </div>
+        <div class="rank-board-count">330<span>bookings</span></div>
+      </div>
+      <div class="rank-board-row" data-item data-name="Nature Treks" data-value="290">
+        <div class="rank-board-num">5</div>
+        <div class="rank-board-main">
+          <div class="rank-board-name">Nature Treks</div>
+          <div class="rank-board-sub">Nature · 290 bookings this quarter</div>
+          <div class="rank-board-bar-track"><div class="rank-board-bar-fill" style="width:45%;background:var(--leaf);"></div></div>
+        </div>
+        <div class="rank-board-count">290<span>bookings</span></div>
+      </div>
+    </div>
+    <p class="table-empty" id="activitiesEmpty" style="display:none;">No activities match your search.</p>
+  </section>
+
+  <!-- ================= USER TRENDS & ANALYTICS ================= -->
+  <section class="tab-panel active" data-panel="trends">
+    <div class="dashboard-card">
+      <div class="dashboard-grid">
+
+        <!-- recent activity mini list -->
+        <div class="chart-panel">
+          <h3>Recent trip bookings</h3>
+          <div class="mini-list">
+            <div class="mini-row">
+              <div class="mini-avatar" style="background:var(--ocean);">P</div>
+              <div class="mini-main"><div class="mini-name">Priya Nair</div><div class="mini-sub">Bir Billing · 2 days ago</div></div>
+              <span class="mini-tag completed">Completed</span>
+            </div>
+            <div class="mini-row">
+              <div class="mini-avatar" style="background:var(--rust);">R</div>
+              <div class="mini-main"><div class="mini-name">Rohan Mehta</div><div class="mini-sub">Kangra Valley · 3 days ago</div></div>
+              <span class="mini-tag ongoing">Ongoing</span>
+            </div>
+            <div class="mini-row">
+              <div class="mini-avatar" style="background:var(--terracotta);">S</div>
+              <div class="mini-main"><div class="mini-name">Sana Iqbal</div><div class="mini-sub">Bir Monastery · 5 days ago</div></div>
+              <span class="mini-tag planned">Planned</span>
+            </div>
+            <div class="mini-row">
+              <div class="mini-avatar" style="background:var(--gold);">V</div>
+              <div class="mini-main"><div class="mini-name">Vikram Rao</div><div class="mini-sub">Beas River · 1 week ago</div></div>
+              <span class="mini-tag completed">Completed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- pie chart: trip status breakdown -->
+        <div class="chart-panel">
+          <h3>Trip status breakdown</h3>
+          <div class="pie-wrap">
+            <svg width="120" height="120" viewBox="0 0 32 32" style="transform:rotate(-90deg);flex:none;">
+              <circle r="16" cx="16" cy="16" fill="var(--ocean)"></circle>
+              <circle r="16" cx="16" cy="16" fill="transparent" stroke="var(--gold)" stroke-width="32" stroke-dasharray="19.5 80.5" stroke-dashoffset="0"></circle>
+              <circle r="16" cx="16" cy="16" fill="transparent" stroke="var(--leaf)" stroke-width="32" stroke-dasharray="9 91" stroke-dashoffset="-19.5"></circle>
+            </svg>
+            <div class="pie-legend">
+              <span><span class="dot" style="background:var(--ocean);"></span>Completed<span class="pct">71.5%</span></span>
+              <span><span class="dot" style="background:var(--gold);"></span>Planned<span class="pct">19.5%</span></span>
+              <span><span class="dot" style="background:var(--leaf);"></span>Ongoing<span class="pct">9%</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- line chart: monthly active users -->
+        <div class="chart-panel span-2">
+          <h3>Monthly active users</h3>
+          <div class="line-meta"><span class="big">8,240</span><span class="delta">+14.2% vs last month</span></div>
+          <svg viewBox="0 0 560 140" width="100%" height="140" preserveAspectRatio="none">
+            <polyline points="10,110 105,70 200,95 295,40 390,55 485,45" fill="none" stroke="#6a787c" stroke-width="2"></polyline>
+            <circle cx="10" cy="110" r="6" fill="var(--rust)"></circle>
+            <circle cx="105" cy="70" r="6" fill="var(--rust)"></circle>
+            <circle cx="200" cy="95" r="6" fill="var(--rust)"></circle>
+            <circle cx="295" cy="40" r="6" fill="var(--rust)"></circle>
+            <circle cx="390" cy="55" r="6" fill="var(--rust)"></circle>
+            <circle cx="485" cy="45" r="6" fill="var(--rust)"></circle>
+          </svg>
+          <div class="line-labels"><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span></div>
+        </div>
+
+        <!-- bar chart: most booked categories -->
+        <div class="chart-panel">
+          <h3>Most booked categories</h3>
+          <div class="bar-chart">
+            <div class="bar-col"><span class="bar-value">640</span><div class="bar-fill" style="height:70%;"></div><span class="bar-label">Adventure</span></div>
+            <div class="bar-col"><span class="bar-value">510</span><div class="bar-fill" style="height:56%;"></div><span class="bar-label">Water</span></div>
+            <div class="bar-col"><span class="bar-value">455</span><div class="bar-fill" style="height:50%;"></div><span class="bar-label">Food</span></div>
+          </div>
+        </div>
+
+        <!-- ranked list: top activities -->
+        <div class="chart-panel">
+          <h3>Top activities this month</h3>
+          <div class="rank-list">
+            <div class="rank-row"><span class="rank-num">1</span><span class="rank-name">Tandem Paragliding — Bir Billing</span><span class="rank-count">640</span></div>
+            <div class="rank-row"><span class="rank-num">2</span><span class="rank-name">Beas River Rafting</span><span class="rank-count">510</span></div>
+            <div class="rank-row"><span class="rank-num">3</span><span class="rank-name">Kangra Valley Food Trail</span><span class="rank-count">455</span></div>
+            <div class="rank-row"><span class="rank-num">4</span><span class="rank-name">Bir Monastery &amp; Tibetan Colony</span><span class="rank-count">330</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="admin-panel.js"></script>
+</body>
+</html>
