@@ -105,6 +105,11 @@ export default function CreateTrip({ onNavigate }) {
     if (hasTripStartError || hasStopError) return;
 
     flashConfirm('Trip created! Redirecting to your itinerary…');
+    setTimeout(() => {
+      if (onNavigate) {
+        onNavigate('buildItinerary');
+      }
+    }, 600);
   };
 
   return (

@@ -131,8 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!valid) return;
 
-    // No backend wired up yet — this is where a real API call would go.
     showConfirm('Trip created! Redirecting to your itinerary…');
+    setTimeout(() => {
+      window.location.href = 'build-itinerary.html';
+    }, 600);
   });
 
   saveDraftBtn.addEventListener('click', () => {

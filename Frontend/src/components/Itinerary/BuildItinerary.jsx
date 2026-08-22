@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import './build-itinerary.css';
 
@@ -52,8 +51,12 @@ export default function BuildItinerary({ onNavigate }) {
     e.preventDefault();
     if (sections.some(sectionHasDateError)) return;
 
-    // No backend wired up yet — this is where a real API call would go.
     flashConfirm('Itinerary finished! Taking you to your trip…');
+    setTimeout(() => {
+      if (onNavigate) {
+        onNavigate('home');
+      }
+    }, 1200);
   };
 
   return (
