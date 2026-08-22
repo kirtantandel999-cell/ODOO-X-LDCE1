@@ -66,6 +66,7 @@ button{font-family:inherit;cursor:pointer;}
 .avatar-menu a:hover, .avatar-menu button:hover{background:var(--sand);color:var(--ink);}
 
 /* ---------- PAGE HEAD (Card structure matching screenshot) ---------- */
+.create-trip-page .page-head,
 .page-head {
   background: var(--indigo-deep);
   color: var(--white);
@@ -73,6 +74,15 @@ button{font-family:inherit;cursor:pointer;}
   padding: 34px 38px 30px;
   margin: 28px 0 32px;
   box-shadow: 0 14px 30px -18px rgba(18, 41, 49, 0.45);
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+}
+.page-head .page-head-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 .page-head .eyebrow {
   font-size: 12.5px;
@@ -83,8 +93,21 @@ button{font-family:inherit;cursor:pointer;}
   margin-bottom: 8px;
   display: block;
 }
-.page-head h1 { font-size: clamp(26px, 3.6vw, 34px); font-weight: 700; }
-.page-head p { margin-top: 8px; color: rgba(255, 255, 255, 0.72); font-size: 15px; max-width: 520px; }
+.page-head h1 {
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 700;
+  color: var(--white);
+  margin: 0 0 8px 0;
+  line-height: 1.25;
+  word-break: break-word;
+}
+.page-head p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 640px;
+}
 
 main{padding-bottom:100px;}
 

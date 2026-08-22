@@ -1,5 +1,57 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+export function normalizeUserProfile(rawUser) {
+  if (!rawUser) return null;
+
+  const firstName = rawUser.firstName || '';
+  const lastName = rawUser.lastName || '';
+  const fullName = [firstName, lastName].filter(Boolean).join(' ') 
+    || rawUser.fullName 
+    || rawUser.name 
+    || (rawUser.email ? rawUser.email.split('@')[0] : 'Traveler');
+
+  const username = rawUser.username 
+    || (rawUser.email ? rawUser.email.split('@')[0] : 'traveler');
+
+  const phone = rawUser.phoneNumber || rawUser.phone || '';
+  const city = rawUser.city || '';
+  const country = rawUser.country || '';
+  const location = [city, country].filter(Boolean).join(', ') || rawUser.location || 'India';
+
+  const bio = rawUser.additionalInformation 
+    || rawUser.bio 
+    || 'Passionate globetrotter exploring architectural wonders, Himalayan treks, and coastal culture.';
+
+  const photo = rawUser.photo 
+    || rawUser.avatar 
+    || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';
+
+  const memberSince = rawUser.memberSince 
+    || (rawUser.createdAt ? new Date(rawUser.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'March 2024');
+
+  return {
+    ...rawUser,
+    id: rawUser.id,
+    firstName,
+    lastName,
+    fullName,
+    name: fullName,
+    username,
+    email: rawUser.email || '',
+    phone,
+    phoneNumber: phone,
+    city,
+    country,
+    location,
+    bio,
+    additionalInformation: bio,
+    photo,
+    avatar: photo,
+    memberSince,
+    preferences: rawUser.preferences || ['Heritage', 'Nature', 'Food', 'Adventure', 'Culture'],
+  };
+}
+
 export const AuthService = {
   getToken: () => {
     try {
@@ -29,6 +81,7 @@ export const AuthService = {
   logout: async () => {
     try {
       localStorage.removeItem('globetrotter_user');
+      localStorage.removeItem('globetrotter_user_profile');
       localStorage.removeItem('globetrotter_token');
     } catch (e) {
       console.error('Logout storage clear error:', e);
@@ -61,19 +114,11 @@ export const AuthService = {
         localStorage.setItem('globetrotter_token', data.token);
       }
 
-      const rawUser = data.user || {};
-      const fullName = [rawUser.firstName, rawUser.lastName].filter(Boolean).join(' ') || rawUser.email || emailOrUsername;
-      const username = rawUser.email ? rawUser.email.split('@')[0] : emailOrUsername;
-      
-      const userObj = {
-        ...rawUser,
-        name: fullName,
-        username,
-        avatar: rawUser.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-      };
+      const userObj = normalizeUserProfile(data.user || { email: emailOrUsername });
 
       try {
         localStorage.setItem('globetrotter_user', JSON.stringify(userObj));
+        localStorage.setItem('globetrotter_user_profile', JSON.stringify(userObj));
       } catch (e) {
         console.error('Failed to store user in localStorage:', e);
       }
@@ -142,7 +187,8 @@ export const AuthService = {
       if (!response.ok) {
         throw new Error(data.message || 'Failed to fetch profile');
       }
-      return data.user || data.data?.user;
+      const raw = data.user || data.data?.user;
+      return normalizeUserProfile(raw);
     } catch (error) {
       console.error('Get profile error:', error);
       throw error;
@@ -160,7 +206,13 @@ export const AuthService = {
       if (!response.ok) {
         throw new Error(data.message || 'Failed to update profile');
       }
-      return data.user || data.data?.user;
+      const raw = data.user || data.data?.user;
+      const normalized = normalizeUserProfile(raw);
+      if (normalized) {
+        localStorage.setItem('globetrotter_user', JSON.stringify(normalized));
+        localStorage.setItem('globetrotter_user_profile', JSON.stringify(normalized));
+      }
+      return normalized;
     } catch (error) {
       console.error('Update profile error:', error);
       throw error;

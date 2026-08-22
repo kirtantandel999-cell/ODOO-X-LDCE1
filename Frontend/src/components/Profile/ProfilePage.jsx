@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { AuthService, normalizeUserProfile } from '../../services/AuthService';
 import './ProfilePage.css';
 
 const DEFAULT_PROFILE = {
@@ -110,9 +112,21 @@ const INITIAL_PREVIOUS_TRIPS = [
 ];
 
 export default function ProfilePage({ onNavigate }) {
+  let auth = null;
+  try {
+    auth = useAuth();
+  } catch (err) {
+    // Fallback if rendered outside AuthProvider
+  }
+
+  const currentUser = auth?.user || AuthService.getCurrentUser();
+
   const [profile, setProfile] = useState(() => {
-    const saved = localStorage.getItem('globetrotter_user_profile');
-    return saved ? JSON.parse(saved) : DEFAULT_PROFILE;
+    if (currentUser) {
+      return normalizeUserProfile(currentUser);
+    }
+    const saved = localStorage.getItem('globetrotter_user_profile') || localStorage.getItem('globetrotter_user');
+    return saved ? normalizeUserProfile(JSON.parse(saved)) : DEFAULT_PROFILE;
   });
 
   const [preplannedTrips, setPreplannedTrips] = useState(INITIAL_PREPLANNED_TRIPS);
@@ -124,15 +138,33 @@ export default function ProfilePage({ onNavigate }) {
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [selectedTripDetails, setSelectedTripDetails] = useState(null);
 
+  // Sync profile state when auth user changes
   useEffect(() => {
-    const saved = localStorage.getItem('globetrotter_user_profile');
-    if (saved) {
-      try {
-        setProfile(JSON.parse(saved));
-      } catch (e) {
-        console.error('Failed to parse saved profile', e);
-      }
+    if (currentUser) {
+      const normalized = normalizeUserProfile(currentUser);
+      setProfile(normalized);
+      localStorage.setItem('globetrotter_user_profile', JSON.stringify(normalized));
     }
+  }, [auth?.user]);
+
+  // Fetch live profile from backend if user is authenticated
+  useEffect(() => {
+    const fetchLiveProfile = async () => {
+      const token = AuthService.getToken();
+      if (!token) return;
+      try {
+        const liveUser = await AuthService.getProfile();
+        if (liveUser) {
+          const normalized = normalizeUserProfile(liveUser);
+          setProfile(normalized);
+          localStorage.setItem('globetrotter_user', JSON.stringify(normalized));
+          localStorage.setItem('globetrotter_user_profile', JSON.stringify(normalized));
+        }
+      } catch (e) {
+        console.warn('Live profile fetch error:', e.message);
+      }
+    };
+    fetchLiveProfile();
   }, []);
 
   const handleOpenEdit = () => {
@@ -141,17 +173,60 @@ export default function ProfilePage({ onNavigate }) {
     setNotification(null);
   };
 
-  const handleSaveProfile = (e) => {
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
-    if (!editFormData.fullName.trim() || !editFormData.email.trim()) {
+    if (!editFormData.fullName?.trim() || !editFormData.email?.trim()) {
       alert('Full Name and Email are required.');
       return;
     }
 
-    setProfile(editFormData);
-    localStorage.setItem('globetrotter_user_profile', JSON.stringify(editFormData));
+    const nameParts = editFormData.fullName.trim().split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    let city = editFormData.city;
+    let country = editFormData.country;
+    if (!city && editFormData.location) {
+      const locParts = editFormData.location.split(',');
+      city = locParts[0]?.trim() || '';
+      country = locParts[1]?.trim() || '';
+    }
+
+    const updatedProfile = {
+      ...editFormData,
+      firstName: firstName || editFormData.firstName || '',
+      lastName: lastName || editFormData.lastName || '',
+      city: city || editFormData.city || '',
+      country: country || editFormData.country || '',
+      phoneNumber: editFormData.phone || editFormData.phoneNumber || '',
+      additionalInformation: editFormData.bio || editFormData.additionalInformation || '',
+    };
+
+    const normalized = normalizeUserProfile(updatedProfile);
+    setProfile(normalized);
+    localStorage.setItem('globetrotter_user_profile', JSON.stringify(normalized));
+    localStorage.setItem('globetrotter_user', JSON.stringify(normalized));
     setIsEditing(false);
     setNotification('Profile details updated successfully!');
+
+    // Persist changes to backend if token exists
+    const token = AuthService.getToken();
+    if (token) {
+      try {
+        await AuthService.updateProfile({
+          firstName: normalized.firstName,
+          lastName: normalized.lastName,
+          phoneNumber: normalized.phoneNumber,
+          city: normalized.city,
+          country: normalized.country,
+          additionalInformation: normalized.additionalInformation,
+          photo: normalized.photo,
+        });
+      } catch (err) {
+        console.warn('Backend update failed:', err.message);
+      }
+    }
+
     setTimeout(() => setNotification(null), 3500);
   };
 
@@ -163,6 +238,16 @@ export default function ProfilePage({ onNavigate }) {
         : [...current, pref];
       return { ...prev, preferences: updated };
     });
+  };
+
+  const handleLogout = async () => {
+    setAvatarMenuOpen(false);
+    if (auth?.logout) {
+      await auth.logout();
+    } else {
+      await AuthService.logout();
+    }
+    if (onNavigate) onNavigate('login');
   };
 
   const ALL_PREFERENCES = ['Heritage', 'Nature', 'Food', 'Adventure', 'Culture', 'Beaches', 'Photography', 'Nightlife'];
@@ -258,6 +343,15 @@ export default function ProfilePage({ onNavigate }) {
                   type="button"
                   onClick={() => {
                     setAvatarMenuOpen(false);
+                    onNavigate && onNavigate('community');
+                  }}
+                >
+                  Community
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAvatarMenuOpen(false);
                     onNavigate && onNavigate('home');
                   }}
                 >
@@ -265,10 +359,7 @@ export default function ProfilePage({ onNavigate }) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setAvatarMenuOpen(false);
-                    onNavigate && onNavigate('login');
-                  }}
+                  onClick={handleLogout}
                 >
                   Log Out
                 </button>

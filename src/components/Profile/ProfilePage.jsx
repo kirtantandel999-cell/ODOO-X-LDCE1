@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { AuthService } from '../../services/AuthService';
+import { AuthService, normalizeUserProfile } from '../../services/AuthService';
 import './ProfilePage.css';
+
+const DEFAULT_PROFILE = {
+  fullName: 'Aarav Sharma',
+  username: 'aarav_travels',
+  email: 'aarav.sharma@example.com',
+  phone: '+91 98765 43210',
+  location: 'Ahmedabad, Gujarat, India',
+  bio: 'Passionate globetrotter exploring architectural wonders, Himalayan treks, and coastal culture across India and around the globe.',
+  photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+  memberSince: 'March 2024',
+  preferences: ['Heritage', 'Nature', 'Food', 'Adventure', 'Culture'],
+};
 
 const INITIAL_PREPLANNED_TRIPS = [
   {
@@ -100,146 +112,145 @@ const INITIAL_PREVIOUS_TRIPS = [
 ];
 
 export default function ProfilePage({ onNavigate }) {
-  const { user, token, logout, updateUser } = useAuth();
+  let auth = null;
+  try {
+    auth = useAuth();
+  } catch (err) {
+    // Fallback if rendered outside AuthProvider
+  }
 
-  // Profile data from the backend
-  const [profile, setProfile] = useState(null);
-  const [profileLoading, setProfileLoading] = useState(true);
+  const currentUser = auth?.user || AuthService.getCurrentUser();
 
-  const [preplannedTrips] = useState(INITIAL_PREPLANNED_TRIPS);
-  const [previousTrips] = useState(INITIAL_PREVIOUS_TRIPS);
+  const [profile, setProfile] = useState(() => {
+    if (currentUser) {
+      return normalizeUserProfile(currentUser);
+    }
+    const saved = localStorage.getItem('globetrotter_user_profile') || localStorage.getItem('globetrotter_user');
+    return saved ? normalizeUserProfile(JSON.parse(saved)) : DEFAULT_PROFILE;
+  });
+
+  const [preplannedTrips, setPreplannedTrips] = useState(INITIAL_PREPLANNED_TRIPS);
+  const [previousTrips, setPreviousTrips] = useState(INITIAL_PREVIOUS_TRIPS);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [editFormData, setEditFormData] = useState({});
+  const [editFormData, setEditFormData] = useState(profile);
   const [notification, setNotification] = useState(null);
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [selectedTripDetails, setSelectedTripDetails] = useState(null);
-  const [saveLoading, setSaveLoading] = useState(false);
 
-  // ── Fetch profile from backend on mount ──────
+  // Sync profile state when auth user changes
   useEffect(() => {
-    const fetchProfile = async () => {
-      if (!token) {
-        setProfileLoading(false);
-        return;
-      }
+    if (currentUser) {
+      const normalized = normalizeUserProfile(currentUser);
+      setProfile(normalized);
+      localStorage.setItem('globetrotter_user_profile', JSON.stringify(normalized));
+    }
+  }, [auth?.user]);
+
+  // Fetch live profile from backend if user is authenticated
+  useEffect(() => {
+    const fetchLiveProfile = async () => {
+      const token = AuthService.getToken();
+      if (!token) return;
       try {
-        const userData = await AuthService.getProfile(token);
-        setProfile(userData);
-      } catch (err) {
-        console.error('Failed to fetch profile:', err);
-        // Fallback to context user data
-        if (user) {
-          setProfile(user);
+        const liveUser = await AuthService.getProfile();
+        if (liveUser) {
+          const normalized = normalizeUserProfile(liveUser);
+          setProfile(normalized);
+          localStorage.setItem('globetrotter_user', JSON.stringify(normalized));
+          localStorage.setItem('globetrotter_user_profile', JSON.stringify(normalized));
         }
-      } finally {
-        setProfileLoading(false);
+      } catch (e) {
+        console.warn('Live profile fetch error:', e.message);
       }
     };
-    fetchProfile();
-  }, [token, user]);
+    fetchLiveProfile();
+  }, []);
 
-  // ── Helpers ──────────────────────────────────
-  const getFullName = () => {
-    if (profile?.firstName && profile?.lastName) return `${profile.firstName} ${profile.lastName}`;
-    if (profile?.firstName) return profile.firstName;
-    if (profile?.name) return profile.name;
-    return 'User';
-  };
-
-  const getInitial = () => {
-    const name = getFullName();
-    return name.charAt(0).toUpperCase();
-  };
-
-  const getMemberSince = () => {
-    if (profile?.createdAt) {
-      const d = new Date(profile.createdAt);
-      return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-    }
-    return 'Recently joined';
-  };
-
-  // ── Edit Profile ─────────────────────────────
   const handleOpenEdit = () => {
-    setEditFormData({
-      firstName: profile?.firstName || '',
-      lastName: profile?.lastName || '',
-      email: profile?.email || '',
-      phoneNumber: profile?.phoneNumber || '',
-      city: profile?.city || '',
-      country: profile?.country || '',
-      additionalInformation: profile?.additionalInformation || '',
-      photo: profile?.photo || '',
-    });
+    setEditFormData({ ...profile });
     setIsEditing(true);
     setNotification(null);
   };
 
   const handleSaveProfile = async (e) => {
     e.preventDefault();
-    if (!editFormData.firstName?.trim() || !editFormData.email?.trim()) {
-      alert('First Name and Email are required.');
+    if (!editFormData.fullName?.trim() || !editFormData.email?.trim()) {
+      alert('Full Name and Email are required.');
       return;
     }
 
-    setSaveLoading(true);
-    try {
-      const result = await AuthService.updateProfile(token, {
-        firstName: editFormData.firstName,
-        lastName: editFormData.lastName,
-        phoneNumber: editFormData.phoneNumber,
-        city: editFormData.city,
-        country: editFormData.country,
-        additionalInformation: editFormData.additionalInformation,
-        photo: editFormData.photo,
-      });
+    const nameParts = editFormData.fullName.trim().split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
 
-      // Update local profile state
-      setProfile(result.user);
-
-      // Update global AuthContext so navbar everywhere updates immediately
-      updateUser(result.user);
-
-      setIsEditing(false);
-      setNotification('Profile details updated successfully!');
-      setTimeout(() => setNotification(null), 3500);
-    } catch (err) {
-      alert(err.message || 'Failed to update profile');
-    } finally {
-      setSaveLoading(false);
+    let city = editFormData.city;
+    let country = editFormData.country;
+    if (!city && editFormData.location) {
+      const locParts = editFormData.location.split(',');
+      city = locParts[0]?.trim() || '';
+      country = locParts[1]?.trim() || '';
     }
+
+    const updatedProfile = {
+      ...editFormData,
+      firstName: firstName || editFormData.firstName || '',
+      lastName: lastName || editFormData.lastName || '',
+      city: city || editFormData.city || '',
+      country: country || editFormData.country || '',
+      phoneNumber: editFormData.phone || editFormData.phoneNumber || '',
+      additionalInformation: editFormData.bio || editFormData.additionalInformation || '',
+    };
+
+    const normalized = normalizeUserProfile(updatedProfile);
+    setProfile(normalized);
+    localStorage.setItem('globetrotter_user_profile', JSON.stringify(normalized));
+    localStorage.setItem('globetrotter_user', JSON.stringify(normalized));
+    setIsEditing(false);
+    setNotification('Profile details updated successfully!');
+
+    // Persist changes to backend if token exists
+    const token = AuthService.getToken();
+    if (token) {
+      try {
+        await AuthService.updateProfile({
+          firstName: normalized.firstName,
+          lastName: normalized.lastName,
+          phoneNumber: normalized.phoneNumber,
+          city: normalized.city,
+          country: normalized.country,
+          additionalInformation: normalized.additionalInformation,
+          photo: normalized.photo,
+        });
+      } catch (err) {
+        console.warn('Backend update failed:', err.message);
+      }
+    }
+
+    setTimeout(() => setNotification(null), 3500);
+  };
+
+  const handlePreferenceToggle = (pref) => {
+    setEditFormData((prev) => {
+      const current = prev.preferences || [];
+      const updated = current.includes(pref)
+        ? current.filter((p) => p !== pref)
+        : [...current, pref];
+      return { ...prev, preferences: updated };
+    });
   };
 
   const handleLogout = async () => {
     setAvatarMenuOpen(false);
-    await logout();
-    onNavigate && onNavigate('home');
+    if (auth?.logout) {
+      await auth.logout();
+    } else {
+      await AuthService.logout();
+    }
+    if (onNavigate) onNavigate('login');
   };
 
-  // ── Loading / Not authenticated states ───────
-  if (profileLoading) {
-    return (
-      <div className="profile-page-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
-        <p style={{ fontSize: '18px', color: '#55666c' }}>Loading profile...</p>
-      </div>
-    );
-  }
-
-  if (!profile && !user) {
-    return (
-      <div className="profile-page-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '16px' }}>
-        <p style={{ fontSize: '18px', color: '#55666c' }}>Please log in to view your profile.</p>
-        <button
-          type="button"
-          style={{ padding: '12px 28px', background: '#c1622d', color: '#fff', border: 'none', borderRadius: '999px', cursor: 'pointer', fontWeight: 600, fontSize: '15px' }}
-          onClick={() => onNavigate && onNavigate('login')}
-        >
-          Go to Login
-        </button>
-      </div>
-    );
-  }
+  const ALL_PREFERENCES = ['Heritage', 'Nature', 'Food', 'Adventure', 'Culture', 'Beaches', 'Photography', 'Nightlife'];
 
   return (
     <div
@@ -294,10 +305,10 @@ export default function ProfilePage({ onNavigate }) {
                   setAvatarMenuOpen((o) => !o);
                 }}
               >
-                {profile?.photo ? (
-                  <img src={profile.photo} alt={getFullName()} />
+                {profile.photo ? (
+                  <img src={profile.photo} alt={profile.fullName} />
                 ) : (
-                  getInitial()
+                  profile.fullName.charAt(0)
                 )}
               </button>
 
@@ -350,7 +361,7 @@ export default function ProfilePage({ onNavigate }) {
       </nav>
 
       <main className="wrap">
-        {/* ---------- PAGE HEAD / HERO ---------- */}
+        {/* ---------- PAGE HEAD / HERO (Short card structure matching image) ---------- */}
         <header className="page-head">
           <span className="eyebrow">✈ Personal Traveler Profile</span>
           <h1>My Profile</h1>
@@ -369,15 +380,15 @@ export default function ProfilePage({ onNavigate }) {
         <section className="profile-hero-card">
           <div className="profile-main-grid">
             <div className="profile-avatar-container">
-              {profile?.photo ? (
+              {profile.photo ? (
                 <img
                   src={profile.photo}
-                  alt={getFullName()}
+                  alt={profile.fullName}
                   className="profile-avatar-img"
                 />
               ) : (
                 <div className="profile-avatar-fallback">
-                  {getInitial()}
+                  {profile.fullName.charAt(0)}
                 </div>
               )}
               <span className="profile-badge-online" title="Active Traveler"></span>
@@ -385,38 +396,44 @@ export default function ProfilePage({ onNavigate }) {
 
             <div className="profile-details-column">
               <div className="profile-name-row">
-                <h2 className="profile-user-name">{getFullName()}</h2>
-                {profile?.email && <span className="profile-handle">{profile.email}</span>}
+                <h2 className="profile-user-name">{profile.fullName}</h2>
+                <span className="profile-handle">@{profile.username}</span>
               </div>
 
-              {profile?.additionalInformation && (
-                <p className="profile-bio">{profile.additionalInformation}</p>
-              )}
+              <p className="profile-bio">{profile.bio}</p>
 
               <div className="profile-info-grid">
-                {(profile?.city || profile?.country) && (
-                  <div className="info-item">
-                    <span className="info-icon">📍</span>
-                    <span>{[profile.city, profile.country].filter(Boolean).join(', ')}</span>
-                  </div>
-                )}
-                {profile?.email && (
-                  <div className="info-item">
-                    <span className="info-icon">✉</span>
-                    <span>{profile.email}</span>
-                  </div>
-                )}
-                {profile?.phoneNumber && (
-                  <div className="info-item">
-                    <span className="info-icon">📞</span>
-                    <span>{profile.phoneNumber}</span>
-                  </div>
-                )}
+                <div className="info-item">
+                  <span className="info-icon">📍</span>
+                  <span>{profile.location}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-icon">✉</span>
+                  <span>{profile.email}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-icon">📞</span>
+                  <span>{profile.phone}</span>
+                </div>
                 <div className="info-item">
                   <span className="info-icon">🗓</span>
-                  <span>Member since {getMemberSince()}</span>
+                  <span>Member since {profile.memberSince}</span>
                 </div>
               </div>
+
+              {profile.preferences && profile.preferences.length > 0 && (
+                <div className="profile-prefs-group">
+                  <span className="prefs-label">Travel Style:</span>
+                  {profile.preferences.map((pref) => {
+                    const tagClass = pref.toLowerCase().replace(/[^a-z]/g, '');
+                    return (
+                      <span key={pref} className={`pref-tag ${tagClass}`}>
+                        {pref}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             <button
@@ -597,23 +614,23 @@ export default function ProfilePage({ onNavigate }) {
             <form onSubmit={handleSaveProfile} className="modal-form">
               <div className="form-row-2">
                 <div className="form-field-group">
-                  <label>First Name *</label>
+                  <label>Full Name *</label>
                   <input
                     type="text"
                     required
-                    value={editFormData.firstName}
+                    value={editFormData.fullName}
                     onChange={(e) =>
-                      setEditFormData({ ...editFormData, firstName: e.target.value })
+                      setEditFormData({ ...editFormData, fullName: e.target.value })
                     }
                   />
                 </div>
                 <div className="form-field-group">
-                  <label>Last Name</label>
+                  <label>Username / Handle</label>
                   <input
                     type="text"
-                    value={editFormData.lastName}
+                    value={editFormData.username}
                     onChange={(e) =>
-                      setEditFormData({ ...editFormData, lastName: e.target.value })
+                      setEditFormData({ ...editFormData, username: e.target.value })
                     }
                   />
                 </div>
@@ -626,44 +643,33 @@ export default function ProfilePage({ onNavigate }) {
                     type="email"
                     required
                     value={editFormData.email}
-                    disabled
-                    title="Email cannot be changed"
-                    style={{ opacity: 0.6, cursor: 'not-allowed' }}
+                    onChange={(e) =>
+                      setEditFormData({ ...editFormData, email: e.target.value })
+                    }
                   />
                 </div>
                 <div className="form-field-group">
                   <label>Phone Number</label>
                   <input
                     type="tel"
-                    value={editFormData.phoneNumber}
+                    value={editFormData.phone}
                     onChange={(e) =>
-                      setEditFormData({ ...editFormData, phoneNumber: e.target.value })
+                      setEditFormData({ ...editFormData, phone: e.target.value })
                     }
                   />
                 </div>
               </div>
 
-              <div className="form-row-2">
-                <div className="form-field-group">
-                  <label>City</label>
-                  <input
-                    type="text"
-                    value={editFormData.city}
-                    onChange={(e) =>
-                      setEditFormData({ ...editFormData, city: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="form-field-group">
-                  <label>Country</label>
-                  <input
-                    type="text"
-                    value={editFormData.country}
-                    onChange={(e) =>
-                      setEditFormData({ ...editFormData, country: e.target.value })
-                    }
-                  />
-                </div>
+              <div className="form-field-group">
+                <label>Location / City, Country</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Ahmedabad, Gujarat, India"
+                  value={editFormData.location}
+                  onChange={(e) =>
+                    setEditFormData({ ...editFormData, location: e.target.value })
+                  }
+                />
               </div>
 
               <div className="form-field-group">
@@ -679,15 +685,41 @@ export default function ProfilePage({ onNavigate }) {
               </div>
 
               <div className="form-field-group">
-                <label>Bio & Additional Information</label>
+                <label>Bio & Travel Motto</label>
                 <textarea
                   rows="3"
                   placeholder="Tell other travelers about your passions, favorite destinations, and travel style..."
-                  value={editFormData.additionalInformation}
+                  value={editFormData.bio}
                   onChange={(e) =>
-                    setEditFormData({ ...editFormData, additionalInformation: e.target.value })
+                    setEditFormData({ ...editFormData, bio: e.target.value })
                   }
                 />
+              </div>
+
+              <div className="form-field-group">
+                <label>Select Travel Preferences</label>
+                <div className="profile-prefs-group" style={{ marginTop: '6px' }}>
+                  {ALL_PREFERENCES.map((pref) => {
+                    const active = (editFormData.preferences || []).includes(pref);
+                    const tagClass = pref.toLowerCase().replace(/[^a-z]/g, '');
+                    return (
+                      <button
+                        key={pref}
+                        type="button"
+                        onClick={() => handlePreferenceToggle(pref)}
+                        className={`pref-tag ${tagClass}`}
+                        style={{
+                          cursor: 'pointer',
+                          opacity: active ? 1 : 0.45,
+                          transform: active ? 'scale(1.05)' : 'scale(1)',
+                          borderStyle: active ? 'solid' : 'dashed',
+                        }}
+                      >
+                        {active ? `✓ ${pref}` : `+ ${pref}`}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               <div className="modal-actions">
@@ -701,9 +733,8 @@ export default function ProfilePage({ onNavigate }) {
                 <button
                   type="submit"
                   className="btn-save-modal"
-                  disabled={saveLoading}
                 >
-                  {saveLoading ? 'Saving...' : 'Save Changes'}
+                  Save Changes
                 </button>
               </div>
             </form>

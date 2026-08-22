@@ -126,6 +126,7 @@ export default function AdminPanel({ onNavigate }) {
                 <button type="button" onClick={() => handleNav('profile')}>My Profile</button>
                 <button type="button" onClick={() => handleNav('createTrip')}>Create Trip</button>
                 <button type="button" onClick={() => handleNav('calendar')}>Calendar</button>
+                <button type="button" onClick={() => handleNav('community')}>Community</button>
                 <button type="button" onClick={() => handleNav('home')}>Home</button>
                 <button type="button" onClick={() => handleNav('login')}>Log Out</button>
               </div>

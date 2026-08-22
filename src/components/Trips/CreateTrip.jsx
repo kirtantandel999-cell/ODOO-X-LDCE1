@@ -99,21 +99,25 @@ export default function CreateTrip({ onNavigate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const hasTripStartError = !tripStart;
-    const hasStopError = stops.some(stopHasDateError);
-    setTripStartError(hasTripStartError);
-    if (hasTripStartError || hasStopError) return;
+    if (!tripStart) {
+      setTripStartError(true);
+      return;
+    }
+    setTripStartError(false);
 
-    flashConfirm('Trip created! Redirecting to your itinerary…');
+    if (stops.some(stopHasDateError)) {
+      alert('Please correct invalid stop dates (end date cannot be before start date).');
+      return;
+    }
+
+    flashConfirm('Trip saved! Redirecting to build itinerary…');
     setTimeout(() => {
-      if (onNavigate) {
-        onNavigate('buildItinerary');
-      }
-    }, 600);
+      if (onNavigate) onNavigate('buildItinerary');
+    }, 1000);
   };
 
   return (
-    <div onClick={() => avatarOpen && setAvatarOpen(false)}>
+    <div className="create-trip-page" onClick={() => avatarOpen && setAvatarOpen(false)}>
       {/* TOP BAR */}
       <div className="topbar">
         <div className="wrap">
@@ -221,8 +225,11 @@ export default function CreateTrip({ onNavigate }) {
       <main className="wrap">
         {/* PAGE HEAD (Card structure matching screenshot) */}
         <div className="page-head">
-          <h1>Plan a new trip</h1>
-          <p>Set your dates, add the places you're visiting, and we'll suggest what to do there.</p>
+          <div className="page-head-content">
+            <span className="eyebrow">Trip Blueprint</span>
+            <h1>Plan a new trip</h1>
+            <p>Set your dates, add the places you're visiting, and we'll suggest what to do there.</p>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -243,51 +250,49 @@ export default function CreateTrip({ onNavigate }) {
                     if (e.target.value) setTripStartError(false);
                   }}
                 />
-                <span className={`field-error${tripStartError ? ' show' : ''}`}>
-                  Pick a start date to continue.
-                </span>
+                <span className={`field-error${tripStartError ? ' show' : ''}`}>Please choose a start date</span>
               </div>
             </div>
 
             <div className="stops">
               {stops.map((stop, i) => {
-                const dateError = stopHasDateError(stop);
+                const dateErr = stopHasDateError(stop);
                 return (
                   <div className="stop-row" key={stop.id}>
                     <span className="stop-index">Place {i + 1}</span>
                     <div className="field">
-                      <label>Select a place</label>
+                      <label htmlFor={`place-${stop.id}`}>Destination</label>
                       <input
-                        type="text"
-                        placeholder="e.g. Udaipur, Rajasthan"
+                        id={`place-${stop.id}`}
                         list="placeList"
+                        placeholder="e.g. Udaipur, Rajasthan"
                         value={stop.place}
                         onChange={(e) => updateStop(stop.id, 'place', e.target.value)}
                       />
                     </div>
                     <div className="field">
-                      <label>Start date</label>
+                      <label htmlFor={`start-${stop.id}`}>From</label>
                       <input
+                        id={`start-${stop.id}`}
                         type="date"
                         value={stop.start}
                         onChange={(e) => updateStop(stop.id, 'start', e.target.value)}
                       />
                     </div>
-                    <div className={`field${dateError ? ' has-error' : ''}`}>
-                      <label>End date</label>
+                    <div className={`field${dateErr ? ' has-error' : ''}`}>
+                      <label htmlFor={`end-${stop.id}`}>To</label>
                       <input
+                        id={`end-${stop.id}`}
                         type="date"
                         value={stop.end}
                         onChange={(e) => updateStop(stop.id, 'end', e.target.value)}
                       />
-                      <span className={`field-error${dateError ? ' show' : ''}`}>
-                        End date must be after start date.
-                      </span>
+                      <span className={`field-error${dateErr ? ' show' : ''}`}>End date before start</span>
                     </div>
                     <button
                       type="button"
                       className="remove-stop"
-                      aria-label="Remove this place"
+                      aria-label="Remove place"
                       disabled={stops.length === 1}
                       onClick={() => removeStop(stop.id)}
                     >
@@ -300,7 +305,7 @@ export default function CreateTrip({ onNavigate }) {
 
             <datalist id="placeList">
               {PLACE_OPTIONS.map((p) => (
-                <option value={p} key={p} />
+                <option key={p} value={p} />
               ))}
             </datalist>
 
@@ -309,30 +314,34 @@ export default function CreateTrip({ onNavigate }) {
             </button>
           </section>
 
-          {/* SUGGESTIONS */}
-          <section>
+          {/* SUGGESTED ACTIVITIES */}
+          <section className="card">
             <div className="suggest-head">
               <div>
-                <h2>Suggestions for places to visit / activities to perform</h2>
-                <p className="sub">Tap to add any of these to your itinerary.</p>
+                <h2>Suggested things to do</h2>
+                <div className="sub">Tap "+ Add" to include an activity in your draft itinerary.</div>
               </div>
               <span className="selected-pill">{selected.size} selected</span>
             </div>
 
             <div className="suggest-grid">
               {SUGGESTIONS.map((s) => {
-                const isSelected = selected.has(s.id);
+                const isSel = selected.has(s.id);
                 return (
-                  <article className={`suggest-card${isSelected ? ' selected' : ''}`} key={s.id}>
+                  <article className={`suggest-card${isSel ? ' selected' : ''}`} key={s.id}>
                     <div className="thumb">
-                      <span className={`tag ${s.tag}`}>{s.label}</span>
                       <img src={s.img} alt={s.name} />
+                      <span className={`tag ${s.tag}`}>{s.label}</span>
                     </div>
                     <div className="suggest-body">
                       <h3>{s.name}</h3>
                       <p>{s.desc}</p>
-                      <button type="button" className="add-toggle" onClick={() => toggleSuggestion(s.id)}>
-                        {isSelected ? '✓ Added' : '+ Add to itinerary'}
+                      <button
+                        type="button"
+                        className="add-toggle"
+                        onClick={() => toggleSuggestion(s.id)}
+                      >
+                        {isSel ? '✓ Added' : '+ Add'}
                       </button>
                     </div>
                   </article>
@@ -341,17 +350,18 @@ export default function CreateTrip({ onNavigate }) {
             </div>
           </section>
 
+          {/* ACTION BAR */}
           <div className="action-bar">
             <span className={`confirm-msg${confirmMsg ? ' show' : ''}`}>{confirmMsg}</span>
             <button
               type="button"
               className="btn btn-ghost"
-              onClick={() => flashConfirm('Draft saved — pick up where you left off anytime.')}
+              onClick={() => onNavigate && onNavigate('home')}
             >
-              Save Draft
+              Cancel
             </button>
             <button type="submit" className="btn btn-primary">
-              Create Trip →
+              Continue to Itinerary →
             </button>
           </div>
         </form>

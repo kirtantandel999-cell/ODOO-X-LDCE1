@@ -11,14 +11,14 @@ export default function CalendarHeader({ onOpenAddModal, onNavigate }) {
   };
 
   return (
-    <div className="page-head">
-      <div className="page-head-content">
+    <div className="calendar-header-banner">
+      <div className="calendar-header-info">
         <span className="eyebrow">Itinerary Schedule</span>
         <h1>Calendar View</h1>
         <p>Set your dates, add the places you're visiting, and we'll suggest what to do there.</p>
       </div>
 
-      <div className="page-head-actions">
+      <div className="calendar-header-actions">
         <button
           type="button"
           className="gt-btn-plan-trip"

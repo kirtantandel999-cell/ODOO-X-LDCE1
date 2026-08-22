@@ -113,7 +113,7 @@ export default function CreateTrip({ onNavigate }) {
   };
 
   return (
-    <div onClick={() => avatarOpen && setAvatarOpen(false)}>
+    <div className="create-trip-page" onClick={() => avatarOpen && setAvatarOpen(false)}>
       {/* TOP BAR */}
       <div className="topbar">
         <div className="wrap">
@@ -221,8 +221,11 @@ export default function CreateTrip({ onNavigate }) {
       <main className="wrap">
         {/* PAGE HEAD (Card structure matching screenshot) */}
         <div className="page-head">
-          <h1>Plan a new trip</h1>
-          <p>Set your dates, add the places you're visiting, and we'll suggest what to do there.</p>
+          <div className="page-head-content">
+            <span className="eyebrow">Trip Blueprint</span>
+            <h1>Plan a new trip</h1>
+            <p>Set your dates, add the places you're visiting, and we'll suggest what to do there.</p>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit}>

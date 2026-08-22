@@ -3,12 +3,18 @@ import { useAuth } from '../../context/AuthContext';
 import './HomePage.css';
 
 export default function HomePage({ onNavigate }) {
-  const { user, isAuthenticated, logout } = useAuth();
+  let auth = null;
+  try {
+    auth = useAuth();
+  } catch (e) {
+    // ignore
+  }
+  const user = auth?.user;
+  const logout = auth?.logout;
+
   const [scrolled, setScrolled] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const carouselRef = useRef(null);
-  const userMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,17 +22,6 @@ export default function HomePage({ onNavigate }) {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Close user dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
-        setUserMenuOpen(false);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
   const scrollCarousel = (amount) => {
@@ -37,26 +32,6 @@ export default function HomePage({ onNavigate }) {
 
   const handleNavClick = () => {
     setNavOpen(false);
-  };
-
-  const handleLogout = async () => {
-    setUserMenuOpen(false);
-    handleNavClick();
-    await logout();
-    // Stay on home — navbar will re-render to show Login/Register
-  };
-
-  const getInitial = () => {
-    if (user?.firstName) return user.firstName.charAt(0).toUpperCase();
-    if (user?.name) return user.name.charAt(0).toUpperCase();
-    return 'U';
-  };
-
-  const getDisplayName = () => {
-    if (user?.firstName && user?.lastName) return `${user.firstName} ${user.lastName}`;
-    if (user?.firstName) return user.firstName;
-    if (user?.name) return user.name;
-    return 'User';
   };
 
   return (
@@ -80,76 +55,59 @@ export default function HomePage({ onNavigate }) {
                 Calendar
               </a>
             </li>
+            <li>
+              <a
+                href="#profile"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick();
+                  onNavigate && onNavigate('profile');
+                }}
+              >
+                Profile
+              </a>
+            </li>
+            <li>
+              <a
+                href="#admin"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick();
+                  onNavigate && onNavigate('admin');
+                }}
+              >
+                Admin
+              </a>
+            </li>
             <li><a href="#about" onClick={handleNavClick}>About</a></li>
-
-            {/* ── Auth-aware section ── */}
-            {isAuthenticated ? (
-              <li className="nav-user-item" ref={userMenuRef}>
-                <button
-                  type="button"
-                  className="nav-user-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setUserMenuOpen((o) => !o);
-                  }}
-                >
-                  {user?.photo ? (
-                    <img
-                      src={user.photo}
-                      alt={getDisplayName()}
-                      className="nav-user-avatar"
-                    />
-                  ) : (
-                    <span className="nav-user-initial">{getInitial()}</span>
-                  )}
-                  <span className="nav-user-name">{getDisplayName()}</span>
-                </button>
-
-                <div className={`nav-user-dropdown${userMenuOpen ? ' open' : ''}`}>
+            {user ? (
+              <>
+                <li>
                   <a
                     href="#profile"
                     onClick={(e) => {
                       e.preventDefault();
-                      setUserMenuOpen(false);
                       handleNavClick();
                       onNavigate && onNavigate('profile');
                     }}
                   >
-                    👤 My Profile
+                    Hi, {user.firstName || user.name?.split(' ')[0] || user.username || 'User'}
                   </a>
-                  <a
-                    href="#calendar"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setUserMenuOpen(false);
-                      handleNavClick();
-                      onNavigate && onNavigate('calendar');
-                    }}
-                  >
-                    📅 Trip Calendar
-                  </a>
-                  <a
-                    href="#create-trip"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setUserMenuOpen(false);
-                      handleNavClick();
-                      onNavigate && onNavigate('createTrip');
-                    }}
-                  >
-                    ✈ Plan Trip
-                  </a>
+                </li>
+                <li>
                   <a
                     href="#logout"
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.preventDefault();
-                      handleLogout();
+                      handleNavClick();
+                      if (logout) await logout();
+                      onNavigate && onNavigate('login');
                     }}
                   >
-                    🚪 Log Out
+                    Logout
                   </a>
-                </div>
-              </li>
+                </li>
+              </>
             ) : (
               <>
                 <li>

@@ -1,137 +1,229 @@
-const API_BASE = 'http://localhost:5000/api/auth';
-const USER_KEY = 'globetrotter_user';
-const TOKEN_KEY = 'globetrotter_token';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+export function normalizeUserProfile(rawUser) {
+  if (!rawUser) return null;
+
+  const firstName = rawUser.firstName || '';
+  const lastName = rawUser.lastName || '';
+  const fullName = [firstName, lastName].filter(Boolean).join(' ') 
+    || rawUser.fullName 
+    || rawUser.name 
+    || (rawUser.email ? rawUser.email.split('@')[0] : 'Traveler');
+
+  const username = rawUser.username 
+    || (rawUser.email ? rawUser.email.split('@')[0] : 'traveler');
+
+  const phone = rawUser.phoneNumber || rawUser.phone || '';
+  const city = rawUser.city || '';
+  const country = rawUser.country || '';
+  const location = [city, country].filter(Boolean).join(', ') || rawUser.location || 'India';
+
+  const bio = rawUser.additionalInformation 
+    || rawUser.bio 
+    || 'Passionate globetrotter exploring architectural wonders, Himalayan treks, and coastal culture.';
+
+  const photo = rawUser.photo 
+    || rawUser.avatar 
+    || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';
+
+  const memberSince = rawUser.memberSince 
+    || (rawUser.createdAt ? new Date(rawUser.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'March 2024');
+
+  return {
+    ...rawUser,
+    id: rawUser.id,
+    firstName,
+    lastName,
+    fullName,
+    name: fullName,
+    username,
+    email: rawUser.email || '',
+    phone,
+    phoneNumber: phone,
+    city,
+    country,
+    location,
+    bio,
+    additionalInformation: bio,
+    photo,
+    avatar: photo,
+    memberSince,
+    preferences: rawUser.preferences || ['Heritage', 'Nature', 'Food', 'Adventure', 'Culture'],
+  };
+}
 
 export const AuthService = {
-  // ── Read persisted session ────────────────────
+  getToken: () => {
+    try {
+      return localStorage.getItem('globetrotter_token') || null;
+    } catch {
+      return null;
+    }
+  },
+
   getCurrentUser: () => {
     try {
-      const stored = localStorage.getItem(USER_KEY);
+      const stored = localStorage.getItem('globetrotter_user');
       return stored ? JSON.parse(stored) : null;
     } catch {
       return null;
     }
   },
 
-  getToken: () => {
-    try {
-      return localStorage.getItem(TOKEN_KEY) || null;
-    } catch {
-      return null;
-    }
+  getAuthHeaders: () => {
+    const token = AuthService.getToken();
+    return {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    };
   },
 
-  // ── Logout ────────────────────────────────────
   logout: async () => {
     try {
-      localStorage.removeItem(USER_KEY);
-      localStorage.removeItem(TOKEN_KEY);
-    } catch {
-      // ignore
+      localStorage.removeItem('globetrotter_user');
+      localStorage.removeItem('globetrotter_user_profile');
+      localStorage.removeItem('globetrotter_token');
+    } catch (e) {
+      console.error('Logout storage clear error:', e);
     }
     return { success: true };
   },
 
-  // ── Login ─────────────────────────────────────
-  // POST /api/auth/login  { email, password }
-  // Returns { message, token, user }
-  login: async (email, password) => {
-    const res = await fetch(`${API_BASE}/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+  login: async (emailOrUsername, password) => {
+    console.log('Attempting backend login with:', { emailOrUsername });
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || 'Login failed');
-    }
-
-    // Persist user + token
     try {
-      localStorage.setItem(USER_KEY, JSON.stringify(data.user));
-      localStorage.setItem(TOKEN_KEY, data.token);
-    } catch (e) {
-      console.error('Failed to persist auth data', e);
-    }
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: emailOrUsername.trim(),
+          password,
+        }),
+      });
 
-    return { success: true, message: data.message, user: data.user, token: data.token };
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Invalid email or password.');
+      }
+
+      if (data.token) {
+        localStorage.setItem('globetrotter_token', data.token);
+      }
+
+      const userObj = normalizeUserProfile(data.user || { email: emailOrUsername });
+
+      try {
+        localStorage.setItem('globetrotter_user', JSON.stringify(userObj));
+        localStorage.setItem('globetrotter_user_profile', JSON.stringify(userObj));
+      } catch (e) {
+        console.error('Failed to store user in localStorage:', e);
+      }
+
+      return {
+        success: true,
+        message: data.message || 'Logged in successfully',
+        token: data.token,
+        user: userObj,
+      };
+    } catch (error) {
+      if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        throw new Error('Could not connect to backend server. Make sure the backend is running at ' + API_BASE_URL);
+      }
+      throw error;
+    }
   },
 
-  // ── Register ──────────────────────────────────
-  // POST /api/auth/register
-  // Returns { message, user }  (no token)
   register: async (userData) => {
-    const res = await fetch(`${API_BASE}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        email: userData.email,
-        password: userData.password,
-        phoneNumber: userData.phone || userData.phoneNumber,
-        city: userData.city,
-        country: userData.country,
-        additionalInformation: userData.additionalInfo || userData.additionalInformation || '',
-        photo: userData.photo || null,
-      }),
-    });
+    console.log('Attempting backend registration with:', userData.email);
 
-    const data = await res.json();
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: userData.firstName?.trim(),
+          lastName: userData.lastName?.trim(),
+          email: userData.email?.trim().toLowerCase(),
+          password: userData.password,
+          phoneNumber: (userData.phoneNumber || userData.phone || '').trim(),
+          city: userData.city?.trim(),
+          country: userData.country?.trim(),
+          additionalInformation: (userData.additionalInformation || userData.additionalInfo || '').trim() || null,
+          photo: userData.photo || null,
+        }),
+      });
 
-    if (!res.ok) {
-      throw new Error(data.message || 'Registration failed');
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed.');
+      }
+
+      return {
+        success: true,
+        message: data.message || 'Registration successful. Please log in.',
+        user: data.user,
+      };
+    } catch (error) {
+      if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        throw new Error('Could not connect to backend server. Make sure the backend is running at ' + API_BASE_URL);
+      }
+      throw error;
     }
-
-    return { success: true, message: data.message, user: data.user };
   },
 
-  // ── Get Profile (protected) ───────────────────
-  // GET /api/auth/profile
-  getProfile: async (token) => {
-    const res = await fetch(`${API_BASE}/profile`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || 'Failed to fetch profile');
+  getProfile: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+        headers: AuthService.getAuthHeaders(),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to fetch profile');
+      }
+      const raw = data.user || data.data?.user;
+      return normalizeUserProfile(raw);
+    } catch (error) {
+      console.error('Get profile error:', error);
+      throw error;
     }
-
-    return data.user;
   },
 
-  // ── Update Profile (protected) ────────────────
-  // PUT /api/auth/profile
-  updateProfile: async (token, profileData) => {
-    const res = await fetch(`${API_BASE}/profile`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(profileData),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || 'Failed to update profile');
+  updateProfile: async (profileData) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+        method: 'PUT',
+        headers: AuthService.getAuthHeaders(),
+        body: JSON.stringify(profileData),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to update profile');
+      }
+      const raw = data.user || data.data?.user;
+      const normalized = normalizeUserProfile(raw);
+      if (normalized) {
+        localStorage.setItem('globetrotter_user', JSON.stringify(normalized));
+        localStorage.setItem('globetrotter_user_profile', JSON.stringify(normalized));
+      }
+      return normalized;
+    } catch (error) {
+      console.error('Update profile error:', error);
+      throw error;
     }
-
-    return { message: data.message, user: data.user };
   },
 
-  // ── Reset Password (placeholder) ──────────────
   resetPassword: async (email) => {
-    console.log('Attempting password reset for:', email);
-    return { success: true, message: 'Password reset link sent' };
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ success: true, message: 'Password reset link sent' });
+      }, 500);
+    });
   },
 };

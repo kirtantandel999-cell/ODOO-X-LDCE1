@@ -1,7 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import './HomePage.css';
 
 export default function HomePage({ onNavigate }) {
+  let auth = null;
+  try {
+    auth = useAuth();
+  } catch (e) {
+    // ignore
+  }
+  const user = auth?.user;
+  const logout = auth?.logout;
+
   const [scrolled, setScrolled] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const carouselRef = useRef(null);
@@ -59,6 +69,18 @@ export default function HomePage({ onNavigate }) {
             </li>
             <li>
               <a
+                href="#community"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick();
+                  onNavigate && onNavigate('community');
+                }}
+              >
+                Community
+              </a>
+            </li>
+            <li>
+              <a
                 href="#admin"
                 onClick={(e) => {
                   e.preventDefault();
@@ -70,23 +92,55 @@ export default function HomePage({ onNavigate }) {
               </a>
             </li>
             <li><a href="#about" onClick={handleNavClick}>About</a></li>
-            <li>
-              <a 
-                href="#login" 
-                onClick={(e) => { e.preventDefault(); handleNavClick(); onNavigate('login'); }}
-              >
-                Login
-              </a>
-            </li>
-            <li>
-              <a 
-                href="#register" 
-                className="btn-register"
-                onClick={(e) => { e.preventDefault(); handleNavClick(); onNavigate('register'); }}
-              >
-                Register
-              </a>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <a
+                    href="#profile"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick();
+                      onNavigate && onNavigate('profile');
+                    }}
+                  >
+                    Hi, {user.firstName || user.name?.split(' ')[0] || user.username || 'User'}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#logout"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      handleNavClick();
+                      if (logout) await logout();
+                      onNavigate && onNavigate('login');
+                    }}
+                  >
+                    Logout
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <a 
+                    href="#login" 
+                    onClick={(e) => { e.preventDefault(); handleNavClick(); onNavigate('login'); }}
+                  >
+                    Login
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#register" 
+                    className="btn-register"
+                    onClick={(e) => { e.preventDefault(); handleNavClick(); onNavigate('register'); }}
+                  >
+                    Register
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
           <button className="nav-toggle" id="navToggle" onClick={() => setNavOpen(!navOpen)}>☰</button>
         </div>

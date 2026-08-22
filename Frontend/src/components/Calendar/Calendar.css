@@ -273,80 +273,124 @@
 }
 
 /* ==========================================================================
-   PAGE HEAD (DARK INDIGO/BLUE BANNER MATCHING SCREENSHOT)
+   PAGE HEAD / CALENDAR BANNER (DARK INDIGO BANNER MATCHING SCREENSHOT)
    ========================================================================== */
-.page-head {
+.calendar-header-banner,
+.calendar-page .page-head,
+.calendar-head {
   background: var(--indigo-deep);
   color: var(--white);
   border-radius: var(--radius);
-  padding: 34px 38px 30px;
-  margin: 28px 0 32px;
+  padding: 32px 38px;
+  margin: 0 0 32px 0;
   box-shadow: 0 14px 30px -18px rgba(18, 41, 49, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
   gap: 24px;
-  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.page-head-content {
+.calendar-header-info,
+.calendar-page .page-head-content,
+.calendar-head .page-head-content {
   flex: 1;
-  min-width: 260px;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
-.page-head .eyebrow {
+.calendar-header-info .eyebrow,
+.calendar-page .page-head .eyebrow,
+.calendar-head .eyebrow {
   font-size: 12.5px;
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
   display: block;
 }
 
-.page-head h1 {
-  font-size: clamp(26px, 3.6vw, 34px);
+.calendar-header-info h1,
+.calendar-page .page-head h1,
+.calendar-head h1 {
+  font-size: clamp(24px, 3.4vw, 34px);
   font-weight: 700;
   color: var(--white);
-  margin: 0;
+  margin: 0 0 8px 0;
   line-height: 1.2;
 }
 
-.page-head p {
-  margin-top: 8px;
+.calendar-header-info p,
+.calendar-page .page-head p,
+.calendar-head p {
+  margin: 0;
   color: rgba(255, 255, 255, 0.76);
   font-size: 15px;
-  max-width: 540px;
+  max-width: 580px;
   line-height: 1.5;
-  margin-bottom: 0;
 }
 
+.calendar-header-actions,
 .page-head-actions {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
+.calendar-header-actions .gt-btn-plan-trip,
+.page-head-actions .gt-btn-plan-trip,
 .gt-btn-plan-trip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--terracotta);
-  color: var(--white);
-  padding: 0.75rem 1.65rem;
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 8px 20px -4px rgba(193, 98, 45, 0.6);
-  transition: all 0.25s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: var(--terracotta) !important;
+  color: var(--white) !important;
+  padding: 10px 22px !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  font-size: 14.5px !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 20px -4px rgba(193, 98, 45, 0.6) !important;
+  transition: all 0.25s ease !important;
+  white-space: nowrap !important;
+  width: auto !important;
+  max-width: fit-content !important;
 }
 
+.calendar-header-actions .gt-btn-plan-trip:hover,
+.page-head-actions .gt-btn-plan-trip:hover,
 .gt-btn-plan-trip:hover {
-  background: var(--terracotta-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px -4px rgba(193, 98, 45, 0.75);
+  background: #a95222 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 25px -4px rgba(193, 98, 45, 0.75) !important;
+}
+
+@media (max-width: 680px) {
+  .calendar-header-banner,
+  .calendar-page .page-head,
+  .calendar-head {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 24px 20px !important;
+    gap: 18px !important;
+  }
+  .calendar-header-actions,
+  .page-head-actions {
+    width: 100%;
+  }
+  .calendar-header-actions .gt-btn-plan-trip,
+  .page-head-actions .gt-btn-plan-trip,
+  .gt-btn-plan-trip {
+    width: 100% !important;
+    justify-content: center !important;
+  }
 }
 
 /* ==========================================================================
