@@ -4,6 +4,7 @@ import RegistrationScreen from './components/Authentication/RegistrationScreen'
 import HomePage from './components/Home/HomePage'
 import CreateTrip from './components/Trips/CreateTrip'
 import BuildItinerary from './components/Itinerary/BuildItinerary'
+import ProfilePage from './components/Profile/ProfilePage'
 import './index.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       {currentScreen === 'home' && <HomePage onNavigate={setCurrentScreen} />}
       {currentScreen === 'login' && <LoginScreen onNavigate={setCurrentScreen} />}
       {currentScreen === 'register' && <RegistrationScreen onNavigate={setCurrentScreen} />}
+      {currentScreen === 'profile' && <ProfilePage onNavigate={setCurrentScreen} />}
       {(currentScreen === 'createTrip' || currentScreen === 'create-trip') && (
         <CreateTrip onNavigate={setCurrentScreen} />
       )}

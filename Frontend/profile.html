@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile · GlobalTrotter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/components/Profile/ProfilePage.css">
+<style>
+  body {
+    margin: 0;
+    background: #faf6ef;
+  }
+</style>
+</head>
+<body>
+
+<div class="profile-page-wrapper">
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <div class="wrap">
+      <a href="homePage.html" class="logo">
+        <span class="mark">GT</span> GlobalTrotter
+      </a>
+      <div class="topbar-right">
+        <span class="crumb">
+          <a href="homePage.html">Home</a> / <span>My Profile</span>
+        </span>
+        <div class="avatar-wrap">
+          <button type="button" class="avatar-btn" id="avatarBtn" aria-label="Account menu">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Aarav Sharma" id="topAvatarImg">
+          </button>
+          <div class="avatar-menu" id="avatarMenu">
+            <a href="profile.html">My Profile</a>
+            <a href="create-trip.html">Plan Trip</a>
+            <a href="homePage.html">Home Page</a>
+            <a href="homePage.html#login">Log Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <!-- PAGE HEAD / HERO (Card structure matching image) -->
+    <header class="page-head">
+      <span class="eyebrow">✈ Personal Traveler Profile</span>
+      <h1>My Profile</h1>
+      <p>Manage your personal travel identity, review your upcoming travel blueprints, and revisit past adventures.</p>
+    </header>
+    <!-- PROFILE HERO CARD -->
+    <section class="profile-hero-card">
+      <div class="profile-main-grid">
+        <div class="profile-avatar-container">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Aarav Sharma" class="profile-avatar-img" id="mainAvatarImg">
+          <span class="profile-badge-online" title="Active Traveler"></span>
+        </div>
+
+        <div class="profile-details-column">
+          <div class="profile-name-row">
+            <h2 class="profile-user-name" id="dispFullName">Aarav Sharma</h2>
+            <span class="profile-handle" id="dispUsername">@aarav_travels</span>
+          </div>
+
+          <p class="profile-bio" id="dispBio">
+            Passionate globetrotter exploring architectural wonders, Himalayan treks, and coastal culture across India and around the globe.
+          </p>
+
+          <div class="profile-info-grid">
+            <div class="info-item">
+              <span class="info-icon">📍</span>
+              <span id="dispLocation">Ahmedabad, Gujarat, India</span>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">✉</span>
+              <span id="dispEmail">aarav.sharma@example.com</span>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">📞</span>
+              <span id="dispPhone">+91 98765 43210</span>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">🗓</span>
+              <span>Member since March 2024</span>
+            </div>
+          </div>
+
+          <div class="profile-prefs-group">
+            <span class="prefs-label">Travel Style:</span>
+            <span class="pref-tag heritage">Heritage</span>
+            <span class="pref-tag nature">Nature</span>
+            <span class="pref-tag food">Food</span>
+            <span class="pref-tag adventure">Adventure</span>
+            <span class="pref-tag culture">Culture</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-edit-profile" id="openEditBtn">
+          ✎ Edit Profile
+        </button>
+      </div>
+
+      <div class="profile-stats-strip">
+        <div class="stat-box">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Upcoming Itineraries</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Completed Journeys</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">12</span>
+          <span class="stat-label">Cities Explored</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREPLANNED TRIPS -->
+    <section>
+      <div class="section-header-block">
+        <div>
+          <h2>Preplanned Trips</h2>
+          <p class="sub">Upcoming itineraries and destinations scheduled on your calendar.</p>
+        </div>
+        <span class="section-count-badge">3 Planned</span>
+      </div>
+
+      <div class="trips-grid">
+        <article class="trip-card">
+          <div class="trip-card-thumb">
+            <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=600&q=70" alt="Royal Rajasthan Expedition">
+            <span class="trip-status-pill upcoming">Upcoming</span>
+          </div>
+          <div class="trip-card-body">
+            <h3 class="trip-card-title">Royal Rajasthan Expedition</h3>
+            <div class="trip-card-dest">Udaipur & Jodhpur, India</div>
+            <p class="trip-card-desc">A 6-day heritage tour traversing lake palaces, majestic Mehrangarh fort, and evening desert trails.</p>
+            <div class="trip-meta-row">
+              <div class="trip-meta-item"><span>🗓</span> 15 Oct – 21 Oct 2026</div>
+              <div class="trip-meta-item"><span>👥</span> 2 Guests</div>
+            </div>
+            <div class="trip-card-foot">
+              <span class="trip-budget-tag">Est. ₹48,000</span>
+              <a href="build-itinerary.html" class="btn-view-trip">View Details →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trip-card">
+          <div class="trip-card-thumb">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=70" alt="Bali Retreat">
+            <span class="trip-status-pill upcoming">Planning</span>
+          </div>
+          <div class="trip-card-body">
+            <h3 class="trip-card-title">Bali Coastal & Temple Retreat</h3>
+            <div class="trip-card-dest">Ubud & Seminyak, Indonesia</div>
+            <p class="trip-card-desc">Relaxing week among Ubud rice terraces, waterfall trekking, and beach sunsets in Seminyak.</p>
+            <div class="trip-meta-row">
+              <div class="trip-meta-item"><span>🗓</span> 5 Dec – 12 Dec 2026</div>
+              <div class="trip-meta-item"><span>👥</span> 2 Guests</div>
+            </div>
+            <div class="trip-card-foot">
+              <span class="trip-budget-tag">Est. ₹95,000</span>
+              <a href="build-itinerary.html" class="btn-view-trip">View Details →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trip-card">
+          <div class="trip-card-thumb">
+            <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=600&q=70" alt="Himachal Snow Trek">
+            <span class="trip-status-pill upcoming">Draft</span>
+          </div>
+          <div class="trip-card-body">
+            <h3 class="trip-card-title">Himachal Snow & Ridge Trek</h3>
+            <div class="trip-card-dest">Manali & Spiti, India</div>
+            <p class="trip-card-desc">High-altitude winter journey with panoramic valley trails, mountain cafes, and star-gazing.</p>
+            <div class="trip-meta-row">
+              <div class="trip-meta-item"><span>🗓</span> 10 Jan – 16 Jan 2027</div>
+              <div class="trip-meta-item"><span>👥</span> 4 Guests</div>
+            </div>
+            <div class="trip-card-foot">
+              <span class="trip-budget-tag">Est. ₹36,000</span>
+              <a href="build-itinerary.html" class="btn-view-trip">View Details →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PREVIOUS TRIPS -->
+    <section>
+      <div class="section-header-block">
+        <div>
+          <h2>Previous Trips</h2>
+          <p class="sub">Your passport collection of completed journeys and adventures.</p>
+        </div>
+        <span class="section-count-badge">3 Completed</span>
+      </div>
+
+      <div class="trips-grid">
+        <article class="ticket-card">
+          <div class="ticket-photo">
+            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=500&q=70" alt="Kerala Backwaters">
+            <span class="trip-status-pill completed">Completed</span>
+          </div>
+          <div class="ticket-perforation"></div>
+          <div class="ticket-content">
+            <div class="ticket-route">
+              <span>COK</span>
+              <span class="ticket-plane">✈</span>
+              <span>ALP</span>
+            </div>
+            <div class="ticket-dates">3 – 7 Nov 2025 · 4 nights</div>
+            <p class="trip-card-desc">Slow houseboat cruise through palm-lined canals and crisp walks across Munnar mist-laden hills.</p>
+            <div class="ticket-foot">
+              <span class="ticket-tag">Kerala · Backwaters</span>
+              <a href="build-itinerary.html" class="ticket-btn-link">View Stub →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card">
+          <div class="ticket-photo">
+            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=500&q=70" alt="Rome & Amalfi">
+            <span class="trip-status-pill completed">Completed</span>
+          </div>
+          <div class="ticket-perforation"></div>
+          <div class="ticket-content">
+            <div class="ticket-route">
+              <span>DEL</span>
+              <span class="ticket-plane">✈</span>
+              <span>FCO</span>
+            </div>
+            <div class="ticket-dates">18 – 27 Jun 2025 · 9 nights</div>
+            <p class="trip-card-desc">Ancient Roman ruins, authentic Trastevere trattorias, and scenic cliffside drives in Southern Italy.</p>
+            <div class="ticket-foot">
+              <span class="ticket-tag">Europe · City & Coast</span>
+              <a href="build-itinerary.html" class="ticket-btn-link">View Stub →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card">
+          <div class="ticket-photo">
+            <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=500&q=70" alt="Goa Coastal Exploration">
+            <span class="trip-status-pill completed">Completed</span>
+          </div>
+          <div class="ticket-perforation"></div>
+          <div class="ticket-content">
+            <div class="ticket-route">
+              <span>AMD</span>
+              <span class="ticket-plane">✈</span>
+              <span>GOI</span>
+            </div>
+            <div class="ticket-dates">14 – 18 Feb 2025 · 4 nights</div>
+            <p class="trip-card-desc">Portuguese quarter walks in Fontainhas, sunset boat cruises, and secluded beaches in Palolem.</p>
+            <div class="ticket-foot">
+              <span class="ticket-tag">Goa · Coast & Heritage</span>
+              <a href="build-itinerary.html" class="ticket-btn-link">View Stub →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="modal-overlay" id="editModal" style="display:none;">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2>Edit Profile</h2>
+      <button type="button" class="modal-close-btn" id="closeModalBtn">✕</button>
+    </div>
+    <form class="modal-form" id="editProfileForm">
+      <div class="form-row-2">
+        <div class="form-field-group">
+          <label>Full Name *</label>
+          <input type="text" id="inputFullName" value="Aarav Sharma" required>
+        </div>
+        <div class="form-field-group">
+          <label>Username / Handle</label>
+          <input type="text" id="inputUsername" value="aarav_travels">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field-group">
+          <label>Email Address *</label>
+          <input type="email" id="inputEmail" value="aarav.sharma@example.com" required>
+        </div>
+        <div class="form-field-group">
+          <label>Phone Number</label>
+          <input type="tel" id="inputPhone" value="+91 98765 43210">
+        </div>
+      </div>
+      <div class="form-field-group">
+        <label>Location</label>
+        <input type="text" id="inputLocation" value="Ahmedabad, Gujarat, India">
+      </div>
+      <div class="form-field-group">
+        <label>Profile Photo URL</label>
+        <input type="url" id="inputPhoto" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80">
+      </div>
+      <div class="form-field-group">
+        <label>Bio & Travel Motto</label>
+        <textarea id="inputBio" rows="3">Passionate globetrotter exploring architectural wonders, Himalayan treks, and coastal culture across India and around the globe.</textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost-modal" id="cancelModalBtn">Cancel</button>
+        <button type="submit" class="btn-save-modal">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const avatarBtn = document.getElementById('avatarBtn');
+  const avatarMenu = document.getElementById('avatarMenu');
+  avatarBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    avatarMenu.classList.toggle('open');
+  });
+  document.addEventListener('click', () => avatarMenu.classList.remove('open'));
+
+  const openEditBtn = document.getElementById('openEditBtn');
+  const editModal = document.getElementById('editModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const cancelModalBtn = document.getElementById('cancelModalBtn');
+  const editProfileForm = document.getElementById('editProfileForm');
+
+  openEditBtn.addEventListener('click', () => {
+    editModal.style.display = 'flex';
+  });
+
+  const closeModal = () => {
+    editModal.style.display = 'none';
+  };
+
+  closeModalBtn.addEventListener('click', closeModal);
+  cancelModalBtn.addEventListener('click', closeModal);
+  editModal.addEventListener('click', (e) => {
+    if (e.target === editModal) closeModal();
+  });
+
+  editProfileForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('dispFullName').textContent = document.getElementById('inputFullName').value;
+    document.getElementById('dispUsername').textContent = '@' + document.getElementById('inputUsername').value.replace('@', '');
+    document.getElementById('dispEmail').textContent = document.getElementById('inputEmail').value;
+    document.getElementById('dispPhone').textContent = document.getElementById('inputPhone').value;
+    document.getElementById('dispLocation').textContent = document.getElementById('inputLocation').value;
+    document.getElementById('dispBio').textContent = document.getElementById('inputBio').value;
+    const photoUrl = document.getElementById('inputPhoto').value;
+    if (photoUrl) {
+      document.getElementById('mainAvatarImg').src = photoUrl;
+      document.getElementById('topAvatarImg').src = photoUrl;
+    }
+    closeModal();
+  });
+</script>
+
+</body>
+</html>

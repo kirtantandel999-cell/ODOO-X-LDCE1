@@ -26,6 +26,7 @@ export default function BuildItinerary({ onNavigate }) {
     makeSection('activity'),
   ]);
   const [confirmMsg, setConfirmMsg] = useState('');
+  const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
 
   const updateSection = (id, field, value) => {
     setSections((prev) => prev.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
@@ -60,7 +61,7 @@ export default function BuildItinerary({ onNavigate }) {
   };
 
   return (
-    <div>
+    <div onClick={() => avatarMenuOpen && setAvatarMenuOpen(false)}>
       {/* TOP BAR */}
       <div className="topbar">
         <div className="wrap">
@@ -103,20 +104,76 @@ export default function BuildItinerary({ onNavigate }) {
               </a>{' '}
               / Itinerary
             </span>
-            <button className="avatar-btn" aria-label="Account menu">A</button>
+            <div className="avatar-wrap">
+              <button
+                type="button"
+                className="avatar-btn"
+                aria-label="Account menu"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setAvatarMenuOpen((o) => !o);
+                }}
+              >
+                A
+              </button>
+              <div className={`avatar-menu${avatarMenuOpen ? ' open' : ''}`}>
+                <a
+                  href="/profile"
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate('profile');
+                    }
+                  }}
+                >
+                  My Profile
+                </a>
+                <a
+                  href="/create-trip"
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate('createTrip');
+                    }
+                  }}
+                >
+                  Plan Trip
+                </a>
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate('home');
+                    }
+                  }}
+                >
+                  Home Page
+                </a>
+                <a
+                  href="/logout"
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate('login');
+                    }
+                  }}
+                >
+                  Log Out
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* PAGE HEAD */}
-      <div className="page-head">
-        <div className="wrap">
+      <main className="wrap">
+        {/* PAGE HEAD (Card structure matching screenshot) */}
+        <div className="page-head">
           <h1>Build your itinerary</h1>
           <p>Break your trip into sections — travel, stay, or anything else — and set a date range and budget for each.</p>
         </div>
-      </div>
 
-      <main className="wrap">
         <form onSubmit={handleSubmit}>
           <div className="sections">
             {sections.map((s, i) => {

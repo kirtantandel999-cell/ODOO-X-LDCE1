@@ -33,6 +33,18 @@ export default function HomePage({ onNavigate }) {
           <ul className={`nav-links ${navOpen ? 'open' : ''}`} id="navLinks">
             <li><a href="#regions" onClick={handleNavClick}>Explore</a></li>
             <li><a href="#trips" onClick={handleNavClick}>My Trips</a></li>
+            <li>
+              <a
+                href="#profile"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick();
+                  onNavigate && onNavigate('profile');
+                }}
+              >
+                Profile
+              </a>
+            </li>
             <li><a href="#about" onClick={handleNavClick}>About</a></li>
             <li>
               <a 

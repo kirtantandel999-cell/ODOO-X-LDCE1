@@ -1,6 +1,17 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---------- Avatar menu ---------- */
+  const avatarBtn = document.getElementById('avatarBtn');
+  const avatarMenu = document.getElementById('avatarMenu');
+  if (avatarBtn && avatarMenu) {
+    avatarBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      avatarMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', () => avatarMenu.classList.remove('open'));
+  }
+
   const sectionsContainer = document.getElementById('sectionsContainer');
   const addSectionBtn = document.getElementById('addSectionBtn');
   const totalBudgetEl = document.getElementById('totalBudget');
