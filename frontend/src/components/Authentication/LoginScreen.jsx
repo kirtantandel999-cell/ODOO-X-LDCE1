@@ -83,6 +83,10 @@ export default function LoginScreen({ onNavigate }) {
         <button type="button" className="btn-link" onClick={() => alert('Password reset modal opened.')}>
           Forgot Password?
         </button>
+        
+        <button type="button" className="btn-link" onClick={() => onNavigate('home')}>
+          ← Back to Home
+        </button>
       </form>
     </div>
   );

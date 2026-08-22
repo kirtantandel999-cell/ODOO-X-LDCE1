@@ -205,6 +205,10 @@ export default function RegistrationScreen({ onNavigate }) {
         <button type="button" className="btn-link" onClick={() => onNavigate('login')}>
           Back to Login
         </button>
+        
+        <button type="button" className="btn-link" onClick={() => onNavigate('home')}>
+          ← Back to Home
+        </button>
       </form>
     </div>
   );
