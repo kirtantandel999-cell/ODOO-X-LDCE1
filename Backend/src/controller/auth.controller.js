@@ -6,21 +6,33 @@ import prisma from "../lib/prisma.js";
 // POST /api/auth/register
 // ─────────────────────────────────────────────
 export const register = async (req, res) => {
-  const { username, password, photo } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    phoneNumber,
+    city,
+    country,
+    additionalInformation,
+    photo,
+  } = req.body;
 
   try {
     // 1. Validate required fields
-    if (!username || !password) {
-      return res.status(400).json({ message: "Username and password are required." });
+    if (!firstName || !lastName || !email || !password || !phoneNumber || !city || !country) {
+      return res.status(400).json({
+        message: "firstName, lastName, email, password, phoneNumber, city, and country are required.",
+      });
     }
 
-    // 2. Check if username is already taken
+    // 2. Check if email is already registered
     const existingUser = await prisma.user.findUnique({
-      where: { username },
+      where: { email },
     });
 
     if (existingUser) {
-      return res.status(409).json({ message: "Username is already taken." });
+      return res.status(409).json({ message: "An account with this email already exists." });
     }
 
     // 3. Hash the password before saving
@@ -29,13 +41,19 @@ export const register = async (req, res) => {
     // 4. Create the user
     const user = await prisma.user.create({
       data: {
-        username,
+        firstName,
+        lastName,
+        email,
         password: hashedPassword,
+        phoneNumber,
+        city,
+        country,
+        additionalInformation: additionalInformation || null,
         photo: photo || null,
       },
     });
 
-    // 5. Return success (never return the password)
+    // 5. Return success — never return the password
     const { password: _, ...userWithoutPassword } = user;
     res.status(201).json({
       message: "User registered successfully.",
@@ -51,37 +69,37 @@ export const register = async (req, res) => {
 // POST /api/auth/login
 // ─────────────────────────────────────────────
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // 1. Validate required fields
-    if (!username || !password) {
-      return res.status(400).json({ message: "Username and password are required." });
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required." });
     }
 
-    // 2. Find the user by username
+    // 2. Find the user by email
     const user = await prisma.user.findUnique({
-      where: { username },
+      where: { email },
     });
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid username or password." });
+      return res.status(401).json({ message: "Invalid email or password." });
     }
 
     // 3. Verify the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid username or password." });
+      return res.status(401).json({ message: "Invalid email or password." });
     }
 
-    // 4. Sign a JWT token
+    // 4. Sign a JWT token — payload uses email (not username)
     const token = jwt.sign(
-      { id: user.id, username: user.username },
+      { id: user.id, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
-    // 5. Return the token and user info (never return the password)
+    // 5. Return token and user info — never return the password
     const { password: _, ...userWithoutPassword } = user;
     res.status(200).json({
       message: "Login successful.",
@@ -99,12 +117,18 @@ export const login = async (req, res) => {
 // ─────────────────────────────────────────────
 export const getProfile = async (req, res) => {
   try {
-    // req.user is set by the auth middleware
+    // req.user.id is set by the JWT middleware
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
       select: {
         id: true,
-        username: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        phoneNumber: true,
+        city: true,
+        country: true,
+        additionalInformation: true,
         photo: true,
         createdAt: true,
         updatedAt: true,
@@ -126,15 +150,29 @@ export const getProfile = async (req, res) => {
 // PUT /api/auth/profile  (protected route)
 // ─────────────────────────────────────────────
 export const updateProfile = async (req, res) => {
-  const { photo } = req.body;
+  const { firstName, lastName, phoneNumber, city, country, additionalInformation, photo } = req.body;
 
   try {
     const updatedUser = await prisma.user.update({
       where: { id: req.user.id },
-      data: { photo: photo || null },
+      data: {
+        ...(firstName && { firstName }),
+        ...(lastName && { lastName }),
+        ...(phoneNumber && { phoneNumber }),
+        ...(city && { city }),
+        ...(country && { country }),
+        ...(additionalInformation !== undefined && { additionalInformation }),
+        ...(photo !== undefined && { photo }),
+      },
       select: {
         id: true,
-        username: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        phoneNumber: true,
+        city: true,
+        country: true,
+        additionalInformation: true,
         photo: true,
         createdAt: true,
         updatedAt: true,
