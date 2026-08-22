@@ -65,11 +65,74 @@ async function main() {
   const destinations = {};
   for (const d of destinationData) {
     const { regionName, ...data } = d;
-    const dest = await prisma.destination.create({
-      data: { ...data, regionId: regions[regionName].id },
+    let dest = await prisma.destination.findFirst({
+      where: { name: data.name, country: data.country },
     });
+    if (!dest) {
+      dest = await prisma.destination.create({
+        data: { ...data, regionId: regions[regionName].id },
+      });
+    }
     destinations[d.name] = dest;
     console.log(`  ✅ Destination: ${dest.name}, ${dest.country} (id: ${dest.id})`);
+  }
+
+  // ── Activities ───────────────────────────────
+  console.log("🎯 Seeding activities (22 activities across categories)...");
+  const activityData = [
+    // Tokyo / Japan
+    { name: "Tokyo Tower Observation Deck", description: "Panoramic 360-degree views of Tokyo skyline and Mount Fuji.", category: "Sightseeing", city: "Tokyo", country: "Japan", latitude: 35.6586, longitude: 139.7454, estimatedDuration: 2.0, estimatedCost: 1500, popularity: 96, image: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=800" },
+    { name: "Shibuya Crossing & Hachiko Statue", description: "Experience the world's busiest pedestrian crossing and visit the loyal dog memorial.", category: "Culture", city: "Tokyo", country: "Japan", latitude: 35.6595, longitude: 139.7005, estimatedDuration: 1.5, estimatedCost: 0, popularity: 98, image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=800" },
+    { name: "Tsukiji Outer Market Sushi Tour", description: "Taste fresh sashimi, wagyu beef skewers, and traditional Japanese street foods.", category: "Food", city: "Tokyo", country: "Japan", latitude: 35.6655, longitude: 139.7707, estimatedDuration: 3.0, estimatedCost: 3500, popularity: 94, image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800" },
+    { name: "Mount Fuji & Hakone Day Trip", description: "Scenic ropeway tour, Lake Ashi cruise, and breathtaking views of Fuji-san.", category: "Nature", city: "Tokyo", country: "Japan", latitude: 35.3606, longitude: 138.7274, estimatedDuration: 8.0, estimatedCost: 7500, popularity: 97, image: "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800" },
+
+    // Kyoto / Japan
+    { name: "Fushimi Inari Shrine Hike", description: "Walk beneath thousands of vermilion torii gates winding up sacred Mount Inari.", category: "Culture", city: "Kyoto", country: "Japan", latitude: 34.9671, longitude: 135.7727, estimatedDuration: 3.0, estimatedCost: 0, popularity: 97, image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800" },
+    { name: "Arashiyama Bamboo Grove & Monkey Park", description: "Stroll through towering bamboo stalks and feed wild macaques at Iwatayama.", category: "Nature", city: "Kyoto", country: "Japan", latitude: 35.0170, longitude: 135.6713, estimatedDuration: 3.5, estimatedCost: 600, popularity: 93, image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800" },
+
+    // Paris / France
+    { name: "Eiffel Tower Summit Tour", description: "Ascend to the highest accessible observation platform in the European Union.", category: "Sightseeing", city: "Paris", country: "France", latitude: 48.8584, longitude: 2.2945, estimatedDuration: 2.5, estimatedCost: 2800, popularity: 99, image: "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800" },
+    { name: "Louvre Museum Guided Art Tour", description: "Discover the Mona Lisa, Venus de Milo, and masterpieces of world art history.", category: "Culture", city: "Paris", country: "France", latitude: 48.8606, longitude: 2.3376, estimatedDuration: 4.0, estimatedCost: 2200, popularity: 98, image: "https://images.unsplash.com/photo-1565099824688-e93eb20fe622?w=800" },
+    { name: "Seine River Dinner Cruise", description: "Gourmet multi-course French dinner gliding past illuminated Parisian monuments.", category: "Entertainment", city: "Paris", country: "France", latitude: 48.8600, longitude: 2.3200, estimatedDuration: 2.5, estimatedCost: 6500, popularity: 92, image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800" },
+
+    // London / UK
+    { name: "Tower of London & Crown Jewels", description: "Explore the medieval fortress and marvel at the British monarchy's royal regalia.", category: "Culture", city: "London", country: "United Kingdom", latitude: 51.5081, longitude: -0.0759, estimatedDuration: 3.0, estimatedCost: 3200, popularity: 95, image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800" },
+    { name: "London Eye Flight", description: "Iconic riverside Ferris wheel offering 360-degree views across central London.", category: "Sightseeing", city: "London", country: "United Kingdom", latitude: 51.5033, longitude: -0.1195, estimatedDuration: 1.0, estimatedCost: 2800, popularity: 93, image: "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800" },
+
+    // Rome / Italy
+    { name: "Colosseum & Roman Forum Tour", description: "Step back into ancient gladiatorial arenas and the political heart of the Roman Empire.", category: "Culture", city: "Rome", country: "Italy", latitude: 41.8902, longitude: 12.4922, estimatedDuration: 3.5, estimatedCost: 2500, popularity: 99, image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800" },
+    { name: "Vatican Museums & Sistine Chapel", description: "Marvel at Michelangelo's ceiling frescoes and St. Peter's Basilica.", category: "Culture", city: "Rome", country: "Italy", latitude: 41.9067, longitude: 12.4547, estimatedDuration: 4.0, estimatedCost: 3000, popularity: 98, image: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800" },
+
+    // Dubai / UAE
+    { name: "Burj Khalifa Top Floor Experience", description: "Soar to levels 124, 125, and 148 of the world's tallest architectural marvel.", category: "Sightseeing", city: "Dubai", country: "United Arab Emirates", latitude: 25.1972, longitude: 55.2744, estimatedDuration: 2.0, estimatedCost: 4200, popularity: 97, image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800" },
+    { name: "Desert Safari & Dune Bashing", description: "4x4 sand dune bashing, camel riding, falconry, and barbecue dinner under desert stars.", category: "Adventure", city: "Dubai", country: "United Arab Emirates", latitude: 24.8607, longitude: 55.4500, estimatedDuration: 6.0, estimatedCost: 4500, popularity: 96, image: "https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?w=800" },
+
+    // Bali / Indonesia
+    { name: "Ubud Rice Terraces & Jungle Swing", description: "Soar over Tegalalang rice paddies on a giant jungle swing and visit coffee plantations.", category: "Adventure", city: "Bali", country: "Indonesia", latitude: -8.4312, longitude: 115.2778, estimatedDuration: 4.0, estimatedCost: 1500, popularity: 94, image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800" },
+    { name: "Tanah Lot Sunset Temple", description: "Dramatic offshore rock temple celebrated for stunning Indian Ocean sunsets.", category: "Relaxation", city: "Bali", country: "Indonesia", latitude: -8.6212, longitude: 115.0868, estimatedDuration: 2.5, estimatedCost: 400, popularity: 91, image: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800" },
+
+    // Bangkok / Thailand
+    { name: "Grand Palace & Wat Phra Kaew", description: "Marvel at Thailand's most sacred temple complex and the revered Emerald Buddha.", category: "Culture", city: "Bangkok", country: "Thailand", latitude: 13.7500, longitude: 100.4914, estimatedDuration: 3.0, estimatedCost: 1200, popularity: 92, image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800" },
+    { name: "Chao Phraya River Longtail Boat Tour", description: "Cruise through Bangkok's canal network (khlongs) and floating markets.", category: "Sightseeing", city: "Bangkok", country: "Thailand", latitude: 13.7465, longitude: 100.4930, estimatedDuration: 2.0, estimatedCost: 800, popularity: 88, image: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800" },
+
+    // Singapore
+    { name: "Gardens by the Bay & Supertree Observatory", description: "Futuristic vertical gardens, Flower Dome, and the magnificent Cloud Forest waterfall.", category: "Nature", city: "Singapore", country: "Singapore", latitude: 1.2816, longitude: 103.8636, estimatedDuration: 3.5, estimatedCost: 2000, popularity: 96, image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800" },
+
+    // Sydney / Australia
+    { name: "Sydney Harbour Bridge Climb", description: "Climb the summit of the iconic 'Coathanger' for unforgettable 360-degree harbour panoramas.", category: "Adventure", city: "Sydney", country: "Australia", latitude: -33.8523, longitude: 151.2108, estimatedDuration: 3.5, estimatedCost: 12000, popularity: 95, image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800" },
+
+    // Mumbai / India
+    { name: "Elephanta Caves Island Boat Trip", description: "Ferry across Mumbai harbour to ancient rock-cut cave temples dedicated to Lord Shiva.", category: "Culture", city: "Mumbai", country: "India", latitude: 18.9633, longitude: 72.9315, estimatedDuration: 4.5, estimatedCost: 500, popularity: 85, image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=800" },
+  ];
+
+  for (const act of activityData) {
+    let existing = await prisma.activity.findFirst({
+      where: { name: act.name, city: act.city },
+    });
+    if (!existing) {
+      existing = await prisma.activity.create({ data: act });
+    }
+    console.log(`  ✅ Activity: ${existing.name} (${existing.category} - ${existing.city}) [id: ${existing.id}]`);
   }
 
   // ── Banners ──────────────────────────────────
@@ -102,6 +165,7 @@ async function main() {
   console.log("\n✅ Seed completed successfully!");
   console.log(`   Regions:      ${Object.keys(regions).length}`);
   console.log(`   Destinations: ${Object.keys(destinations).length}`);
+  console.log(`   Activities:   ${activityData.length}`);
   console.log("   Banners:      2");
 }
 

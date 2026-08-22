@@ -2,12 +2,11 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
-// ── Existing routes ───────────────────────────
+// ── Routes ───────────────────────────────────
 import authRoutes from "./routes/auth.routes.js";
-
-// ── New routes ────────────────────────────────
 import regionRoutes from "./routes/region.routes.js";
 import destinationRoutes from "./routes/destination.routes.js";
+import activityRoutes from "./routes/activity.routes.js";
 import tripRoutes from "./routes/trip.routes.js";
 import bannerRoutes from "./routes/banner.routes.js";
 import homeRoutes from "./routes/home.routes.js";
@@ -20,10 +19,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ── Routes ───────────────────────────────────
+// ── Route Mounts ─────────────────────────────
 app.use("/api/auth", authRoutes);
 app.use("/api/regions", regionRoutes);
 app.use("/api/destinations", destinationRoutes);
+app.use("/api/activities", activityRoutes);
 app.use("/api/trips", tripRoutes);
 app.use("/api/banners", bannerRoutes);
 app.use("/api/home", homeRoutes);
@@ -38,6 +38,7 @@ app.get("/", (req, res) => {
       "/api/auth",
       "/api/regions",
       "/api/destinations",
+      "/api/activities",
       "/api/trips",
       "/api/banners",
       "/api/home",

@@ -84,6 +84,7 @@ model Trip {
 
   user             User              @relation(fields: [userId], references: [id])
   tripDestinations TripDestination[]
+  tripActivities   TripActivity[]
 }
 
 model TripDestination {
@@ -94,9 +95,46 @@ model TripDestination {
   order         Int       @default(0)
   notes         String?
   createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt
 
   trip        Trip        @relation(fields: [tripId], references: [id], onDelete: Cascade)
   destination Destination @relation(fields: [destinationId], references: [id])
+}
+
+model Activity {
+  id                Int            @id @default(autoincrement())
+  name              String
+  description       String?
+  category          String
+  image             String?
+  city              String
+  country           String
+  latitude          Float?
+  longitude         Float?
+  estimatedDuration Float?
+  estimatedCost     Float?
+  currency          String         @default("INR")
+  popularity        Int            @default(0)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  tripActivities    TripActivity[]
+}
+
+model TripActivity {
+  id          Int       @id @default(autoincrement())
+  tripId      Int
+  activityId  Int
+  plannedDate DateTime?
+  startTime   String?
+  endTime     String?
+  order       Int       @default(0)
+  notes       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  trip     Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  activity Activity @relation(fields: [activityId], references: [id])
 }
 
 model Banner {
@@ -111,3 +149,4 @@ model Banner {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
+
