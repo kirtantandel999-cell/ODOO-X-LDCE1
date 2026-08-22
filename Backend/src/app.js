@@ -1,11 +1,25 @@
-import express from "express"
-const app = express()
-const port = 3000
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import authRoutes from "./routes/auth.routes.js";
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+// ── Global Middlewares ───────────────────────
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ── Routes ───────────────────────────────────
+app.use("/api/auth", authRoutes);
+
+// ── Health check ─────────────────────────────
+app.get("/", (req, res) => {
+  res.json({ message: "GlobeTrotter API is running 🌍" });
+});
+
+// ── Start Server ─────────────────────────────
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
+});
