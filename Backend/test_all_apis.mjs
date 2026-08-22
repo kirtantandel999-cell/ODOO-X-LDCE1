@@ -152,14 +152,26 @@ async function runCompleteTestSuite() {
   const delDest = await request(`/api/destinations/${tempDestId}`, { method: "DELETE", headers: authHeaders });
   test(delDest.status === 200, "DELETE /api/destinations/:id");
 
-  // 5. ACTIVITIES
+  // 5. ACTIVITIES (SCREEN 8 SEARCH / FILTER / SORT / GROUP)
   const actsRes = await request("/api/activities?city=Tokyo");
-  test(actsRes.status === 200, "GET /api/activities");
+  test(actsRes.status === 200 && Array.isArray(actsRes.data.data), "GET /api/activities");
 
-  const actSearch = await request("/api/activities/search?q=sushi");
-  test(actSearch.status === 200, "GET /api/activities/search?q=sushi");
+  const actSearch = await request("/api/activities/search?q=paragliding");
+  test(actSearch.status === 200 && Array.isArray(actSearch.data.data), "GET /api/activities/search?q=paragliding");
 
-  const actId = actsRes.data.data.activities[0].id;
+  const actCaseSearch = await request("/api/activities?q=PARAGLIDING");
+  test(actCaseSearch.status === 200 && Array.isArray(actCaseSearch.data.data), "GET /api/activities?q=PARAGLIDING");
+
+  const actGroupCat = await request("/api/activities?groupBy=category");
+  test(actGroupCat.status === 200 && typeof actGroupCat.data.data === "object", "GET /api/activities?groupBy=category");
+
+  const actGroupDest = await request("/api/activities?groupBy=destination");
+  test(actGroupDest.status === 200 && typeof actGroupDest.data.data === "object", "GET /api/activities?groupBy=destination");
+
+  const actFilterAdv = await request("/api/activities?category=Adventure&sort=popularity_desc&page=1&limit=5");
+  test(actFilterAdv.status === 200 && Array.isArray(actFilterAdv.data.data), "GET /api/activities?category=Adventure");
+
+  const actId = actsRes.data.data[0].id;
   const singleAct = await request(`/api/activities/${actId}`);
   test(singleAct.status === 200, `GET /api/activities/${actId}`);
 
@@ -180,6 +192,13 @@ async function runCompleteTestSuite() {
 
   const delAct = await request(`/api/activities/${tempActId}`, { method: "DELETE", headers: authHeaders });
   test(delAct.status === 200, "DELETE /api/activities/:id");
+
+  // Validation guards
+  const badActSort = await request("/api/activities?sort=invalid_sort");
+  test(badActSort.status === 400, "Guard: 400 Bad Request on invalid activity sort");
+
+  const badActGroup = await request("/api/activities?groupBy=invalid_group");
+  test(badActGroup.status === 400, "Guard: 400 Bad Request on invalid activity groupBy");
 
   // 6. SCREEN 4: PLACES & SUGGESTIONS
   const placeSearch = await request("/api/trips/places/search?q=tokyo");

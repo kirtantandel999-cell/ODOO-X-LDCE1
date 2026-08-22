@@ -122,16 +122,27 @@ async function main() {
     // Sydney / Australia
     { name: "Sydney Harbour Bridge Climb", description: "Climb the summit of the iconic 'Coathanger' for unforgettable 360-degree harbour panoramas.", category: "Adventure", city: "Sydney", country: "Australia", latitude: -33.8523, longitude: 151.2108, estimatedDuration: 3.5, estimatedCost: 12000, popularity: 95, image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800" },
 
+    // Bali / Paragliding
+    { name: "Tandem Paragliding Experience", description: "Breathtaking coastal paragliding flight soaring above Bali's southern cliffs and Indian Ocean.", category: "Adventure", city: "Bali", country: "Indonesia", latitude: -8.8400, longitude: 115.1800, estimatedDuration: 2.0, estimatedCost: 4500, popularity: 97, image: "https://images.unsplash.com/photo-1507034589631-9433cc6bc453?w=800" },
+
     // Mumbai / India
     { name: "Elephanta Caves Island Boat Trip", description: "Ferry across Mumbai harbour to ancient rock-cut cave temples dedicated to Lord Shiva.", category: "Culture", city: "Mumbai", country: "India", latitude: 18.9633, longitude: 72.9315, estimatedDuration: 4.5, estimatedCost: 500, popularity: 85, image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=800" },
   ];
 
   for (const act of activityData) {
+    const dest = destinations[act.city] || destinations[act.name] || null;
     let existing = await prisma.activity.findFirst({
       where: { name: act.name, city: act.city },
     });
     if (!existing) {
-      existing = await prisma.activity.create({ data: act });
+      existing = await prisma.activity.create({
+        data: { ...act, destinationId: dest ? dest.id : null },
+      });
+    } else if (dest && !existing.destinationId) {
+      existing = await prisma.activity.update({
+        where: { id: existing.id },
+        data: { destinationId: dest.id },
+      });
     }
     console.log(`  ✅ Activity: ${existing.name} (${existing.category} - ${existing.city}) [id: ${existing.id}]`);
   }

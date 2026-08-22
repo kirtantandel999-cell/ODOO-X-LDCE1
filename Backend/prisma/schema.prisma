@@ -77,6 +77,7 @@ model Destination {
   region           Region            @relation(fields: [regionId], references: [id])
   tripDestinations TripDestination[]
   tripSections     TripSection[]
+  activities       Activity[]
 }
 
 model Trip {
@@ -124,6 +125,7 @@ model Activity {
   image             String?
   city              String
   country           String
+  destinationId     Int?
   latitude          Float?
   longitude         Float?
   estimatedDuration Float?
@@ -133,8 +135,17 @@ model Activity {
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
 
-  tripActivities    TripActivity[]
-  tripSections      TripSection[]
+  destination    Destination?   @relation(fields: [destinationId], references: [id])
+  tripActivities TripActivity[]
+  tripSections   TripSection[]
+
+  @@index([name])
+  @@index([category])
+  @@index([city])
+  @@index([country])
+  @@index([popularity])
+  @@index([estimatedCost])
+  @@index([destinationId])
 }
 
 model TripActivity {

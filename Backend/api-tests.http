@@ -661,4 +661,129 @@ Content-Type: {{contentType}}
 GET {{baseUrl}}/api/users/me
 Content-Type: {{contentType}}
 
+###
+
+
+### ====================================================================
+### SCREEN 8: ACTIVITY SEARCH / CITY SEARCH (ALL SCENARIOS)
+### ====================================================================
+
+### STEP 1: Get All Activities (Default Listing & Pagination)
+# @name getAllActivities
+GET {{baseUrl}}/api/activities
+Content-Type: {{contentType}}
+
+### STEP 2: Dedicated Activity Search (e.g. Paragliding)
+# @name searchActivitiesDedicated
+GET {{baseUrl}}/api/activities/search?q=paragliding
+Content-Type: {{contentType}}
+
+### STEP 3: Dedicated City Search (e.g. Tokyo)
+# @name searchDestinationsDedicated
+GET {{baseUrl}}/api/destinations/search?q=tokyo
+Content-Type: {{contentType}}
+
+### STEP 4: Case-Insensitive Activity Search on Main Endpoint
+# @name searchActivitiesCaseInsensitive
+GET {{baseUrl}}/api/activities?q=PARAGLIDING
+Content-Type: {{contentType}}
+
+### STEP 5: Filter Activities by Category (e.g. Adventure, Food, Culture)
+# @name filterActivitiesCategory
+GET {{baseUrl}}/api/activities?category=Adventure
+Content-Type: {{contentType}}
+
+### STEP 6: Filter Activities by Destination ID
+# @name filterActivitiesDestination
+GET {{baseUrl}}/api/activities?destinationId=1
+Content-Type: {{contentType}}
+
+### STEP 7a: Sort Activities by Popularity
+# @name sortActivitiesPopularity
+GET {{baseUrl}}/api/activities?sort=popularity_desc
+Content-Type: {{contentType}}
+
+### STEP 7b: Sort Activities by Name Ascending
+# @name sortActivitiesName
+GET {{baseUrl}}/api/activities?sort=name_asc
+Content-Type: {{contentType}}
+
+### STEP 7c: Sort Activities by Price / Cost Ascending
+# @name sortActivitiesPrice
+GET {{baseUrl}}/api/activities?sort=price_asc
+Content-Type: {{contentType}}
+
+### STEP 8: Group Activities by Category
+# @name groupActivitiesCategory
+GET {{baseUrl}}/api/activities?groupBy=category
+Content-Type: {{contentType}}
+
+### STEP 9: Group Activities by Destination / City
+# @name groupActivitiesDestination
+GET {{baseUrl}}/api/activities?groupBy=destination
+Content-Type: {{contentType}}
+
+### STEP 10: Paginate Activities (Page 1, Limit 5)
+# @name paginateActivities
+GET {{baseUrl}}/api/activities?page=1&limit=5
+Content-Type: {{contentType}}
+
+### STEP 11: Combined Query (Search + Category + Rating + Pagination)
+# @name combinedActivitiesQuery
+GET {{baseUrl}}/api/activities?q=paragliding&category=adventure&sort=rating_desc&page=1&limit=10
+Content-Type: {{contentType}}
+
+### STEP 12: Single Activity Details by ID
+# @name getSingleActivityDetails
+GET {{baseUrl}}/api/activities/28
+Content-Type: {{contentType}}
+
+### STEP 13: Single Destination Details by ID (With Top Activities)
+# @name getSingleDestinationDetails
+GET {{baseUrl}}/api/destinations/1
+Content-Type: {{contentType}}
+
+### STEP 14: Search with No Results (Returns 200 with empty array)
+# @name searchNoResults
+GET {{baseUrl}}/api/activities?q=nonexistent_xyz_query
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### SCREEN 8 VALIDATION & ERROR CHECKS
+### ====================================================================
+
+### 15a. Invalid Sort -> Expects 400 Bad Request
+# @name testInvalidActivitySort
+GET {{baseUrl}}/api/activities?sort=invalid_sort
+Content-Type: {{contentType}}
+
+### 15b. Invalid GroupBy -> Expects 400 Bad Request
+# @name testInvalidActivityGroupBy
+GET {{baseUrl}}/api/activities?groupBy=invalid_group
+Content-Type: {{contentType}}
+
+### 15c. Invalid Price Range (maxPrice < minPrice) -> Expects 400 Bad Request
+# @name testInvalidActivityPrice
+GET {{baseUrl}}/api/activities?minPrice=10000&maxPrice=1000
+Content-Type: {{contentType}}
+
+### 15d. Invalid Rating (> 5) -> Expects 400 Bad Request
+# @name testInvalidActivityRating
+GET {{baseUrl}}/api/activities?minRating=10
+Content-Type: {{contentType}}
+
+### 15e. Invalid Page (< 1) -> Expects 400 Bad Request
+# @name testInvalidActivityPage
+GET {{baseUrl}}/api/activities?page=-1
+Content-Type: {{contentType}}
+
+### 15f. Invalid Limit (> 50) -> Expects 400 Bad Request
+# @name testInvalidActivityLimit
+GET {{baseUrl}}/api/activities?limit=99999
+Content-Type: {{contentType}}
+
+
 

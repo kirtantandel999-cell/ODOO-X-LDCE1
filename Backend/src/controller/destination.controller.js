@@ -50,32 +50,16 @@ export const createDestination = async (req, res) => {
 
 // ─────────────────────────────────────────────
 // GET /api/destinations
-// Supports: search, region, country, minPopularity,
+// Supports: q, search, region, country, minPopularity,
 //           sort, groupBy, page, limit
 // ─────────────────────────────────────────────
 export const getDestinations = async (req, res) => {
   const {
-    search, region, country, minPopularity,
+    q, search, region, country, minPopularity,
     sort = "name_asc", groupBy, page = 1, limit = 20,
   } = req.query;
 
-  // ── Build where clause ─────────────────────
-  const where = {};
-
-  if (search?.trim()) {
-    where.OR = [
-      { name: { contains: search.trim(), mode: "insensitive" } },
-      { city: { contains: search.trim(), mode: "insensitive" } },
-      { country: { contains: search.trim(), mode: "insensitive" } },
-      { region: { name: { contains: search.trim(), mode: "insensitive" } } },
-    ];
-  }
-  if (region?.trim()) where.region = { name: { equals: region.trim(), mode: "insensitive" } };
-  if (country?.trim()) where.country = { contains: country.trim(), mode: "insensitive" };
-  if (minPopularity) where.popularity = { gte: parseInt(minPopularity) };
-
-  // ── Build orderBy ──────────────────────────
-  const sortMap = {
+  const validSortMap = {
     name_asc:         { name: "asc" },
     name_desc:        { name: "desc" },
     popularity_asc:   { popularity: "asc" },
@@ -83,11 +67,48 @@ export const getDestinations = async (req, res) => {
     newest:           { createdAt: "desc" },
     oldest:           { createdAt: "asc" },
   };
-  const orderBy = sortMap[sort] || sortMap.name_asc;
+
+  if (sort && !validSortMap[sort]) {
+    return fail(res, `Invalid sort parameter. Allowed values: ${Object.keys(validSortMap).join(", ")}`, 400);
+  }
+
+  const validGroupBy = ["region", "country"];
+  if (groupBy && !validGroupBy.includes(String(groupBy).toLowerCase())) {
+    return fail(res, `Invalid groupBy parameter. Allowed values: region, country`, 400);
+  }
+
+  const pageNum = parseInt(page);
+  const limitNum = parseInt(limit);
+  if (isNaN(pageNum) || pageNum < 1) {
+    return fail(res, "Invalid page parameter. Must be an integer >= 1.", 400);
+  }
+  if (isNaN(limitNum) || limitNum < 1 || limitNum > 50) {
+    return fail(res, "Invalid limit parameter. Must be between 1 and 50.", 400);
+  }
+
+  // ── Build where clause ─────────────────────
+  const where = {};
+  const queryTerm = (q || search || "").trim();
+
+  if (queryTerm) {
+    where.OR = [
+      { name: { contains: queryTerm, mode: "insensitive" } },
+      { city: { contains: queryTerm, mode: "insensitive" } },
+      { country: { contains: queryTerm, mode: "insensitive" } },
+      { region: { name: { contains: queryTerm, mode: "insensitive" } } },
+      { description: { contains: queryTerm, mode: "insensitive" } },
+    ];
+  }
+  if (region?.trim()) where.region = { name: { equals: region.trim(), mode: "insensitive" } };
+  if (country?.trim()) where.country = { contains: country.trim(), mode: "insensitive" };
+  if (minPopularity) where.popularity = { gte: parseInt(minPopularity) };
+
+  const orderBy = validSortMap[sort] || validSortMap.name_asc;
 
   try {
     // ── GroupBy handling ───────────────────────
-    if (groupBy === "region" || groupBy === "country") {
+    if (groupBy) {
+      const normalizedGroup = String(groupBy).toLowerCase();
       const destinations = await prisma.destination.findMany({
         where,
         orderBy,
@@ -96,7 +117,7 @@ export const getDestinations = async (req, res) => {
 
       const grouped = {};
       for (const d of destinations) {
-        const key = groupBy === "region" ? d.region.name : d.country;
+        const key = normalizedGroup === "region" ? d.region.name : d.country;
         if (!grouped[key]) grouped[key] = [];
         grouped[key].push(d);
       }
@@ -104,8 +125,8 @@ export const getDestinations = async (req, res) => {
     }
 
     // ── Paginated list ─────────────────────────
-    const skip = (parseInt(page) - 1) * parseInt(limit);
-    const take = parseInt(limit);
+    const skip = (pageNum - 1) * limitNum;
+    const take = limitNum;
 
     const [destinations, total] = await Promise.all([
       prisma.destination.findMany({ where, orderBy, skip, take, include: destinationInclude }),
@@ -114,7 +135,7 @@ export const getDestinations = async (req, res) => {
 
     return ok(res, {
       destinations,
-      pagination: { total, page: parseInt(page), limit: take, totalPages: Math.ceil(total / take) },
+      pagination: { total, page: pageNum, limit: take, totalPages: Math.ceil(total / take) || (total === 0 ? 0 : 1) },
     }, "Destinations fetched successfully.");
   } catch (e) {
     console.error("getDestinations:", e);
@@ -129,14 +150,17 @@ export const searchDestinations = async (req, res) => {
   const { q } = req.query;
   if (!q?.trim()) return fail(res, "Search query 'q' is required.", 400);
 
+  const queryTerm = q.trim();
+
   try {
     const destinations = await prisma.destination.findMany({
       where: {
         OR: [
-          { name: { contains: q.trim(), mode: "insensitive" } },
-          { city: { contains: q.trim(), mode: "insensitive" } },
-          { country: { contains: q.trim(), mode: "insensitive" } },
-          { region: { name: { contains: q.trim(), mode: "insensitive" } } },
+          { name: { contains: queryTerm, mode: "insensitive" } },
+          { city: { contains: queryTerm, mode: "insensitive" } },
+          { country: { contains: queryTerm, mode: "insensitive" } },
+          { region: { name: { contains: queryTerm, mode: "insensitive" } } },
+          { description: { contains: queryTerm, mode: "insensitive" } },
         ],
       },
       include: destinationInclude,
@@ -159,7 +183,13 @@ export const getDestinationById = async (req, res) => {
   try {
     const dest = await prisma.destination.findUnique({
       where: { id },
-      include: destinationInclude,
+      include: {
+        ...destinationInclude,
+        activities: {
+          take: 10,
+          orderBy: { popularity: "desc" },
+        },
+      },
     });
     if (!dest) return fail(res, "Destination not found.", 404);
     return ok(res, dest, "Destination fetched successfully.");
