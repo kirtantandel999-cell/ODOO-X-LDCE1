@@ -179,7 +179,7 @@ async function main() {
   const hashedPassword = await bcrypt.hash("Password@123", 10);
   const testUser = await prisma.user.upsert({
     where: { email: "rudra@example.com" },
-    update: { password: hashedPassword },
+    update: { password: hashedPassword, role: "USER" },
     create: {
       firstName: "Rudra",
       lastName: "Patel",
@@ -188,10 +188,28 @@ async function main() {
       phoneNumber: "9876543210",
       city: "Ahmedabad",
       country: "India",
+      role: "USER",
       additionalInformation: "Traveler & Explorer",
     },
   });
-  console.log(`  ✅ Test User: ${testUser.email} (id: ${testUser.id})`);
+  console.log(`  ✅ Test User: ${testUser.email} (id: ${testUser.id}, role: ${testUser.role})`);
+
+  const adminUser = await prisma.user.upsert({
+    where: { email: "admin@example.com" },
+    update: { password: hashedPassword, role: "ADMIN" },
+    create: {
+      firstName: "Super",
+      lastName: "Admin",
+      email: "admin@example.com",
+      password: hashedPassword,
+      phoneNumber: "9999988888",
+      city: "San Francisco",
+      country: "United States",
+      role: "ADMIN",
+      additionalInformation: "GlobeTrotter System Administrator",
+    },
+  });
+  console.log(`  👑 Admin User: ${adminUser.email} (id: ${adminUser.id}, role: ${adminUser.role})`);
 
   const now = new Date();
   const ongoingStart = new Date(now);

@@ -1265,6 +1265,188 @@ Content-Type: {{contentType}}
 GET {{baseUrl}}/api/calendar?year=2026&month=8
 Content-Type: {{contentType}}
 
+###
+
+
+### ====================================================================
+### SCREEN 12: ADMIN PANEL (ALL SCENARIOS)
+### ====================================================================
+
+### STEP 1: Login as Admin
+# @name adminLogin
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "admin@example.com",
+  "password": "Password@123"
+}
+
+### STEP 2: Get Admin Dashboard Metrics
+# @name getAdminDashboard
+GET {{baseUrl}}/api/admin/dashboard
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 3: Manage Users (Paginated List)
+# @name getAdminUsersList
+GET {{baseUrl}}/api/admin/users
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 4: Search Users by Query
+# @name searchAdminUsers
+GET {{baseUrl}}/api/admin/users?search=rudra
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 5: Filter Users by Role
+# @name filterAdminUsersRole
+GET {{baseUrl}}/api/admin/users?role=ADMIN
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 6: Sort Users by Name Ascending
+# @name sortAdminUsers
+GET {{baseUrl}}/api/admin/users?sort=name_asc
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 7: Get User Details by ID
+# @name getAdminUserDetails
+GET {{baseUrl}}/api/admin/users/1
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 8: Get User's Trips by Admin
+# @name getAdminUserTrips
+GET {{baseUrl}}/api/admin/users/1/trips
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 9: Get User's Community Posts by Admin
+# @name getAdminUserCommunity
+GET {{baseUrl}}/api/admin/users/1/community
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 10a: Deactivate User
+# @name deactivateUser
+PATCH {{baseUrl}}/api/admin/users/1/status
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "active": false
+}
+
+### STEP 10b: Reactivate User
+# @name reactivateUser
+PATCH {{baseUrl}}/api/admin/users/1/status
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "active": true
+}
+
+### STEP 11: Get Popular Cities
+# @name getPopularCities
+GET {{baseUrl}}/api/admin/popular-cities
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 12: Search Popular Cities
+# @name searchPopularCities
+GET {{baseUrl}}/api/admin/popular-cities?search=tokyo
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 13: Get Popular Activities
+# @name getPopularActivities
+GET {{baseUrl}}/api/admin/popular-activities
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 14: Search Popular Activities
+# @name searchPopularActivities
+GET {{baseUrl}}/api/admin/popular-activities?search=paragliding
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 15: Get User Trends and Analytics Summary
+# @name getAdminAnalytics
+GET {{baseUrl}}/api/admin/analytics
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 16: Get Monthly User Registration Trends
+# @name getUserTrends
+GET {{baseUrl}}/api/admin/analytics/users?months=6
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 17: Get Monthly Trip Creation Trends
+# @name getTripTrends
+GET {{baseUrl}}/api/admin/analytics/trips?months=6
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### STEP 18: Date-Range Filtered Analytics
+# @name getDateRangeAnalytics
+GET {{baseUrl}}/api/admin/analytics?startDate=2026-01-01&endDate=2026-12-31
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### SCREEN 12 VALIDATION & SECURITY CHECKS
+### ====================================================================
+
+### 19a. Normal User Blocked from Admin Dashboard -> Expects 403 Forbidden
+# @name testNormalUserAdminDashboard
+GET {{baseUrl}}/api/admin/dashboard
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 19b. Normal User Blocked from Admin Users -> Expects 403 Forbidden
+# @name testNormalUserAdminUsers
+GET {{baseUrl}}/api/admin/users
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 20. Unauthenticated Request -> Expects 401 Unauthorized
+# @name testUnauthenticatedAdmin
+GET {{baseUrl}}/api/admin/dashboard
+Content-Type: {{contentType}}
+
+### 21a. Invalid Limit > 50 -> Expects 400 Bad Request
+# @name testInvalidAdminLimit
+GET {{baseUrl}}/api/admin/users?limit=1000
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### 21b. Invalid Sort Parameter -> Expects 400 Bad Request
+# @name testInvalidAdminSort
+GET {{baseUrl}}/api/admin/users?sort=invalid_sort
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### 21c. Invalid Months Parameter -> Expects 400 Bad Request
+# @name testInvalidAdminMonths
+GET {{baseUrl}}/api/admin/analytics/users?months=100
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+### 21d. Invalid Date Range (startDate > endDate) -> Expects 400 Bad Request
+# @name testInvalidDateRange
+GET {{baseUrl}}/api/admin/analytics?startDate=2026-12-31&endDate=2026-01-01
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+
 
 
 

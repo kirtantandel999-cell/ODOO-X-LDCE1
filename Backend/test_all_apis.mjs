@@ -548,9 +548,43 @@ async function runCompleteTestSuite() {
   const calHelper = await request("/api/calendar/current", { headers: authHeaders });
   test(calHelper.status === 200, "GET /api/calendar/current");
 
-  // 15. SECURITY GUARDS
+  // 15. SCREEN 12: ADMIN PANEL
+  const adminLogin = await request("/api/auth/login", {
+    method: "POST",
+    body: JSON.stringify({ email: "admin@example.com", password: "Password@123" }),
+  });
+  const adminHeaders = { Authorization: `Bearer ${adminLogin.data.token}` };
+
+  const adminDash = await request("/api/admin/dashboard", { headers: adminHeaders });
+  test(adminDash.status === 200 && adminDash.data.data.users !== undefined, "GET /api/admin/dashboard (Admin Dashboard)");
+
+  const adminUsers = await request("/api/admin/users", { headers: adminHeaders });
+  test(adminUsers.status === 200 && Array.isArray(adminUsers.data.data), "GET /api/admin/users (Admin Manage Users)");
+
+  const adminUser1 = await request("/api/admin/users/1", { headers: adminHeaders });
+  test(adminUser1.status === 200 && adminUser1.data.data.id === 1, "GET /api/admin/users/:userId");
+
+  const popCities = await request("/api/admin/popular-cities", { headers: adminHeaders });
+  test(popCities.status === 200 && Array.isArray(popCities.data.data), "GET /api/admin/popular-cities");
+
+  const popActs = await request("/api/admin/popular-activities", { headers: adminHeaders });
+  test(popActs.status === 200 && Array.isArray(popActs.data.data), "GET /api/admin/popular-activities");
+
+  const adminAnalytics = await request("/api/admin/analytics", { headers: adminHeaders });
+  test(adminAnalytics.status === 200 && typeof adminAnalytics.data.data.totalUsers === "number", "GET /api/admin/analytics");
+
+  const adminUserTrends = await request("/api/admin/analytics/users?months=6", { headers: adminHeaders });
+  test(adminUserTrends.status === 200 && Array.isArray(adminUserTrends.data.data), "GET /api/admin/analytics/users");
+
+  const adminTripTrends = await request("/api/admin/analytics/trips?months=6", { headers: adminHeaders });
+  test(adminTripTrends.status === 200 && Array.isArray(adminTripTrends.data.data), "GET /api/admin/analytics/trips");
+
+  // 16. SECURITY GUARDS
   const unauth = await request("/api/trips/my");
   test(unauth.status === 401, "Guard: 401 Unauthorized");
+
+  const normalUserAdminForbidden = await request("/api/admin/dashboard", { headers: authHeaders });
+  test(normalUserAdminForbidden.status === 403, "Guard: 403 Forbidden for normal user on Admin API");
 
   const badDate = await request(`/api/trips/${tripId}/sections`, {
     method: "POST",
