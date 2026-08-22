@@ -16,5 +16,6 @@ router.post("/login", login);
 // ── Protected routes (require valid JWT) ────
 router.get("/profile", authenticateToken, getProfile);
 router.put("/profile", authenticateToken, updateProfile);
+router.patch("/profile", authenticateToken, updateProfile);
 
 export default router;

@@ -67,9 +67,29 @@ async function runCompleteTestSuite() {
   const updateProfRes = await request("/api/auth/profile", {
     method: "PUT",
     headers: authHeaders,
-    body: JSON.stringify({ city: "Mumbai" }),
+    body: JSON.stringify({ city: "Mumbai", additionalInformation: "Backpacker" }),
   });
-  test(updateProfRes.status === 200, "PUT /api/auth/profile");
+  test(updateProfRes.status === 200 && updateProfRes.data.user.city === "Mumbai", "PUT /api/auth/profile");
+
+  const patchProfRes = await request("/api/auth/profile", {
+    method: "PATCH",
+    headers: authHeaders,
+    body: JSON.stringify({ city: "Pune" }),
+  });
+  test(patchProfRes.status === 200 && patchProfRes.data.user.city === "Pune", "PATCH /api/auth/profile");
+
+  // Screen 7 Dashboard endpoints
+  const userDashRes = await request("/api/users/me", { headers: authHeaders });
+  test(userDashRes.status === 200 && userDashRes.data.data.user !== undefined, "GET /api/users/me (Screen 7 Profile Dashboard)");
+
+  const preplannedTripsRes = await request("/api/users/me/trips/preplanned", { headers: authHeaders });
+  test(preplannedTripsRes.status === 200 && Array.isArray(preplannedTripsRes.data.data), "GET /api/users/me/trips/preplanned");
+
+  const prevTripsRes = await request("/api/users/me/trips/previous", { headers: authHeaders });
+  test(prevTripsRes.status === 200 && Array.isArray(prevTripsRes.data.data), "GET /api/users/me/trips/previous");
+
+  const tripSummaryRes = await request("/api/users/me/trips/summary", { headers: authHeaders });
+  test(tripSummaryRes.status === 200 && typeof tripSummaryRes.data.data.totalTrips === "number", "GET /api/users/me/trips/summary");
 
   // 3. REGIONS
   const regionsRes = await request("/api/regions");

@@ -549,3 +549,116 @@ GET {{baseUrl}}/api/trips?startDate=2026-12-31&endDate=2026-01-01
 Authorization: Bearer {{authToken}}
 Content-Type: {{contentType}}
 
+###
+
+
+### ====================================================================
+### SCREEN 7: USER PROFILE & DASHBOARD (ALL SCENARIOS)
+### ====================================================================
+
+### STEP 1: Get Current Logged-in User Profile
+# @name getMyProfile
+GET {{baseUrl}}/api/auth/profile
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 2: Update Profile (Full Update via PUT)
+# @name updateMyProfile
+PUT {{baseUrl}}/api/auth/profile
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "firstName": "Rudra Updated",
+  "lastName": "Patel",
+  "phoneNumber": "9876543210",
+  "city": "Ahmedabad",
+  "country": "India",
+  "additionalInformation": "Passionate backpacker, solo traveler, and travel blogger.",
+  "photo": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400"
+}
+
+### STEP 3: Partial Profile Update via PATCH
+# @name patchMyProfile
+PATCH {{baseUrl}}/api/auth/profile
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "city": "Gandhinagar"
+}
+
+### STEP 4: Get Profile Dashboard (User Details + Preplanned + Previous + Counts)
+# @name getProfileDashboard
+GET {{baseUrl}}/api/users/me
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 5: Get Preplanned / Upcoming Trips
+# @name getPreplannedTrips
+GET {{baseUrl}}/api/users/me/trips/preplanned
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 6: Get Previous / Completed Trips
+# @name getPreviousTrips
+GET {{baseUrl}}/api/users/me/trips/previous
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 7: Get Trip Summary Counts
+# @name getTripSummaryCounts
+GET {{baseUrl}}/api/users/me/trips/summary
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 8: View Trip Details from Profile Card (Using real trip ID)
+# @name viewTripFromProfile
+GET {{baseUrl}}/api/trips/{{tripId}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### SCREEN 7 VALIDATION & ERROR CHECKS
+### ====================================================================
+
+### 9a. Invalid Profile Update: Empty First Name -> Expects 400 Bad Request
+# @name testEmptyFirstName
+PUT {{baseUrl}}/api/auth/profile
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "firstName": "",
+  "lastName": "Patel"
+}
+
+### 9b. Invalid Profile Update: Short Phone Number -> Expects 400 Bad Request
+# @name testInvalidPhone
+PUT {{baseUrl}}/api/auth/profile
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "phoneNumber": "123"
+}
+
+### 9c. Invalid Profile Update: Invalid Photo URL -> Expects 400 Bad Request
+# @name testInvalidPhotoUrl
+PUT {{baseUrl}}/api/auth/profile
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "photo": "not-a-url"
+}
+
+### 9d. Unauthorized Dashboard Access (No Token) -> Expects 401 Unauthorized
+# @name testUnauthorizedDashboard
+GET {{baseUrl}}/api/users/me
+Content-Type: {{contentType}}
+
+

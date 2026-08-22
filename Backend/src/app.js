@@ -10,6 +10,7 @@ import activityRoutes from "./routes/activity.routes.js";
 import tripRoutes from "./routes/trip.routes.js";
 import bannerRoutes from "./routes/banner.routes.js";
 import homeRoutes from "./routes/home.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // ── Route Mounts ─────────────────────────────
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/regions", regionRoutes);
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/activities", activityRoutes);
@@ -36,6 +38,7 @@ app.get("/", (req, res) => {
     version: "1.0.0",
     endpoints: [
       "/api/auth",
+      "/api/users",
       "/api/regions",
       "/api/destinations",
       "/api/activities",

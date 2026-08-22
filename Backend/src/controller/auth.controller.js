@@ -115,12 +115,84 @@ export const login = async (req, res) => {
   }
 };
 
+// ─── Profile Validation Helper ────────────────────────────
+const validateProfileInput = (body) => {
+  const { firstName, lastName, phoneNumber, city, country, photo, additionalInformation } = body;
+
+  if (firstName !== undefined) {
+    if (typeof firstName !== "string" || !firstName.trim()) {
+      return "firstName cannot be empty.";
+    }
+    if (firstName.trim().length > 50) {
+      return "firstName must not exceed 50 characters.";
+    }
+  }
+
+  if (lastName !== undefined) {
+    if (typeof lastName !== "string" || !lastName.trim()) {
+      return "lastName cannot be empty.";
+    }
+    if (lastName.trim().length > 50) {
+      return "lastName must not exceed 50 characters.";
+    }
+  }
+
+  if (phoneNumber !== undefined) {
+    if (typeof phoneNumber !== "string" || !phoneNumber.trim()) {
+      return "phoneNumber cannot be empty.";
+    }
+    const cleanPhone = phoneNumber.trim();
+    if (cleanPhone.length < 7 || cleanPhone.length > 20) {
+      return "phoneNumber must be between 7 and 20 characters.";
+    }
+  }
+
+  if (city !== undefined) {
+    if (typeof city !== "string" || !city.trim()) {
+      return "city cannot be empty.";
+    }
+    if (city.trim().length > 100) {
+      return "city must not exceed 100 characters.";
+    }
+  }
+
+  if (country !== undefined) {
+    if (typeof country !== "string" || !country.trim()) {
+      return "country cannot be empty.";
+    }
+    if (country.trim().length > 100) {
+      return "country must not exceed 100 characters.";
+    }
+  }
+
+  if (additionalInformation !== undefined && additionalInformation !== null) {
+    if (typeof additionalInformation === "string" && additionalInformation.length > 1000) {
+      return "additionalInformation must not exceed 1000 characters.";
+    }
+  }
+
+  if (photo !== undefined && photo !== null && photo !== "") {
+    if (typeof photo !== "string") {
+      return "photo must be a valid URL string.";
+    }
+    try {
+      const url = new URL(photo);
+      if (!["http:", "https:"].includes(url.protocol)) {
+        return "photo must be a valid http or https URL.";
+      }
+    } catch {
+      return "photo must be a valid URL.";
+    }
+  }
+
+  return null;
+};
+
 // ─────────────────────────────────────────────
 // GET /api/auth/profile  (protected route)
 // ─────────────────────────────────────────────
 export const getProfile = async (req, res) => {
   try {
-    // req.user.id is set by the JWT middleware
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
       select: {
@@ -139,34 +211,54 @@ export const getProfile = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found." });
+      return res.status(404).json({ success: false, message: "User not found." });
     }
 
-    res.status(200).json({ user });
+    res.status(200).json({
+      success: true,
+      message: "Profile fetched successfully.",
+      user,
+      data: { user },
+    });
   } catch (error) {
     console.error("Get profile error:", error);
-    res.status(500).json({ message: "Internal server error." });
+    res.status(500).json({ success: false, message: "Internal server error." });
   }
 };
 
 // ─────────────────────────────────────────────
-// PUT /api/auth/profile  (protected route)
+// PUT & PATCH /api/auth/profile  (protected route)
 // ─────────────────────────────────────────────
 export const updateProfile = async (req, res) => {
   const { firstName, lastName, phoneNumber, city, country, additionalInformation, photo } = req.body;
 
+  // Validation
+  const validationError = validateProfileInput(req.body);
+  if (validationError) {
+    return res.status(400).json({
+      success: false,
+      message: validationError,
+      error: null,
+    });
+  }
+
+  const updateData = {};
+  if (firstName !== undefined) updateData.firstName = firstName.trim();
+  if (lastName !== undefined) updateData.lastName = lastName.trim();
+  if (phoneNumber !== undefined) updateData.phoneNumber = phoneNumber.trim();
+  if (city !== undefined) updateData.city = city.trim();
+  if (country !== undefined) updateData.country = country.trim();
+  if (additionalInformation !== undefined) {
+    updateData.additionalInformation = typeof additionalInformation === "string" ? additionalInformation.trim() : null;
+  }
+  if (photo !== undefined) {
+    updateData.photo = typeof photo === "string" ? photo.trim() : null;
+  }
+
   try {
     const updatedUser = await prisma.user.update({
       where: { id: req.user.id },
-      data: {
-        ...(firstName && { firstName }),
-        ...(lastName && { lastName }),
-        ...(phoneNumber && { phoneNumber }),
-        ...(city && { city }),
-        ...(country && { country }),
-        ...(additionalInformation !== undefined && { additionalInformation }),
-        ...(photo !== undefined && { photo }),
-      },
+      data: updateData,
       select: {
         id: true,
         firstName: true,
@@ -183,11 +275,13 @@ export const updateProfile = async (req, res) => {
     });
 
     res.status(200).json({
+      success: true,
       message: "Profile updated successfully.",
       user: updatedUser,
+      data: { user: updatedUser },
     });
   } catch (error) {
     console.error("Update profile error:", error);
-    res.status(500).json({ message: "Internal server error." });
+    res.status(500).json({ success: false, message: "Internal server error." });
   }
 };

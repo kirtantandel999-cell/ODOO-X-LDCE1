@@ -210,6 +210,16 @@ async function main() {
       destName: "Kyoto",
     },
     {
+      title: "Winter Beach Getaway in Bali",
+      description: "Year-end tropical vacation in Bali",
+      startDate: new Date("2026-12-15"),
+      endDate: new Date("2026-12-25"),
+      status: "PLANNED",
+      budget: 180000,
+      currency: "INR",
+      destName: "Bali",
+    },
+    {
       title: "Completed European Grand Tour",
       description: "Past summer vacation across Paris and Rome",
       startDate: new Date("2026-05-01"),
@@ -218,6 +228,16 @@ async function main() {
       budget: 350000,
       currency: "INR",
       destName: "Paris",
+    },
+    {
+      title: "Historic London Exploration",
+      description: "Winter cultural tour of historic London landmarks",
+      startDate: new Date("2026-01-10"),
+      endDate: new Date("2026-01-20"),
+      status: "COMPLETED",
+      budget: 280000,
+      currency: "INR",
+      destName: "London",
     },
   ];
 
