@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalTrotter — Every trip, planned around you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Home.css">
+
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo"><span class="mark">GT</span> GlobalTrotter</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#regions">Explore</a></li>
+      <li><a href="#trips">My Trips</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#login">Login</a></li>
+      <li><a href="#register" class="btn-register">Register</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-veil"></div>
+  <div class="wrap hero-content">
+    <span class="eyebrow">Personalized travel planning</span>
+    <h1>Every trip, planned<br>around <em>you</em>.</h1>
+    <p>From Rajasthan's forts to the coasts of Portugal — build itineraries as unique as your passport stamps, then let GlobalTrotter handle the logistics.</p>
+    <div class="hero-actions">
+      <a href="#regions" class="btn btn-primary">Start Planning →</a>
+      <a href="#trips" class="btn btn-ghost">See My Trips</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- SEARCH BAR -->
+  <div class="search-float" id="search">
+    <div class="search-card">
+      <div class="search-field">
+        <label>Destination</label>
+        <input type="text" placeholder="Try 'Kerala' or 'Japan'">
+      </div>
+      <div class="search-field">
+        <label>Group By</label>
+        <select>
+          <option>Region</option>
+          <option>Trip length</option>
+          <option>Budget</option>
+          <option>Travel style</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>Filter</label>
+        <select>
+          <option>All trips</option>
+          <option>Domestic (India)</option>
+          <option>International</option>
+          <option>Under 5 days</option>
+          <option>Family-friendly</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>Sort By</label>
+        <select>
+          <option>Popularity</option>
+          <option>Price: low to high</option>
+          <option>Newest itineraries</option>
+          <option>Rating</option>
+        </select>
+      </div>
+      <button class="search-go">🔍 Search</button>
+    </div>
+  </div>
+
+  <!-- TOP REGIONAL SELECTIONS -->
+  <section id="regions">
+    <div class="section-head">
+      <div>
+        <h2>Top Regional Selections</h2>
+        <p class="sub">Curated starting points for your next itinerary — hover a card to see what's inside.</p>
+      </div>
+      <a href="#" class="see-all">View all regions →</a>
+    </div>
+
+    <div class="group-label intl"><span class="dot"></span> International</div>
+    <div class="grid">
+      <article class="dest-card">
+        <span class="stamp intl">ASIA<br>◆</span>
+        <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=700&q=70" alt="Asia">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">Continent</div>
+          <h3>Asia</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+      <article class="dest-card">
+        <span class="stamp intl">EUR<br>◆</span>
+        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=700&q=70" alt="Europe">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">Continent</div>
+          <h3>Europe</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+      <article class="dest-card">
+        <span class="stamp intl">AMR<br>◆</span>
+        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=700&q=70" alt="Americas">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">Continent</div>
+          <h3>Americas</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+      <article class="dest-card">
+        <span class="stamp intl">AFR<br>◆</span>
+        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=700&q=70" alt="Africa">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">Continent</div>
+          <h3>Africa</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="group-label india"><span class="dot"></span> Indian Trips</div>
+    <div class="grid india">
+      <article class="dest-card">
+        <span class="stamp india">RJ<br>◆</span>
+        <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=600&q=70" alt="Rajasthan">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">India</div>
+          <h3>Rajasthan</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+      <article class="dest-card">
+        <span class="stamp india">KL<br>◆</span>
+        <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=600&q=70" alt="Kerala">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">India</div>
+          <h3>Kerala</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+      <article class="dest-card">
+        <span class="stamp india">GA<br>◆</span>
+        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=70" alt="Goa">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">India</div>
+          <h3>Goa</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+      <article class="dest-card">
+        <span class="stamp india">HP<br>◆</span>
+        <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=600&q=70" alt="Himachal Pradesh">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">India</div>
+          <h3>Himachal Pradesh</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+      <article class="dest-card">
+        <span class="stamp india">NE<br>◆</span>
+        <img src="https://img.veenaworld.com/wp-content/uploads/2023/06/Natures-Paradise-Discover-the-Best-Places-To-Visit-in-North-East-India.jpg">
+        <div class="dest-veil"></div>
+        <div class="dest-info">
+          <div class="region">India</div>
+          <h3>North-East India</h3>
+          <div class="dest-explore">Explore itineraries →</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PREVIOUS TRIPS -->
+  <section id="trips">
+    <div class="section-head">
+      <div>
+        <h2>Previous Trips</h2>
+        <p class="sub">Your travel history, kept like boarding passes — tap any stub to reopen the full itinerary.</p>
+      </div>
+      <a href="#" class="see-all">View all trips →</a>
+    </div>
+
+    <div class="carousel-shell">
+      <div class="carousel" id="carousel">
+        <div class="ticket">
+          <div class="ticket-photo">
+            <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=500&q=70" alt="Udaipur trip">
+            <span class="ticket-status">Completed</span>
+          </div>
+          <div class="perforation"></div>
+          <div class="ticket-body">
+            <div class="ticket-route"><span>AMD</span><span class="plane">✈</span><span>UDR</span></div>
+            <div class="ticket-dates">12 – 16 Feb 2026 · 4 nights</div>
+            <div class="ticket-foot"><span class="ticket-tag">Rajasthan · Heritage</span><a href="#" class="ticket-view">View →</a></div>
+          </div>
+        </div>
+        <div class="ticket">
+          <div class="ticket-photo">
+            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=500&q=70" alt="Alleppey trip">
+            <span class="ticket-status">Completed</span>
+          </div>
+          <div class="perforation"></div>
+          <div class="ticket-body">
+            <div class="ticket-route"><span>COK</span><span class="plane">✈</span><span>ALP</span></div>
+            <div class="ticket-dates">3 – 7 Nov 2025 · 4 nights</div>
+            <div class="ticket-foot"><span class="ticket-tag">Kerala · Backwaters</span><a href="#" class="ticket-view">View →</a></div>
+          </div>
+        </div>
+        <div class="ticket">
+          <div class="ticket-photo">
+            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=500&q=70" alt="Rome trip">
+            <span class="ticket-status">Completed</span>
+          </div>
+          <div class="perforation"></div>
+          <div class="ticket-body">
+            <div class="ticket-route"><span>DEL</span><span class="plane">✈</span><span>FCO</span></div>
+            <div class="ticket-dates">18 – 27 Jun 2025 · 9 nights</div>
+            <div class="ticket-foot"><span class="ticket-tag">Europe · City & Coast</span><a href="#" class="ticket-view">View →</a></div>
+          </div>
+        </div>
+        <div class="ticket">
+          <div class="ticket-photo">
+            <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=500&q=70" alt="Manali trip">
+            <span class="ticket-status">Completed</span>
+          </div>
+          <div class="perforation"></div>
+          <div class="ticket-body">
+            <div class="ticket-route"><span>DEL</span><span class="plane">✈</span><span>KUU</span></div>
+            <div class="ticket-dates">2 – 6 Jan 2025 · 4 nights</div>
+            <div class="ticket-foot"><span class="ticket-tag">Himachal · Mountains</span><a href="#" class="ticket-view">View →</a></div>
+          </div>
+        </div>
+        <div class="ticket">
+          <div class="ticket-photo">
+            <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=500&q=70" alt="Bali trip">
+            <span class="ticket-status">Completed</span>
+          </div>
+          <div class="perforation"></div>
+          <div class="ticket-body">
+            <div class="ticket-route"><span>BLR</span><span class="plane">✈</span><span>DPS</span></div>
+            <div class="ticket-dates">14 – 20 Sep 2024 · 6 nights</div>
+            <div class="ticket-foot"><span class="ticket-tag">Asia · Island</span><a href="#" class="ticket-view">View →</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button id="prevBtn" aria-label="Scroll left">←</button>
+        <button id="nextBtn" aria-label="Scroll right">→</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FLOATING CTA -->
+<a href="#search" class="fab"><span>+</span><span class="label">Plan a Trip</span></a>
+
+<!-- FOOTER -->
+<footer id="about">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo"><span class="mark">GT</span> GlobalTrotter</a>
+        <p>Personalized itineraries across India and the world — planned around how you actually like to travel.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#regions">International</a></li>
+          <li><a href="#regions">Indian Trips</a></li>
+          <li><a href="#trips">My Trips</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Help Center</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@globaltrotter.travel">hello@globaltrotter.travel</a></li>
+          <li><a href="tel:+911234567890">+91 12345 67890</a></li>
+          <li>Ahmedabad, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 GlobalTrotter. All rights reserved.</span>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Twitter">X</a>
+        <a href="#" aria-label="Facebook">FB</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="home.js">
+</script>
+
+</body>
+</html>
