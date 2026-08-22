@@ -1,0 +1,422 @@
+### ====================================================================
+### GlobeTrotter Backend API Test Suite (Screens 1 to 5)
+### Format: VS Code / Antigravity REST Client (.http)
+### ====================================================================
+
+### Global Variables
+@baseUrl = http://localhost:5000
+@contentType = application/json
+
+### --------------------------------------------------------------------
+### VARIABLES TO REPLACE AS YOU TEST:
+### 1. After Step 1 (Login), paste the returned JWT token below into @authToken:
+@authToken = YOUR_ACCESS_TOKEN
+
+### 2. IDs you will copy from API responses:
+@destinationId = 1
+@activityId = 4
+@tripId = 1
+@tripActivityId = 1
+@tripDestinationId = 1
+@sectionId1 = 1
+@sectionId2 = 2
+@sectionId3 = 3
+
+
+### ====================================================================
+### 0. HEALTH CHECK
+### ====================================================================
+
+# @name healthCheck
+GET {{baseUrl}}/
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 1: AUTHENTICATION (Register & Login)
+### ====================================================================
+
+### 1a. Register New User (Optional)
+# @name register
+POST {{baseUrl}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+  "firstName": "Rudra",
+  "lastName": "Patel",
+  "email": "rudra@example.com",
+  "password": "Password@123",
+  "phoneNumber": "9876543210",
+  "city": "Ahmedabad",
+  "country": "India",
+  "additionalInformation": "Traveler & Explorer",
+  "photo": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400"
+}
+
+### 1b. Login (COPY THE TOKEN FROM THIS RESPONSE TO @authToken ABOVE)
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "rudra@example.com",
+  "password": "Password@123"
+}
+
+### 1c. Get Logged-in User Profile
+# @name getProfile
+GET {{baseUrl}}/api/auth/profile
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 2: GET AN EXISTING TRIP
+### ====================================================================
+
+### 2a. Get All My Active / Planned Trips
+### -> COPY AN EXISTING "id" INTO @tripId AT THE TOP!
+# @name getMyTrips
+GET {{baseUrl}}/api/trips/my
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 2b. Plan a New Trip (If you need a fresh trip: Oct 10 to Oct 20)
+# @name planNewTrip
+POST {{baseUrl}}/api/trips/plan
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Japan Vacation 2026",
+  "description": "10-day trip covering Tokyo and Kyoto",
+  "destinationId": 1,
+  "destinationIds": [2],
+  "activityIds": [1, 2, 3],
+  "startDate": "2026-10-10",
+  "endDate": "2026-10-20",
+  "budget": 180000,
+  "currency": "INR",
+  "coverImage": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800"
+}
+
+###
+
+
+### ====================================================================
+### STEP 3: GET SECTIONS (SCREEN 5)
+### ====================================================================
+
+### 3. Get All Sections of Trip
+# @name getSections
+GET {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 4: CREATE SECTION 1 (Hotel)
+### ====================================================================
+
+### 4. Create Section 1: Tokyo Hotel
+### -> COPY THE "id" FROM THIS RESPONSE INTO @sectionId1 AT THE TOP!
+# @name createSection1
+POST {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Tokyo Hotel",
+  "description": "Hotel stay in Shibuya near major transit hubs",
+  "type": "HOTEL",
+  "startDate": "2026-10-10",
+  "endDate": "2026-10-12",
+  "budget": 30000,
+  "currency": "INR",
+  "location": "Shibuya, Tokyo",
+  "notes": "Near metro station, breakfast included",
+  "order": 1
+}
+
+###
+
+
+### ====================================================================
+### STEP 5: CREATE SECTION 2 (Sightseeing)
+### ====================================================================
+
+### 5. Create Section 2: Tokyo Sightseeing
+### -> COPY THE "id" FROM THIS RESPONSE INTO @sectionId2 AT THE TOP!
+# @name createSection2
+POST {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Tokyo Sightseeing",
+  "description": "Visit major Tokyo attractions including Tokyo Tower and Shibuya",
+  "type": "SIGHTSEEING",
+  "startDate": "2026-10-12",
+  "endDate": "2026-10-14",
+  "budget": 15000,
+  "currency": "INR",
+  "location": "Tokyo",
+  "notes": "Tokyo Tower and Shibuya Crossing",
+  "order": 2
+}
+
+###
+
+
+### ====================================================================
+### STEP 6: CREATE SECTION 3 (Travel)
+### ====================================================================
+
+### 6. Create Section 3: Kyoto Travel
+### -> COPY THE "id" FROM THIS RESPONSE INTO @sectionId3 AT THE TOP!
+# @name createSection3
+POST {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Kyoto Travel",
+  "description": "Travel from Tokyo to Kyoto via Shinkansen Bullet Train",
+  "type": "TRAVEL",
+  "startDate": "2026-10-15",
+  "endDate": "2026-10-16",
+  "budget": 20000,
+  "currency": "INR",
+  "location": "Tokyo to Kyoto",
+  "notes": "Book Shinkansen window seats",
+  "order": 3
+}
+
+###
+
+
+### ====================================================================
+### STEP 7: VERIFY ALL SECTIONS
+### ====================================================================
+
+### 7. List Sections - Verify Section 1, 2, 3 in Order
+# @name verifyAllSections
+GET {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 8: GET SINGLE SECTION
+### ====================================================================
+
+### 8. Get Section 1 Details
+# @name getSingleSection
+GET {{baseUrl}}/api/trips/{{tripId}}/sections/{{sectionId1}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 9: UPDATE SECTION
+### ====================================================================
+
+### 9. Update Section 1
+# @name updateSection
+PUT {{baseUrl}}/api/trips/{{tripId}}/sections/{{sectionId1}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Updated Tokyo Hotel",
+  "budget": 35000,
+  "notes": "Updated hotel preference: High floor room"
+}
+
+###
+
+
+### ====================================================================
+### STEP 10: REORDER SECTIONS
+### ====================================================================
+
+### 10a. Reorder Sections (Set Section 3 -> Order 1, Section 1 -> Order 2, Section 2 -> Order 3)
+# @name reorderSections
+PUT {{baseUrl}}/api/trips/{{tripId}}/sections/reorder
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "sectionIds": [
+    {{sectionId3}},
+    {{sectionId1}},
+    {{sectionId2}}
+  ]
+}
+
+### 10b. Verify Reordered Sections
+# @name verifyReorderedSections
+GET {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 11: GET COMPLETE ITINERARY (EXTENDED FOR SCREEN 5)
+### ====================================================================
+
+### 11. Complete Itinerary (Returns Trip + Sections + Destinations + Activities + Days)
+# @name getCompleteItinerary
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 12: GET TRIP BUDGET SUMMARY (SCREEN 5)
+### ====================================================================
+
+### 12. Trip Budget Breakdown (Trip Budget, Section Total, Remaining Budget)
+# @name getTripBudget
+GET {{baseUrl}}/api/trips/{{tripId}}/budget
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 13: LINK / UNLINK DESTINATION & ACTIVITY TO SECTION
+### ====================================================================
+
+### 13a. Link Destination to Section 2
+# @name linkSectionDestination
+POST {{baseUrl}}/api/trips/{{tripId}}/sections/{{sectionId2}}/destination
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "destinationId": 1
+}
+
+### 13b. Link Activity to Section 2
+# @name linkSectionActivity
+POST {{baseUrl}}/api/trips/{{tripId}}/sections/{{sectionId2}}/activity
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "activityId": 1
+}
+
+### 13c. Unlink Destination from Section 2
+# @name unlinkSectionDestination
+DELETE {{baseUrl}}/api/trips/{{tripId}}/sections/{{sectionId2}}/destination
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13d. Unlink Activity from Section 2
+# @name unlinkSectionActivity
+DELETE {{baseUrl}}/api/trips/{{tripId}}/sections/{{sectionId2}}/activity
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 14: DELETE SECTION
+### ====================================================================
+
+### 14a. Delete Section 2 (Auto-normalizes remaining orders)
+# @name deleteSection
+DELETE {{baseUrl}}/api/trips/{{tripId}}/sections/{{sectionId2}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 14b. Verify Normalized Remaining Sections
+# @name verifyAfterDelete
+GET {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### STEP 15: VALIDATION & ERROR CHECKS
+### ====================================================================
+
+### 15a. Invalid Date Order (endDate before startDate) -> Expects 400 Bad Request
+# @name testInvalidDateOrder
+POST {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Invalid Section Date Order",
+  "type": "HOTEL",
+  "startDate": "2026-10-20",
+  "endDate": "2026-10-10",
+  "budget": 10000,
+  "currency": "INR"
+}
+
+### 15b. Outside Parent Trip Dates -> Expects 400 Bad Request
+# @name testOutsideTripDates
+POST {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Invalid Section Outside Dates",
+  "type": "HOTEL",
+  "startDate": "2026-10-25",
+  "endDate": "2026-10-27",
+  "budget": 10000,
+  "currency": "INR"
+}
+
+### 15c. Negative Budget -> Expects 400 Bad Request
+# @name testNegativeBudget
+POST {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Invalid Negative Budget",
+  "type": "HOTEL",
+  "startDate": "2026-10-10",
+  "endDate": "2026-10-12",
+  "budget": -5000,
+  "currency": "INR"
+}
+
+### 15d. Invalid Section Type -> Expects 400 Bad Request
+# @name testInvalidSectionType
+POST {{baseUrl}}/api/trips/{{tripId}}/sections
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Invalid Section Type Test",
+  "type": "INVALID_TYPE",
+  "startDate": "2026-10-10",
+  "endDate": "2026-10-12",
+  "budget": 10000,
+  "currency": "INR"
+}

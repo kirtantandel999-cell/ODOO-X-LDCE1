@@ -162,6 +162,62 @@ async function main() {
   });
   console.log("  ✅ Banners created.");
 
+  // ── Sample Trip Sections ─────────────────────
+  const sampleTrip = await prisma.trip.findFirst();
+  if (sampleTrip) {
+    console.log(`📋 Seeding sample sections for Trip "${sampleTrip.title}" (id: ${sampleTrip.id})...`);
+    const sampleSections = [
+      {
+        title: "Tokyo Hotel Stay",
+        description: "Stay in Shibuya near major transit hubs",
+        type: "HOTEL",
+        startDate: new Date("2026-10-10"),
+        endDate: new Date("2026-10-12"),
+        budget: 30000,
+        currency: "INR",
+        location: "Shibuya, Tokyo",
+        notes: "Book near JR Shibuya Station",
+        order: 1,
+      },
+      {
+        title: "Tokyo Sightseeing & Food Exploration",
+        description: "Visit Tokyo Tower, Shibuya Crossing, and Tsukiji Outer Market",
+        type: "SIGHTSEEING",
+        startDate: new Date("2026-10-12"),
+        endDate: new Date("2026-10-14"),
+        budget: 15000,
+        currency: "INR",
+        location: "Tokyo, Japan",
+        notes: "Morning sushi tour, evening observation deck",
+        order: 2,
+      },
+      {
+        title: "Bullet Train Travel to Kyoto",
+        description: "Shinkansen high-speed train from Tokyo to Kyoto",
+        type: "TRAVEL",
+        startDate: new Date("2026-10-14"),
+        endDate: new Date("2026-10-15"),
+        budget: 20000,
+        currency: "INR",
+        location: "Tokyo -> Kyoto",
+        notes: "Reserve Mt. Fuji side window seats",
+        order: 3,
+      },
+    ];
+
+    for (const sec of sampleSections) {
+      const existing = await prisma.tripSection.findFirst({
+        where: { tripId: sampleTrip.id, title: sec.title },
+      });
+      if (!existing) {
+        await prisma.tripSection.create({
+          data: { ...sec, tripId: sampleTrip.id },
+        });
+        console.log(`  ✅ Section: ${sec.title} (Order: ${sec.order})`);
+      }
+    }
+  }
+
   console.log("\n✅ Seed completed successfully!");
   console.log(`   Regions:      ${Object.keys(regions).length}`);
   console.log(`   Destinations: ${Object.keys(destinations).length}`);

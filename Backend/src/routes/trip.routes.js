@@ -20,6 +20,19 @@ import {
   updateTripActivity,
   removeTripActivity,
 } from "../controller/trip.controller.js";
+import {
+  createSection,
+  getSections,
+  getSectionById,
+  updateSection,
+  deleteSection,
+  reorderSections,
+  linkSectionDestination,
+  unlinkSectionDestination,
+  linkSectionActivity,
+  unlinkSectionActivity,
+  getTripBudget,
+} from "../controller/section.controller.js";
 import { authenticateToken } from "../middleware/auth.middleware.js";
 
 const router = Router();
@@ -37,8 +50,25 @@ router.post("/plan", planTrip);
 router.get("/my", getMyTrips);
 router.get("/previous", getPreviousTrips);
 
-// Trip Itinerary
+// Trip Itinerary & Budget
 router.get("/:tripId/itinerary", getTripItinerary);
+router.get("/:tripId/budget", getTripBudget);
+
+// Trip Sections (Build Itinerary - Screen 5)
+// IMPORTANT: /reorder must be placed BEFORE /:sectionId
+router.put("/:tripId/sections/reorder", reorderSections);
+
+router.post("/:tripId/sections", createSection);
+router.get("/:tripId/sections", getSections);
+router.get("/:tripId/sections/:sectionId", getSectionById);
+router.put("/:tripId/sections/:sectionId", updateSection);
+router.delete("/:tripId/sections/:sectionId", deleteSection);
+
+// Section Entity Links
+router.post("/:tripId/sections/:sectionId/destination", linkSectionDestination);
+router.delete("/:tripId/sections/:sectionId/destination", unlinkSectionDestination);
+router.post("/:tripId/sections/:sectionId/activity", linkSectionActivity);
+router.delete("/:tripId/sections/:sectionId/activity", unlinkSectionActivity);
 
 // Trip CRUD
 router.post("/", createTrip);

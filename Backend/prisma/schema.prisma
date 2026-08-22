@@ -19,6 +19,16 @@ enum TripStatus {
   CANCELLED
 }
 
+enum SectionType {
+  TRAVEL
+  HOTEL
+  ACTIVITY
+  SIGHTSEEING
+  FOOD
+  TRANSPORT
+  OTHER
+}
+
 // ─── Models ──────────────────────────────────
 
 model User {
@@ -66,6 +76,7 @@ model Destination {
 
   region           Region            @relation(fields: [regionId], references: [id])
   tripDestinations TripDestination[]
+  tripSections     TripSection[]
 }
 
 model Trip {
@@ -85,6 +96,7 @@ model Trip {
   user             User              @relation(fields: [userId], references: [id])
   tripDestinations TripDestination[]
   tripActivities   TripActivity[]
+  sections         TripSection[]
 }
 
 model TripDestination {
@@ -119,6 +131,7 @@ model Activity {
   updatedAt         DateTime       @updatedAt
 
   tripActivities    TripActivity[]
+  tripSections      TripSection[]
 }
 
 model TripActivity {
@@ -135,6 +148,29 @@ model TripActivity {
 
   trip     Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
   activity Activity @relation(fields: [activityId], references: [id])
+}
+
+model TripSection {
+  id            Int         @id @default(autoincrement())
+  tripId        Int
+  title         String
+  description   String?
+  type          SectionType
+  startDate     DateTime
+  endDate       DateTime
+  budget        Float?
+  currency      String      @default("INR")
+  location      String?
+  notes         String?
+  order         Int         @default(0)
+  destinationId Int?
+  activityId    Int?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now()) @updatedAt
+
+  trip        Trip         @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  destination Destination? @relation(fields: [destinationId], references: [id])
+  activity    Activity?    @relation(fields: [activityId], references: [id])
 }
 
 model Banner {

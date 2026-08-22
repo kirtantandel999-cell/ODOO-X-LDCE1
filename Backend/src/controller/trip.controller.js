@@ -22,6 +22,15 @@ const tripInclude = {
     },
     orderBy: { order: "asc" },
   },
+  sections: {
+    include: {
+      destination: {
+        include: { region: { select: { id: true, name: true } } },
+      },
+      activity: true,
+    },
+    orderBy: { order: "asc" },
+  },
 };
 
 // ─── Validate dates ────────────────────────────────────────
@@ -477,6 +486,7 @@ export const getTripById = async (req, res) => {
         destination: primaryDestination,
         destinations: trip.tripDestinations,
         activities: trip.tripActivities,
+        sections: trip.sections,
       },
       "Trip fetched successfully."
     );
@@ -585,12 +595,26 @@ export const getTripItinerary = async (req, res) => {
     return ok(
       res,
       {
+        trip: {
+          id: trip.id,
+          title: trip.title,
+          description: trip.description,
+          startDate: trip.startDate,
+          endDate: trip.endDate,
+          status: trip.status,
+          budget: trip.budget,
+          currency: trip.currency,
+          coverImage: trip.coverImage,
+        },
         tripId: trip.id,
         title: trip.title,
         startDate: trip.startDate,
         endDate: trip.endDate,
         status: trip.status,
         totalDays: days.length,
+        sections: trip.sections,
+        destinations: trip.tripDestinations,
+        activities: trip.tripActivities,
         itinerary: days,
         unassigned: unassignedItems,
       },
