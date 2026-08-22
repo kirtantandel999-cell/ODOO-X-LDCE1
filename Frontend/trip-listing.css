@@ -1,0 +1,183 @@
+/* ==========================================================
+   GlobalTrotter — User Trip Listing (Screen 6)
+   Shares the design tokens from the landing page / create-trip /
+   build-itinerary pages for brand consistency. Standalone file —
+   usable by both trip-listing.html and TripListing.jsx.
+   ========================================================== */
+
+:root{
+  --ink:#17262b;
+  --indigo:#1c3f4d;
+  --indigo-deep:#122931;
+  --ocean:#2e7d9a;
+  --terracotta:#c1622d;
+  --rust:#8b3a3a;
+  --gold:#d9a441;
+  --sand:#f3e9d8;
+  --cream:#faf6ef;
+  --white:#ffffff;
+  --line:rgba(23,38,43,0.12);
+  --shadow:0 20px 40px -18px rgba(23,38,43,0.35);
+  --radius:18px;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;letter-spacing:-0.01em;}
+a{color:inherit;text-decoration:none;}
+button, textarea, input, select{font-family:inherit;}
+button{cursor:pointer;}
+.wrap{max-width:960px;margin:0 auto;padding:0 32px;}
+
+/* ---------- TOP BAR (shared look with create-trip / build-itinerary) ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,246,239,0.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .wrap{max-width:1080px;display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;color:var(--indigo-deep);}
+.logo .mark{
+  width:32px;height:32px;border-radius:50%;
+  background:conic-gradient(from 210deg, var(--terracotta), var(--gold), var(--ocean), var(--terracotta));
+  display:flex;align-items:center;justify-content:center;color:var(--white);font-size:13px;font-weight:800;
+}
+.crumb{font-size:13.5px;color:#6a787c;display:flex;align-items:center;gap:8px;}
+.crumb a:hover{color:var(--terracotta);}
+.topbar-right{display:flex;align-items:center;gap:18px;}
+.avatar-wrap{position:relative;}
+.avatar-btn{
+  width:38px;height:38px;border-radius:50%;
+  border:1.5px solid var(--line);background:var(--white);
+  display:flex;align-items:center;justify-content:center;color:var(--indigo-deep);font-size:14px;font-weight:700;
+}
+.avatar-btn:hover{border-color:var(--terracotta);}
+.avatar-menu{
+  position:absolute;right:0;top:48px;min-width:160px;
+  background:var(--white);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);padding:6px;display:none;flex-direction:column;gap:2px;
+}
+.avatar-menu.open{display:flex;}
+.avatar-menu a{padding:9px 12px;border-radius:8px;font-size:13.5px;color:var(--ink);}
+.avatar-menu a:hover{background:var(--sand);color:var(--terracotta);}
+
+/* ---------- PAGE HEAD ---------- */
+.page-head{background:var(--indigo-deep);color:var(--white);padding:38px 0 34px;margin-bottom:30px;}
+.page-head .wrap{max-width:960px;}
+.page-head .eyebrow{
+  font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;
+}
+.page-head h1{font-size:clamp(26px,3.6vw,34px);font-weight:700;}
+.page-head p{margin-top:8px;color:rgba(255,255,255,0.72);font-size:15px;max-width:560px;}
+
+main{padding-bottom:110px;}
+
+/* ---------- SEARCH / TOOLBAR ---------- */
+.toolbar{
+  display:flex;align-items:center;gap:12px;
+  background:var(--white);border:1.5px solid var(--line);border-radius:999px;
+  padding:8px 10px 8px 18px;margin-bottom:34px;box-shadow:0 12px 26px -20px rgba(23,38,43,0.4);
+}
+.toolbar .search-field{
+  flex:1;display:flex;align-items:center;gap:10px;min-width:0;
+}
+.toolbar .search-field svg{flex:none;color:#8b9a9e;}
+.toolbar input[type="search"]{
+  flex:1;min-width:0;border:none;background:none;font-size:14.5px;color:var(--ink);padding:8px 0;
+}
+.toolbar input[type="search"]:focus{outline:none;}
+.toolbar input[type="search"]::placeholder{color:#9aa7ab;}
+.toolbar-selects{display:flex;align-items:center;gap:8px;flex:none;}
+.toolbar select{
+  appearance:none;-webkit-appearance:none;
+  border:1.5px solid var(--line);border-radius:999px;
+  padding:9px 30px 9px 14px;font-size:13px;font-weight:600;color:var(--indigo-deep);
+  background:var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23122931' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+  cursor:pointer;
+}
+.toolbar select:focus{outline:none;border-color:var(--terracotta);}
+
+/* ---------- TRIP GROUPS ---------- */
+.trip-group{margin-bottom:34px;}
+.trip-group:last-child{margin-bottom:0;}
+.group-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.group-head h2{font-size:19px;font-weight:600;color:var(--indigo-deep);}
+.group-count{
+  font-size:12px;font-weight:700;color:var(--ocean);background:rgba(46,125,154,0.14);
+  border-radius:999px;padding:2px 10px;
+}
+.group-head .status-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+.status-dot.ongoing{background:var(--terracotta);}
+.status-dot.upcoming{background:var(--ocean);}
+.status-dot.completed{background:#6a787c;}
+
+.trip-list{display:flex;flex-direction:column;gap:16px;}
+.group-empty{
+  border:1.5px dashed var(--line);border-radius:var(--radius);
+  padding:22px;text-align:center;color:#8b9a9e;font-size:13.5px;display:none;
+}
+.group-empty.show{display:block;}
+
+/* ---------- TRIP CARD ---------- */
+.trip-card{
+  background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);
+  box-shadow:0 12px 26px -20px rgba(23,38,43,0.4);
+  padding:20px;display:flex;gap:18px;align-items:stretch;
+  cursor:pointer;transition:transform .2s ease, box-shadow .2s ease;
+}
+.trip-card:hover{transform:translateY(-2px);box-shadow:0 18px 32px -18px rgba(23,38,43,0.45);}
+.trip-card:focus-visible{outline:2px solid var(--terracotta);outline-offset:2px;}
+.trip-thumb{
+  flex:none;width:104px;border-radius:12px;overflow:hidden;background:var(--sand);
+  display:flex;align-items:center;justify-content:center;
+}
+.trip-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.trip-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;}
+.trip-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+.trip-title{font-family:'Poppins',sans-serif;font-size:16.5px;font-weight:600;color:var(--indigo-deep);}
+.trip-route{font-size:12.5px;color:#6a787c;margin-top:2px;}
+.status-pill{
+  flex:none;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+  padding:4px 11px;border-radius:999px;white-space:nowrap;
+}
+.status-pill.ongoing{color:var(--terracotta);background:rgba(193,98,45,0.14);}
+.status-pill.upcoming{color:var(--ocean);background:rgba(46,125,154,0.14);}
+.status-pill.completed{color:#5a666a;background:rgba(90,102,106,0.12);}
+.trip-overview{font-size:13.5px;color:var(--ink);line-height:1.5;opacity:.85;}
+.trip-foot{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:6px;font-size:12.5px;color:#6a787c;flex-wrap:wrap;}
+.trip-foot span{display:flex;align-items:center;gap:5px;}
+.trip-foot .budget{font-weight:700;color:var(--indigo-deep);margin-left:auto;}
+
+/* ---------- FLOATING ADD BUTTON ---------- */
+.fab{
+  position:fixed;right:28px;bottom:28px;z-index:60;
+  display:flex;align-items:center;gap:8px;
+  background:var(--terracotta);color:var(--white);border:none;border-radius:999px;
+  padding:15px 22px;font-weight:600;font-size:14.5px;
+  box-shadow:0 16px 30px -12px rgba(193,98,45,0.75);
+  transition:transform .2s ease;
+}
+.fab:hover{transform:translateY(-3px);}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:640px){
+  .wrap{padding:0 18px;}
+  .crumb{display:none;}
+  .toolbar{flex-wrap:wrap;border-radius:20px;padding:12px;}
+  .toolbar-selects{width:100%;justify-content:space-between;}
+  .toolbar select{flex:1;padding-left:10px;}
+  .trip-card{flex-direction:column;}
+  .trip-thumb{width:100%;height:120px;}
+  .fab span.fab-label{display:none;}
+  .fab{padding:15px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .trip-card, .fab{transition:none;}
+}

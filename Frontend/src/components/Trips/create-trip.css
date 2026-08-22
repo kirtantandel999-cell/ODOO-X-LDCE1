@@ -53,21 +53,38 @@ button{font-family:inherit;cursor:pointer;}
 .avatar-btn:hover{border-color:var(--terracotta);}
 .avatar-menu{
   position:absolute;top:48px;right:0;
-  background:var(--white);border:1px solid var(--line);border-radius:12px;
-  box-shadow:var(--shadow);min-width:160px;padding:8px;
-  display:none;flex-direction:column;gap:2px;
+  background:var(--white);border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 16px 36px -10px rgba(23, 38, 43, 0.22);min-width:165px;padding:8px;
+  display:none;flex-direction:column;gap:2px;z-index:70;
 }
 .avatar-menu.open{display:flex;}
-.avatar-menu a{padding:9px 12px;border-radius:8px;font-size:14px;font-weight:500;}
-.avatar-menu a:hover{background:var(--sand);}
-
-/* ---------- PAGE HEAD ---------- */
-.page-head{background:var(--indigo-deep);color:var(--white);padding:38px 0 34px;margin-bottom:36px;}
-.page-head .eyebrow{
-  font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;
+.avatar-menu a, .avatar-menu button{
+  padding:10px 16px;border-radius:10px;font-size:15px;font-weight:600;
+  text-align:left;border:none;background:none;color:var(--ink);
+  transition:background .15s ease, color .15s ease;
 }
-.page-head h1{font-size:clamp(26px,3.6vw,34px);font-weight:700;}
-.page-head p{margin-top:8px;color:rgba(255,255,255,0.72);font-size:15px;max-width:520px;}
+.avatar-menu a:hover, .avatar-menu button:hover{background:var(--sand);color:var(--ink);}
+
+/* ---------- PAGE HEAD (Card structure matching screenshot) ---------- */
+.page-head {
+  background: var(--indigo-deep);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 34px 38px 30px;
+  margin: 28px 0 32px;
+  box-shadow: 0 14px 30px -18px rgba(18, 41, 49, 0.45);
+}
+.page-head .eyebrow {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+}
+.page-head h1 { font-size: clamp(26px, 3.6vw, 34px); font-weight: 700; }
+.page-head p { margin-top: 8px; color: rgba(255, 255, 255, 0.72); font-size: 15px; max-width: 520px; }
 
 main{padding-bottom:100px;}
 

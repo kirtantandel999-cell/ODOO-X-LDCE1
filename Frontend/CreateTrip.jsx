@@ -107,6 +107,11 @@ export default function CreateTrip({ onNavigate }) {
 
     // No backend wired up yet — this is where a real API call would go.
     flashConfirm('Trip created! Redirecting to your itinerary…');
+    setTimeout(() => {
+      if (onNavigate) {
+        onNavigate('buildItinerary');
+      }
+    }, 600);
   };
 
   return (

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity Search · GlobalTrotter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="activity-search.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">GT</span> GlobalTrotter</a>
+    <div class="topbar-right">
+      <span class="crumb"><a href="create-trip.html">New Trip</a> / Activity Search</span>
+      <div class="avatar-wrap">
+        <button class="avatar-btn" id="avatarBtn" aria-label="Account menu">A</button>
+        <div class="avatar-menu" id="avatarMenu">
+          <a href="profile.html">My Profile</a>
+          <a href="trip-listing.html">My Trips</a>
+          <a href="#">Log Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HEAD -->
+<div class="page-head">
+  <div class="wrap">
+    <h1>Activity &amp; city search</h1>
+    <p>Search any activity or city and add what fits straight into your itinerary.</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-field">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="activitySearch" placeholder="Search bar ......" aria-label="Search activities or cities" value="Paragliding">
+    </div>
+    <div class="toolbar-selects">
+      <select id="groupBySelect" aria-label="Group by">
+        <option value="none">Group by: None</option>
+        <option value="category">Group by: Category</option>
+      </select>
+      <select id="filterSelect" aria-label="Filter">
+        <option value="all">Filter: All</option>
+        <option value="adventure">Filter: Adventure</option>
+        <option value="nature">Filter: Nature</option>
+        <option value="heritage">Filter: Heritage</option>
+        <option value="food">Filter: Food</option>
+        <option value="water">Filter: Water</option>
+      </select>
+      <select id="sortBySelect" aria-label="Sort by">
+        <option value="rating">Sort by: Rating</option>
+        <option value="price-low">Sort by: Price (low)</option>
+        <option value="price-high">Sort by: Price (high)</option>
+        <option value="duration">Sort by: Duration</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- RESULTS (flat, default) -->
+  <section class="trip-group" data-group="all">
+    <div class="group-head">
+      <h2>Results</h2>
+      <span class="group-count" data-count>7</span>
+    </div>
+    <div class="trip-list" data-list>
+
+      <article class="trip-card" data-trip data-name="Tandem Paragliding — Bir Billing" data-tag="adventure" data-rating="4.8" data-price="3200" data-duration="1" data-duration-label="20–30 min" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1521673461164-de300ebcfb17?auto=format&fit=crop&w=200&q=70" alt="Paragliding over hills"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Tandem Paragliding — Bir Billing</div>
+              <div class="trip-route">Himachal Pradesh · 20–30 min flight</div>
+            </div>
+            <span class="status-pill adventure">Adventure</span>
+          </div>
+          <p class="trip-overview">A guided tandem flight over the valley with a certified pilot, launch and landing assistance included.</p>
+          <div class="trip-foot">
+            <span class="rating">★ 4.8</span>
+            <span>20–30 min</span>
+            <span class="budget">₹3,200</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card" data-trip data-name="Sunset Paragliding — Kamshet" data-tag="adventure" data-rating="4.6" data-price="2500" data-duration="1" data-duration-label="15–20 min" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=200&q=70" alt="Paragliding at sunset"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Sunset Paragliding — Kamshet</div>
+              <div class="trip-route">Maharashtra · 15–20 min flight</div>
+            </div>
+            <span class="status-pill adventure">Adventure</span>
+          </div>
+          <p class="trip-overview">A shorter evening flight timed for golden-hour views over the Sahyadri ranges.</p>
+          <div class="trip-foot">
+            <span class="rating">★ 4.6</span>
+            <span>15–20 min</span>
+            <span class="budget">₹2,500</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card" data-trip data-name="Billing Viewpoint Walk" data-tag="nature" data-rating="4.5" data-price="0" data-duration="2" data-duration-label="~2 hrs" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=200&q=70" alt="Valley viewpoint"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Billing Viewpoint Walk</div>
+              <div class="trip-route">Himachal Pradesh · Free entry</div>
+            </div>
+            <span class="status-pill nature">Nature</span>
+          </div>
+          <p class="trip-overview">A short walk up to the take-off point — the best spot to watch paragliders launch.</p>
+          <div class="trip-foot">
+            <span class="rating">★ 4.5</span>
+            <span>~2 hrs</span>
+            <span class="budget">Free</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card" data-trip data-name="Bir Monastery & Tibetan Colony" data-tag="heritage" data-rating="4.4" data-price="150" data-duration="2" data-duration-label="~2 hrs" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=200&q=70" alt="Hill town monastery"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Bir Monastery &amp; Tibetan Colony</div>
+              <div class="trip-route">Himachal Pradesh · Entry ₹150</div>
+            </div>
+            <span class="status-pill heritage">Heritage</span>
+          </div>
+          <p class="trip-overview">A quiet Tibetan settlement with a colourful monastery, prayer wheels and craft shops.</p>
+          <div class="trip-foot">
+            <span class="rating">★ 4.4</span>
+            <span>~2 hrs</span>
+            <span class="budget">₹150</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card" data-trip data-name="Kangra Valley Food Trail" data-tag="food" data-rating="4.7" data-price="600" data-duration="2" data-duration-label="~2 hrs" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=200&q=70" alt="Local food stalls"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Kangra Valley Food Trail</div>
+              <div class="trip-route">Himachal Pradesh · Group walk</div>
+            </div>
+            <span class="status-pill food">Food</span>
+          </div>
+          <p class="trip-overview">A guided evening walk sampling local Himachali dishes across three family-run kitchens.</p>
+          <div class="trip-foot">
+            <span class="rating">★ 4.7</span>
+            <span>~2 hrs</span>
+            <span class="budget">₹600</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card" data-trip data-name="Beas River Rafting" data-tag="water" data-rating="4.3" data-price="1200" data-duration="3" data-duration-label="~3 hrs" tabindex="0">
+        <div class="trip-thumb"><img src="https://tse3.mm.bing.net/th/id/OIP.0NFOktTLF8iiDD961BUT5AHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Beas River Rafting</div>
+              <div class="trip-route">Kullu, Himachal Pradesh · 14 km stretch</div>
+            </div>
+            <span class="status-pill water">Water</span>
+          </div>
+          <p class="trip-overview">Grade II–III rapids with safety gear and an instructor included, best paired with a Bir stopover.</p>
+          <div class="trip-foot">
+            <span class="rating">★ 4.3</span>
+            <span>~3 hrs</span>
+            <span class="budget">₹1,200</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card" data-trip data-name="Billing Ridge Day Trek" data-tag="adventure" data-rating="4.2" data-price="1800" data-duration="6" data-duration-label="~6 hrs" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=200&q=70" alt="Ridge trek trail"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Billing Ridge Day Trek</div>
+              <div class="trip-route">Himachal Pradesh · 8 km trail</div>
+            </div>
+            <span class="status-pill adventure">Adventure</span>
+          </div>
+          <p class="trip-overview">A moderate day hike along the ridge with panoramic views of the launch site below.</p>
+          <div class="trip-foot">
+            <span class="rating">★ 4.2</span>
+            <span>~6 hrs</span>
+            <span class="budget">₹1,800</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <p class="group-empty" data-empty>No activities match your search.</p>
+  </section>
+
+  <!-- CATEGORY GROUPS (populated by JS when "Group by: Category" is selected) -->
+  <section class="trip-group" data-group="adventure" style="display:none;">
+    <div class="group-head"><span class="status-dot adventure"></span><h2>Adventure</h2><span class="group-count" data-count>0</span></div>
+    <div class="trip-list" data-list></div>
+    <p class="group-empty" data-empty>No adventure activities match your search.</p>
+  </section>
+
+  <section class="trip-group" data-group="nature" style="display:none;">
+    <div class="group-head"><span class="status-dot nature"></span><h2>Nature</h2><span class="group-count" data-count>0</span></div>
+    <div class="trip-list" data-list></div>
+    <p class="group-empty" data-empty>No nature activities match your search.</p>
+  </section>
+
+  <section class="trip-group" data-group="heritage" style="display:none;">
+    <div class="group-head"><span class="status-dot heritage"></span><h2>Heritage</h2><span class="group-count" data-count>0</span></div>
+    <div class="trip-list" data-list></div>
+    <p class="group-empty" data-empty>No heritage activities match your search.</p>
+  </section>
+
+  <section class="trip-group" data-group="food" style="display:none;">
+    <div class="group-head"><span class="status-dot food"></span><h2>Food</h2><span class="group-count" data-count>0</span></div>
+    <div class="trip-list" data-list></div>
+    <p class="group-empty" data-empty>No food activities match your search.</p>
+  </section>
+
+  <section class="trip-group" data-group="water" style="display:none;">
+    <div class="group-head"><span class="status-dot water"></span><h2>Water</h2><span class="group-count" data-count>0</span></div>
+    <div class="trip-list" data-list></div>
+    <p class="group-empty" data-empty>No water activities match your search.</p>
+  </section>
+
+</main>
+
+<script src="activity-search.js"></script>
+</body>
+</html>

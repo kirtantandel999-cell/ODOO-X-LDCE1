@@ -105,6 +105,11 @@ export default function CreateTrip({ onNavigate }) {
     if (hasTripStartError || hasStopError) return;
 
     flashConfirm('Trip created! Redirecting to your itinerary…');
+    setTimeout(() => {
+      if (onNavigate) {
+        onNavigate('buildItinerary');
+      }
+    }, 600);
   };
 
   return (
@@ -152,9 +157,30 @@ export default function CreateTrip({ onNavigate }) {
                 A
               </button>
               <div className={`avatar-menu${avatarOpen ? ' open' : ''}`}>
-                <a href="/profile">My Profile</a>
                 <a
-                  href="/trips"
+                  href="/profile"
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate('profile');
+                    }
+                  }}
+                >
+                  My Profile
+                </a>
+                <a
+                  href="/create-trip"
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate('createTrip');
+                    }
+                  }}
+                >
+                  Plan Trip
+                </a>
+                <a
+                  href="/"
                   onClick={(e) => {
                     if (onNavigate) {
                       e.preventDefault();
@@ -162,24 +188,32 @@ export default function CreateTrip({ onNavigate }) {
                     }
                   }}
                 >
-                  My Trips
+                  Home Page
                 </a>
-                <a href="/logout">Log Out</a>
+                <a
+                  href="/logout"
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate('login');
+                    }
+                  }}
+                >
+                  Log Out
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* PAGE HEAD */}
-      <div className="page-head">
-        <div className="wrap">
+      <main className="wrap">
+        {/* PAGE HEAD (Card structure matching screenshot) */}
+        <div className="page-head">
           <h1>Plan a new trip</h1>
           <p>Set your dates, add the places you're visiting, and we'll suggest what to do there.</p>
         </div>
-      </div>
 
-      <main className="wrap">
         <form onSubmit={handleSubmit}>
           {/* TRIP DETAILS */}
           <section className="card">
