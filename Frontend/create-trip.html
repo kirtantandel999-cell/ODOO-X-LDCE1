@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan a New Trip · GlobalTrotter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="create-trip.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">GT</span> GlobalTrotter</a>
+    <div class="topbar-right">
+      <span class="crumb"><a href="index.html">My Trips</a> / New Trip</span>
+      <div class="avatar-wrap">
+        <button class="avatar-btn" id="avatarBtn" aria-label="Account menu">A</button>
+        <div class="avatar-menu" id="avatarMenu">
+          <a href="#">My Profile</a>
+          <a href="#">My Trips</a>
+          <a href="#">Log Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HEAD -->
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Screen 4</span>
+    <h1>Plan a new trip</h1>
+    <p>Set your dates, add the places you're visiting, and we'll suggest what to do there.</p>
+  </div>
+</div>
+
+<main class="wrap">
+  <form id="tripForm">
+    <!-- TRIP DATES + STOPS -->
+    <section class="card">
+      <h2>Trip details</h2>
+      <p class="card-sub">Add at least one place. Use "+ Add another place" for multi-city trips.</p>
+
+      <div class="field-row">
+        <div class="field" id="tripStartField">
+          <label for="tripStart">Trip start date</label>
+          <input type="date" id="tripStart" required>
+          <span class="field-error">Pick a start date to continue.</span>
+        </div>
+      </div>
+
+      <div class="stops" id="stopsContainer">
+        <!-- stop rows injected by script.js; one exists by default below -->
+        <div class="stop-row" data-stop>
+          <span class="stop-index">Place 1</span>
+          <div class="field">
+            <label>Select a place</label>
+            <input type="text" placeholder="e.g. Udaipur, Rajasthan" list="placeList" data-role="place">
+          </div>
+          <div class="field">
+            <label>Start date</label>
+            <input type="date" data-role="start">
+          </div>
+          <div class="field">
+            <label>End date</label>
+            <input type="date" data-role="end">
+            <span class="field-error">End date must be after start date.</span>
+          </div>
+          <button type="button" class="remove-stop" aria-label="Remove this place" disabled>✕</button>
+        </div>
+      </div>
+
+      <datalist id="placeList">
+        <option value="Rajasthan, India">
+        <option value="Kerala, India">
+        <option value="Goa, India">
+        <option value="Himachal Pradesh, India">
+        <option value="North-East India">
+        <option value="Bali, Indonesia">
+        <option value="Rome, Italy">
+        <option value="Paris, France">
+      </datalist>
+
+      <button type="button" class="add-stop-btn" id="addStopBtn">+ Add another place</button>
+    </section>
+
+    <!-- SUGGESTIONS -->
+    <section>
+      <div class="suggest-head">
+        <div>
+          <h2>Suggestions for places to visit / activities to perform</h2>
+          <p class="sub">Tap to add any of these to your itinerary.</p>
+        </div>
+        <span class="selected-pill" id="selectedPill">0 selected</span>
+      </div>
+
+      <div class="suggest-grid" id="suggestGrid">
+        <article class="suggest-card" data-suggest>
+          <div class="thumb">
+            <span class="tag heritage">Heritage</span>
+            <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=500&q=70" alt="City Palace">
+          </div>
+          <div class="suggest-body">
+            <h3>City Palace</h3>
+            <p>A lakeside palace complex with courtyards, museums and sweeping views.</p>
+            <button type="button" class="add-toggle">+ Add to itinerary</button>
+          </div>
+        </article>
+
+        <article class="suggest-card" data-suggest>
+          <div class="thumb">
+            <span class="tag nature">Nature</span>
+            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=500&q=70" alt="Backwater cruise">
+          </div>
+          <div class="suggest-body">
+            <h3>Backwater Cruise</h3>
+            <p>A slow houseboat ride through palm-lined canals and paddy fields.</p>
+            <button type="button" class="add-toggle">+ Add to itinerary</button>
+          </div>
+        </article>
+
+        <article class="suggest-card" data-suggest>
+          <div class="thumb">
+            <span class="tag adventure">Adventure</span>
+            <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=500&q=70" alt="Mountain trek">
+          </div>
+          <div class="suggest-body">
+            <h3>Ridge Trek</h3>
+            <p>A half-day trail with panoramic views of the valley below.</p>
+            <button type="button" class="add-toggle">+ Add to itinerary</button>
+          </div>
+        </article>
+
+        <article class="suggest-card" data-suggest>
+          <div class="thumb">
+            <span class="tag food">Food</span>
+            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500&q=70" alt="Street food market">
+          </div>
+          <div class="suggest-body">
+            <h3>Old Town Food Walk</h3>
+            <p>A guided evening walk through the local street-food market.</p>
+            <button type="button" class="add-toggle">+ Add to itinerary</button>
+          </div>
+        </article>
+
+        <article class="suggest-card" data-suggest>
+          <div class="thumb">
+            <span class="tag heritage">Heritage</span>
+            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=500&q=70" alt="Museum">
+          </div>
+          <div class="suggest-body">
+            <h3>Heritage Museum</h3>
+            <p>Local art, textiles and history housed in a restored haveli.</p>
+            <button type="button" class="add-toggle">+ Add to itinerary</button>
+          </div>
+        </article>
+
+        <article class="suggest-card" data-suggest>
+          <div class="thumb">
+            <span class="tag nature">Nature</span>
+            <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=500&q=70" alt="Beach">
+          </div>
+          <div class="suggest-body">
+            <h3>Sunset Beach</h3>
+            <p>A quieter stretch of coast, best visited an hour before sunset.</p>
+            <button type="button" class="add-toggle">+ Add to itinerary</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="action-bar">
+      <span class="confirm-msg" id="confirmMsg">Trip saved — you can keep editing it anytime.</span>
+      <button type="button" class="btn btn-ghost" id="saveDraftBtn">Save Draft</button>
+      <button type="submit" class="btn btn-primary" id="createTripBtn">Create Trip →</button>
+    </div>
+  </form>
+</main>
+
+<script src="create-trip.js"></script>
+</body>
+</html>
