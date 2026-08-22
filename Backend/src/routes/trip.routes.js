@@ -5,6 +5,10 @@ import {
   getSuggestions,
   createTrip,
   planTrip,
+  getUserTrips,
+  getOngoingTrips,
+  getUpcomingTrips,
+  getCompletedTrips,
   getMyTrips,
   getPreviousTrips,
   getTripById,
@@ -45,10 +49,17 @@ router.get("/suggestions", getSuggestions);
 // ── Protected Routes (Require Authentication) ─
 router.use(authenticateToken);
 
-// Named endpoints before /:id parameter
-router.post("/plan", planTrip);
+// Screen 6 Main Trips Listing API
+router.get("/", getUserTrips);
+
+// Named filter endpoints before /:id parameter
+router.get("/ongoing", getOngoingTrips);
+router.get("/upcoming", getUpcomingTrips);
+router.get("/completed", getCompletedTrips);
 router.get("/my", getMyTrips);
 router.get("/previous", getPreviousTrips);
+
+router.post("/plan", planTrip);
 
 // Trip Itinerary & Budget
 router.get("/:tripId/itinerary", getTripItinerary);

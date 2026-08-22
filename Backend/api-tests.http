@@ -420,3 +420,132 @@ Content-Type: {{contentType}}
   "budget": 10000,
   "currency": "INR"
 }
+
+###
+
+
+### ====================================================================
+### SCREEN 6: USER TRIP LISTING (ALL SCENARIOS)
+### ====================================================================
+
+### STEP 1: Main User Trip Listing (Default: Grouped by Ongoing / Upcoming / Completed + Counts)
+# @name getUserTripsMain
+GET {{baseUrl}}/api/trips
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 2: Dedicated Ongoing Trips Endpoint
+# @name getOngoingTrips
+GET {{baseUrl}}/api/trips/ongoing
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 3: Dedicated Upcoming Trips Endpoint
+# @name getUpcomingTrips
+GET {{baseUrl}}/api/trips/upcoming
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 4: Dedicated Completed Trips Endpoint
+# @name getCompletedTrips
+GET {{baseUrl}}/api/trips/completed
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 5: Search Trips by keyword (Title, Description, Destination, City, Country)
+# @name searchTrips
+GET {{baseUrl}}/api/trips?search=tokyo
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 6: Filter Trips by Status (ongoing | upcoming | completed | cancelled)
+# @name filterTripsStatus
+GET {{baseUrl}}/api/trips?status=upcoming
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 7a: Sort Trips by Nearest Start Date
+# @name sortTripsDateAsc
+GET {{baseUrl}}/api/trips?sort=start_date_asc
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 7b: Sort Trips by Highest Budget
+# @name sortTripsBudgetDesc
+GET {{baseUrl}}/api/trips?sort=budget_desc
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 8: Group Trips by Destination
+# @name groupTripsByDestination
+GET {{baseUrl}}/api/trips?groupBy=destination
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 9: Paginated Trips Listing (Page 1, Limit 2)
+# @name paginateTrips
+GET {{baseUrl}}/api/trips?page=1&limit=2
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 10: Filter Trips by Budget Range (50,000 to 250,000)
+# @name filterTripsBudgetRange
+GET {{baseUrl}}/api/trips?minBudget=50000&maxBudget=250000
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 11: Combined Query (Search + Filter + Sort + Pagination)
+# @name combinedTripsQuery
+GET {{baseUrl}}/api/trips?search=japan&status=upcoming&sort=start_date_asc&page=1&limit=10
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 12: Single Trip Details by ID
+# @name getSingleTripDetails
+GET {{baseUrl}}/api/trips/{{tripId}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### SCREEN 6 VALIDATION & ERROR CHECKS
+### ====================================================================
+
+### 13a. Invalid Status -> Expects 400 Bad Request
+# @name testInvalidStatus
+GET {{baseUrl}}/api/trips?status=invalid_status
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13b. Invalid Sort -> Expects 400 Bad Request
+# @name testInvalidSort
+GET {{baseUrl}}/api/trips?sort=invalid_sort
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13c. Invalid Page (< 1) -> Expects 400 Bad Request
+# @name testInvalidPage
+GET {{baseUrl}}/api/trips?page=-1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13d. Invalid Limit (> 50) -> Expects 400 Bad Request
+# @name testInvalidLimit
+GET {{baseUrl}}/api/trips?limit=99999
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13e. Invalid Budget Range (maxBudget < minBudget) -> Expects 400 Bad Request
+# @name testInvalidBudgetRange
+GET {{baseUrl}}/api/trips?minBudget=100000&maxBudget=50000
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13f. Invalid Date Range (endDate < startDate) -> Expects 400 Bad Request
+# @name testInvalidTripDateFilter
+GET {{baseUrl}}/api/trips?startDate=2026-12-31&endDate=2026-01-01
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+

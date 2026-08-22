@@ -1,4 +1,5 @@
 import "dotenv/config";
+import bcrypt from "bcryptjs";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client.js";
 
@@ -162,59 +163,85 @@ async function main() {
   });
   console.log("  ✅ Banners created.");
 
-  // ── Sample Trip Sections ─────────────────────
-  const sampleTrip = await prisma.trip.findFirst();
-  if (sampleTrip) {
-    console.log(`📋 Seeding sample sections for Trip "${sampleTrip.title}" (id: ${sampleTrip.id})...`);
-    const sampleSections = [
-      {
-        title: "Tokyo Hotel Stay",
-        description: "Stay in Shibuya near major transit hubs",
-        type: "HOTEL",
-        startDate: new Date("2026-10-10"),
-        endDate: new Date("2026-10-12"),
-        budget: 30000,
-        currency: "INR",
-        location: "Shibuya, Tokyo",
-        notes: "Book near JR Shibuya Station",
-        order: 1,
-      },
-      {
-        title: "Tokyo Sightseeing & Food Exploration",
-        description: "Visit Tokyo Tower, Shibuya Crossing, and Tsukiji Outer Market",
-        type: "SIGHTSEEING",
-        startDate: new Date("2026-10-12"),
-        endDate: new Date("2026-10-14"),
-        budget: 15000,
-        currency: "INR",
-        location: "Tokyo, Japan",
-        notes: "Morning sushi tour, evening observation deck",
-        order: 2,
-      },
-      {
-        title: "Bullet Train Travel to Kyoto",
-        description: "Shinkansen high-speed train from Tokyo to Kyoto",
-        type: "TRAVEL",
-        startDate: new Date("2026-10-14"),
-        endDate: new Date("2026-10-15"),
-        budget: 20000,
-        currency: "INR",
-        location: "Tokyo -> Kyoto",
-        notes: "Reserve Mt. Fuji side window seats",
-        order: 3,
-      },
-    ];
+  // ── Test User & Trips for Screen 6 ───────────
+  console.log("👤 Seeding test user & trips for Screen 6...");
+  const hashedPassword = await bcrypt.hash("Password@123", 10);
+  const testUser = await prisma.user.upsert({
+    where: { email: "rudra@example.com" },
+    update: { password: hashedPassword },
+    create: {
+      firstName: "Rudra",
+      lastName: "Patel",
+      email: "rudra@example.com",
+      password: hashedPassword,
+      phoneNumber: "9876543210",
+      city: "Ahmedabad",
+      country: "India",
+      additionalInformation: "Traveler & Explorer",
+    },
+  });
+  console.log(`  ✅ Test User: ${testUser.email} (id: ${testUser.id})`);
 
-    for (const sec of sampleSections) {
-      const existing = await prisma.tripSection.findFirst({
-        where: { tripId: sampleTrip.id, title: sec.title },
+  const now = new Date();
+  const ongoingStart = new Date(now);
+  ongoingStart.setDate(now.getDate() - 2);
+  const ongoingEnd = new Date(now);
+  ongoingEnd.setDate(now.getDate() + 4);
+
+  const tripData = [
+    {
+      title: "Ongoing Tokyo Adventure",
+      description: "Currently exploring Tokyo and experiencing city highlights",
+      startDate: ongoingStart,
+      endDate: ongoingEnd,
+      status: "ONGOING",
+      budget: 150000,
+      currency: "INR",
+      destName: "Tokyo",
+    },
+    {
+      title: "Autumn in Kyoto & Osaka",
+      description: "Upcoming autumn foliage tour in Kansai region",
+      startDate: new Date("2026-10-10"),
+      endDate: new Date("2026-10-20"),
+      status: "PLANNED",
+      budget: 220000,
+      currency: "INR",
+      destName: "Kyoto",
+    },
+    {
+      title: "Completed European Grand Tour",
+      description: "Past summer vacation across Paris and Rome",
+      startDate: new Date("2026-05-01"),
+      endDate: new Date("2026-05-15"),
+      status: "COMPLETED",
+      budget: 350000,
+      currency: "INR",
+      destName: "Paris",
+    },
+  ];
+
+  for (const td of tripData) {
+    const { destName, ...tFields } = td;
+    let existingTrip = await prisma.trip.findFirst({
+      where: { userId: testUser.id, title: tFields.title },
+    });
+    if (!existingTrip) {
+      existingTrip = await prisma.trip.create({
+        data: { ...tFields, userId: testUser.id },
       });
-      if (!existing) {
-        await prisma.tripSection.create({
-          data: { ...sec, tripId: sampleTrip.id },
+
+      // Add destination
+      if (destinations[destName]) {
+        await prisma.tripDestination.create({
+          data: {
+            tripId: existingTrip.id,
+            destinationId: destinations[destName].id,
+            order: 1,
+          },
         });
-        console.log(`  ✅ Section: ${sec.title} (Order: ${sec.order})`);
       }
+      console.log(`  ✅ Trip: ${existingTrip.title} (Status: ${existingTrip.status})`);
     }
   }
 

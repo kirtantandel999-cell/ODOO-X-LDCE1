@@ -188,6 +188,31 @@ async function runCompleteTestSuite() {
   test(planTrip.status === 201, "POST /api/trips/plan");
   const tripId = planTrip.data.data.id;
 
+  // Screen 6 User Trips listing
+  const allUserTrips = await request("/api/trips", { headers: authHeaders });
+  test(allUserTrips.status === 200 && allUserTrips.data.data.ongoing !== undefined, "GET /api/trips (Screen 6 Main Listing)");
+
+  const ongoingTrips = await request("/api/trips/ongoing", { headers: authHeaders });
+  test(ongoingTrips.status === 200 && Array.isArray(ongoingTrips.data.data.ongoing), "GET /api/trips/ongoing");
+
+  const upcomingTrips = await request("/api/trips/upcoming", { headers: authHeaders });
+  test(upcomingTrips.status === 200 && Array.isArray(upcomingTrips.data.data.upcoming), "GET /api/trips/upcoming");
+
+  const completedTrips = await request("/api/trips/completed", { headers: authHeaders });
+  test(completedTrips.status === 200 && Array.isArray(completedTrips.data.data.completed), "GET /api/trips/completed");
+
+  const searchTrips = await request("/api/trips?search=master", { headers: authHeaders });
+  test(searchTrips.status === 200, "GET /api/trips?search=master");
+
+  const filterTrips = await request("/api/trips?status=upcoming&sort=budget_desc", { headers: authHeaders });
+  test(filterTrips.status === 200, "GET /api/trips?status=upcoming&sort=budget_desc");
+
+  const groupTrips = await request("/api/trips?groupBy=destination", { headers: authHeaders });
+  test(groupTrips.status === 200, "GET /api/trips?groupBy=destination");
+
+  const paginateTrips = await request("/api/trips?page=1&limit=5", { headers: authHeaders });
+  test(paginateTrips.status === 200 && paginateTrips.data.pagination.page === 1, "GET /api/trips?page=1&limit=5");
+
   const myTrips = await request("/api/trips/my", { headers: authHeaders });
   test(myTrips.status === 200, "GET /api/trips/my");
 

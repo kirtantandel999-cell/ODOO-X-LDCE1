@@ -97,6 +97,9 @@ model Trip {
   tripDestinations TripDestination[]
   tripActivities   TripActivity[]
   sections         TripSection[]
+
+  @@index([userId, startDate, endDate])
+  @@index([userId, status])
 }
 
 model TripDestination {

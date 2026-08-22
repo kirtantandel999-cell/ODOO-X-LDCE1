@@ -1,7 +1,7 @@
 import prisma from "../lib/prisma.js";
 
-const ok = (res, data, message = "Success", status = 200) =>
-  res.status(status).json({ success: true, message, data });
+const ok = (res, data, message = "Success", status = 200, extra = {}) =>
+  res.status(status).json({ success: true, message, data, ...extra });
 
 const fail = (res, message = "Error", status = 500, error = null) =>
   res.status(status).json({ success: false, message, error });
@@ -414,50 +414,331 @@ export const createTrip = async (req, res) => {
   }
 };
 
+// ─── Helper: Format Trip Summary Card for Listing ─────────
+const formatTripCard = (trip, todayStart, todayEnd) => {
+  let tripStatus = "upcoming";
+  if (trip.status === "CANCELLED") {
+    tripStatus = "cancelled";
+  } else if (trip.status === "COMPLETED" || new Date(trip.endDate) < todayStart) {
+    tripStatus = "completed";
+  } else if (new Date(trip.startDate) <= todayEnd && new Date(trip.endDate) >= todayStart) {
+    tripStatus = "ongoing";
+  } else {
+    tripStatus = "upcoming";
+  }
+
+  const mainDestination = trip.tripDestinations?.[0]?.destination || null;
+
+  return {
+    id: trip.id,
+    title: trip.title,
+    description: trip.description,
+    startDate: trip.startDate,
+    endDate: trip.endDate,
+    tripStatus,
+    status: trip.status,
+    coverImage: trip.coverImage,
+    budget: trip.budget,
+    currency: trip.currency,
+    mainDestination: mainDestination
+      ? {
+          id: mainDestination.id,
+          name: mainDestination.name,
+          city: mainDestination.city,
+          country: mainDestination.country,
+          image: mainDestination.image,
+        }
+      : null,
+    destinationCount: trip._count?.tripDestinations || trip.tripDestinations?.length || 0,
+    activityCount: trip._count?.tripActivities || trip.tripActivities?.length || 0,
+    sectionCount: trip._count?.sections || trip.sections?.length || 0,
+    createdAt: trip.createdAt,
+    updatedAt: trip.updatedAt,
+  };
+};
+
 // ─────────────────────────────────────────────
-// GET /api/trips/my
+// GET /api/trips (Screen 6 Main User Trip Listing)
+// Supports: search, status, startDate, endDate, destinationId,
+//           minBudget, maxBudget, sort, groupBy, page, limit
 // ─────────────────────────────────────────────
-export const getMyTrips = async (req, res) => {
+export const getUserTrips = async (req, res) => {
   const userId = req.user.id;
+  const {
+    search,
+    status,
+    startDate,
+    endDate,
+    destinationId,
+    minBudget,
+    maxBudget,
+    sort = "start_date_asc",
+    groupBy = "status",
+    page = 1,
+    limit = 10,
+  } = req.query;
+
+  // 1. Parameter Validation
+  const validStatuses = ["ongoing", "upcoming", "completed", "cancelled"];
+  if (status && !validStatuses.includes(String(status).toLowerCase())) {
+    return fail(res, `Invalid status. Allowed values: ${validStatuses.join(", ")}`, 400);
+  }
+
+  const validSortMap = {
+    newest: { createdAt: "desc" },
+    oldest: { createdAt: "asc" },
+    start_date_asc: { startDate: "asc" },
+    start_date_desc: { startDate: "desc" },
+    end_date_asc: { endDate: "asc" },
+    end_date_desc: { endDate: "desc" },
+    budget_asc: { budget: "asc" },
+    budget_desc: { budget: "desc" },
+    title_asc: { title: "asc" },
+    title_desc: { title: "desc" },
+  };
+  if (sort && !validSortMap[sort]) {
+    return fail(res, `Invalid sort parameter. Allowed values: ${Object.keys(validSortMap).join(", ")}`, 400);
+  }
+
+  const validGroupBy = ["status", "destination"];
+  if (groupBy && !validGroupBy.includes(String(groupBy).toLowerCase())) {
+    return fail(res, `Invalid groupBy parameter. Allowed values: ${validGroupBy.join(", ")}`, 400);
+  }
+
+  const pageNum = parseInt(page);
+  const limitNum = parseInt(limit);
+  if (isNaN(pageNum) || pageNum < 1) {
+    return fail(res, "Invalid page parameter. Must be an integer >= 1.", 400);
+  }
+  if (isNaN(limitNum) || limitNum < 1 || limitNum > 50) {
+    return fail(res, "Invalid limit parameter. Must be between 1 and 50.", 400);
+  }
+
+  if (minBudget !== undefined) {
+    const minB = parseFloat(minBudget);
+    if (isNaN(minB) || minB < 0) return fail(res, "Invalid minBudget. Must be >= 0.", 400);
+  }
+  if (maxBudget !== undefined) {
+    const maxB = parseFloat(maxBudget);
+    if (isNaN(maxB) || maxB < 0) return fail(res, "Invalid maxBudget. Must be >= 0.", 400);
+  }
+  if (minBudget !== undefined && maxBudget !== undefined) {
+    if (parseFloat(maxBudget) < parseFloat(minBudget)) {
+      return fail(res, "maxBudget cannot be less than minBudget.", 400);
+    }
+  }
+
+  if (startDate && isNaN(new Date(startDate).getTime())) {
+    return fail(res, "Invalid startDate parameter.", 400);
+  }
+  if (endDate && isNaN(new Date(endDate).getTime())) {
+    return fail(res, "Invalid endDate parameter.", 400);
+  }
+  if (startDate && endDate && new Date(endDate) < new Date(startDate)) {
+    return fail(res, "endDate cannot be before startDate.", 400);
+  }
+
+  // 2. Build Where Clause
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+  const todayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+
+  const where = { userId };
+
+  if (search?.trim()) {
+    const s = search.trim();
+    where.OR = [
+      { title: { contains: s, mode: "insensitive" } },
+      { description: { contains: s, mode: "insensitive" } },
+      {
+        tripDestinations: {
+          some: {
+            destination: {
+              OR: [
+                { name: { contains: s, mode: "insensitive" } },
+                { city: { contains: s, mode: "insensitive" } },
+                { country: { contains: s, mode: "insensitive" } },
+              ],
+            },
+          },
+        },
+      },
+    ];
+  }
+
+  if (destinationId) {
+    const dId = parseInt(destinationId);
+    if (isNaN(dId)) return fail(res, "Invalid destinationId.", 400);
+    where.tripDestinations = { some: { destinationId: dId } };
+  }
+
+  if (minBudget !== undefined || maxBudget !== undefined) {
+    where.budget = {
+      ...(minBudget !== undefined && { gte: parseFloat(minBudget) }),
+      ...(maxBudget !== undefined && { lte: parseFloat(maxBudget) }),
+    };
+  }
+
+  if (startDate || endDate) {
+    if (startDate) where.startDate = { gte: new Date(startDate) };
+    if (endDate) where.endDate = { ...(where.endDate || {}), lte: new Date(endDate) };
+  }
+
+  if (status) {
+    const normalizedStatus = String(status).toLowerCase();
+    if (normalizedStatus === "ongoing") {
+      where.startDate = { ...(where.startDate || {}), lte: todayEnd };
+      where.endDate = { ...(where.endDate || {}), gte: todayStart };
+      where.status = { not: "CANCELLED" };
+    } else if (normalizedStatus === "upcoming") {
+      where.startDate = { ...(where.startDate || {}), gt: todayEnd };
+      where.status = { not: "CANCELLED" };
+    } else if (normalizedStatus === "completed") {
+      where.OR = [
+        { endDate: { lt: todayStart } },
+        { status: "COMPLETED" },
+      ];
+      where.status = { not: "CANCELLED" };
+    } else if (normalizedStatus === "cancelled") {
+      where.status = "CANCELLED";
+    }
+  }
+
+  const orderBy = validSortMap[sort] || { startDate: "asc" };
 
   try {
-    const trips = await prisma.trip.findMany({
-      where: { userId },
-      include: tripInclude,
-      orderBy: { createdAt: "desc" },
-    });
-    return ok(res, trips, "Your trips fetched successfully.");
+    // 3. Query Trips & Summary Counts
+    const skip = (pageNum - 1) * limitNum;
+    const take = limitNum;
+
+    const [trips, totalMatching, allUserTrips] = await Promise.all([
+      prisma.trip.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        include: {
+          tripDestinations: {
+            include: {
+              destination: {
+                select: { id: true, name: true, city: true, country: true, image: true },
+              },
+            },
+            orderBy: { order: "asc" },
+          },
+          _count: {
+            select: { tripDestinations: true, tripActivities: true, sections: true },
+          },
+        },
+      }),
+      prisma.trip.count({ where }),
+      prisma.trip.findMany({
+        where: { userId },
+        select: { id: true, startDate: true, endDate: true, status: true },
+      }),
+    ]);
+
+    // Format cards
+    const cards = trips.map((t) => formatTripCard(t, todayStart, todayEnd));
+
+    // Calculate user's overall summary counts
+    let ongoingCount = 0;
+    let upcomingCount = 0;
+    let completedCount = 0;
+    for (const t of allUserTrips) {
+      if (t.status === "CANCELLED") continue;
+      if (t.status === "COMPLETED" || new Date(t.endDate) < todayStart) completedCount++;
+      else if (new Date(t.startDate) <= todayEnd && new Date(t.endDate) >= todayStart) ongoingCount++;
+      else upcomingCount++;
+    }
+
+    // Grouping
+    let groupedData;
+    if (String(groupBy).toLowerCase() === "destination") {
+      groupedData = {};
+      for (const c of cards) {
+        const destKey = c.mainDestination?.name || "Other";
+        if (!groupedData[destKey]) groupedData[destKey] = [];
+        groupedData[destKey].push(c);
+      }
+    } else {
+      // Default: status grouping
+      groupedData = {
+        ongoing: cards.filter((c) => c.tripStatus === "ongoing"),
+        upcoming: cards.filter((c) => c.tripStatus === "upcoming"),
+        completed: cards.filter((c) => c.tripStatus === "completed"),
+      };
+      if (cards.some((c) => c.tripStatus === "cancelled")) {
+        groupedData.cancelled = cards.filter((c) => c.tripStatus === "cancelled");
+      }
+    }
+
+    return ok(
+      res,
+      groupedData,
+      "User trips fetched successfully.",
+      200,
+      {
+        summary: {
+          ongoingCount,
+          upcomingCount,
+          completedCount,
+          totalCount: allUserTrips.length,
+        },
+        pagination: {
+          page: pageNum,
+          limit: limitNum,
+          total: totalMatching,
+          totalPages: Math.ceil(totalMatching / limitNum) || 1,
+        },
+      }
+    );
   } catch (e) {
-    console.error("getMyTrips error:", e);
+    console.error("getUserTrips error:", e);
     return fail(res, "Internal server error.");
   }
 };
 
 // ─────────────────────────────────────────────
-// GET /api/trips/previous
+// GET /api/trips/ongoing
+// ─────────────────────────────────────────────
+export const getOngoingTrips = async (req, res) => {
+  req.query.status = "ongoing";
+  req.query.sort = req.query.sort || "start_date_asc";
+  return getUserTrips(req, res);
+};
+
+// ─────────────────────────────────────────────
+// GET /api/trips/upcoming
+// ─────────────────────────────────────────────
+export const getUpcomingTrips = async (req, res) => {
+  req.query.status = "upcoming";
+  req.query.sort = req.query.sort || "start_date_asc";
+  return getUserTrips(req, res);
+};
+
+// ─────────────────────────────────────────────
+// GET /api/trips/completed
+// ─────────────────────────────────────────────
+export const getCompletedTrips = async (req, res) => {
+  req.query.status = "completed";
+  req.query.sort = req.query.sort || "end_date_desc";
+  return getUserTrips(req, res);
+};
+
+// ─────────────────────────────────────────────
+// GET /api/trips/my (Legacy alias)
+// ─────────────────────────────────────────────
+export const getMyTrips = async (req, res) => {
+  return getUserTrips(req, res);
+};
+
+// ─────────────────────────────────────────────
+// GET /api/trips/previous (Legacy alias)
 // ─────────────────────────────────────────────
 export const getPreviousTrips = async (req, res) => {
-  const userId = req.user.id;
-  const now = new Date();
-
-  try {
-    const trips = await prisma.trip.findMany({
-      where: {
-        userId,
-        OR: [
-          { status: "COMPLETED" },
-          { status: "CANCELLED" },
-          { endDate: { lt: now } },
-        ],
-      },
-      include: tripInclude,
-      orderBy: { endDate: "desc" },
-    });
-    return ok(res, trips, "Previous trips fetched successfully.");
-  } catch (e) {
-    console.error("getPreviousTrips error:", e);
-    return fail(res, "Internal server error.");
-  }
+  req.query.status = "completed";
+  return getUserTrips(req, res);
 };
 
 // ─────────────────────────────────────────────

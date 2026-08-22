@@ -1,0 +1,1001 @@
+DestinationID,Name,State,Type,Popularity,BestTimeToVisit,HotelName,HotelPricePerNight
+1,Taj Mahal,Uttar Pradesh,Historical,8.691906258695031,Nov-Feb,Mughal View Resort,2258
+2,Goa Beaches,Goa,Beach,8.605031858363876,Nov-Mar,Goa Beach Resort,5446
+3,Jaipur City,Rajasthan,City,9.225372007612826,Oct-Mar,Jaipur Grand Hotel,2042
+4,Kerala Backwaters,Kerala,Nature,7.9773855361057935,Sep-Mar,Kerala Nature Retreat,4790
+5,Leh Ladakh,Jammu and Kashmir,Adventure,8.399821878316247,Apr-Jun,Himalayan View Resort,3563
+6,Taj Mahal,Uttar Pradesh,Historical,7.6489495441529245,Nov-Feb,Taj Heritage Hotel,1728
+7,Goa Beaches,Goa,Beach,9.14506834197403,Nov-Mar,Ocean View Goa Hotel,5095
+8,Jaipur City,Rajasthan,City,9.4587045393854,Oct-Mar,Pink City Heritage Hotel,2719
+9,Kerala Backwaters,Kerala,Nature,9.260450137338132,Sep-Mar,Kerala Nature Retreat,3446
+10,Leh Ladakh,Jammu and Kashmir,Adventure,8.811952081678728,Apr-Jun,Snow Peak Resort,2505
+11,Taj Mahal,Uttar Pradesh,Historical,8.17770928252728,Nov-Feb,Mughal View Resort,1967
+12,Goa Beaches,Goa,Beach,8.084317505906522,Nov-Mar,Ocean View Goa Hotel,4255
+13,Jaipur City,Rajasthan,City,9.114721643188815,Oct-Mar,Royal Rajasthan Palace,1874
+14,Kerala Backwaters,Kerala,Nature,8.551426230833268,Sep-Mar,Kerala Nature Retreat,2203
+15,Leh Ladakh,Jammu and Kashmir,Adventure,9.297389086740504,Apr-Jun,Kashmir Valley Hotel,4370
+16,Taj Mahal,Uttar Pradesh,Historical,8.337332881983857,Nov-Feb,Taj Heritage Hotel,2145
+17,Goa Beaches,Goa,Beach,7.524150401549511,Nov-Mar,Palm Paradise Resort,2617
+18,Jaipur City,Rajasthan,City,8.332572923728481,Oct-Mar,Pink City Heritage Hotel,3429
+19,Kerala Backwaters,Kerala,Nature,9.01709023649701,Sep-Mar,Coconut Grove Hotel,4751
+20,Leh Ladakh,Jammu and Kashmir,Adventure,8.930902395039807,Apr-Jun,Kashmir Valley Hotel,4521
+21,Taj Mahal,Uttar Pradesh,Historical,9.321865627407217,Nov-Feb,Taj Heritage Hotel,2446
+22,Goa Beaches,Goa,Beach,7.745073501266791,Nov-Mar,Goa Beach Resort,5121
+23,Jaipur City,Rajasthan,City,7.883349652185746,Oct-Mar,Pink City Heritage Hotel,3264
+24,Kerala Backwaters,Kerala,Nature,9.182423104129008,Sep-Mar,Coconut Grove Hotel,2393
+25,Leh Ladakh,Jammu and Kashmir,Adventure,9.416526131108329,Apr-Jun,Himalayan View Resort,3346
+26,Taj Mahal,Uttar Pradesh,Historical,9.088205553232354,Nov-Feb,Taj Heritage Hotel,2915
+27,Goa Beaches,Goa,Beach,7.504499933755479,Nov-Mar,Goa Beach Resort,5597
+28,Jaipur City,Rajasthan,City,8.471855314612888,Oct-Mar,Jaipur Grand Hotel,3258
+29,Kerala Backwaters,Kerala,Nature,8.320514389999829,Sep-Mar,Kerala Nature Retreat,4420
+30,Leh Ladakh,Jammu and Kashmir,Adventure,7.930637906720852,Apr-Jun,Snow Peak Resort,5871
+31,Taj Mahal,Uttar Pradesh,Historical,8.534267493855534,Nov-Feb,Agra Palace Hotel,3168
+32,Goa Beaches,Goa,Beach,7.8063301955187105,Nov-Mar,Ocean View Goa Hotel,4873
+33,Jaipur City,Rajasthan,City,7.684440449007848,Oct-Mar,Pink City Heritage Hotel,3233
+34,Kerala Backwaters,Kerala,Nature,8.206055639263237,Sep-Mar,Coconut Grove Hotel,3341
+35,Leh Ladakh,Jammu and Kashmir,Adventure,8.115627955366532,Apr-Jun,Snow Peak Resort,5383
+36,Taj Mahal,Uttar Pradesh,Historical,8.152769658316458,Nov-Feb,Agra Palace Hotel,3310
+37,Goa Beaches,Goa,Beach,8.874757885859394,Nov-Mar,Ocean View Goa Hotel,3223
+38,Jaipur City,Rajasthan,City,9.458687607787096,Oct-Mar,Jaipur Grand Hotel,2024
+39,Kerala Backwaters,Kerala,Nature,9.276722027226734,Sep-Mar,Kerala Backwater Resort,2731
+40,Leh Ladakh,Jammu and Kashmir,Adventure,9.451473447708324,Apr-Jun,Snow Peak Resort,2612
+41,Taj Mahal,Uttar Pradesh,Historical,9.45205627034071,Nov-Feb,Taj Heritage Hotel,3687
+42,Goa Beaches,Goa,Beach,8.854828172623169,Nov-Mar,Ocean View Goa Hotel,3058
+43,Jaipur City,Rajasthan,City,8.935833780679161,Oct-Mar,Jaipur Grand Hotel,3848
+44,Kerala Backwaters,Kerala,Nature,8.844208014043545,Sep-Mar,Kerala Backwater Resort,4337
+45,Leh Ladakh,Jammu and Kashmir,Adventure,8.987615299121257,Apr-Jun,Himalayan View Resort,3153
+46,Taj Mahal,Uttar Pradesh,Historical,8.66663306287539,Nov-Feb,Mughal View Resort,1819
+47,Goa Beaches,Goa,Beach,7.726020724706562,Nov-Mar,Palm Paradise Resort,4073
+48,Jaipur City,Rajasthan,City,9.072662351480414,Oct-Mar,Royal Rajasthan Palace,3628
+49,Kerala Backwaters,Kerala,Nature,8.0159728308643,Sep-Mar,Coconut Grove Hotel,4117
+50,Leh Ladakh,Jammu and Kashmir,Adventure,8.18047732584072,Apr-Jun,Kashmir Valley Hotel,2638
+51,Taj Mahal,Uttar Pradesh,Historical,8.329362264700663,Nov-Feb,Agra Palace Hotel,3526
+52,Goa Beaches,Goa,Beach,8.298754590990846,Nov-Mar,Goa Beach Resort,4806
+53,Jaipur City,Rajasthan,City,8.399568313158765,Oct-Mar,Pink City Heritage Hotel,2701
+54,Kerala Backwaters,Kerala,Nature,8.116931496368345,Sep-Mar,Kerala Backwater Resort,2889
+55,Leh Ladakh,Jammu and Kashmir,Adventure,7.560629646730556,Apr-Jun,Kashmir Valley Hotel,4539
+56,Taj Mahal,Uttar Pradesh,Historical,8.77933917498307,Nov-Feb,Mughal View Resort,1509
+57,Goa Beaches,Goa,Beach,8.061326287087322,Nov-Mar,Ocean View Goa Hotel,2760
+58,Jaipur City,Rajasthan,City,8.648115222412239,Oct-Mar,Royal Rajasthan Palace,3742
+59,Kerala Backwaters,Kerala,Nature,9.490122865222292,Sep-Mar,Kerala Nature Retreat,3873
+60,Leh Ladakh,Jammu and Kashmir,Adventure,8.090294276209098,Apr-Jun,Snow Peak Resort,4719
+61,Taj Mahal,Uttar Pradesh,Historical,9.255411351531992,Nov-Feb,Agra Palace Hotel,3560
+62,Goa Beaches,Goa,Beach,9.379786903532915,Nov-Mar,Goa Beach Resort,3691
+63,Jaipur City,Rajasthan,City,9.202094230781736,Oct-Mar,Pink City Heritage Hotel,3419
+64,Kerala Backwaters,Kerala,Nature,7.995381521960635,Sep-Mar,Coconut Grove Hotel,2520
+65,Leh Ladakh,Jammu and Kashmir,Adventure,8.264285623199319,Apr-Jun,Kashmir Valley Hotel,3842
+66,Taj Mahal,Uttar Pradesh,Historical,8.657185750902032,Nov-Feb,Agra Palace Hotel,3136
+67,Goa Beaches,Goa,Beach,7.593468221686345,Nov-Mar,Palm Paradise Resort,4876
+68,Jaipur City,Rajasthan,City,7.599766915318256,Oct-Mar,Pink City Heritage Hotel,3794
+69,Kerala Backwaters,Kerala,Nature,9.251449511759905,Sep-Mar,Coconut Grove Hotel,5158
+70,Leh Ladakh,Jammu and Kashmir,Adventure,8.302199786049163,Apr-Jun,Himalayan View Resort,4443
+71,Taj Mahal,Uttar Pradesh,Historical,7.918856059125499,Nov-Feb,Mughal View Resort,3538
+72,Goa Beaches,Goa,Beach,9.49812898326928,Nov-Mar,Palm Paradise Resort,5990
+73,Jaipur City,Rajasthan,City,9.365362186929548,Oct-Mar,Pink City Heritage Hotel,2918
+74,Kerala Backwaters,Kerala,Nature,8.61852560875922,Sep-Mar,Coconut Grove Hotel,3804
+75,Leh Ladakh,Jammu and Kashmir,Adventure,8.051674304536373,Apr-Jun,Kashmir Valley Hotel,4865
+76,Taj Mahal,Uttar Pradesh,Historical,9.019776840711156,Nov-Feb,Agra Palace Hotel,1735
+77,Goa Beaches,Goa,Beach,8.72436552320658,Nov-Mar,Palm Paradise Resort,4469
+78,Jaipur City,Rajasthan,City,8.697245496090385,Oct-Mar,Jaipur Grand Hotel,2133
+79,Kerala Backwaters,Kerala,Nature,8.48262944456915,Sep-Mar,Kerala Nature Retreat,4108
+80,Leh Ladakh,Jammu and Kashmir,Adventure,9.167168852535996,Apr-Jun,Kashmir Valley Hotel,2875
+81,Taj Mahal,Uttar Pradesh,Historical,8.113730398100675,Nov-Feb,Mughal View Resort,2660
+82,Goa Beaches,Goa,Beach,8.067416540924038,Nov-Mar,Goa Beach Resort,5135
+83,Jaipur City,Rajasthan,City,9.25520276869782,Oct-Mar,Pink City Heritage Hotel,3370
+84,Kerala Backwaters,Kerala,Nature,9.33374854303011,Sep-Mar,Kerala Backwater Resort,4760
+85,Leh Ladakh,Jammu and Kashmir,Adventure,7.877439168200071,Apr-Jun,Himalayan View Resort,3819
+86,Taj Mahal,Uttar Pradesh,Historical,8.093807911279,Nov-Feb,Agra Palace Hotel,3355
+87,Goa Beaches,Goa,Beach,8.322799778823294,Nov-Mar,Ocean View Goa Hotel,3872
+88,Jaipur City,Rajasthan,City,9.018383603515831,Oct-Mar,Royal Rajasthan Palace,2672
+89,Kerala Backwaters,Kerala,Nature,8.686130970942902,Sep-Mar,Coconut Grove Hotel,3452
+90,Leh Ladakh,Jammu and Kashmir,Adventure,7.864848872360961,Apr-Jun,Himalayan View Resort,4817
+91,Taj Mahal,Uttar Pradesh,Historical,8.775155892425978,Nov-Feb,Taj Heritage Hotel,3351
+92,Goa Beaches,Goa,Beach,7.842354721882594,Nov-Mar,Goa Beach Resort,5345
+93,Jaipur City,Rajasthan,City,9.116298424696906,Oct-Mar,Royal Rajasthan Palace,3114
+94,Kerala Backwaters,Kerala,Nature,7.678657960181018,Sep-Mar,Kerala Nature Retreat,2924
+95,Leh Ladakh,Jammu and Kashmir,Adventure,8.18716561676901,Apr-Jun,Himalayan View Resort,5736
+96,Taj Mahal,Uttar Pradesh,Historical,8.984287702263758,Nov-Feb,Taj Heritage Hotel,3552
+97,Goa Beaches,Goa,Beach,8.882535315140167,Nov-Mar,Goa Beach Resort,5398
+98,Jaipur City,Rajasthan,City,7.511446246886857,Oct-Mar,Jaipur Grand Hotel,1877
+99,Kerala Backwaters,Kerala,Nature,8.154277486295694,Sep-Mar,Kerala Backwater Resort,4821
+100,Leh Ladakh,Jammu and Kashmir,Adventure,8.55062227154497,Apr-Jun,Himalayan View Resort,2631
+101,Taj Mahal,Uttar Pradesh,Historical,9.35787687156371,Nov-Feb,Mughal View Resort,2100
+102,Goa Beaches,Goa,Beach,7.901206474541698,Nov-Mar,Ocean View Goa Hotel,4272
+103,Jaipur City,Rajasthan,City,9.293866271159713,Oct-Mar,Jaipur Grand Hotel,2865
+104,Kerala Backwaters,Kerala,Nature,9.032056856576263,Sep-Mar,Kerala Backwater Resort,4336
+105,Leh Ladakh,Jammu and Kashmir,Adventure,9.367695620218187,Apr-Jun,Snow Peak Resort,4949
+106,Taj Mahal,Uttar Pradesh,Historical,8.494823560399388,Nov-Feb,Mughal View Resort,3843
+107,Goa Beaches,Goa,Beach,8.670099991881528,Nov-Mar,Goa Beach Resort,4363
+108,Jaipur City,Rajasthan,City,8.180179995253692,Oct-Mar,Jaipur Grand Hotel,3118
+109,Kerala Backwaters,Kerala,Nature,8.024075275103758,Sep-Mar,Kerala Backwater Resort,2815
+110,Leh Ladakh,Jammu and Kashmir,Adventure,8.885980061188206,Apr-Jun,Kashmir Valley Hotel,6097
+111,Taj Mahal,Uttar Pradesh,Historical,8.979764648904338,Nov-Feb,Mughal View Resort,3969
+112,Goa Beaches,Goa,Beach,8.196505600821453,Nov-Mar,Palm Paradise Resort,4388
+113,Jaipur City,Rajasthan,City,7.576534512918616,Oct-Mar,Royal Rajasthan Palace,2846
+114,Kerala Backwaters,Kerala,Nature,9.46714704036077,Sep-Mar,Kerala Nature Retreat,2774
+115,Leh Ladakh,Jammu and Kashmir,Adventure,8.717346793179837,Apr-Jun,Himalayan View Resort,4690
+116,Taj Mahal,Uttar Pradesh,Historical,8.636073233725135,Nov-Feb,Agra Palace Hotel,2492
+117,Goa Beaches,Goa,Beach,9.21979801445382,Nov-Mar,Goa Beach Resort,5212
+118,Jaipur City,Rajasthan,City,7.69898565359074,Oct-Mar,Jaipur Grand Hotel,3992
+119,Kerala Backwaters,Kerala,Nature,8.953643159740016,Sep-Mar,Kerala Nature Retreat,3448
+120,Leh Ladakh,Jammu and Kashmir,Adventure,7.928950861748308,Apr-Jun,Kashmir Valley Hotel,5554
+121,Taj Mahal,Uttar Pradesh,Historical,8.624112218256297,Nov-Feb,Taj Heritage Hotel,2002
+122,Goa Beaches,Goa,Beach,7.791202932648026,Nov-Mar,Ocean View Goa Hotel,4497
+123,Jaipur City,Rajasthan,City,9.31595003961975,Oct-Mar,Pink City Heritage Hotel,2620
+124,Kerala Backwaters,Kerala,Nature,7.921320004258767,Sep-Mar,Kerala Nature Retreat,4351
+125,Leh Ladakh,Jammu and Kashmir,Adventure,8.13647203127079,Apr-Jun,Snow Peak Resort,5610
+126,Taj Mahal,Uttar Pradesh,Historical,8.271757062443388,Nov-Feb,Taj Heritage Hotel,3470
+127,Goa Beaches,Goa,Beach,8.132745077467629,Nov-Mar,Ocean View Goa Hotel,2697
+128,Jaipur City,Rajasthan,City,7.513479447324053,Oct-Mar,Royal Rajasthan Palace,3469
+129,Kerala Backwaters,Kerala,Nature,9.066328357904666,Sep-Mar,Kerala Nature Retreat,4826
+130,Leh Ladakh,Jammu and Kashmir,Adventure,9.46063445778344,Apr-Jun,Kashmir Valley Hotel,4938
+131,Taj Mahal,Uttar Pradesh,Historical,8.853926858989041,Nov-Feb,Mughal View Resort,2702
+132,Goa Beaches,Goa,Beach,8.188672007745929,Nov-Mar,Goa Beach Resort,5101
+133,Jaipur City,Rajasthan,City,7.813559346844389,Oct-Mar,Royal Rajasthan Palace,3271
+134,Kerala Backwaters,Kerala,Nature,7.743269418238725,Sep-Mar,Coconut Grove Hotel,5286
+135,Leh Ladakh,Jammu and Kashmir,Adventure,9.398122784522716,Apr-Jun,Snow Peak Resort,4146
+136,Taj Mahal,Uttar Pradesh,Historical,8.15356207947505,Nov-Feb,Mughal View Resort,3192
+137,Goa Beaches,Goa,Beach,8.863570277264008,Nov-Mar,Palm Paradise Resort,3812
+138,Jaipur City,Rajasthan,City,9.195643436953048,Oct-Mar,Jaipur Grand Hotel,3835
+139,Kerala Backwaters,Kerala,Nature,8.426322913287258,Sep-Mar,Kerala Nature Retreat,2677
+140,Leh Ladakh,Jammu and Kashmir,Adventure,8.907807740975244,Apr-Jun,Himalayan View Resort,3754
+141,Taj Mahal,Uttar Pradesh,Historical,7.618133331669091,Nov-Feb,Mughal View Resort,2422
+142,Goa Beaches,Goa,Beach,7.601039201109356,Nov-Mar,Ocean View Goa Hotel,2919
+143,Jaipur City,Rajasthan,City,8.299735698712732,Oct-Mar,Pink City Heritage Hotel,4004
+144,Kerala Backwaters,Kerala,Nature,7.8305412284530735,Sep-Mar,Coconut Grove Hotel,4797
+145,Leh Ladakh,Jammu and Kashmir,Adventure,9.388011428887994,Apr-Jun,Himalayan View Resort,6012
+146,Taj Mahal,Uttar Pradesh,Historical,8.373844119971205,Nov-Feb,Mughal View Resort,2620
+147,Goa Beaches,Goa,Beach,7.770934466715671,Nov-Mar,Ocean View Goa Hotel,5568
+148,Jaipur City,Rajasthan,City,7.69274109154765,Oct-Mar,Jaipur Grand Hotel,2750
+149,Kerala Backwaters,Kerala,Nature,7.812523860815096,Sep-Mar,Kerala Backwater Resort,4536
+150,Leh Ladakh,Jammu and Kashmir,Adventure,8.863872329774836,Apr-Jun,Himalayan View Resort,3777
+151,Taj Mahal,Uttar Pradesh,Historical,9.450175079123191,Nov-Feb,Agra Palace Hotel,3743
+152,Goa Beaches,Goa,Beach,9.000248319359416,Nov-Mar,Goa Beach Resort,5145
+153,Jaipur City,Rajasthan,City,9.072635913777948,Oct-Mar,Jaipur Grand Hotel,3657
+154,Kerala Backwaters,Kerala,Nature,9.48479754719289,Sep-Mar,Kerala Nature Retreat,2716
+155,Leh Ladakh,Jammu and Kashmir,Adventure,7.933121408559026,Apr-Jun,Himalayan View Resort,4158
+156,Taj Mahal,Uttar Pradesh,Historical,8.96758311752555,Nov-Feb,Mughal View Resort,3365
+157,Goa Beaches,Goa,Beach,7.607643334351276,Nov-Mar,Ocean View Goa Hotel,5412
+158,Jaipur City,Rajasthan,City,8.533439718586166,Oct-Mar,Royal Rajasthan Palace,2941
+159,Kerala Backwaters,Kerala,Nature,8.017566360422618,Sep-Mar,Kerala Backwater Resort,5053
+160,Leh Ladakh,Jammu and Kashmir,Adventure,8.0366846404497,Apr-Jun,Snow Peak Resort,4432
+161,Taj Mahal,Uttar Pradesh,Historical,7.738547101644033,Nov-Feb,Mughal View Resort,2314
+162,Goa Beaches,Goa,Beach,7.5447704698175055,Nov-Mar,Ocean View Goa Hotel,4775
+163,Jaipur City,Rajasthan,City,8.168780568830128,Oct-Mar,Pink City Heritage Hotel,3700
+164,Kerala Backwaters,Kerala,Nature,7.81836693407545,Sep-Mar,Coconut Grove Hotel,4463
+165,Leh Ladakh,Jammu and Kashmir,Adventure,7.554650204523121,Apr-Jun,Kashmir Valley Hotel,5495
+166,Taj Mahal,Uttar Pradesh,Historical,7.967520190746358,Nov-Feb,Taj Heritage Hotel,3562
+167,Goa Beaches,Goa,Beach,9.1852981894065,Nov-Mar,Palm Paradise Resort,5728
+168,Jaipur City,Rajasthan,City,7.634504263080543,Oct-Mar,Royal Rajasthan Palace,3894
+169,Kerala Backwaters,Kerala,Nature,7.686748942635202,Sep-Mar,Kerala Backwater Resort,4571
+170,Leh Ladakh,Jammu and Kashmir,Adventure,7.848982805962368,Apr-Jun,Kashmir Valley Hotel,5391
+171,Taj Mahal,Uttar Pradesh,Historical,7.721043377213922,Nov-Feb,Agra Palace Hotel,1629
+172,Goa Beaches,Goa,Beach,9.486279939461564,Nov-Mar,Palm Paradise Resort,5982
+173,Jaipur City,Rajasthan,City,7.722252209890692,Oct-Mar,Jaipur Grand Hotel,1894
+174,Kerala Backwaters,Kerala,Nature,8.360692114959477,Sep-Mar,Coconut Grove Hotel,4874
+175,Leh Ladakh,Jammu and Kashmir,Adventure,8.866219313947683,Apr-Jun,Snow Peak Resort,5302
+176,Taj Mahal,Uttar Pradesh,Historical,8.165093921735247,Nov-Feb,Taj Heritage Hotel,3455
+177,Goa Beaches,Goa,Beach,9.446896779006565,Nov-Mar,Ocean View Goa Hotel,5863
+178,Jaipur City,Rajasthan,City,8.544351694378236,Oct-Mar,Pink City Heritage Hotel,2593
+179,Kerala Backwaters,Kerala,Nature,8.299149270820505,Sep-Mar,Kerala Backwater Resort,4034
+180,Leh Ladakh,Jammu and Kashmir,Adventure,8.091363134430685,Apr-Jun,Himalayan View Resort,5854
+181,Taj Mahal,Uttar Pradesh,Historical,9.236840653145723,Nov-Feb,Taj Heritage Hotel,3616
+182,Goa Beaches,Goa,Beach,8.332585021952074,Nov-Mar,Ocean View Goa Hotel,4183
+183,Jaipur City,Rajasthan,City,8.872498743885908,Oct-Mar,Pink City Heritage Hotel,1810
+184,Kerala Backwaters,Kerala,Nature,7.816345212118861,Sep-Mar,Kerala Backwater Resort,4065
+185,Leh Ladakh,Jammu and Kashmir,Adventure,8.242881342868039,Apr-Jun,Himalayan View Resort,5419
+186,Taj Mahal,Uttar Pradesh,Historical,8.118994457168691,Nov-Feb,Taj Heritage Hotel,2211
+187,Goa Beaches,Goa,Beach,8.843079930515232,Nov-Mar,Ocean View Goa Hotel,4570
+188,Jaipur City,Rajasthan,City,8.202625978518912,Oct-Mar,Jaipur Grand Hotel,2614
+189,Kerala Backwaters,Kerala,Nature,8.649611762507414,Sep-Mar,Coconut Grove Hotel,2545
+190,Leh Ladakh,Jammu and Kashmir,Adventure,9.150588626183191,Apr-Jun,Snow Peak Resort,4849
+191,Taj Mahal,Uttar Pradesh,Historical,8.072256876114661,Nov-Feb,Taj Heritage Hotel,1862
+192,Goa Beaches,Goa,Beach,8.419905788920559,Nov-Mar,Palm Paradise Resort,4943
+193,Jaipur City,Rajasthan,City,7.672819736516948,Oct-Mar,Royal Rajasthan Palace,4065
+194,Kerala Backwaters,Kerala,Nature,7.764994888805412,Sep-Mar,Kerala Backwater Resort,4388
+195,Leh Ladakh,Jammu and Kashmir,Adventure,9.09297245471366,Apr-Jun,Snow Peak Resort,6187
+196,Taj Mahal,Uttar Pradesh,Historical,8.393643741715653,Nov-Feb,Agra Palace Hotel,2484
+197,Goa Beaches,Goa,Beach,9.433855269535494,Nov-Mar,Ocean View Goa Hotel,5540
+198,Jaipur City,Rajasthan,City,8.25589320047637,Oct-Mar,Jaipur Grand Hotel,3439
+199,Kerala Backwaters,Kerala,Nature,9.112874173872637,Sep-Mar,Coconut Grove Hotel,3027
+200,Leh Ladakh,Jammu and Kashmir,Adventure,7.77167518972464,Apr-Jun,Himalayan View Resort,5230
+201,Taj Mahal,Uttar Pradesh,Historical,7.653509093644129,Nov-Feb,Taj Heritage Hotel,1855
+202,Goa Beaches,Goa,Beach,8.24671865641993,Nov-Mar,Palm Paradise Resort,5555
+203,Jaipur City,Rajasthan,City,9.04284018561824,Oct-Mar,Royal Rajasthan Palace,3147
+204,Kerala Backwaters,Kerala,Nature,7.96348370355229,Sep-Mar,Coconut Grove Hotel,5404
+205,Leh Ladakh,Jammu and Kashmir,Adventure,8.456754675076878,Apr-Jun,Kashmir Valley Hotel,5435
+206,Taj Mahal,Uttar Pradesh,Historical,9.282226276103572,Nov-Feb,Mughal View Resort,3363
+207,Goa Beaches,Goa,Beach,8.560557283746103,Nov-Mar,Palm Paradise Resort,2626
+208,Jaipur City,Rajasthan,City,9.232664943302456,Oct-Mar,Jaipur Grand Hotel,2403
+209,Kerala Backwaters,Kerala,Nature,7.650543289908463,Sep-Mar,Kerala Backwater Resort,4128
+210,Leh Ladakh,Jammu and Kashmir,Adventure,8.277611273067814,Apr-Jun,Himalayan View Resort,3513
+211,Taj Mahal,Uttar Pradesh,Historical,8.188261257930963,Nov-Feb,Taj Heritage Hotel,1550
+212,Goa Beaches,Goa,Beach,9.149424673009314,Nov-Mar,Goa Beach Resort,5600
+213,Jaipur City,Rajasthan,City,7.971646077114067,Oct-Mar,Jaipur Grand Hotel,3230
+214,Kerala Backwaters,Kerala,Nature,8.37824470003113,Sep-Mar,Kerala Backwater Resort,3992
+215,Leh Ladakh,Jammu and Kashmir,Adventure,7.584036611041155,Apr-Jun,Kashmir Valley Hotel,5361
+216,Taj Mahal,Uttar Pradesh,Historical,9.36720219996661,Nov-Feb,Agra Palace Hotel,3136
+217,Goa Beaches,Goa,Beach,9.14476464169103,Nov-Mar,Palm Paradise Resort,5976
+218,Jaipur City,Rajasthan,City,9.034168574407344,Oct-Mar,Jaipur Grand Hotel,3445
+219,Kerala Backwaters,Kerala,Nature,9.23761035529466,Sep-Mar,Kerala Backwater Resort,4667
+220,Leh Ladakh,Jammu and Kashmir,Adventure,8.869504608299943,Apr-Jun,Himalayan View Resort,3705
+221,Taj Mahal,Uttar Pradesh,Historical,8.719051821566694,Nov-Feb,Taj Heritage Hotel,3354
+222,Goa Beaches,Goa,Beach,8.240843057485613,Nov-Mar,Ocean View Goa Hotel,3066
+223,Jaipur City,Rajasthan,City,8.936949815863377,Oct-Mar,Pink City Heritage Hotel,4218
+224,Kerala Backwaters,Kerala,Nature,8.077912596148288,Sep-Mar,Coconut Grove Hotel,3135
+225,Leh Ladakh,Jammu and Kashmir,Adventure,8.793334588772431,Apr-Jun,Himalayan View Resort,4434
+226,Taj Mahal,Uttar Pradesh,Historical,7.721478393909334,Nov-Feb,Agra Palace Hotel,2832
+227,Goa Beaches,Goa,Beach,8.882153318904079,Nov-Mar,Palm Paradise Resort,5708
+228,Jaipur City,Rajasthan,City,8.534275498218907,Oct-Mar,Jaipur Grand Hotel,2001
+229,Kerala Backwaters,Kerala,Nature,7.603935909874509,Sep-Mar,Kerala Nature Retreat,4560
+230,Leh Ladakh,Jammu and Kashmir,Adventure,7.619039723254248,Apr-Jun,Snow Peak Resort,2616
+231,Taj Mahal,Uttar Pradesh,Historical,7.788256139986302,Nov-Feb,Mughal View Resort,2436
+232,Goa Beaches,Goa,Beach,8.789144742286863,Nov-Mar,Goa Beach Resort,3074
+233,Jaipur City,Rajasthan,City,7.782973981393143,Oct-Mar,Jaipur Grand Hotel,4091
+234,Kerala Backwaters,Kerala,Nature,9.420960540403104,Sep-Mar,Coconut Grove Hotel,2736
+235,Leh Ladakh,Jammu and Kashmir,Adventure,8.734064597506109,Apr-Jun,Himalayan View Resort,4125
+236,Taj Mahal,Uttar Pradesh,Historical,8.42477279242355,Nov-Feb,Agra Palace Hotel,3622
+237,Goa Beaches,Goa,Beach,8.160740974111713,Nov-Mar,Palm Paradise Resort,2885
+238,Jaipur City,Rajasthan,City,8.127785896913094,Oct-Mar,Pink City Heritage Hotel,2274
+239,Kerala Backwaters,Kerala,Nature,8.757659224866991,Sep-Mar,Kerala Nature Retreat,2617
+240,Leh Ladakh,Jammu and Kashmir,Adventure,8.51845220238507,Apr-Jun,Snow Peak Resort,4894
+241,Taj Mahal,Uttar Pradesh,Historical,7.668642704912232,Nov-Feb,Taj Heritage Hotel,2438
+242,Goa Beaches,Goa,Beach,9.164688152340853,Nov-Mar,Goa Beach Resort,3454
+243,Jaipur City,Rajasthan,City,9.068862539358657,Oct-Mar,Jaipur Grand Hotel,2675
+244,Kerala Backwaters,Kerala,Nature,9.011521245140806,Sep-Mar,Coconut Grove Hotel,2962
+245,Leh Ladakh,Jammu and Kashmir,Adventure,9.459953313645835,Apr-Jun,Himalayan View Resort,3702
+246,Taj Mahal,Uttar Pradesh,Historical,8.617311411386703,Nov-Feb,Mughal View Resort,2705
+247,Goa Beaches,Goa,Beach,9.153509849210488,Nov-Mar,Ocean View Goa Hotel,3163
+248,Jaipur City,Rajasthan,City,7.879027092891848,Oct-Mar,Jaipur Grand Hotel,1824
+249,Kerala Backwaters,Kerala,Nature,8.89428404394321,Sep-Mar,Coconut Grove Hotel,4190
+250,Leh Ladakh,Jammu and Kashmir,Adventure,9.151090722807776,Apr-Jun,Snow Peak Resort,3703
+251,Taj Mahal,Uttar Pradesh,Historical,8.041916757088895,Nov-Feb,Mughal View Resort,2209
+252,Goa Beaches,Goa,Beach,8.836459649194737,Nov-Mar,Ocean View Goa Hotel,4379
+253,Jaipur City,Rajasthan,City,8.125034098865065,Oct-Mar,Jaipur Grand Hotel,2984
+254,Kerala Backwaters,Kerala,Nature,9.143167495034348,Sep-Mar,Kerala Backwater Resort,4424
+255,Leh Ladakh,Jammu and Kashmir,Adventure,8.59789687012441,Apr-Jun,Himalayan View Resort,2784
+256,Taj Mahal,Uttar Pradesh,Historical,8.403655361533389,Nov-Feb,Mughal View Resort,1562
+257,Goa Beaches,Goa,Beach,8.284116199094758,Nov-Mar,Palm Paradise Resort,3502
+258,Jaipur City,Rajasthan,City,7.617165381372276,Oct-Mar,Royal Rajasthan Palace,2461
+259,Kerala Backwaters,Kerala,Nature,8.382675748307422,Sep-Mar,Kerala Nature Retreat,4913
+260,Leh Ladakh,Jammu and Kashmir,Adventure,7.917003558302456,Apr-Jun,Himalayan View Resort,4703
+261,Taj Mahal,Uttar Pradesh,Historical,8.083688761192684,Nov-Feb,Taj Heritage Hotel,2992
+262,Goa Beaches,Goa,Beach,7.758783397757156,Nov-Mar,Palm Paradise Resort,5620
+263,Jaipur City,Rajasthan,City,9.407835019184882,Oct-Mar,Jaipur Grand Hotel,2766
+264,Kerala Backwaters,Kerala,Nature,8.025088514803304,Sep-Mar,Kerala Nature Retreat,3048
+265,Leh Ladakh,Jammu and Kashmir,Adventure,9.1417227262193,Apr-Jun,Kashmir Valley Hotel,3607
+266,Taj Mahal,Uttar Pradesh,Historical,8.91877315803813,Nov-Feb,Agra Palace Hotel,2188
+267,Goa Beaches,Goa,Beach,8.813848708103913,Nov-Mar,Ocean View Goa Hotel,2647
+268,Jaipur City,Rajasthan,City,8.015626863328043,Oct-Mar,Jaipur Grand Hotel,2141
+269,Kerala Backwaters,Kerala,Nature,7.588087849193326,Sep-Mar,Coconut Grove Hotel,4723
+270,Leh Ladakh,Jammu and Kashmir,Adventure,8.434929744953086,Apr-Jun,Himalayan View Resort,3586
+271,Taj Mahal,Uttar Pradesh,Historical,9.23228996203718,Nov-Feb,Taj Heritage Hotel,3224
+272,Goa Beaches,Goa,Beach,7.935193696560209,Nov-Mar,Palm Paradise Resort,3883
+273,Jaipur City,Rajasthan,City,9.324373462793442,Oct-Mar,Royal Rajasthan Palace,4408
+274,Kerala Backwaters,Kerala,Nature,7.777024607207728,Sep-Mar,Coconut Grove Hotel,2526
+275,Leh Ladakh,Jammu and Kashmir,Adventure,8.388578037562013,Apr-Jun,Himalayan View Resort,4292
+276,Taj Mahal,Uttar Pradesh,Historical,7.591070676890291,Nov-Feb,Taj Heritage Hotel,3259
+277,Goa Beaches,Goa,Beach,8.694303252963497,Nov-Mar,Ocean View Goa Hotel,5712
+278,Jaipur City,Rajasthan,City,9.120385789350228,Oct-Mar,Jaipur Grand Hotel,2789
+279,Kerala Backwaters,Kerala,Nature,7.841206949727761,Sep-Mar,Kerala Backwater Resort,4462
+280,Leh Ladakh,Jammu and Kashmir,Adventure,7.639341731351649,Apr-Jun,Himalayan View Resort,4982
+281,Taj Mahal,Uttar Pradesh,Historical,9.43086446632471,Nov-Feb,Mughal View Resort,2451
+282,Goa Beaches,Goa,Beach,8.888987617087139,Nov-Mar,Ocean View Goa Hotel,3222
+283,Jaipur City,Rajasthan,City,8.219242611520933,Oct-Mar,Jaipur Grand Hotel,3879
+284,Kerala Backwaters,Kerala,Nature,9.01486652208098,Sep-Mar,Coconut Grove Hotel,4917
+285,Leh Ladakh,Jammu and Kashmir,Adventure,8.992391383757372,Apr-Jun,Himalayan View Resort,4832
+286,Taj Mahal,Uttar Pradesh,Historical,9.362001470283614,Nov-Feb,Mughal View Resort,1928
+287,Goa Beaches,Goa,Beach,9.171525350501778,Nov-Mar,Goa Beach Resort,4000
+288,Jaipur City,Rajasthan,City,8.1727822883656,Oct-Mar,Pink City Heritage Hotel,2085
+289,Kerala Backwaters,Kerala,Nature,7.844009444111711,Sep-Mar,Coconut Grove Hotel,5415
+290,Leh Ladakh,Jammu and Kashmir,Adventure,7.934186545996741,Apr-Jun,Snow Peak Resort,5995
+291,Taj Mahal,Uttar Pradesh,Historical,8.571800372009168,Nov-Feb,Agra Palace Hotel,3565
+292,Goa Beaches,Goa,Beach,8.259128922273915,Nov-Mar,Goa Beach Resort,3268
+293,Jaipur City,Rajasthan,City,7.534360802624437,Oct-Mar,Jaipur Grand Hotel,4437
+294,Kerala Backwaters,Kerala,Nature,8.553046939554307,Sep-Mar,Kerala Backwater Resort,3594
+295,Leh Ladakh,Jammu and Kashmir,Adventure,9.301807912303714,Apr-Jun,Himalayan View Resort,5746
+296,Taj Mahal,Uttar Pradesh,Historical,8.01345163279451,Nov-Feb,Agra Palace Hotel,1693
+297,Goa Beaches,Goa,Beach,7.633292996550987,Nov-Mar,Palm Paradise Resort,5049
+298,Jaipur City,Rajasthan,City,8.804695152197962,Oct-Mar,Pink City Heritage Hotel,2787
+299,Kerala Backwaters,Kerala,Nature,8.966364802325172,Sep-Mar,Coconut Grove Hotel,3336
+300,Leh Ladakh,Jammu and Kashmir,Adventure,7.799198881540521,Apr-Jun,Kashmir Valley Hotel,4661
+301,Taj Mahal,Uttar Pradesh,Historical,8.634308850859137,Nov-Feb,Mughal View Resort,3201
+302,Goa Beaches,Goa,Beach,7.64928107708147,Nov-Mar,Goa Beach Resort,3446
+303,Jaipur City,Rajasthan,City,9.356796584275807,Oct-Mar,Royal Rajasthan Palace,2630
+304,Kerala Backwaters,Kerala,Nature,8.61120828898768,Sep-Mar,Kerala Backwater Resort,4120
+305,Leh Ladakh,Jammu and Kashmir,Adventure,8.111872493591813,Apr-Jun,Himalayan View Resort,5835
+306,Taj Mahal,Uttar Pradesh,Historical,8.4480644643696,Nov-Feb,Agra Palace Hotel,1554
+307,Goa Beaches,Goa,Beach,8.41986035294417,Nov-Mar,Goa Beach Resort,3299
+308,Jaipur City,Rajasthan,City,8.122052827503532,Oct-Mar,Jaipur Grand Hotel,2577
+309,Kerala Backwaters,Kerala,Nature,8.122685722841448,Sep-Mar,Kerala Nature Retreat,3681
+310,Leh Ladakh,Jammu and Kashmir,Adventure,7.862071974081125,Apr-Jun,Himalayan View Resort,4401
+311,Taj Mahal,Uttar Pradesh,Historical,8.093952306204637,Nov-Feb,Taj Heritage Hotel,3709
+312,Goa Beaches,Goa,Beach,7.923067612961262,Nov-Mar,Ocean View Goa Hotel,5951
+313,Jaipur City,Rajasthan,City,8.160495549722198,Oct-Mar,Jaipur Grand Hotel,3934
+314,Kerala Backwaters,Kerala,Nature,7.923207093856658,Sep-Mar,Coconut Grove Hotel,2254
+315,Leh Ladakh,Jammu and Kashmir,Adventure,7.746686189763855,Apr-Jun,Snow Peak Resort,6047
+316,Taj Mahal,Uttar Pradesh,Historical,8.03328074273946,Nov-Feb,Agra Palace Hotel,3323
+317,Goa Beaches,Goa,Beach,8.61779577553025,Nov-Mar,Palm Paradise Resort,3701
+318,Jaipur City,Rajasthan,City,7.79913244942954,Oct-Mar,Pink City Heritage Hotel,2632
+319,Kerala Backwaters,Kerala,Nature,8.84963555984027,Sep-Mar,Coconut Grove Hotel,2512
+320,Leh Ladakh,Jammu and Kashmir,Adventure,8.353685271308148,Apr-Jun,Kashmir Valley Hotel,5306
+321,Taj Mahal,Uttar Pradesh,Historical,9.146376228258996,Nov-Feb,Taj Heritage Hotel,3358
+322,Goa Beaches,Goa,Beach,7.875971584786738,Nov-Mar,Ocean View Goa Hotel,4507
+323,Jaipur City,Rajasthan,City,8.130587468948864,Oct-Mar,Pink City Heritage Hotel,3806
+324,Kerala Backwaters,Kerala,Nature,7.662104838922936,Sep-Mar,Kerala Nature Retreat,4690
+325,Leh Ladakh,Jammu and Kashmir,Adventure,7.767402106418881,Apr-Jun,Snow Peak Resort,4290
+326,Taj Mahal,Uttar Pradesh,Historical,8.206421939119537,Nov-Feb,Agra Palace Hotel,1827
+327,Goa Beaches,Goa,Beach,8.382390141309063,Nov-Mar,Goa Beach Resort,5625
+328,Jaipur City,Rajasthan,City,8.631489840212462,Oct-Mar,Pink City Heritage Hotel,4426
+329,Kerala Backwaters,Kerala,Nature,8.214897900478032,Sep-Mar,Kerala Backwater Resort,5322
+330,Leh Ladakh,Jammu and Kashmir,Adventure,7.63573528781037,Apr-Jun,Snow Peak Resort,6180
+331,Taj Mahal,Uttar Pradesh,Historical,9.082935360672389,Nov-Feb,Taj Heritage Hotel,2787
+332,Goa Beaches,Goa,Beach,8.942874660350423,Nov-Mar,Goa Beach Resort,5989
+333,Jaipur City,Rajasthan,City,7.632343966795443,Oct-Mar,Royal Rajasthan Palace,3943
+334,Kerala Backwaters,Kerala,Nature,8.710665370439624,Sep-Mar,Kerala Nature Retreat,3311
+335,Leh Ladakh,Jammu and Kashmir,Adventure,9.310237104496576,Apr-Jun,Snow Peak Resort,5649
+336,Taj Mahal,Uttar Pradesh,Historical,9.26879230848542,Nov-Feb,Taj Heritage Hotel,2811
+337,Goa Beaches,Goa,Beach,8.576362703436722,Nov-Mar,Goa Beach Resort,5691
+338,Jaipur City,Rajasthan,City,8.139654822360953,Oct-Mar,Pink City Heritage Hotel,4338
+339,Kerala Backwaters,Kerala,Nature,8.568613099478302,Sep-Mar,Kerala Backwater Resort,2651
+340,Leh Ladakh,Jammu and Kashmir,Adventure,9.051578730223218,Apr-Jun,Kashmir Valley Hotel,4023
+341,Taj Mahal,Uttar Pradesh,Historical,8.408281456588794,Nov-Feb,Taj Heritage Hotel,1664
+342,Goa Beaches,Goa,Beach,9.379923842860553,Nov-Mar,Palm Paradise Resort,2681
+343,Jaipur City,Rajasthan,City,7.873481445510227,Oct-Mar,Jaipur Grand Hotel,4316
+344,Kerala Backwaters,Kerala,Nature,9.162324692301334,Sep-Mar,Kerala Backwater Resort,3109
+345,Leh Ladakh,Jammu and Kashmir,Adventure,9.315488065792977,Apr-Jun,Himalayan View Resort,5282
+346,Taj Mahal,Uttar Pradesh,Historical,8.969950615777162,Nov-Feb,Taj Heritage Hotel,2322
+347,Goa Beaches,Goa,Beach,7.920959927553192,Nov-Mar,Goa Beach Resort,3443
+348,Jaipur City,Rajasthan,City,8.013552975522641,Oct-Mar,Pink City Heritage Hotel,3801
+349,Kerala Backwaters,Kerala,Nature,8.18621530520951,Sep-Mar,Kerala Backwater Resort,4254
+350,Leh Ladakh,Jammu and Kashmir,Adventure,7.950916521545693,Apr-Jun,Snow Peak Resort,2829
+351,Taj Mahal,Uttar Pradesh,Historical,8.488999182063221,Nov-Feb,Mughal View Resort,2274
+352,Goa Beaches,Goa,Beach,7.946596794608405,Nov-Mar,Goa Beach Resort,4698
+353,Jaipur City,Rajasthan,City,9.29747082018926,Oct-Mar,Jaipur Grand Hotel,1946
+354,Kerala Backwaters,Kerala,Nature,7.760694703272286,Sep-Mar,Kerala Backwater Resort,3114
+355,Leh Ladakh,Jammu and Kashmir,Adventure,8.057546789498799,Apr-Jun,Himalayan View Resort,4071
+356,Taj Mahal,Uttar Pradesh,Historical,8.606176983767309,Nov-Feb,Mughal View Resort,2808
+357,Goa Beaches,Goa,Beach,8.314502184896275,Nov-Mar,Goa Beach Resort,5247
+358,Jaipur City,Rajasthan,City,7.738761292909418,Oct-Mar,Jaipur Grand Hotel,1881
+359,Kerala Backwaters,Kerala,Nature,7.832207353651939,Sep-Mar,Coconut Grove Hotel,2713
+360,Leh Ladakh,Jammu and Kashmir,Adventure,8.117132891287836,Apr-Jun,Himalayan View Resort,4420
+361,Taj Mahal,Uttar Pradesh,Historical,8.134764369094412,Nov-Feb,Agra Palace Hotel,3439
+362,Goa Beaches,Goa,Beach,8.908499371844,Nov-Mar,Ocean View Goa Hotel,3245
+363,Jaipur City,Rajasthan,City,8.857005319987184,Oct-Mar,Pink City Heritage Hotel,3209
+364,Kerala Backwaters,Kerala,Nature,8.029543990563425,Sep-Mar,Coconut Grove Hotel,2906
+365,Leh Ladakh,Jammu and Kashmir,Adventure,8.878382688353271,Apr-Jun,Snow Peak Resort,2970
+366,Taj Mahal,Uttar Pradesh,Historical,9.266030293290664,Nov-Feb,Agra Palace Hotel,1895
+367,Goa Beaches,Goa,Beach,8.445148546462805,Nov-Mar,Palm Paradise Resort,4055
+368,Jaipur City,Rajasthan,City,8.00825181627746,Oct-Mar,Jaipur Grand Hotel,4108
+369,Kerala Backwaters,Kerala,Nature,7.526677667953975,Sep-Mar,Coconut Grove Hotel,3004
+370,Leh Ladakh,Jammu and Kashmir,Adventure,8.35737821975577,Apr-Jun,Snow Peak Resort,3433
+371,Taj Mahal,Uttar Pradesh,Historical,8.32089647558579,Nov-Feb,Agra Palace Hotel,2779
+372,Goa Beaches,Goa,Beach,7.824610910350504,Nov-Mar,Ocean View Goa Hotel,4257
+373,Jaipur City,Rajasthan,City,9.276956975859664,Oct-Mar,Jaipur Grand Hotel,2704
+374,Kerala Backwaters,Kerala,Nature,9.27098132194643,Sep-Mar,Coconut Grove Hotel,5497
+375,Leh Ladakh,Jammu and Kashmir,Adventure,8.44823537077092,Apr-Jun,Kashmir Valley Hotel,3576
+376,Taj Mahal,Uttar Pradesh,Historical,9.483879397405463,Nov-Feb,Agra Palace Hotel,3390
+377,Goa Beaches,Goa,Beach,7.92228615054826,Nov-Mar,Goa Beach Resort,4023
+378,Jaipur City,Rajasthan,City,9.36474701059834,Oct-Mar,Royal Rajasthan Palace,3187
+379,Kerala Backwaters,Kerala,Nature,7.710901822596214,Sep-Mar,Kerala Backwater Resort,3503
+380,Leh Ladakh,Jammu and Kashmir,Adventure,8.658172608842527,Apr-Jun,Snow Peak Resort,3092
+381,Taj Mahal,Uttar Pradesh,Historical,9.30052503102598,Nov-Feb,Agra Palace Hotel,3606
+382,Goa Beaches,Goa,Beach,8.487140997084705,Nov-Mar,Ocean View Goa Hotel,2627
+383,Jaipur City,Rajasthan,City,8.70695511642636,Oct-Mar,Royal Rajasthan Palace,2535
+384,Kerala Backwaters,Kerala,Nature,8.63256261554465,Sep-Mar,Coconut Grove Hotel,4968
+385,Leh Ladakh,Jammu and Kashmir,Adventure,8.051203902011398,Apr-Jun,Snow Peak Resort,6453
+386,Taj Mahal,Uttar Pradesh,Historical,9.46333200145262,Nov-Feb,Agra Palace Hotel,2020
+387,Goa Beaches,Goa,Beach,8.763403696969464,Nov-Mar,Ocean View Goa Hotel,5099
+388,Jaipur City,Rajasthan,City,9.151665484353009,Oct-Mar,Pink City Heritage Hotel,2036
+389,Kerala Backwaters,Kerala,Nature,9.40914617773771,Sep-Mar,Kerala Backwater Resort,3504
+390,Leh Ladakh,Jammu and Kashmir,Adventure,8.854728503825909,Apr-Jun,Himalayan View Resort,5930
+391,Taj Mahal,Uttar Pradesh,Historical,8.937176476917816,Nov-Feb,Agra Palace Hotel,3281
+392,Goa Beaches,Goa,Beach,8.65903274744209,Nov-Mar,Ocean View Goa Hotel,3801
+393,Jaipur City,Rajasthan,City,8.429521721872453,Oct-Mar,Royal Rajasthan Palace,4341
+394,Kerala Backwaters,Kerala,Nature,8.884525796968724,Sep-Mar,Kerala Backwater Resort,4251
+395,Leh Ladakh,Jammu and Kashmir,Adventure,8.879069809066051,Apr-Jun,Himalayan View Resort,5213
+396,Taj Mahal,Uttar Pradesh,Historical,9.113864702192004,Nov-Feb,Agra Palace Hotel,1941
+397,Goa Beaches,Goa,Beach,8.739477476072606,Nov-Mar,Palm Paradise Resort,4576
+398,Jaipur City,Rajasthan,City,8.33295003386784,Oct-Mar,Jaipur Grand Hotel,4457
+399,Kerala Backwaters,Kerala,Nature,8.376325562448297,Sep-Mar,Kerala Nature Retreat,3004
+400,Leh Ladakh,Jammu and Kashmir,Adventure,9.120122756229376,Apr-Jun,Snow Peak Resort,2574
+401,Taj Mahal,Uttar Pradesh,Historical,8.033376557417458,Nov-Feb,Agra Palace Hotel,3675
+402,Goa Beaches,Goa,Beach,8.050919516333472,Nov-Mar,Palm Paradise Resort,4589
+403,Jaipur City,Rajasthan,City,8.578600554982318,Oct-Mar,Jaipur Grand Hotel,3179
+404,Kerala Backwaters,Kerala,Nature,9.28938699420442,Sep-Mar,Kerala Nature Retreat,2240
+405,Leh Ladakh,Jammu and Kashmir,Adventure,8.266309519533893,Apr-Jun,Kashmir Valley Hotel,5481
+406,Taj Mahal,Uttar Pradesh,Historical,8.13824601276976,Nov-Feb,Mughal View Resort,3581
+407,Goa Beaches,Goa,Beach,8.685967653034197,Nov-Mar,Goa Beach Resort,5588
+408,Jaipur City,Rajasthan,City,7.789753610332566,Oct-Mar,Pink City Heritage Hotel,3500
+409,Kerala Backwaters,Kerala,Nature,7.695324251011531,Sep-Mar,Kerala Nature Retreat,5424
+410,Leh Ladakh,Jammu and Kashmir,Adventure,9.056239628784924,Apr-Jun,Kashmir Valley Hotel,5545
+411,Taj Mahal,Uttar Pradesh,Historical,8.284126727805766,Nov-Feb,Taj Heritage Hotel,2901
+412,Goa Beaches,Goa,Beach,8.056589740959444,Nov-Mar,Palm Paradise Resort,3087
+413,Jaipur City,Rajasthan,City,9.164900243709798,Oct-Mar,Pink City Heritage Hotel,3422
+414,Kerala Backwaters,Kerala,Nature,8.41852933200488,Sep-Mar,Coconut Grove Hotel,2541
+415,Leh Ladakh,Jammu and Kashmir,Adventure,8.650437608917823,Apr-Jun,Kashmir Valley Hotel,4574
+416,Taj Mahal,Uttar Pradesh,Historical,9.327014780224204,Nov-Feb,Taj Heritage Hotel,2145
+417,Goa Beaches,Goa,Beach,7.799317152894507,Nov-Mar,Palm Paradise Resort,3230
+418,Jaipur City,Rajasthan,City,8.571570122764205,Oct-Mar,Pink City Heritage Hotel,1967
+419,Kerala Backwaters,Kerala,Nature,8.165654259803166,Sep-Mar,Kerala Nature Retreat,2809
+420,Leh Ladakh,Jammu and Kashmir,Adventure,9.333012518480867,Apr-Jun,Kashmir Valley Hotel,4815
+421,Taj Mahal,Uttar Pradesh,Historical,8.912423770627766,Nov-Feb,Mughal View Resort,3272
+422,Goa Beaches,Goa,Beach,7.9629327439636866,Nov-Mar,Goa Beach Resort,4540
+423,Jaipur City,Rajasthan,City,8.427042499188698,Oct-Mar,Royal Rajasthan Palace,2254
+424,Kerala Backwaters,Kerala,Nature,8.016517304482331,Sep-Mar,Kerala Backwater Resort,5153
+425,Leh Ladakh,Jammu and Kashmir,Adventure,7.677908499077882,Apr-Jun,Himalayan View Resort,4208
+426,Taj Mahal,Uttar Pradesh,Historical,7.742346085788473,Nov-Feb,Mughal View Resort,2201
+427,Goa Beaches,Goa,Beach,8.049399731297333,Nov-Mar,Palm Paradise Resort,5181
+428,Jaipur City,Rajasthan,City,9.229663135604667,Oct-Mar,Royal Rajasthan Palace,3399
+429,Kerala Backwaters,Kerala,Nature,8.186484600129791,Sep-Mar,Coconut Grove Hotel,2329
+430,Leh Ladakh,Jammu and Kashmir,Adventure,7.528160810117106,Apr-Jun,Snow Peak Resort,5567
+431,Taj Mahal,Uttar Pradesh,Historical,8.45973062297419,Nov-Feb,Mughal View Resort,3345
+432,Goa Beaches,Goa,Beach,8.839626409332572,Nov-Mar,Ocean View Goa Hotel,3886
+433,Jaipur City,Rajasthan,City,8.683728793384567,Oct-Mar,Royal Rajasthan Palace,2492
+434,Kerala Backwaters,Kerala,Nature,8.707253748746416,Sep-Mar,Coconut Grove Hotel,3594
+435,Leh Ladakh,Jammu and Kashmir,Adventure,8.316001911390781,Apr-Jun,Kashmir Valley Hotel,3293
+436,Taj Mahal,Uttar Pradesh,Historical,7.728114076451941,Nov-Feb,Agra Palace Hotel,1528
+437,Goa Beaches,Goa,Beach,7.987106149468621,Nov-Mar,Ocean View Goa Hotel,2648
+438,Jaipur City,Rajasthan,City,8.465558405614521,Oct-Mar,Royal Rajasthan Palace,3119
+439,Kerala Backwaters,Kerala,Nature,8.208388595361088,Sep-Mar,Kerala Nature Retreat,4258
+440,Leh Ladakh,Jammu and Kashmir,Adventure,8.224548104826292,Apr-Jun,Snow Peak Resort,6083
+441,Taj Mahal,Uttar Pradesh,Historical,7.865953290683349,Nov-Feb,Agra Palace Hotel,2636
+442,Goa Beaches,Goa,Beach,8.459808776651839,Nov-Mar,Ocean View Goa Hotel,2686
+443,Jaipur City,Rajasthan,City,9.225300608752708,Oct-Mar,Pink City Heritage Hotel,3050
+444,Kerala Backwaters,Kerala,Nature,8.308543307938688,Sep-Mar,Kerala Backwater Resort,3533
+445,Leh Ladakh,Jammu and Kashmir,Adventure,7.845173227424654,Apr-Jun,Kashmir Valley Hotel,2597
+446,Taj Mahal,Uttar Pradesh,Historical,8.09180966649682,Nov-Feb,Taj Heritage Hotel,1554
+447,Goa Beaches,Goa,Beach,8.888745118422108,Nov-Mar,Palm Paradise Resort,5170
+448,Jaipur City,Rajasthan,City,8.531272858594322,Oct-Mar,Jaipur Grand Hotel,2557
+449,Kerala Backwaters,Kerala,Nature,7.900632192964087,Sep-Mar,Kerala Nature Retreat,2605
+450,Leh Ladakh,Jammu and Kashmir,Adventure,8.390879272653267,Apr-Jun,Himalayan View Resort,4616
+451,Taj Mahal,Uttar Pradesh,Historical,7.948981237202266,Nov-Feb,Taj Heritage Hotel,2812
+452,Goa Beaches,Goa,Beach,7.710238850545792,Nov-Mar,Goa Beach Resort,4285
+453,Jaipur City,Rajasthan,City,8.426026820095585,Oct-Mar,Pink City Heritage Hotel,2550
+454,Kerala Backwaters,Kerala,Nature,8.250765565651493,Sep-Mar,Coconut Grove Hotel,5419
+455,Leh Ladakh,Jammu and Kashmir,Adventure,7.889359194048391,Apr-Jun,Himalayan View Resort,6038
+456,Taj Mahal,Uttar Pradesh,Historical,7.509850241166378,Nov-Feb,Mughal View Resort,3262
+457,Goa Beaches,Goa,Beach,9.348468751483985,Nov-Mar,Palm Paradise Resort,5815
+458,Jaipur City,Rajasthan,City,9.04884504620765,Oct-Mar,Pink City Heritage Hotel,2164
+459,Kerala Backwaters,Kerala,Nature,8.231034030468606,Sep-Mar,Coconut Grove Hotel,4226
+460,Leh Ladakh,Jammu and Kashmir,Adventure,8.25449220912482,Apr-Jun,Himalayan View Resort,2981
+461,Taj Mahal,Uttar Pradesh,Historical,8.54049334743632,Nov-Feb,Taj Heritage Hotel,3748
+462,Goa Beaches,Goa,Beach,7.625998220803341,Nov-Mar,Goa Beach Resort,2653
+463,Jaipur City,Rajasthan,City,8.981270231292,Oct-Mar,Royal Rajasthan Palace,3324
+464,Kerala Backwaters,Kerala,Nature,8.555128223838274,Sep-Mar,Kerala Backwater Resort,4320
+465,Leh Ladakh,Jammu and Kashmir,Adventure,7.761543597697145,Apr-Jun,Snow Peak Resort,5260
+466,Taj Mahal,Uttar Pradesh,Historical,8.25089870590044,Nov-Feb,Mughal View Resort,3843
+467,Goa Beaches,Goa,Beach,8.025486409324685,Nov-Mar,Goa Beach Resort,3540
+468,Jaipur City,Rajasthan,City,9.47910151784028,Oct-Mar,Pink City Heritage Hotel,3464
+469,Kerala Backwaters,Kerala,Nature,8.661784765251305,Sep-Mar,Kerala Backwater Resort,3440
+470,Leh Ladakh,Jammu and Kashmir,Adventure,8.93195095213289,Apr-Jun,Snow Peak Resort,2560
+471,Taj Mahal,Uttar Pradesh,Historical,9.431015219195524,Nov-Feb,Mughal View Resort,2438
+472,Goa Beaches,Goa,Beach,9.276219098262825,Nov-Mar,Palm Paradise Resort,4139
+473,Jaipur City,Rajasthan,City,8.138557734045776,Oct-Mar,Jaipur Grand Hotel,3889
+474,Kerala Backwaters,Kerala,Nature,7.780303814451599,Sep-Mar,Kerala Backwater Resort,2224
+475,Leh Ladakh,Jammu and Kashmir,Adventure,8.439314463538002,Apr-Jun,Kashmir Valley Hotel,3562
+476,Taj Mahal,Uttar Pradesh,Historical,8.59393285581819,Nov-Feb,Taj Heritage Hotel,1630
+477,Goa Beaches,Goa,Beach,9.061411819218064,Nov-Mar,Goa Beach Resort,3752
+478,Jaipur City,Rajasthan,City,8.746027540435104,Oct-Mar,Pink City Heritage Hotel,1907
+479,Kerala Backwaters,Kerala,Nature,8.432522163463709,Sep-Mar,Kerala Backwater Resort,2371
+480,Leh Ladakh,Jammu and Kashmir,Adventure,9.183226466821637,Apr-Jun,Snow Peak Resort,3958
+481,Taj Mahal,Uttar Pradesh,Historical,8.347502107586056,Nov-Feb,Taj Heritage Hotel,1601
+482,Goa Beaches,Goa,Beach,7.948762856954323,Nov-Mar,Palm Paradise Resort,5413
+483,Jaipur City,Rajasthan,City,9.187132541918034,Oct-Mar,Pink City Heritage Hotel,4371
+484,Kerala Backwaters,Kerala,Nature,8.361380335928295,Sep-Mar,Coconut Grove Hotel,4522
+485,Leh Ladakh,Jammu and Kashmir,Adventure,9.307482015375824,Apr-Jun,Himalayan View Resort,4136
+486,Taj Mahal,Uttar Pradesh,Historical,9.2500304022815,Nov-Feb,Agra Palace Hotel,2540
+487,Goa Beaches,Goa,Beach,8.062331360639273,Nov-Mar,Palm Paradise Resort,2829
+488,Jaipur City,Rajasthan,City,8.654607164170207,Oct-Mar,Royal Rajasthan Palace,3320
+489,Kerala Backwaters,Kerala,Nature,8.63372498272289,Sep-Mar,Kerala Nature Retreat,2211
+490,Leh Ladakh,Jammu and Kashmir,Adventure,8.387349596378451,Apr-Jun,Himalayan View Resort,3841
+491,Taj Mahal,Uttar Pradesh,Historical,8.20803233304684,Nov-Feb,Agra Palace Hotel,1715
+492,Goa Beaches,Goa,Beach,8.1282869592547,Nov-Mar,Palm Paradise Resort,2838
+493,Jaipur City,Rajasthan,City,8.878936494411294,Oct-Mar,Royal Rajasthan Palace,3599
+494,Kerala Backwaters,Kerala,Nature,8.937812540340415,Sep-Mar,Kerala Nature Retreat,4908
+495,Leh Ladakh,Jammu and Kashmir,Adventure,8.414265880762033,Apr-Jun,Kashmir Valley Hotel,5652
+496,Taj Mahal,Uttar Pradesh,Historical,8.265509612154226,Nov-Feb,Agra Palace Hotel,3250
+497,Goa Beaches,Goa,Beach,8.698828827904826,Nov-Mar,Palm Paradise Resort,4008
+498,Jaipur City,Rajasthan,City,9.324413281531497,Oct-Mar,Royal Rajasthan Palace,4221
+499,Kerala Backwaters,Kerala,Nature,9.26496476298098,Sep-Mar,Coconut Grove Hotel,5223
+500,Leh Ladakh,Jammu and Kashmir,Adventure,8.940107797681996,Apr-Jun,Snow Peak Resort,3209
+501,Taj Mahal,Uttar Pradesh,Historical,8.43779797890401,Nov-Feb,Agra Palace Hotel,2723
+502,Goa Beaches,Goa,Beach,9.314545773276503,Nov-Mar,Palm Paradise Resort,5013
+503,Jaipur City,Rajasthan,City,8.918823544059974,Oct-Mar,Jaipur Grand Hotel,2912
+504,Kerala Backwaters,Kerala,Nature,7.992592263408194,Sep-Mar,Coconut Grove Hotel,3491
+505,Leh Ladakh,Jammu and Kashmir,Adventure,8.07869796905618,Apr-Jun,Himalayan View Resort,6226
+506,Taj Mahal,Uttar Pradesh,Historical,8.510029536153398,Nov-Feb,Taj Heritage Hotel,1988
+507,Goa Beaches,Goa,Beach,8.240547501092525,Nov-Mar,Goa Beach Resort,4061
+508,Jaipur City,Rajasthan,City,9.43596338151704,Oct-Mar,Jaipur Grand Hotel,1846
+509,Kerala Backwaters,Kerala,Nature,9.25204552164384,Sep-Mar,Coconut Grove Hotel,2977
+510,Leh Ladakh,Jammu and Kashmir,Adventure,9.380186804036049,Apr-Jun,Himalayan View Resort,3539
+511,Taj Mahal,Uttar Pradesh,Historical,9.219575248565713,Nov-Feb,Mughal View Resort,2210
+512,Goa Beaches,Goa,Beach,9.222486404593646,Nov-Mar,Palm Paradise Resort,2900
+513,Jaipur City,Rajasthan,City,9.319083493307607,Oct-Mar,Jaipur Grand Hotel,3617
+514,Kerala Backwaters,Kerala,Nature,7.980635862122308,Sep-Mar,Kerala Backwater Resort,5228
+515,Leh Ladakh,Jammu and Kashmir,Adventure,9.481318666573411,Apr-Jun,Himalayan View Resort,5657
+516,Taj Mahal,Uttar Pradesh,Historical,7.890656667652207,Nov-Feb,Taj Heritage Hotel,1749
+517,Goa Beaches,Goa,Beach,8.715019439382655,Nov-Mar,Ocean View Goa Hotel,2890
+518,Jaipur City,Rajasthan,City,8.92790148381448,Oct-Mar,Jaipur Grand Hotel,2134
+519,Kerala Backwaters,Kerala,Nature,7.772507901461253,Sep-Mar,Kerala Backwater Resort,2828
+520,Leh Ladakh,Jammu and Kashmir,Adventure,8.521876495404149,Apr-Jun,Snow Peak Resort,6090
+521,Taj Mahal,Uttar Pradesh,Historical,9.073609022110247,Nov-Feb,Taj Heritage Hotel,1636
+522,Goa Beaches,Goa,Beach,8.486706784627046,Nov-Mar,Goa Beach Resort,5430
+523,Jaipur City,Rajasthan,City,8.998307150645953,Oct-Mar,Pink City Heritage Hotel,3321
+524,Kerala Backwaters,Kerala,Nature,8.207456170247866,Sep-Mar,Kerala Nature Retreat,3026
+525,Leh Ladakh,Jammu and Kashmir,Adventure,8.090624068994547,Apr-Jun,Himalayan View Resort,3226
+526,Taj Mahal,Uttar Pradesh,Historical,8.798076955318615,Nov-Feb,Taj Heritage Hotel,3000
+527,Goa Beaches,Goa,Beach,9.240920636796004,Nov-Mar,Ocean View Goa Hotel,5141
+528,Jaipur City,Rajasthan,City,8.564171557585537,Oct-Mar,Pink City Heritage Hotel,2789
+529,Kerala Backwaters,Kerala,Nature,7.726465986904015,Sep-Mar,Coconut Grove Hotel,4619
+530,Leh Ladakh,Jammu and Kashmir,Adventure,9.135320166568894,Apr-Jun,Himalayan View Resort,3434
+531,Taj Mahal,Uttar Pradesh,Historical,7.819012402589374,Nov-Feb,Mughal View Resort,1901
+532,Goa Beaches,Goa,Beach,8.988127174492362,Nov-Mar,Palm Paradise Resort,3966
+533,Jaipur City,Rajasthan,City,7.692409735196847,Oct-Mar,Jaipur Grand Hotel,2414
+534,Kerala Backwaters,Kerala,Nature,8.181851282648088,Sep-Mar,Kerala Nature Retreat,3496
+535,Leh Ladakh,Jammu and Kashmir,Adventure,9.177624039641806,Apr-Jun,Himalayan View Resort,6097
+536,Taj Mahal,Uttar Pradesh,Historical,9.05646084632939,Nov-Feb,Agra Palace Hotel,2682
+537,Goa Beaches,Goa,Beach,9.187047298341549,Nov-Mar,Goa Beach Resort,5723
+538,Jaipur City,Rajasthan,City,8.61290957770994,Oct-Mar,Pink City Heritage Hotel,4467
+539,Kerala Backwaters,Kerala,Nature,8.945958184370141,Sep-Mar,Coconut Grove Hotel,4435
+540,Leh Ladakh,Jammu and Kashmir,Adventure,8.310861660543809,Apr-Jun,Kashmir Valley Hotel,6384
+541,Taj Mahal,Uttar Pradesh,Historical,8.299700198889736,Nov-Feb,Agra Palace Hotel,2621
+542,Goa Beaches,Goa,Beach,8.682101749793983,Nov-Mar,Palm Paradise Resort,2630
+543,Jaipur City,Rajasthan,City,8.997155930746766,Oct-Mar,Jaipur Grand Hotel,2994
+544,Kerala Backwaters,Kerala,Nature,8.517940732286046,Sep-Mar,Kerala Backwater Resort,5183
+545,Leh Ladakh,Jammu and Kashmir,Adventure,7.661289356429886,Apr-Jun,Snow Peak Resort,5533
+546,Taj Mahal,Uttar Pradesh,Historical,8.99406731089834,Nov-Feb,Agra Palace Hotel,1682
+547,Goa Beaches,Goa,Beach,8.645510418904573,Nov-Mar,Goa Beach Resort,5530
+548,Jaipur City,Rajasthan,City,8.086168021757981,Oct-Mar,Pink City Heritage Hotel,2163
+549,Kerala Backwaters,Kerala,Nature,9.251772000884309,Sep-Mar,Kerala Backwater Resort,2238
+550,Leh Ladakh,Jammu and Kashmir,Adventure,8.747376070548807,Apr-Jun,Snow Peak Resort,6098
+551,Taj Mahal,Uttar Pradesh,Historical,8.374491709395679,Nov-Feb,Taj Heritage Hotel,2872
+552,Goa Beaches,Goa,Beach,8.564998979974378,Nov-Mar,Goa Beach Resort,5529
+553,Jaipur City,Rajasthan,City,9.40131781831434,Oct-Mar,Royal Rajasthan Palace,2720
+554,Kerala Backwaters,Kerala,Nature,9.025943210875612,Sep-Mar,Kerala Backwater Resort,4969
+555,Leh Ladakh,Jammu and Kashmir,Adventure,9.04217651721199,Apr-Jun,Himalayan View Resort,5732
+556,Taj Mahal,Uttar Pradesh,Historical,7.703776810764232,Nov-Feb,Agra Palace Hotel,1515
+557,Goa Beaches,Goa,Beach,8.672185130404245,Nov-Mar,Goa Beach Resort,2992
+558,Jaipur City,Rajasthan,City,9.113897123897514,Oct-Mar,Royal Rajasthan Palace,3249
+559,Kerala Backwaters,Kerala,Nature,8.65327152196819,Sep-Mar,Kerala Nature Retreat,3331
+560,Leh Ladakh,Jammu and Kashmir,Adventure,9.252519204291165,Apr-Jun,Himalayan View Resort,5441
+561,Taj Mahal,Uttar Pradesh,Historical,9.456850743680612,Nov-Feb,Mughal View Resort,1810
+562,Goa Beaches,Goa,Beach,9.310527198750878,Nov-Mar,Palm Paradise Resort,3238
+563,Jaipur City,Rajasthan,City,7.952541968997334,Oct-Mar,Royal Rajasthan Palace,2345
+564,Kerala Backwaters,Kerala,Nature,8.870130228380821,Sep-Mar,Kerala Nature Retreat,4661
+565,Leh Ladakh,Jammu and Kashmir,Adventure,8.47880343825541,Apr-Jun,Snow Peak Resort,2750
+566,Taj Mahal,Uttar Pradesh,Historical,7.567818752588276,Nov-Feb,Agra Palace Hotel,2258
+567,Goa Beaches,Goa,Beach,9.187761000514808,Nov-Mar,Goa Beach Resort,4304
+568,Jaipur City,Rajasthan,City,8.248703528475824,Oct-Mar,Royal Rajasthan Palace,3097
+569,Kerala Backwaters,Kerala,Nature,9.000157281763427,Sep-Mar,Kerala Nature Retreat,3831
+570,Leh Ladakh,Jammu and Kashmir,Adventure,7.748348707167752,Apr-Jun,Himalayan View Resort,6310
+571,Taj Mahal,Uttar Pradesh,Historical,9.193226492177772,Nov-Feb,Mughal View Resort,3414
+572,Goa Beaches,Goa,Beach,8.29243960608129,Nov-Mar,Goa Beach Resort,5610
+573,Jaipur City,Rajasthan,City,9.155604744108183,Oct-Mar,Jaipur Grand Hotel,2613
+574,Kerala Backwaters,Kerala,Nature,7.553270853318885,Sep-Mar,Kerala Backwater Resort,2228
+575,Leh Ladakh,Jammu and Kashmir,Adventure,8.419067682490505,Apr-Jun,Kashmir Valley Hotel,3457
+576,Taj Mahal,Uttar Pradesh,Historical,8.450301921040447,Nov-Feb,Taj Heritage Hotel,3532
+577,Goa Beaches,Goa,Beach,8.207209291443316,Nov-Mar,Goa Beach Resort,2976
+578,Jaipur City,Rajasthan,City,8.205781816540815,Oct-Mar,Pink City Heritage Hotel,2117
+579,Kerala Backwaters,Kerala,Nature,8.598752880266343,Sep-Mar,Kerala Backwater Resort,2444
+580,Leh Ladakh,Jammu and Kashmir,Adventure,8.998305590476127,Apr-Jun,Kashmir Valley Hotel,3247
+581,Taj Mahal,Uttar Pradesh,Historical,9.01567151822585,Nov-Feb,Taj Heritage Hotel,2196
+582,Goa Beaches,Goa,Beach,7.779308047020037,Nov-Mar,Ocean View Goa Hotel,2771
+583,Jaipur City,Rajasthan,City,8.45671070203574,Oct-Mar,Jaipur Grand Hotel,3571
+584,Kerala Backwaters,Kerala,Nature,7.877125609308293,Sep-Mar,Kerala Backwater Resort,3462
+585,Leh Ladakh,Jammu and Kashmir,Adventure,8.937350084907646,Apr-Jun,Himalayan View Resort,4924
+586,Taj Mahal,Uttar Pradesh,Historical,7.569722658093775,Nov-Feb,Taj Heritage Hotel,1765
+587,Goa Beaches,Goa,Beach,7.768523623167793,Nov-Mar,Ocean View Goa Hotel,5473
+588,Jaipur City,Rajasthan,City,9.180141735009256,Oct-Mar,Royal Rajasthan Palace,2720
+589,Kerala Backwaters,Kerala,Nature,9.427997305985516,Sep-Mar,Kerala Nature Retreat,2539
+590,Leh Ladakh,Jammu and Kashmir,Adventure,8.17109010854659,Apr-Jun,Kashmir Valley Hotel,2888
+591,Taj Mahal,Uttar Pradesh,Historical,8.148297385049217,Nov-Feb,Mughal View Resort,3550
+592,Goa Beaches,Goa,Beach,9.168100701200414,Nov-Mar,Ocean View Goa Hotel,6000
+593,Jaipur City,Rajasthan,City,9.468508271221934,Oct-Mar,Pink City Heritage Hotel,2965
+594,Kerala Backwaters,Kerala,Nature,8.618563706489919,Sep-Mar,Kerala Nature Retreat,2575
+595,Leh Ladakh,Jammu and Kashmir,Adventure,9.446618127599066,Apr-Jun,Himalayan View Resort,6241
+596,Taj Mahal,Uttar Pradesh,Historical,7.865548979182885,Nov-Feb,Taj Heritage Hotel,3533
+597,Goa Beaches,Goa,Beach,7.735247906037738,Nov-Mar,Ocean View Goa Hotel,4871
+598,Jaipur City,Rajasthan,City,7.754720778868718,Oct-Mar,Royal Rajasthan Palace,1945
+599,Kerala Backwaters,Kerala,Nature,9.463041121922352,Sep-Mar,Kerala Nature Retreat,4181
+600,Leh Ladakh,Jammu and Kashmir,Adventure,9.390934664335951,Apr-Jun,Himalayan View Resort,2792
+601,Taj Mahal,Uttar Pradesh,Historical,7.679434820985951,Nov-Feb,Taj Heritage Hotel,1931
+602,Goa Beaches,Goa,Beach,8.330784565286411,Nov-Mar,Ocean View Goa Hotel,3204
+603,Jaipur City,Rajasthan,City,8.51701771288866,Oct-Mar,Royal Rajasthan Palace,3798
+604,Kerala Backwaters,Kerala,Nature,9.298998286534964,Sep-Mar,Kerala Nature Retreat,4832
+605,Leh Ladakh,Jammu and Kashmir,Adventure,9.015692413525752,Apr-Jun,Himalayan View Resort,2898
+606,Taj Mahal,Uttar Pradesh,Historical,7.645870324298047,Nov-Feb,Taj Heritage Hotel,2463
+607,Goa Beaches,Goa,Beach,7.6520123514027665,Nov-Mar,Palm Paradise Resort,5711
+608,Jaipur City,Rajasthan,City,8.443802951781302,Oct-Mar,Pink City Heritage Hotel,4034
+609,Kerala Backwaters,Kerala,Nature,8.29568641738167,Sep-Mar,Kerala Nature Retreat,4241
+610,Leh Ladakh,Jammu and Kashmir,Adventure,7.940660734256079,Apr-Jun,Kashmir Valley Hotel,4328
+611,Taj Mahal,Uttar Pradesh,Historical,9.342123928378385,Nov-Feb,Mughal View Resort,3608
+612,Goa Beaches,Goa,Beach,7.582948969365619,Nov-Mar,Palm Paradise Resort,3438
+613,Jaipur City,Rajasthan,City,7.893422691754661,Oct-Mar,Royal Rajasthan Palace,2509
+614,Kerala Backwaters,Kerala,Nature,9.003574785226348,Sep-Mar,Kerala Nature Retreat,3006
+615,Leh Ladakh,Jammu and Kashmir,Adventure,8.810690633638737,Apr-Jun,Snow Peak Resort,3963
+616,Taj Mahal,Uttar Pradesh,Historical,9.200376502061246,Nov-Feb,Taj Heritage Hotel,2825
+617,Goa Beaches,Goa,Beach,9.097017238917031,Nov-Mar,Ocean View Goa Hotel,5915
+618,Jaipur City,Rajasthan,City,8.39215366577806,Oct-Mar,Jaipur Grand Hotel,1810
+619,Kerala Backwaters,Kerala,Nature,9.4345443222489,Sep-Mar,Coconut Grove Hotel,3285
+620,Leh Ladakh,Jammu and Kashmir,Adventure,8.896288153040157,Apr-Jun,Snow Peak Resort,4368
+621,Taj Mahal,Uttar Pradesh,Historical,7.820265199039039,Nov-Feb,Taj Heritage Hotel,3773
+622,Goa Beaches,Goa,Beach,8.642272298087951,Nov-Mar,Palm Paradise Resort,5724
+623,Jaipur City,Rajasthan,City,7.809114532022525,Oct-Mar,Pink City Heritage Hotel,4411
+624,Kerala Backwaters,Kerala,Nature,8.331131728498399,Sep-Mar,Kerala Backwater Resort,2971
+625,Leh Ladakh,Jammu and Kashmir,Adventure,8.352057126187718,Apr-Jun,Himalayan View Resort,4094
+626,Taj Mahal,Uttar Pradesh,Historical,7.64985755753062,Nov-Feb,Agra Palace Hotel,3107
+627,Goa Beaches,Goa,Beach,7.949828337049644,Nov-Mar,Ocean View Goa Hotel,3833
+628,Jaipur City,Rajasthan,City,9.28390783788805,Oct-Mar,Pink City Heritage Hotel,2684
+629,Kerala Backwaters,Kerala,Nature,7.674024425319291,Sep-Mar,Kerala Backwater Resort,3589
+630,Leh Ladakh,Jammu and Kashmir,Adventure,9.26454156504302,Apr-Jun,Kashmir Valley Hotel,5901
+631,Taj Mahal,Uttar Pradesh,Historical,8.69173765365114,Nov-Feb,Taj Heritage Hotel,1725
+632,Goa Beaches,Goa,Beach,7.876158566558553,Nov-Mar,Palm Paradise Resort,3324
+633,Jaipur City,Rajasthan,City,8.038341365095178,Oct-Mar,Jaipur Grand Hotel,4065
+634,Kerala Backwaters,Kerala,Nature,8.33060225072883,Sep-Mar,Coconut Grove Hotel,3136
+635,Leh Ladakh,Jammu and Kashmir,Adventure,8.512680031670806,Apr-Jun,Kashmir Valley Hotel,5300
+636,Taj Mahal,Uttar Pradesh,Historical,8.591103123657849,Nov-Feb,Taj Heritage Hotel,3806
+637,Goa Beaches,Goa,Beach,9.155871192324602,Nov-Mar,Goa Beach Resort,4411
+638,Jaipur City,Rajasthan,City,9.315119560288965,Oct-Mar,Royal Rajasthan Palace,3596
+639,Kerala Backwaters,Kerala,Nature,9.081925622089122,Sep-Mar,Coconut Grove Hotel,2253
+640,Leh Ladakh,Jammu and Kashmir,Adventure,8.009714714967838,Apr-Jun,Snow Peak Resort,5618
+641,Taj Mahal,Uttar Pradesh,Historical,8.559749376912812,Nov-Feb,Taj Heritage Hotel,2226
+642,Goa Beaches,Goa,Beach,9.304705550324336,Nov-Mar,Goa Beach Resort,5236
+643,Jaipur City,Rajasthan,City,9.300321813290449,Oct-Mar,Pink City Heritage Hotel,3344
+644,Kerala Backwaters,Kerala,Nature,9.189377296102892,Sep-Mar,Kerala Backwater Resort,5370
+645,Leh Ladakh,Jammu and Kashmir,Adventure,9.16102966115886,Apr-Jun,Snow Peak Resort,3543
+646,Taj Mahal,Uttar Pradesh,Historical,8.90349451280123,Nov-Feb,Mughal View Resort,3413
+647,Goa Beaches,Goa,Beach,9.00875189802598,Nov-Mar,Goa Beach Resort,4276
+648,Jaipur City,Rajasthan,City,8.771306422116705,Oct-Mar,Royal Rajasthan Palace,3396
+649,Kerala Backwaters,Kerala,Nature,8.167683021047935,Sep-Mar,Coconut Grove Hotel,4114
+650,Leh Ladakh,Jammu and Kashmir,Adventure,8.204607883952981,Apr-Jun,Snow Peak Resort,6061
+651,Taj Mahal,Uttar Pradesh,Historical,9.464391796425565,Nov-Feb,Mughal View Resort,3966
+652,Goa Beaches,Goa,Beach,7.956162812949001,Nov-Mar,Goa Beach Resort,5237
+653,Jaipur City,Rajasthan,City,9.496920384788352,Oct-Mar,Pink City Heritage Hotel,2649
+654,Kerala Backwaters,Kerala,Nature,8.441880661939361,Sep-Mar,Kerala Nature Retreat,4309
+655,Leh Ladakh,Jammu and Kashmir,Adventure,8.769705210150947,Apr-Jun,Snow Peak Resort,5716
+656,Taj Mahal,Uttar Pradesh,Historical,9.032216296013203,Nov-Feb,Agra Palace Hotel,3763
+657,Goa Beaches,Goa,Beach,9.350623282972432,Nov-Mar,Palm Paradise Resort,2502
+658,Jaipur City,Rajasthan,City,9.008048228406723,Oct-Mar,Jaipur Grand Hotel,1959
+659,Kerala Backwaters,Kerala,Nature,7.991928056209089,Sep-Mar,Kerala Nature Retreat,2980
+660,Leh Ladakh,Jammu and Kashmir,Adventure,7.923387964302513,Apr-Jun,Kashmir Valley Hotel,5691
+661,Taj Mahal,Uttar Pradesh,Historical,9.349513600175449,Nov-Feb,Mughal View Resort,2392
+662,Goa Beaches,Goa,Beach,7.848867269009221,Nov-Mar,Goa Beach Resort,4530
+663,Jaipur City,Rajasthan,City,8.822604311521562,Oct-Mar,Royal Rajasthan Palace,4176
+664,Kerala Backwaters,Kerala,Nature,7.975932402561909,Sep-Mar,Coconut Grove Hotel,2779
+665,Leh Ladakh,Jammu and Kashmir,Adventure,8.175473128767925,Apr-Jun,Kashmir Valley Hotel,4433
+666,Taj Mahal,Uttar Pradesh,Historical,8.535347955383795,Nov-Feb,Agra Palace Hotel,2880
+667,Goa Beaches,Goa,Beach,7.97016084501826,Nov-Mar,Goa Beach Resort,3790
+668,Jaipur City,Rajasthan,City,7.593849734423116,Oct-Mar,Jaipur Grand Hotel,3440
+669,Kerala Backwaters,Kerala,Nature,7.840622429583862,Sep-Mar,Kerala Backwater Resort,3151
+670,Leh Ladakh,Jammu and Kashmir,Adventure,7.809939225539317,Apr-Jun,Snow Peak Resort,5894
+671,Taj Mahal,Uttar Pradesh,Historical,9.406991630850325,Nov-Feb,Taj Heritage Hotel,2487
+672,Goa Beaches,Goa,Beach,7.687336809771084,Nov-Mar,Ocean View Goa Hotel,3718
+673,Jaipur City,Rajasthan,City,7.818407810021514,Oct-Mar,Royal Rajasthan Palace,2720
+674,Kerala Backwaters,Kerala,Nature,8.000500722385876,Sep-Mar,Coconut Grove Hotel,4985
+675,Leh Ladakh,Jammu and Kashmir,Adventure,8.944718004457487,Apr-Jun,Himalayan View Resort,3855
+676,Taj Mahal,Uttar Pradesh,Historical,9.263552559071387,Nov-Feb,Mughal View Resort,1669
+677,Goa Beaches,Goa,Beach,8.565346616052354,Nov-Mar,Goa Beach Resort,3020
+678,Jaipur City,Rajasthan,City,8.104480470792156,Oct-Mar,Royal Rajasthan Palace,3286
+679,Kerala Backwaters,Kerala,Nature,7.841584036663998,Sep-Mar,Kerala Backwater Resort,2239
+680,Leh Ladakh,Jammu and Kashmir,Adventure,9.159638354049664,Apr-Jun,Kashmir Valley Hotel,4060
+681,Taj Mahal,Uttar Pradesh,Historical,8.748130652752925,Nov-Feb,Taj Heritage Hotel,2918
+682,Goa Beaches,Goa,Beach,8.57790096253945,Nov-Mar,Palm Paradise Resort,3454
+683,Jaipur City,Rajasthan,City,8.419040819940108,Oct-Mar,Pink City Heritage Hotel,2783
+684,Kerala Backwaters,Kerala,Nature,9.465996074743892,Sep-Mar,Kerala Backwater Resort,5395
+685,Leh Ladakh,Jammu and Kashmir,Adventure,7.598827165312162,Apr-Jun,Himalayan View Resort,3474
+686,Taj Mahal,Uttar Pradesh,Historical,8.260858751837267,Nov-Feb,Taj Heritage Hotel,1537
+687,Goa Beaches,Goa,Beach,8.036441481700162,Nov-Mar,Ocean View Goa Hotel,4875
+688,Jaipur City,Rajasthan,City,8.056619012437265,Oct-Mar,Royal Rajasthan Palace,3074
+689,Kerala Backwaters,Kerala,Nature,8.133852314473286,Sep-Mar,Coconut Grove Hotel,3399
+690,Leh Ladakh,Jammu and Kashmir,Adventure,8.195260134545546,Apr-Jun,Himalayan View Resort,4125
+691,Taj Mahal,Uttar Pradesh,Historical,8.887068416502617,Nov-Feb,Mughal View Resort,2413
+692,Goa Beaches,Goa,Beach,8.822980009436904,Nov-Mar,Goa Beach Resort,2953
+693,Jaipur City,Rajasthan,City,8.397475308756675,Oct-Mar,Jaipur Grand Hotel,1836
+694,Kerala Backwaters,Kerala,Nature,9.22776324553234,Sep-Mar,Kerala Nature Retreat,3911
+695,Leh Ladakh,Jammu and Kashmir,Adventure,9.288646088702306,Apr-Jun,Himalayan View Resort,5520
+696,Taj Mahal,Uttar Pradesh,Historical,8.627961321716496,Nov-Feb,Agra Palace Hotel,2295
+697,Goa Beaches,Goa,Beach,8.419227436314172,Nov-Mar,Ocean View Goa Hotel,3472
+698,Jaipur City,Rajasthan,City,8.305889899010864,Oct-Mar,Royal Rajasthan Palace,2392
+699,Kerala Backwaters,Kerala,Nature,7.6569626144692755,Sep-Mar,Kerala Backwater Resort,3337
+700,Leh Ladakh,Jammu and Kashmir,Adventure,8.87865289903948,Apr-Jun,Kashmir Valley Hotel,5611
+701,Taj Mahal,Uttar Pradesh,Historical,8.814028636189173,Nov-Feb,Mughal View Resort,2824
+702,Goa Beaches,Goa,Beach,9.111768717459087,Nov-Mar,Ocean View Goa Hotel,4771
+703,Jaipur City,Rajasthan,City,8.56369804176352,Oct-Mar,Royal Rajasthan Palace,2117
+704,Kerala Backwaters,Kerala,Nature,7.917510991611324,Sep-Mar,Kerala Backwater Resort,4596
+705,Leh Ladakh,Jammu and Kashmir,Adventure,8.371945150547274,Apr-Jun,Kashmir Valley Hotel,4662
+706,Taj Mahal,Uttar Pradesh,Historical,9.023746389658204,Nov-Feb,Agra Palace Hotel,2846
+707,Goa Beaches,Goa,Beach,8.629118750166763,Nov-Mar,Ocean View Goa Hotel,4091
+708,Jaipur City,Rajasthan,City,8.844219597824981,Oct-Mar,Jaipur Grand Hotel,3689
+709,Kerala Backwaters,Kerala,Nature,9.155527396194914,Sep-Mar,Kerala Backwater Resort,4287
+710,Leh Ladakh,Jammu and Kashmir,Adventure,9.03152474709979,Apr-Jun,Snow Peak Resort,6430
+711,Taj Mahal,Uttar Pradesh,Historical,8.636551596129936,Nov-Feb,Agra Palace Hotel,3496
+712,Goa Beaches,Goa,Beach,8.810464389396717,Nov-Mar,Palm Paradise Resort,4272
+713,Jaipur City,Rajasthan,City,8.24455368678293,Oct-Mar,Royal Rajasthan Palace,3112
+714,Kerala Backwaters,Kerala,Nature,8.655670235424626,Sep-Mar,Coconut Grove Hotel,3485
+715,Leh Ladakh,Jammu and Kashmir,Adventure,8.402277983035928,Apr-Jun,Kashmir Valley Hotel,2715
+716,Taj Mahal,Uttar Pradesh,Historical,8.878654587888997,Nov-Feb,Agra Palace Hotel,3883
+717,Goa Beaches,Goa,Beach,8.367306496099209,Nov-Mar,Palm Paradise Resort,5739
+718,Jaipur City,Rajasthan,City,9.203460228257162,Oct-Mar,Royal Rajasthan Palace,3939
+719,Kerala Backwaters,Kerala,Nature,8.603678777019319,Sep-Mar,Kerala Backwater Resort,4600
+720,Leh Ladakh,Jammu and Kashmir,Adventure,8.034817273030939,Apr-Jun,Snow Peak Resort,5118
+721,Taj Mahal,Uttar Pradesh,Historical,8.931632119904084,Nov-Feb,Agra Palace Hotel,3204
+722,Goa Beaches,Goa,Beach,9.389779698220083,Nov-Mar,Ocean View Goa Hotel,5328
+723,Jaipur City,Rajasthan,City,8.279131951554369,Oct-Mar,Royal Rajasthan Palace,2162
+724,Kerala Backwaters,Kerala,Nature,7.925686613406978,Sep-Mar,Kerala Backwater Resort,4804
+725,Leh Ladakh,Jammu and Kashmir,Adventure,9.339552233237942,Apr-Jun,Himalayan View Resort,5916
+726,Taj Mahal,Uttar Pradesh,Historical,8.182156495747552,Nov-Feb,Taj Heritage Hotel,3216
+727,Goa Beaches,Goa,Beach,7.714387334549871,Nov-Mar,Goa Beach Resort,3693
+728,Jaipur City,Rajasthan,City,9.09930562784097,Oct-Mar,Royal Rajasthan Palace,2155
+729,Kerala Backwaters,Kerala,Nature,8.569879157443847,Sep-Mar,Kerala Backwater Resort,2390
+730,Leh Ladakh,Jammu and Kashmir,Adventure,7.896272170257733,Apr-Jun,Kashmir Valley Hotel,6238
+731,Taj Mahal,Uttar Pradesh,Historical,9.20644321253904,Nov-Feb,Mughal View Resort,3969
+732,Goa Beaches,Goa,Beach,8.465381843255685,Nov-Mar,Goa Beach Resort,3199
+733,Jaipur City,Rajasthan,City,8.703584273601871,Oct-Mar,Pink City Heritage Hotel,3854
+734,Kerala Backwaters,Kerala,Nature,8.248600725902943,Sep-Mar,Coconut Grove Hotel,4380
+735,Leh Ladakh,Jammu and Kashmir,Adventure,8.514869186476712,Apr-Jun,Snow Peak Resort,6318
+736,Taj Mahal,Uttar Pradesh,Historical,9.088805186403164,Nov-Feb,Taj Heritage Hotel,2056
+737,Goa Beaches,Goa,Beach,9.413701353656403,Nov-Mar,Ocean View Goa Hotel,3325
+738,Jaipur City,Rajasthan,City,8.053822692109417,Oct-Mar,Royal Rajasthan Palace,2854
+739,Kerala Backwaters,Kerala,Nature,8.372037385587443,Sep-Mar,Coconut Grove Hotel,4782
+740,Leh Ladakh,Jammu and Kashmir,Adventure,9.263891738676694,Apr-Jun,Kashmir Valley Hotel,2925
+741,Taj Mahal,Uttar Pradesh,Historical,7.72777553164018,Nov-Feb,Agra Palace Hotel,3910
+742,Goa Beaches,Goa,Beach,8.532765536915521,Nov-Mar,Palm Paradise Resort,4074
+743,Jaipur City,Rajasthan,City,7.727596682180292,Oct-Mar,Jaipur Grand Hotel,3929
+744,Kerala Backwaters,Kerala,Nature,8.203211682328114,Sep-Mar,Kerala Backwater Resort,4603
+745,Leh Ladakh,Jammu and Kashmir,Adventure,7.933373924579141,Apr-Jun,Himalayan View Resort,5829
+746,Taj Mahal,Uttar Pradesh,Historical,9.059361289382425,Nov-Feb,Mughal View Resort,2088
+747,Goa Beaches,Goa,Beach,8.350906820188296,Nov-Mar,Goa Beach Resort,4512
+748,Jaipur City,Rajasthan,City,8.719936425969232,Oct-Mar,Pink City Heritage Hotel,3347
+749,Kerala Backwaters,Kerala,Nature,8.931736559795393,Sep-Mar,Kerala Backwater Resort,2494
+750,Leh Ladakh,Jammu and Kashmir,Adventure,8.956458952804828,Apr-Jun,Kashmir Valley Hotel,4485
+751,Taj Mahal,Uttar Pradesh,Historical,7.790538404306647,Nov-Feb,Mughal View Resort,2747
+752,Goa Beaches,Goa,Beach,8.539108136038704,Nov-Mar,Goa Beach Resort,4048
+753,Jaipur City,Rajasthan,City,8.594748337394,Oct-Mar,Jaipur Grand Hotel,3490
+754,Kerala Backwaters,Kerala,Nature,8.084015245138538,Sep-Mar,Kerala Backwater Resort,3336
+755,Leh Ladakh,Jammu and Kashmir,Adventure,7.734281734271488,Apr-Jun,Kashmir Valley Hotel,3756
+756,Taj Mahal,Uttar Pradesh,Historical,8.54760827518156,Nov-Feb,Mughal View Resort,3564
+757,Goa Beaches,Goa,Beach,7.644463430707246,Nov-Mar,Goa Beach Resort,2859
+758,Jaipur City,Rajasthan,City,9.12139535266794,Oct-Mar,Pink City Heritage Hotel,2499
+759,Kerala Backwaters,Kerala,Nature,8.72751759235414,Sep-Mar,Kerala Nature Retreat,2647
+760,Leh Ladakh,Jammu and Kashmir,Adventure,8.352180026398809,Apr-Jun,Snow Peak Resort,5403
+761,Taj Mahal,Uttar Pradesh,Historical,9.36014231646272,Nov-Feb,Taj Heritage Hotel,3912
+762,Goa Beaches,Goa,Beach,8.147811499679674,Nov-Mar,Goa Beach Resort,3174
+763,Jaipur City,Rajasthan,City,8.90257550420428,Oct-Mar,Royal Rajasthan Palace,2807
+764,Kerala Backwaters,Kerala,Nature,8.506724060467622,Sep-Mar,Coconut Grove Hotel,3549
+765,Leh Ladakh,Jammu and Kashmir,Adventure,8.62458625744304,Apr-Jun,Himalayan View Resort,5014
+766,Taj Mahal,Uttar Pradesh,Historical,8.145328815121932,Nov-Feb,Mughal View Resort,3961
+767,Goa Beaches,Goa,Beach,8.24362221802096,Nov-Mar,Ocean View Goa Hotel,3085
+768,Jaipur City,Rajasthan,City,7.596634440314337,Oct-Mar,Royal Rajasthan Palace,3056
+769,Kerala Backwaters,Kerala,Nature,7.57663598347406,Sep-Mar,Kerala Backwater Resort,3447
+770,Leh Ladakh,Jammu and Kashmir,Adventure,9.08102960007878,Apr-Jun,Snow Peak Resort,3493
+771,Taj Mahal,Uttar Pradesh,Historical,8.129988976860952,Nov-Feb,Agra Palace Hotel,2935
+772,Goa Beaches,Goa,Beach,9.13732713238196,Nov-Mar,Goa Beach Resort,3071
+773,Jaipur City,Rajasthan,City,8.784997932243503,Oct-Mar,Royal Rajasthan Palace,4182
+774,Kerala Backwaters,Kerala,Nature,8.038663649202402,Sep-Mar,Kerala Nature Retreat,3445
+775,Leh Ladakh,Jammu and Kashmir,Adventure,8.079156318407351,Apr-Jun,Himalayan View Resort,4584
+776,Taj Mahal,Uttar Pradesh,Historical,8.459363313306993,Nov-Feb,Agra Palace Hotel,2488
+777,Goa Beaches,Goa,Beach,9.046231352406494,Nov-Mar,Ocean View Goa Hotel,2777
+778,Jaipur City,Rajasthan,City,9.200907306361843,Oct-Mar,Royal Rajasthan Palace,3019
+779,Kerala Backwaters,Kerala,Nature,8.861507015552508,Sep-Mar,Kerala Nature Retreat,5163
+780,Leh Ladakh,Jammu and Kashmir,Adventure,9.291685937704914,Apr-Jun,Himalayan View Resort,4387
+781,Taj Mahal,Uttar Pradesh,Historical,8.531079521858732,Nov-Feb,Taj Heritage Hotel,1983
+782,Goa Beaches,Goa,Beach,8.99783225118662,Nov-Mar,Goa Beach Resort,3765
+783,Jaipur City,Rajasthan,City,8.528348193854123,Oct-Mar,Pink City Heritage Hotel,2530
+784,Kerala Backwaters,Kerala,Nature,8.317882740052342,Sep-Mar,Coconut Grove Hotel,4439
+785,Leh Ladakh,Jammu and Kashmir,Adventure,9.366933345133754,Apr-Jun,Snow Peak Resort,3540
+786,Taj Mahal,Uttar Pradesh,Historical,8.389205905418272,Nov-Feb,Taj Heritage Hotel,2417
+787,Goa Beaches,Goa,Beach,9.44212563021952,Nov-Mar,Goa Beach Resort,4948
+788,Jaipur City,Rajasthan,City,8.223627062910356,Oct-Mar,Pink City Heritage Hotel,2685
+789,Kerala Backwaters,Kerala,Nature,8.174235795355958,Sep-Mar,Kerala Backwater Resort,4952
+790,Leh Ladakh,Jammu and Kashmir,Adventure,9.157720701508042,Apr-Jun,Kashmir Valley Hotel,2521
+791,Taj Mahal,Uttar Pradesh,Historical,9.42168809807716,Nov-Feb,Taj Heritage Hotel,1973
+792,Goa Beaches,Goa,Beach,7.50562874119151,Nov-Mar,Ocean View Goa Hotel,5691
+793,Jaipur City,Rajasthan,City,7.781580260307882,Oct-Mar,Royal Rajasthan Palace,4057
+794,Kerala Backwaters,Kerala,Nature,8.531159787998941,Sep-Mar,Kerala Backwater Resort,4553
+795,Leh Ladakh,Jammu and Kashmir,Adventure,8.189514727765914,Apr-Jun,Kashmir Valley Hotel,5841
+796,Taj Mahal,Uttar Pradesh,Historical,9.243698788707544,Nov-Feb,Taj Heritage Hotel,2203
+797,Goa Beaches,Goa,Beach,9.120638441373126,Nov-Mar,Goa Beach Resort,3186
+798,Jaipur City,Rajasthan,City,7.608875043089363,Oct-Mar,Pink City Heritage Hotel,2084
+799,Kerala Backwaters,Kerala,Nature,9.078902378388406,Sep-Mar,Kerala Nature Retreat,2915
+800,Leh Ladakh,Jammu and Kashmir,Adventure,7.972030910129,Apr-Jun,Snow Peak Resort,6247
+801,Taj Mahal,Uttar Pradesh,Historical,9.157148625977571,Nov-Feb,Agra Palace Hotel,2262
+802,Goa Beaches,Goa,Beach,9.41083109431862,Nov-Mar,Palm Paradise Resort,3750
+803,Jaipur City,Rajasthan,City,9.31045957210701,Oct-Mar,Pink City Heritage Hotel,2747
+804,Kerala Backwaters,Kerala,Nature,8.208242452766306,Sep-Mar,Coconut Grove Hotel,4628
+805,Leh Ladakh,Jammu and Kashmir,Adventure,8.410141709638284,Apr-Jun,Kashmir Valley Hotel,5007
+806,Taj Mahal,Uttar Pradesh,Historical,8.576757876815993,Nov-Feb,Mughal View Resort,2530
+807,Goa Beaches,Goa,Beach,9.178994029748877,Nov-Mar,Ocean View Goa Hotel,2528
+808,Jaipur City,Rajasthan,City,8.01406881114496,Oct-Mar,Pink City Heritage Hotel,2706
+809,Kerala Backwaters,Kerala,Nature,7.8442566698712035,Sep-Mar,Kerala Backwater Resort,5304
+810,Leh Ladakh,Jammu and Kashmir,Adventure,8.161053310539785,Apr-Jun,Kashmir Valley Hotel,6217
+811,Taj Mahal,Uttar Pradesh,Historical,9.393805813478073,Nov-Feb,Taj Heritage Hotel,3626
+812,Goa Beaches,Goa,Beach,9.006784740288401,Nov-Mar,Palm Paradise Resort,5494
+813,Jaipur City,Rajasthan,City,8.336255248752801,Oct-Mar,Pink City Heritage Hotel,4306
+814,Kerala Backwaters,Kerala,Nature,7.589205999248015,Sep-Mar,Kerala Nature Retreat,2769
+815,Leh Ladakh,Jammu and Kashmir,Adventure,9.220824441474456,Apr-Jun,Himalayan View Resort,4506
+816,Taj Mahal,Uttar Pradesh,Historical,9.423987379093196,Nov-Feb,Taj Heritage Hotel,2953
+817,Goa Beaches,Goa,Beach,7.999026975129425,Nov-Mar,Ocean View Goa Hotel,3237
+818,Jaipur City,Rajasthan,City,8.385706717073933,Oct-Mar,Jaipur Grand Hotel,2315
+819,Kerala Backwaters,Kerala,Nature,7.562622503552138,Sep-Mar,Kerala Nature Retreat,4200
+820,Leh Ladakh,Jammu and Kashmir,Adventure,8.772244496732984,Apr-Jun,Snow Peak Resort,5670
+821,Taj Mahal,Uttar Pradesh,Historical,8.853137683108654,Nov-Feb,Taj Heritage Hotel,3944
+822,Goa Beaches,Goa,Beach,9.22889675552697,Nov-Mar,Goa Beach Resort,2538
+823,Jaipur City,Rajasthan,City,8.501224868997667,Oct-Mar,Pink City Heritage Hotel,2686
+824,Kerala Backwaters,Kerala,Nature,9.206043310589514,Sep-Mar,Coconut Grove Hotel,5044
+825,Leh Ladakh,Jammu and Kashmir,Adventure,7.943715893520679,Apr-Jun,Snow Peak Resort,4704
+826,Taj Mahal,Uttar Pradesh,Historical,8.277156854345177,Nov-Feb,Mughal View Resort,2598
+827,Goa Beaches,Goa,Beach,8.377495779286125,Nov-Mar,Ocean View Goa Hotel,5431
+828,Jaipur City,Rajasthan,City,7.804063905354139,Oct-Mar,Pink City Heritage Hotel,3623
+829,Kerala Backwaters,Kerala,Nature,9.073371866855572,Sep-Mar,Coconut Grove Hotel,5401
+830,Leh Ladakh,Jammu and Kashmir,Adventure,7.928094923060946,Apr-Jun,Kashmir Valley Hotel,4210
+831,Taj Mahal,Uttar Pradesh,Historical,8.771961835427916,Nov-Feb,Agra Palace Hotel,2473
+832,Goa Beaches,Goa,Beach,9.366867008044636,Nov-Mar,Palm Paradise Resort,5655
+833,Jaipur City,Rajasthan,City,7.976891811337149,Oct-Mar,Pink City Heritage Hotel,3362
+834,Kerala Backwaters,Kerala,Nature,8.329340966088974,Sep-Mar,Coconut Grove Hotel,5096
+835,Leh Ladakh,Jammu and Kashmir,Adventure,8.622267855355735,Apr-Jun,Snow Peak Resort,5953
+836,Taj Mahal,Uttar Pradesh,Historical,7.789458969308924,Nov-Feb,Mughal View Resort,2488
+837,Goa Beaches,Goa,Beach,9.49270628520052,Nov-Mar,Ocean View Goa Hotel,2520
+838,Jaipur City,Rajasthan,City,7.6511899073828,Oct-Mar,Jaipur Grand Hotel,4150
+839,Kerala Backwaters,Kerala,Nature,9.19673720089384,Sep-Mar,Coconut Grove Hotel,3068
+840,Leh Ladakh,Jammu and Kashmir,Adventure,7.93351873337229,Apr-Jun,Himalayan View Resort,2583
+841,Taj Mahal,Uttar Pradesh,Historical,8.641198251436522,Nov-Feb,Agra Palace Hotel,3182
+842,Goa Beaches,Goa,Beach,8.784629096343433,Nov-Mar,Goa Beach Resort,4476
+843,Jaipur City,Rajasthan,City,9.191194972792676,Oct-Mar,Jaipur Grand Hotel,3210
+844,Kerala Backwaters,Kerala,Nature,9.173580627388572,Sep-Mar,Coconut Grove Hotel,3730
+845,Leh Ladakh,Jammu and Kashmir,Adventure,8.669449269625428,Apr-Jun,Snow Peak Resort,5828
+846,Taj Mahal,Uttar Pradesh,Historical,8.971338259095013,Nov-Feb,Agra Palace Hotel,2069
+847,Goa Beaches,Goa,Beach,7.790585198400288,Nov-Mar,Ocean View Goa Hotel,3433
+848,Jaipur City,Rajasthan,City,9.02991974288286,Oct-Mar,Royal Rajasthan Palace,3780
+849,Kerala Backwaters,Kerala,Nature,8.749274375887886,Sep-Mar,Kerala Backwater Resort,5434
+850,Leh Ladakh,Jammu and Kashmir,Adventure,8.64491136642723,Apr-Jun,Himalayan View Resort,4355
+851,Taj Mahal,Uttar Pradesh,Historical,9.33544112557844,Nov-Feb,Agra Palace Hotel,2292
+852,Goa Beaches,Goa,Beach,8.287492091663,Nov-Mar,Goa Beach Resort,3291
+853,Jaipur City,Rajasthan,City,9.04694477176505,Oct-Mar,Pink City Heritage Hotel,3609
+854,Kerala Backwaters,Kerala,Nature,9.33810388495833,Sep-Mar,Kerala Backwater Resort,3494
+855,Leh Ladakh,Jammu and Kashmir,Adventure,8.913268954871437,Apr-Jun,Himalayan View Resort,5039
+856,Taj Mahal,Uttar Pradesh,Historical,7.668691908852082,Nov-Feb,Agra Palace Hotel,3755
+857,Goa Beaches,Goa,Beach,9.027677154981644,Nov-Mar,Palm Paradise Resort,4107
+858,Jaipur City,Rajasthan,City,8.491365337579884,Oct-Mar,Royal Rajasthan Palace,2883
+859,Kerala Backwaters,Kerala,Nature,7.921623278868692,Sep-Mar,Coconut Grove Hotel,4677
+860,Leh Ladakh,Jammu and Kashmir,Adventure,7.7202244959060975,Apr-Jun,Himalayan View Resort,3484
+861,Taj Mahal,Uttar Pradesh,Historical,7.824049108063554,Nov-Feb,Agra Palace Hotel,3180
+862,Goa Beaches,Goa,Beach,8.527437466841967,Nov-Mar,Ocean View Goa Hotel,5880
+863,Jaipur City,Rajasthan,City,7.5288565248227135,Oct-Mar,Jaipur Grand Hotel,2319
+864,Kerala Backwaters,Kerala,Nature,9.147968243343048,Sep-Mar,Kerala Nature Retreat,2790
+865,Leh Ladakh,Jammu and Kashmir,Adventure,8.989187748130234,Apr-Jun,Snow Peak Resort,3550
+866,Taj Mahal,Uttar Pradesh,Historical,8.15752225096045,Nov-Feb,Mughal View Resort,3209
+867,Goa Beaches,Goa,Beach,7.544784240485142,Nov-Mar,Goa Beach Resort,4535
+868,Jaipur City,Rajasthan,City,8.498230857041534,Oct-Mar,Jaipur Grand Hotel,4046
+869,Kerala Backwaters,Kerala,Nature,7.67787032728221,Sep-Mar,Kerala Nature Retreat,4634
+870,Leh Ladakh,Jammu and Kashmir,Adventure,8.31662363535272,Apr-Jun,Snow Peak Resort,2848
+871,Taj Mahal,Uttar Pradesh,Historical,7.643206988401131,Nov-Feb,Mughal View Resort,2459
+872,Goa Beaches,Goa,Beach,9.413328344476888,Nov-Mar,Palm Paradise Resort,4463
+873,Jaipur City,Rajasthan,City,9.231967797202106,Oct-Mar,Royal Rajasthan Palace,2492
+874,Kerala Backwaters,Kerala,Nature,8.671636575343907,Sep-Mar,Kerala Nature Retreat,3759
+875,Leh Ladakh,Jammu and Kashmir,Adventure,8.98297001694882,Apr-Jun,Snow Peak Resort,6399
+876,Taj Mahal,Uttar Pradesh,Historical,8.796715429177867,Nov-Feb,Mughal View Resort,1877
+877,Goa Beaches,Goa,Beach,7.911432523928271,Nov-Mar,Goa Beach Resort,5446
+878,Jaipur City,Rajasthan,City,7.601483087639889,Oct-Mar,Pink City Heritage Hotel,2326
+879,Kerala Backwaters,Kerala,Nature,8.309631133912779,Sep-Mar,Kerala Backwater Resort,5424
+880,Leh Ladakh,Jammu and Kashmir,Adventure,8.442750358263288,Apr-Jun,Kashmir Valley Hotel,5281
+881,Taj Mahal,Uttar Pradesh,Historical,8.278291770000452,Nov-Feb,Mughal View Resort,3753
+882,Goa Beaches,Goa,Beach,8.449238005542009,Nov-Mar,Ocean View Goa Hotel,5002
+883,Jaipur City,Rajasthan,City,7.95494238797158,Oct-Mar,Royal Rajasthan Palace,3059
+884,Kerala Backwaters,Kerala,Nature,9.241444802843858,Sep-Mar,Kerala Backwater Resort,4075
+885,Leh Ladakh,Jammu and Kashmir,Adventure,9.03191394329098,Apr-Jun,Kashmir Valley Hotel,4263
+886,Taj Mahal,Uttar Pradesh,Historical,7.713067194844037,Nov-Feb,Agra Palace Hotel,2020
+887,Goa Beaches,Goa,Beach,7.590325473167349,Nov-Mar,Goa Beach Resort,4201
+888,Jaipur City,Rajasthan,City,8.968588466673665,Oct-Mar,Pink City Heritage Hotel,2816
+889,Kerala Backwaters,Kerala,Nature,9.002930521303405,Sep-Mar,Kerala Backwater Resort,5203
+890,Leh Ladakh,Jammu and Kashmir,Adventure,7.743039575412055,Apr-Jun,Kashmir Valley Hotel,6402
+891,Taj Mahal,Uttar Pradesh,Historical,9.223991095114595,Nov-Feb,Taj Heritage Hotel,2513
+892,Goa Beaches,Goa,Beach,8.86432839457484,Nov-Mar,Goa Beach Resort,5048
+893,Jaipur City,Rajasthan,City,8.375786034039642,Oct-Mar,Royal Rajasthan Palace,1916
+894,Kerala Backwaters,Kerala,Nature,8.8155969048925,Sep-Mar,Coconut Grove Hotel,4633
+895,Leh Ladakh,Jammu and Kashmir,Adventure,8.011096326725276,Apr-Jun,Kashmir Valley Hotel,3867
+896,Taj Mahal,Uttar Pradesh,Historical,8.775168604432578,Nov-Feb,Agra Palace Hotel,2083
+897,Goa Beaches,Goa,Beach,8.342976753551683,Nov-Mar,Goa Beach Resort,2894
+898,Jaipur City,Rajasthan,City,8.311533772217603,Oct-Mar,Pink City Heritage Hotel,2887
+899,Kerala Backwaters,Kerala,Nature,8.575304720464212,Sep-Mar,Coconut Grove Hotel,4968
+900,Leh Ladakh,Jammu and Kashmir,Adventure,8.81228742963959,Apr-Jun,Himalayan View Resort,2571
+901,Taj Mahal,Uttar Pradesh,Historical,7.94384380620817,Nov-Feb,Mughal View Resort,1773
+902,Goa Beaches,Goa,Beach,9.115849499250787,Nov-Mar,Goa Beach Resort,4513
+903,Jaipur City,Rajasthan,City,8.253494745892702,Oct-Mar,Pink City Heritage Hotel,3143
+904,Kerala Backwaters,Kerala,Nature,8.574376628395806,Sep-Mar,Kerala Backwater Resort,2537
+905,Leh Ladakh,Jammu and Kashmir,Adventure,8.13644498964263,Apr-Jun,Snow Peak Resort,3889
+906,Taj Mahal,Uttar Pradesh,Historical,8.619770095066015,Nov-Feb,Taj Heritage Hotel,2106
+907,Goa Beaches,Goa,Beach,8.06914958687841,Nov-Mar,Palm Paradise Resort,2665
+908,Jaipur City,Rajasthan,City,8.452641011322342,Oct-Mar,Jaipur Grand Hotel,3367
+909,Kerala Backwaters,Kerala,Nature,8.740400669784297,Sep-Mar,Coconut Grove Hotel,4258
+910,Leh Ladakh,Jammu and Kashmir,Adventure,8.569335477200543,Apr-Jun,Snow Peak Resort,3824
+911,Taj Mahal,Uttar Pradesh,Historical,7.685181358142892,Nov-Feb,Mughal View Resort,2228
+912,Goa Beaches,Goa,Beach,9.4380138836961,Nov-Mar,Goa Beach Resort,5348
+913,Jaipur City,Rajasthan,City,7.58801460622224,Oct-Mar,Royal Rajasthan Palace,3843
+914,Kerala Backwaters,Kerala,Nature,9.285417260653366,Sep-Mar,Coconut Grove Hotel,2301
+915,Leh Ladakh,Jammu and Kashmir,Adventure,7.85112195819902,Apr-Jun,Himalayan View Resort,5996
+916,Taj Mahal,Uttar Pradesh,Historical,9.39676149780104,Nov-Feb,Taj Heritage Hotel,2915
+917,Goa Beaches,Goa,Beach,7.545108072258168,Nov-Mar,Ocean View Goa Hotel,3278
+918,Jaipur City,Rajasthan,City,9.371201913686736,Oct-Mar,Royal Rajasthan Palace,2013
+919,Kerala Backwaters,Kerala,Nature,9.252136618345416,Sep-Mar,Kerala Nature Retreat,3311
+920,Leh Ladakh,Jammu and Kashmir,Adventure,7.584679630283544,Apr-Jun,Snow Peak Resort,4076
+921,Taj Mahal,Uttar Pradesh,Historical,8.685684922550122,Nov-Feb,Mughal View Resort,3948
+922,Goa Beaches,Goa,Beach,9.298024384615864,Nov-Mar,Palm Paradise Resort,5135
+923,Jaipur City,Rajasthan,City,7.821684368681256,Oct-Mar,Pink City Heritage Hotel,3495
+924,Kerala Backwaters,Kerala,Nature,8.644015149109247,Sep-Mar,Coconut Grove Hotel,2791
+925,Leh Ladakh,Jammu and Kashmir,Adventure,7.801125565121017,Apr-Jun,Snow Peak Resort,3833
+926,Taj Mahal,Uttar Pradesh,Historical,8.324741876265339,Nov-Feb,Agra Palace Hotel,2609
+927,Goa Beaches,Goa,Beach,7.741214133839709,Nov-Mar,Palm Paradise Resort,4639
+928,Jaipur City,Rajasthan,City,8.026833743679079,Oct-Mar,Royal Rajasthan Palace,2513
+929,Kerala Backwaters,Kerala,Nature,8.66318905277383,Sep-Mar,Coconut Grove Hotel,3135
+930,Leh Ladakh,Jammu and Kashmir,Adventure,8.54331105953082,Apr-Jun,Kashmir Valley Hotel,4451
+931,Taj Mahal,Uttar Pradesh,Historical,9.309322896703316,Nov-Feb,Mughal View Resort,1741
+932,Goa Beaches,Goa,Beach,7.936004330312837,Nov-Mar,Ocean View Goa Hotel,4543
+933,Jaipur City,Rajasthan,City,9.274200565698507,Oct-Mar,Jaipur Grand Hotel,1801
+934,Kerala Backwaters,Kerala,Nature,7.904577589196294,Sep-Mar,Kerala Nature Retreat,4472
+935,Leh Ladakh,Jammu and Kashmir,Adventure,8.473490132236787,Apr-Jun,Snow Peak Resort,5348
+936,Taj Mahal,Uttar Pradesh,Historical,8.02055897257851,Nov-Feb,Mughal View Resort,3268
+937,Goa Beaches,Goa,Beach,8.257655225773263,Nov-Mar,Palm Paradise Resort,4449
+938,Jaipur City,Rajasthan,City,9.20608066746193,Oct-Mar,Jaipur Grand Hotel,4436
+939,Kerala Backwaters,Kerala,Nature,8.40872418732025,Sep-Mar,Kerala Nature Retreat,4363
+940,Leh Ladakh,Jammu and Kashmir,Adventure,7.737707489631597,Apr-Jun,Himalayan View Resort,6237
+941,Taj Mahal,Uttar Pradesh,Historical,8.645046758887661,Nov-Feb,Agra Palace Hotel,2417
+942,Goa Beaches,Goa,Beach,8.702652455921308,Nov-Mar,Palm Paradise Resort,5674
+943,Jaipur City,Rajasthan,City,9.106183997228763,Oct-Mar,Pink City Heritage Hotel,4041
+944,Kerala Backwaters,Kerala,Nature,9.429650079998778,Sep-Mar,Kerala Nature Retreat,5437
+945,Leh Ladakh,Jammu and Kashmir,Adventure,7.537510610841785,Apr-Jun,Snow Peak Resort,5418
+946,Taj Mahal,Uttar Pradesh,Historical,8.012249945176515,Nov-Feb,Mughal View Resort,1589
+947,Goa Beaches,Goa,Beach,7.619280847171351,Nov-Mar,Goa Beach Resort,4209
+948,Jaipur City,Rajasthan,City,7.708772719956032,Oct-Mar,Jaipur Grand Hotel,3969
+949,Kerala Backwaters,Kerala,Nature,9.087608839185751,Sep-Mar,Kerala Backwater Resort,2342
+950,Leh Ladakh,Jammu and Kashmir,Adventure,7.671909274040946,Apr-Jun,Kashmir Valley Hotel,5541
+951,Taj Mahal,Uttar Pradesh,Historical,8.365692888254666,Nov-Feb,Mughal View Resort,1605
+952,Goa Beaches,Goa,Beach,8.123015873320766,Nov-Mar,Goa Beach Resort,3386
+953,Jaipur City,Rajasthan,City,8.321398766693164,Oct-Mar,Royal Rajasthan Palace,2227
+954,Kerala Backwaters,Kerala,Nature,9.192148287990324,Sep-Mar,Kerala Nature Retreat,3528
+955,Leh Ladakh,Jammu and Kashmir,Adventure,8.10676258457348,Apr-Jun,Kashmir Valley Hotel,4395
+956,Taj Mahal,Uttar Pradesh,Historical,9.240773308493525,Nov-Feb,Agra Palace Hotel,3494
+957,Goa Beaches,Goa,Beach,9.319617878220548,Nov-Mar,Palm Paradise Resort,2816
+958,Jaipur City,Rajasthan,City,7.932950633090041,Oct-Mar,Royal Rajasthan Palace,3786
+959,Kerala Backwaters,Kerala,Nature,9.052548436473314,Sep-Mar,Kerala Backwater Resort,2834
+960,Leh Ladakh,Jammu and Kashmir,Adventure,8.925500312367074,Apr-Jun,Himalayan View Resort,4425
+961,Taj Mahal,Uttar Pradesh,Historical,8.385107105120452,Nov-Feb,Taj Heritage Hotel,3556
+962,Goa Beaches,Goa,Beach,9.210850998967874,Nov-Mar,Palm Paradise Resort,5321
+963,Jaipur City,Rajasthan,City,8.81434371431127,Oct-Mar,Jaipur Grand Hotel,4070
+964,Kerala Backwaters,Kerala,Nature,8.86184135941464,Sep-Mar,Kerala Backwater Resort,3639
+965,Leh Ladakh,Jammu and Kashmir,Adventure,8.636537892208446,Apr-Jun,Himalayan View Resort,3052
+966,Taj Mahal,Uttar Pradesh,Historical,9.140527124056437,Nov-Feb,Agra Palace Hotel,2215
+967,Goa Beaches,Goa,Beach,7.528727096669634,Nov-Mar,Ocean View Goa Hotel,3787
+968,Jaipur City,Rajasthan,City,9.06097855232804,Oct-Mar,Jaipur Grand Hotel,3513
+969,Kerala Backwaters,Kerala,Nature,9.409359526915562,Sep-Mar,Coconut Grove Hotel,4083
+970,Leh Ladakh,Jammu and Kashmir,Adventure,9.01310124502825,Apr-Jun,Kashmir Valley Hotel,5889
+971,Taj Mahal,Uttar Pradesh,Historical,8.372423129319028,Nov-Feb,Mughal View Resort,2607
+972,Goa Beaches,Goa,Beach,9.215187537133938,Nov-Mar,Goa Beach Resort,3841
+973,Jaipur City,Rajasthan,City,8.565934397421195,Oct-Mar,Jaipur Grand Hotel,1910
+974,Kerala Backwaters,Kerala,Nature,7.686987873824284,Sep-Mar,Coconut Grove Hotel,2450
+975,Leh Ladakh,Jammu and Kashmir,Adventure,8.780722103503646,Apr-Jun,Himalayan View Resort,4930
+976,Taj Mahal,Uttar Pradesh,Historical,8.008536059147975,Nov-Feb,Taj Heritage Hotel,3554
+977,Goa Beaches,Goa,Beach,8.499576395856343,Nov-Mar,Palm Paradise Resort,2958
+978,Jaipur City,Rajasthan,City,8.519173371272599,Oct-Mar,Pink City Heritage Hotel,2907
+979,Kerala Backwaters,Kerala,Nature,9.08174574800675,Sep-Mar,Coconut Grove Hotel,2407
+980,Leh Ladakh,Jammu and Kashmir,Adventure,9.347621264963776,Apr-Jun,Snow Peak Resort,3399
+981,Taj Mahal,Uttar Pradesh,Historical,8.732673715422088,Nov-Feb,Mughal View Resort,1521
+982,Goa Beaches,Goa,Beach,8.841048136040031,Nov-Mar,Goa Beach Resort,2909
+983,Jaipur City,Rajasthan,City,9.08021631984698,Oct-Mar,Pink City Heritage Hotel,2694
+984,Kerala Backwaters,Kerala,Nature,7.748098699266505,Sep-Mar,Kerala Backwater Resort,2714
+985,Leh Ladakh,Jammu and Kashmir,Adventure,9.034655060888772,Apr-Jun,Himalayan View Resort,5698
+986,Taj Mahal,Uttar Pradesh,Historical,8.108715094313126,Nov-Feb,Taj Heritage Hotel,2308
+987,Goa Beaches,Goa,Beach,9.499811031053753,Nov-Mar,Goa Beach Resort,3373
+988,Jaipur City,Rajasthan,City,7.96234787124329,Oct-Mar,Pink City Heritage Hotel,1813
+989,Kerala Backwaters,Kerala,Nature,8.208087955185452,Sep-Mar,Kerala Backwater Resort,3170
+990,Leh Ladakh,Jammu and Kashmir,Adventure,8.117425964659915,Apr-Jun,Kashmir Valley Hotel,5525
+991,Taj Mahal,Uttar Pradesh,Historical,8.20738838115243,Nov-Feb,Agra Palace Hotel,3634
+992,Goa Beaches,Goa,Beach,8.114747172536235,Nov-Mar,Ocean View Goa Hotel,5456
+993,Jaipur City,Rajasthan,City,8.19515468129691,Oct-Mar,Pink City Heritage Hotel,3360
+994,Kerala Backwaters,Kerala,Nature,8.165291117364324,Sep-Mar,Kerala Nature Retreat,3524
+995,Leh Ladakh,Jammu and Kashmir,Adventure,7.74636736837115,Apr-Jun,Kashmir Valley Hotel,3766
+996,Taj Mahal,Uttar Pradesh,Historical,8.13381819081494,Nov-Feb,Agra Palace Hotel,3669
+997,Goa Beaches,Goa,Beach,8.203518828553301,Nov-Mar,Palm Paradise Resort,5718
+998,Jaipur City,Rajasthan,City,8.308435430056575,Oct-Mar,Jaipur Grand Hotel,2549
+999,Kerala Backwaters,Kerala,Nature,8.961740523595862,Sep-Mar,Kerala Nature Retreat,2884
+1000,Leh Ladakh,Jammu and Kashmir,Adventure,8.939036209396416,Apr-Jun,Himalayan View Resort,4427
