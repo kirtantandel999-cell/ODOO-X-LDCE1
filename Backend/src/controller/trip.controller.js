@@ -777,12 +777,57 @@ export const getTripById = async (req, res) => {
   }
 };
 
+// ─── Helper: Clean Date Formatting ───────────────────────
+const formatDateKey = (d) => {
+  if (!d) return null;
+  const dateObj = new Date(d);
+  if (isNaN(dateObj.getTime())) return null;
+  return dateObj.toISOString().split("T")[0];
+};
+
+const parseDateUTC = (dStr) => {
+  const clean = String(dStr).split("T")[0];
+  const [y, m, d] = clean.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d));
+};
+
 // ─────────────────────────────────────────────
-// GET /api/trips/:tripId/itinerary
+// GET /api/trips/:tripId/itinerary (Screen 9 Day-Wise Itinerary with Budget & Filters)
+// Supports: search, date, startDate, endDate, category, destinationId, sort, groupBy
 // ─────────────────────────────────────────────
 export const getTripItinerary = async (req, res) => {
   const tripId = parseInt(req.params.tripId || req.params.id);
   if (isNaN(tripId)) return fail(res, "Invalid trip ID.", 400);
+
+  const {
+    search,
+    date,
+    startDate,
+    endDate,
+    category,
+    destinationId,
+    sort = "order_asc",
+    groupBy = "day",
+  } = req.query;
+
+  const validSorts = [
+    "order_asc",
+    "order_desc",
+    "start_time_asc",
+    "start_time_desc",
+    "expense_asc",
+    "expense_desc",
+    "name_asc",
+    "name_desc",
+  ];
+  if (sort && !validSorts.includes(sort)) {
+    return fail(res, `Invalid sort parameter. Allowed values: ${validSorts.join(", ")}`, 400);
+  }
+
+  const validGroups = ["day", "category"];
+  if (groupBy && !validGroups.includes(String(groupBy).toLowerCase())) {
+    return fail(res, `Invalid groupBy parameter. Allowed values: day, category`, 400);
+  }
 
   try {
     const trip = await prisma.trip.findUnique({
@@ -793,86 +838,203 @@ export const getTripItinerary = async (req, res) => {
     if (!trip) return fail(res, "Trip not found.", 404);
     if (trip.userId !== req.user.id) return fail(res, "Forbidden.", 403);
 
-    const start = new Date(trip.startDate);
-    const end = new Date(trip.endDate);
+    const startStr = formatDateKey(trip.startDate);
+    const endStr = formatDateKey(trip.endDate);
+    const startUTC = parseDateUTC(startStr);
+    const endUTC = parseDateUTC(endStr);
 
-    // Build day-by-day dates array
-    const days = [];
-    const curr = new Date(start);
+    // Build all trip days dynamically in UTC
+    const allDays = [];
+    let curr = new Date(startUTC);
     let dayIndex = 1;
 
-    while (curr <= end) {
+    while (curr <= endUTC) {
       const dateStr = curr.toISOString().split("T")[0];
-      days.push({
+      allDays.push({
+        day: dayIndex++,
         date: dateStr,
-        dayNumber: dayIndex++,
         items: [],
+        totalExpense: 0,
       });
-      curr.setDate(curr.getDate() + 1);
+      curr.setUTCDate(curr.getUTCDate() + 1);
     }
 
-    const unassignedItems = [];
+    // Process TripActivities
+    let activities = trip.tripActivities.map((ta) => {
+      let dayNumber = null;
+      let dateStr = null;
 
-    // Map destinations to days
-    for (const td of trip.tripDestinations) {
-      const item = {
-        type: "DESTINATION",
-        tripDestinationId: td.id,
-        destination: td.destination,
-        visitDate: td.visitDate,
-        order: td.order,
-        notes: td.notes,
-      };
-
-      if (td.visitDate) {
-        const dStr = new Date(td.visitDate).toISOString().split("T")[0];
-        const targetDay = days.find((d) => d.date === dStr);
-        if (targetDay) {
-          targetDay.items.push(item);
-        } else {
-          unassignedItems.push(item);
-        }
-      } else {
-        unassignedItems.push(item);
+      if (ta.plannedDate) {
+        dateStr = formatDateKey(ta.plannedDate);
+        const itemUTC = parseDateUTC(dateStr);
+        const diff = Math.round((itemUTC - startUTC) / (1000 * 60 * 60 * 24));
+        dayNumber = diff + 1;
       }
-    }
 
-    // Map activities to days
-    for (const ta of trip.tripActivities) {
-      const item = {
-        type: "ACTIVITY",
+      const itemExpense =
+        ta.expense !== null && ta.expense !== undefined
+          ? ta.expense
+          : ta.activity?.estimatedCost || 0;
+
+      return {
+        id: ta.id,
         tripActivityId: ta.id,
-        activity: ta.activity,
+        activityId: ta.activityId,
+        activity: {
+          id: ta.activity.id,
+          name: ta.activity.name,
+          description: ta.activity.description,
+          category: ta.activity.category,
+          image: ta.activity.image,
+          city: ta.activity.city,
+          country: ta.activity.country,
+          estimatedCost: ta.activity.estimatedCost,
+          estimatedDuration: ta.activity.estimatedDuration,
+          destinationId: ta.activity.destinationId,
+        },
         plannedDate: ta.plannedDate,
+        day: dayNumber,
+        date: dateStr,
         startTime: ta.startTime,
         endTime: ta.endTime,
         order: ta.order,
+        expense: itemExpense,
+        currency: ta.currency || trip.currency || "INR",
         notes: ta.notes,
       };
+    });
 
-      if (ta.plannedDate) {
-        const dStr = new Date(ta.plannedDate).toISOString().split("T")[0];
-        const targetDay = days.find((d) => d.date === dStr);
+    // Apply Search Filter
+    if (search?.trim()) {
+      const q = search.trim().toLowerCase();
+      activities = activities.filter(
+        (it) =>
+          it.activity.name.toLowerCase().includes(q) ||
+          (it.activity.description && it.activity.description.toLowerCase().includes(q)) ||
+          (it.notes && it.notes.toLowerCase().includes(q)) ||
+          (it.activity.city && it.activity.city.toLowerCase().includes(q)) ||
+          (it.activity.country && it.activity.country.toLowerCase().includes(q))
+      );
+    }
+
+    // Apply Category Filter
+    if (category?.trim()) {
+      const cat = category.trim().toLowerCase();
+      activities = activities.filter(
+        (it) => it.activity.category && it.activity.category.toLowerCase() === cat
+      );
+    }
+
+    // Apply Destination Filter
+    if (destinationId) {
+      const dId = parseInt(destinationId);
+      activities = activities.filter((it) => it.activity.destinationId === dId);
+    }
+
+    // Sort items
+    const sortComparator = (a, b) => {
+      if (sort === "start_time_asc") {
+        if (a.startTime && b.startTime) return a.startTime.localeCompare(b.startTime);
+        return a.startTime ? -1 : 1;
+      }
+      if (sort === "start_time_desc") {
+        if (a.startTime && b.startTime) return b.startTime.localeCompare(a.startTime);
+        return a.startTime ? 1 : -1;
+      }
+      if (sort === "expense_asc") return (a.expense || 0) - (b.expense || 0);
+      if (sort === "expense_desc") return (b.expense || 0) - (a.expense || 0);
+      if (sort === "name_asc") return a.activity.name.localeCompare(b.activity.name);
+      if (sort === "name_desc") return b.activity.name.localeCompare(a.activity.name);
+      if (sort === "order_desc") return (b.order || 0) - (a.order || 0);
+      return (a.order || 0) - (b.order || 0); // default: order_asc
+    };
+
+    activities.sort(sortComparator);
+
+    // Group items into days
+    const unassigned = [];
+    for (const act of activities) {
+      if (act.date) {
+        const targetDay = allDays.find((d) => d.date === act.date);
         if (targetDay) {
-          targetDay.items.push(item);
+          targetDay.items.push(act);
+          targetDay.totalExpense += act.expense;
         } else {
-          unassignedItems.push(item);
+          unassigned.push(act);
         }
       } else {
-        unassignedItems.push(item);
+        unassigned.push(act);
       }
     }
 
-    // Sort items inside each day by startTime and order
-    for (const day of days) {
-      day.items.sort((a, b) => {
-        if (a.startTime && b.startTime) return a.startTime.localeCompare(b.startTime);
-        if (a.startTime) return -1;
-        if (b.startTime) return 1;
-        return (a.order || 0) - (b.order || 0);
+    // Sort items inside each day
+    for (const d of allDays) {
+      d.items.sort(sortComparator);
+    }
+
+    // Filter days if date or startDate/endDate provided
+    let finalDays = allDays;
+    if (date) {
+      finalDays = allDays.filter((d) => d.date === date);
+    } else if (startDate || endDate) {
+      finalDays = allDays.filter((d) => {
+        let ok = true;
+        if (startDate) ok = ok && d.date >= startDate;
+        if (endDate) ok = ok && d.date <= endDate;
+        return ok;
       });
     }
 
+    // Calculate overall budget metrics
+    const totalCalculatedExpense = allDays.reduce((sum, d) => sum + d.totalExpense, 0);
+    const tripBudget = trip.budget || 0;
+    const remainingBudget =
+      trip.budget !== null && trip.budget !== undefined
+        ? tripBudget - totalCalculatedExpense
+        : null;
+    const overBudget =
+      trip.budget !== null && trip.budget !== undefined
+        ? totalCalculatedExpense > tripBudget
+        : false;
+
+    // Handle groupBy = category
+    if (String(groupBy).toLowerCase() === "category") {
+      const groupedByCategory = {};
+      for (const act of activities) {
+        const cat = act.activity.category || "Uncategorized";
+        if (!groupedByCategory[cat]) groupedByCategory[cat] = [];
+        groupedByCategory[cat].push(act);
+      }
+
+      return ok(
+        res,
+        {
+          trip: {
+            id: trip.id,
+            title: trip.title,
+            description: trip.description,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
+            status: trip.status,
+            budget: trip.budget,
+            currency: trip.currency,
+            coverImage: trip.coverImage,
+          },
+          categories: groupedByCategory,
+          summary: {
+            totalActivities: activities.length,
+            totalExpense: totalCalculatedExpense,
+            tripBudget,
+            remainingBudget,
+            overBudget,
+            currency: trip.currency || "INR",
+          },
+        },
+        "Trip itinerary grouped by category fetched successfully."
+      );
+    }
+
+    // Default: GroupBy Day
     return ok(
       res,
       {
@@ -887,22 +1049,177 @@ export const getTripItinerary = async (req, res) => {
           currency: trip.currency,
           coverImage: trip.coverImage,
         },
+        days: finalDays,
+        unassigned,
+        summary: {
+          totalDays: finalDays.length,
+          totalActivities: activities.length,
+          totalExpense: totalCalculatedExpense,
+          tripBudget,
+          remainingBudget,
+          overBudget,
+          currency: trip.currency || "INR",
+        },
+      },
+      "Trip itinerary fetched successfully.",
+      200,
+      {
         tripId: trip.id,
         title: trip.title,
         startDate: trip.startDate,
         endDate: trip.endDate,
         status: trip.status,
-        totalDays: days.length,
+        totalDays: finalDays.length,
         sections: trip.sections,
         destinations: trip.tripDestinations,
         activities: trip.tripActivities,
-        itinerary: days,
-        unassigned: unassignedItems,
-      },
-      "Trip itinerary fetched successfully."
+        itinerary: finalDays,
+      }
     );
   } catch (e) {
     console.error("getTripItinerary error:", e);
+    return fail(res, "Internal server error.");
+  }
+};
+
+// ─────────────────────────────────────────────
+// GET /api/trips/:tripId/itinerary/day/:date
+// ─────────────────────────────────────────────
+export const getTripItineraryDay = async (req, res) => {
+  const tripId = parseInt(req.params.tripId);
+  const { date } = req.params;
+  if (isNaN(tripId)) return fail(res, "Invalid trip ID.", 400);
+  if (!date || isNaN(new Date(date).getTime())) {
+    return fail(res, "Invalid date parameter. Must be YYYY-MM-DD.", 400);
+  }
+
+  try {
+    const trip = await prisma.trip.findUnique({
+      where: { id: tripId },
+      include: tripInclude,
+    });
+
+    if (!trip) return fail(res, "Trip not found.", 404);
+    if (trip.userId !== req.user.id) return fail(res, "Forbidden.", 403);
+
+    const targetDateStr = String(date).split("T")[0];
+    const targetUTC = parseDateUTC(targetDateStr);
+    const startStr = formatDateKey(trip.startDate);
+    const startUTC = parseDateUTC(startStr);
+
+    const diff = Math.round((targetUTC - startUTC) / (1000 * 60 * 60 * 24));
+    const dayNumber = diff + 1;
+
+    const dayActs = trip.tripActivities.filter((ta) => {
+      if (!ta.plannedDate) return false;
+      const dStr = formatDateKey(ta.plannedDate);
+      return dStr === targetDateStr;
+    });
+
+    dayActs.sort((a, b) => {
+      if (a.startTime && b.startTime) return a.startTime.localeCompare(b.startTime);
+      if (a.startTime) return -1;
+      if (b.startTime) return 1;
+      return (a.order || 0) - (b.order || 0);
+    });
+
+    const items = dayActs.map((ta) => ({
+      id: ta.id,
+      tripActivityId: ta.id,
+      activityId: ta.activityId,
+      activity: {
+        id: ta.activity.id,
+        name: ta.activity.name,
+        description: ta.activity.description,
+        category: ta.activity.category,
+        image: ta.activity.image,
+        city: ta.activity.city,
+        country: ta.activity.country,
+      },
+      plannedDate: ta.plannedDate,
+      day: dayNumber,
+      startTime: ta.startTime,
+      endTime: ta.endTime,
+      order: ta.order,
+      expense:
+        ta.expense !== null && ta.expense !== undefined
+          ? ta.expense
+          : ta.activity?.estimatedCost || 0,
+      currency: ta.currency || trip.currency || "INR",
+      notes: ta.notes,
+    }));
+
+    const totalExpense = items.reduce((sum, it) => sum + (it.expense || 0), 0);
+
+    return ok(
+      res,
+      {
+        day: dayNumber,
+        date: targetDateStr,
+        items,
+        totalExpense,
+        currency: trip.currency || "INR",
+      },
+      "Day itinerary fetched successfully."
+    );
+  } catch (e) {
+    console.error("getTripItineraryDay error:", e);
+    return fail(res, "Internal server error.");
+  }
+};
+
+// ─────────────────────────────────────────────
+// PUT /api/trips/:tripId/itinerary/reorder
+// ─────────────────────────────────────────────
+export const reorderItinerary = async (req, res) => {
+  const tripId = parseInt(req.params.tripId);
+  if (isNaN(tripId)) return fail(res, "Invalid trip ID.", 400);
+
+  const { itemIds, date } = req.body;
+  if (!Array.isArray(itemIds) || itemIds.length === 0) {
+    return fail(res, "itemIds must be a non-empty array of tripActivity IDs.", 400);
+  }
+
+  const parsedIds = itemIds.map((id) => parseInt(id));
+  if (parsedIds.some(isNaN)) {
+    return fail(res, "All itemIds must be valid integers.", 400);
+  }
+
+  try {
+    const trip = await prisma.trip.findUnique({ where: { id: tripId } });
+    if (!trip) return fail(res, "Trip not found.", 404);
+    if (trip.userId !== req.user.id) return fail(res, "Forbidden.", 403);
+
+    const existing = await prisma.tripActivity.findMany({
+      where: { id: { in: parsedIds }, tripId },
+      select: { id: true },
+    });
+
+    if (existing.length !== parsedIds.length) {
+      return fail(res, "One or more itemIds do not belong to this trip.", 404);
+    }
+
+    await prisma.$transaction(
+      parsedIds.map((id, index) =>
+        prisma.tripActivity.update({
+          where: { id },
+          data: {
+            order: index + 1,
+            ...(date ? { plannedDate: new Date(date) } : {}),
+          },
+        })
+      )
+    );
+
+    const updatedItems = await prisma.tripActivity.findMany({
+      where: { id: { in: parsedIds } },
+      include: { activity: true },
+      orderBy: { order: "asc" },
+    });
+
+    return ok(res, updatedItems, "Itinerary items reordered successfully.");
+  } catch (e) {
+    console.error("reorderItinerary error:", e);
     return fail(res, "Internal server error.");
   }
 };
@@ -1119,11 +1436,20 @@ export const addActivityToTrip = async (req, res) => {
   const tripId = parseInt(req.params.tripId);
   if (isNaN(tripId)) return fail(res, "Invalid trip ID.", 400);
 
-  const { activityId, plannedDate, startTime, endTime, order, notes } = req.body;
+  const { activityId, plannedDate, startTime, endTime, order, expense, currency, notes } = req.body;
   if (!activityId) return fail(res, "activityId is required.", 400);
 
   const aId = parseInt(activityId);
   if (isNaN(aId)) return fail(res, "Invalid activityId.", 400);
+
+  if (expense !== undefined && expense !== null) {
+    const exp = parseFloat(expense);
+    if (isNaN(exp) || exp < 0) return fail(res, "expense cannot be negative.", 400);
+  }
+
+  if (startTime && endTime && startTime > endTime) {
+    return fail(res, "startTime cannot be after endTime.", 400);
+  }
 
   try {
     const trip = await prisma.trip.findUnique({ where: { id: tripId } });
@@ -1145,6 +1471,8 @@ export const addActivityToTrip = async (req, res) => {
         startTime: startTime || null,
         endTime: endTime || null,
         order: order ? parseInt(order) : 0,
+        expense: expense !== undefined && expense !== null ? parseFloat(expense) : (activity.estimatedCost || 0),
+        currency: currency || trip.currency || "INR",
         notes: notes || null,
       },
       include: {
@@ -1194,7 +1522,16 @@ export const updateTripActivity = async (req, res) => {
   const taId = parseInt(req.params.tripActivityId || req.params.taId);
   if (isNaN(tripId) || isNaN(taId)) return fail(res, "Invalid ID.", 400);
 
-  const { plannedDate, startTime, endTime, order, notes } = req.body;
+  const { plannedDate, startTime, endTime, order, expense, currency, notes } = req.body;
+
+  if (expense !== undefined && expense !== null) {
+    const exp = parseFloat(expense);
+    if (isNaN(exp) || exp < 0) return fail(res, "expense cannot be negative.", 400);
+  }
+
+  if (startTime && endTime && startTime > endTime) {
+    return fail(res, "startTime cannot be after endTime.", 400);
+  }
 
   try {
     const trip = await prisma.trip.findUnique({ where: { id: tripId } });
@@ -1217,6 +1554,10 @@ export const updateTripActivity = async (req, res) => {
         ...(startTime !== undefined && { startTime }),
         ...(endTime !== undefined && { endTime }),
         ...(order !== undefined && { order: parseInt(order) }),
+        ...(expense !== undefined && {
+          expense: expense !== null ? parseFloat(expense) : 0,
+        }),
+        ...(currency !== undefined && { currency }),
         ...(notes !== undefined && { notes }),
       },
       include: {

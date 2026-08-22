@@ -406,12 +406,39 @@ async function runCompleteTestSuite() {
   const delSec = await request(`/api/trips/${tripId}/sections/${sId2}`, { method: "DELETE", headers: authHeaders });
   test(delSec.status === 200, "DELETE /api/trips/:tripId/sections/:sectionId");
 
-  // 11. ITINERARY & BUDGET
+  // 11. SCREEN 9: ITINERARY & BUDGET (DAY-WISE WITH BUDGET)
   const itinerary = await request(`/api/trips/${tripId}/itinerary`, { headers: authHeaders });
-  test(itinerary.status === 200 && Array.isArray(itinerary.data.data.sections), "GET /api/trips/:tripId/itinerary");
+  test(
+    itinerary.status === 200 &&
+    Array.isArray(itinerary.data.data.days) &&
+    itinerary.data.data.summary !== undefined,
+    "GET /api/trips/:tripId/itinerary (Screen 9 Day-Wise Itinerary)"
+  );
+
+  const dayDetail = await request(`/api/trips/${tripId}/itinerary/day/2026-10-10`, { headers: authHeaders });
+  test(dayDetail.status === 200 && dayDetail.data.data.day === 1, "GET /api/trips/:tripId/itinerary/day/:date");
 
   const budget = await request(`/api/trips/${tripId}/budget`, { headers: authHeaders });
-  test(budget.status === 200 && typeof budget.data.data.remainingBudget === "number", "GET /api/trips/:tripId/budget");
+  test(
+    budget.status === 200 &&
+    typeof budget.data.data.remainingBudget === "number" &&
+    Array.isArray(budget.data.data.dailyBreakdown),
+    "GET /api/trips/:tripId/budget (Screen 9 Budget & Daily Breakdown)"
+  );
+
+  const reorderAct = await request(`/api/trips/${tripId}/activities`, {
+    method: "POST",
+    headers: authHeaders,
+    body: JSON.stringify({ activityId: 1, plannedDate: "2026-10-10" }),
+  });
+  const reorderTAId = reorderAct.data.data.id;
+
+  const reorderItin = await request(`/api/trips/${tripId}/itinerary/reorder`, {
+    method: "PUT",
+    headers: authHeaders,
+    body: JSON.stringify({ itemIds: [reorderTAId] }),
+  });
+  test(reorderItin.status === 200, "PUT /api/trips/:tripId/itinerary/reorder");
 
   // 12. HOMEPAGE & BANNERS
   const home = await request("/api/home", { headers: authHeaders });

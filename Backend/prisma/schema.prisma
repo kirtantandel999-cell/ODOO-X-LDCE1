@@ -156,12 +156,16 @@ model TripActivity {
   startTime   String?
   endTime     String?
   order       Int       @default(0)
+  expense     Float?    @default(0)
+  currency    String    @default("INR")
   notes       String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
   trip     Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
   activity Activity @relation(fields: [activityId], references: [id])
+
+  @@index([tripId, plannedDate])
 }
 
 model TripSection {

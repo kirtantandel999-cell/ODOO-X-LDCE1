@@ -545,7 +545,7 @@ export const unlinkSectionActivity = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────
-// GET /api/trips/:tripId/budget
+// GET /api/trips/:tripId/budget (Screen 9 Budget with Daily Breakdown & Over-Budget Flag)
 // ─────────────────────────────────────────────
 export const getTripBudget = async (req, res) => {
   const tripId = parseInt(req.params.tripId);
@@ -555,24 +555,72 @@ export const getTripBudget = async (req, res) => {
   if (error) return fail(res, error, status);
 
   try {
-    const sections = await prisma.tripSection.findMany({
-      where: { tripId },
-      select: {
-        id: true,
-        title: true,
-        type: true,
-        budget: true,
-        currency: true,
-        order: true,
-      },
-      orderBy: { order: "asc" },
-    });
+    const [sections, tripActivities] = await Promise.all([
+      prisma.tripSection.findMany({
+        where: { tripId },
+        select: {
+          id: true,
+          title: true,
+          type: true,
+          budget: true,
+          currency: true,
+          order: true,
+        },
+        orderBy: { order: "asc" },
+      }),
+      prisma.tripActivity.findMany({
+        where: { tripId },
+        include: { activity: true },
+        orderBy: { order: "asc" },
+      }),
+    ]);
 
     const tripBudget = trip.budget || 0;
+
+    // Daily breakdown from trip startDate to endDate
+    const start = new Date(trip.startDate);
+    const end = new Date(trip.endDate);
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+
+    const dailyBreakdown = [];
+    let curr = new Date(start);
+    let dayNum = 1;
+    let activityExpenseTotal = 0;
+
+    while (curr <= end) {
+      const dateStr = curr.toISOString().split("T")[0];
+      const dayActs = tripActivities.filter((ta) => {
+        if (!ta.plannedDate) return false;
+        return new Date(ta.plannedDate).toISOString().split("T")[0] === dateStr;
+      });
+
+      const dayExpense = dayActs.reduce(
+        (sum, ta) =>
+          sum +
+          (ta.expense !== null && ta.expense !== undefined
+            ? ta.expense
+            : ta.activity?.estimatedCost || 0),
+        0
+      );
+
+      activityExpenseTotal += dayExpense;
+
+      dailyBreakdown.push({
+        day: dayNum++,
+        date: dateStr,
+        expense: dayExpense,
+      });
+
+      curr.setDate(curr.getDate() + 1);
+    }
+
     const sectionBudgetTotal = sections.reduce((sum, s) => sum + (s.budget || 0), 0);
-    const remainingBudget = trip.budget !== null && trip.budget !== undefined
-      ? trip.budget - sectionBudgetTotal
-      : null;
+    const totalExpense = activityExpenseTotal > 0 ? activityExpenseTotal : sectionBudgetTotal;
+    const remainingBudget =
+      trip.budget !== null && trip.budget !== undefined ? tripBudget - totalExpense : null;
+    const overBudget =
+      trip.budget !== null && trip.budget !== undefined ? totalExpense > tripBudget : false;
 
     return ok(
       res,
@@ -581,8 +629,11 @@ export const getTripBudget = async (req, res) => {
         tripTitle: trip.title,
         currency: trip.currency || "INR",
         tripBudget,
-        sectionBudgetTotal,
+        totalExpense,
         remainingBudget,
+        overBudget,
+        dailyBreakdown,
+        sectionBudgetTotal,
         sections: sections.map((s) => ({
           sectionId: s.id,
           title: s.title,

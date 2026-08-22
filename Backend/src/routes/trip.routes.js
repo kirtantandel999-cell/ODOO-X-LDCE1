@@ -13,6 +13,8 @@ import {
   getPreviousTrips,
   getTripById,
   getTripItinerary,
+  getTripItineraryDay,
+  reorderItinerary,
   updateTrip,
   deleteTrip,
   addDestinationToTrip,
@@ -61,7 +63,9 @@ router.get("/previous", getPreviousTrips);
 
 router.post("/plan", planTrip);
 
-// Trip Itinerary & Budget
+// Trip Itinerary (Screen 9 Day-Wise Itinerary & Budget)
+router.put("/:tripId/itinerary/reorder", reorderItinerary);
+router.get("/:tripId/itinerary/day/:date", getTripItineraryDay);
 router.get("/:tripId/itinerary", getTripItinerary);
 router.get("/:tripId/budget", getTripBudget);
 

@@ -785,5 +785,198 @@ Content-Type: {{contentType}}
 GET {{baseUrl}}/api/activities?limit=99999
 Content-Type: {{contentType}}
 
+###
+
+
+### ====================================================================
+### SCREEN 9: ITINERARY VIEW WITH BUDGET (ALL SCENARIOS)
+### ====================================================================
+
+### STEP 1: Add First Itinerary Activity to Day 1 (2026-10-10)
+# @name addItineraryActivity1
+POST {{baseUrl}}/api/trips/{{tripId}}/activities
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "activityId": 1,
+  "plannedDate": "2026-10-10",
+  "startTime": "10:00",
+  "endTime": "12:00",
+  "order": 1,
+  "expense": 5000,
+  "currency": "INR",
+  "notes": "Morning sightseeing activity"
+}
+
+### STEP 2: Add Second Itinerary Activity to Day 1 (2026-10-10)
+# @name addItineraryActivity2
+POST {{baseUrl}}/api/trips/{{tripId}}/activities
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "activityId": 2,
+  "plannedDate": "2026-10-10",
+  "startTime": "14:00",
+  "endTime": "16:00",
+  "order": 2,
+  "expense": 2500,
+  "currency": "INR",
+  "notes": "Afternoon culture activity"
+}
+
+### STEP 3: Add Third Itinerary Activity to Day 2 (2026-10-11)
+# @name addItineraryActivity3
+POST {{baseUrl}}/api/trips/{{tripId}}/activities
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "activityId": 3,
+  "plannedDate": "2026-10-11",
+  "startTime": "09:00",
+  "endTime": "11:00",
+  "order": 1,
+  "expense": 3000,
+  "currency": "INR",
+  "notes": "Day 2 food tour"
+}
+
+### STEP 4: Get Complete Day-Wise Itinerary (Shows Day 1, Day 2, Expenses & Budget)
+# @name getCompleteItinerary
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 5: Get Day 1 Detail by Date
+# @name getDay1Detail
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary/day/2026-10-10
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 6: Get Trip Budget with Daily Breakdown & Over-Budget Flag
+# @name getTripBudgetDetails
+GET {{baseUrl}}/api/trips/{{tripId}}/budget
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 7: Search Itinerary Items by Query
+# @name searchItinerary
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary?search=sightseeing
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 8: Filter Itinerary by Single Date
+# @name filterItineraryByDate
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary?date=2026-10-10
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 9a: Sort Itinerary by Expense Descending
+# @name sortItineraryExpenseDesc
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary?sort=expense_desc
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 9b: Sort Itinerary by Start Time Ascending
+# @name sortItineraryStartTimeAsc
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary?sort=start_time_asc
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 10: Group Itinerary by Category
+# @name groupItineraryCategory
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary?groupBy=category
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 11: Update Itinerary Activity (Change Date to Day 2 & Expense to 6000)
+# @name updateItineraryActivity
+PUT {{baseUrl}}/api/trips/{{tripId}}/activities/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "plannedDate": "2026-10-11",
+  "startTime": "11:00",
+  "endTime": "13:00",
+  "order": 2,
+  "expense": 6000,
+  "currency": "INR",
+  "notes": "Updated plan moved to Day 2"
+}
+
+### STEP 12: Reorder Itinerary Items within Day 2
+# @name reorderItineraryDay
+PUT {{baseUrl}}/api/trips/{{tripId}}/itinerary/reorder
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "date": "2026-10-11",
+  "itemIds": [2, 1]
+}
+
+### STEP 13: Delete Activity from Itinerary
+# @name deleteItineraryActivity
+DELETE {{baseUrl}}/api/trips/{{tripId}}/activities/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### SCREEN 9 VALIDATION & SECURITY CHECKS
+### ====================================================================
+
+### 14a. Invalid PlannedDate (Outside Trip Date Range) -> Expects 400 Bad Request
+# @name testInvalidPlannedDate
+POST {{baseUrl}}/api/trips/{{tripId}}/activities
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "activityId": 1,
+  "plannedDate": "2027-01-01",
+  "expense": 1000,
+  "currency": "INR"
+}
+
+### 14b. Negative Expense -> Expects 400 Bad Request
+# @name testNegativeExpense
+POST {{baseUrl}}/api/trips/{{tripId}}/activities
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "activityId": 1,
+  "plannedDate": "2026-10-10",
+  "expense": -5000,
+  "currency": "INR"
+}
+
+### 14c. Invalid Time Order (startTime > endTime) -> Expects 400 Bad Request
+# @name testInvalidTimeOrder
+POST {{baseUrl}}/api/trips/{{tripId}}/activities
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "activityId": 1,
+  "plannedDate": "2026-10-10",
+  "startTime": "15:00",
+  "endTime": "10:00",
+  "expense": 1000,
+  "currency": "INR"
+}
+
+### 14d. Unauthorized Itinerary Access (No Token) -> Expects 401 Unauthorized
+# @name testUnauthorizedItinerary
+GET {{baseUrl}}/api/trips/{{tripId}}/itinerary
+Content-Type: {{contentType}}
+
+
 
 
