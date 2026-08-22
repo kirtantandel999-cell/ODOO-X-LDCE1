@@ -65,7 +65,16 @@ export default function HomePage({ onNavigate }) {
           <h1>Every trip, planned<br/>around <em>you</em>.</h1>
           <p>From Rajasthan's forts to the coasts of Portugal — build itineraries as unique as your passport stamps, then let GlobalTrotter handle the logistics.</p>
           <div className="hero-actions">
-            <a href="#regions" className="btn btn-primary">Start Planning →</a>
+            <a
+              href="#create-trip"
+              className="btn btn-primary"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate && onNavigate('createTrip');
+              }}
+            >
+              Start Planning →
+            </a>
             <a href="#trips" className="btn btn-ghost">See My Trips</a>
           </div>
         </div>
@@ -302,7 +311,17 @@ export default function HomePage({ onNavigate }) {
       </div>
 
       {/* FLOATING CTA */}
-      <a href="#search" className="fab"><span>+</span><span className="label">Plan a Trip</span></a>
+      <a
+        href="#create-trip"
+        className="fab"
+        onClick={(e) => {
+          e.preventDefault();
+          onNavigate && onNavigate('createTrip');
+        }}
+      >
+        <span>+</span>
+        <span className="label">Plan a Trip</span>
+      </a>
 
       {/* FOOTER */}
       <footer id="about">

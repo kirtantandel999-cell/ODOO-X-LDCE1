@@ -2,6 +2,7 @@ import { useState } from 'react'
 import LoginScreen from './components/Authentication/LoginScreen'
 import RegistrationScreen from './components/Authentication/RegistrationScreen'
 import HomePage from './components/Home/HomePage'
+import CreateTrip from './components/Trips/CreateTrip'
 import './index.css'
 
 function App() {
@@ -12,6 +13,9 @@ function App() {
       {currentScreen === 'home' && <HomePage onNavigate={setCurrentScreen} />}
       {currentScreen === 'login' && <LoginScreen onNavigate={setCurrentScreen} />}
       {currentScreen === 'register' && <RegistrationScreen onNavigate={setCurrentScreen} />}
+      {(currentScreen === 'createTrip' || currentScreen === 'create-trip') && (
+        <CreateTrip onNavigate={setCurrentScreen} />
+      )}
     </>
   )
 }
