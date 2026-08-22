@@ -9,7 +9,7 @@ export const register = async (req, res) => {
   const {
     firstName,
     lastName,
-    email,
+    email: rawEmail,
     password,
     phoneNumber,
     city,
@@ -18,9 +18,11 @@ export const register = async (req, res) => {
     photo,
   } = req.body;
 
+  const email = rawEmail?.trim().toLowerCase();
+
   try {
     // 1. Validate required fields
-    if (!firstName || !lastName || !email || !password || !phoneNumber || !city || !country) {
+    if (!firstName?.trim() || !lastName?.trim() || !email || !password || !phoneNumber?.trim() || !city?.trim() || !country?.trim()) {
       return res.status(400).json({
         message: "firstName, lastName, email, password, phoneNumber, city, and country are required.",
       });
@@ -41,14 +43,14 @@ export const register = async (req, res) => {
     // 4. Create the user
     const user = await prisma.user.create({
       data: {
-        firstName,
-        lastName,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
         email,
         password: hashedPassword,
-        phoneNumber,
-        city,
-        country,
-        additionalInformation: additionalInformation || null,
+        phoneNumber: phoneNumber.trim(),
+        city: city.trim(),
+        country: country.trim(),
+        additionalInformation: additionalInformation?.trim() || null,
         photo: photo || null,
       },
     });
@@ -69,7 +71,8 @@ export const register = async (req, res) => {
 // POST /api/auth/login
 // ─────────────────────────────────────────────
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email: rawEmail, password } = req.body;
+  const email = rawEmail?.trim().toLowerCase();
 
   try {
     // 1. Validate required fields
