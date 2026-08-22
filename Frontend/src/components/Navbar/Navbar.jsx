@@ -100,6 +100,16 @@ export default function Navbar({ onNavigate, currentScreen = 'calendar' }) {
                 Trip Calendar
               </a>
               <a
+                href="/admin"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setAvatarOpen(false);
+                  onNavigate && onNavigate('admin');
+                }}
+              >
+                Admin Panel
+              </a>
+              <a
                 href="/create-trip"
                 onClick={(e) => {
                   e.preventDefault();

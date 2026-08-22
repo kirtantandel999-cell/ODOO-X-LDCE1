@@ -20,10 +20,11 @@ export default function Navbar({ onNavigate, currentScreen = 'calendar' }) {
     e.preventDefault();
     setAvatarOpen(false);
     if (logout) await logout();
-    if (onNavigate) onNavigate('login');
+    if (onNavigate) onNavigate('home');
   };
 
   const getInitial = () => {
+    if (user?.firstName) return user.firstName.charAt(0).toUpperCase();
     if (user?.name) return user.name.charAt(0).toUpperCase();
     if (user?.username) return user.username.charAt(0).toUpperCase();
     return 'A';
@@ -67,10 +68,10 @@ export default function Navbar({ onNavigate, currentScreen = 'calendar' }) {
                 setAvatarOpen((o) => !o);
               }}
             >
-              {user?.avatar ? (
+              {(user?.photo || user?.avatar) ? (
                 <img
-                  src={user.avatar}
-                  alt={user.name || 'User'}
+                  src={user.photo || user.avatar}
+                  alt={user.firstName || user.name || 'User'}
                   style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
                 />
               ) : (

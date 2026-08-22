@@ -57,6 +57,18 @@ export default function HomePage({ onNavigate }) {
                 Profile
               </a>
             </li>
+            <li>
+              <a
+                href="#admin"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick();
+                  onNavigate && onNavigate('admin');
+                }}
+              >
+                Admin
+              </a>
+            </li>
             <li><a href="#about" onClick={handleNavClick}>About</a></li>
             <li>
               <a 

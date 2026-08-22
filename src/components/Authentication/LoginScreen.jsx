@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { User } from 'lucide-react';
-import { AuthService } from '../../services/AuthService';
+import { useAuth } from '../../context/AuthContext';
 
 export default function LoginScreen({ onNavigate }) {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const { login } = useAuth();
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(null);
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.username.trim()) newErrors.username = 'Username is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
     if (!formData.password) newErrors.password = 'Password is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -24,12 +25,14 @@ export default function LoginScreen({ onNavigate }) {
     setNotification(null);
     
     try {
-      const response = await AuthService.login(formData.username, formData.password);
-      setNotification({ type: 'success', message: response.message });
-      // In a real app, you would save the token/session and redirect to the dashboard.
-      setTimeout(() => alert('Redirecting to Dashboard...'), 1000);
+      const response = await login(formData.email, formData.password);
+      setNotification({ type: 'success', message: response.message || 'Login successful!' });
+      // Redirect to home after a brief success message
+      setTimeout(() => {
+        onNavigate && onNavigate('home');
+      }, 600);
     } catch (error) {
-      setNotification({ type: 'error', message: error.message });
+      setNotification({ type: 'error', message: error.message || 'Login failed' });
     } finally {
       setIsLoading(false);
     }
@@ -52,13 +55,13 @@ export default function LoginScreen({ onNavigate }) {
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <input
-            type="text"
-            placeholder="Username"
-            value={formData.username}
-            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-            className={errors.username ? 'input-error' : ''}
+            type="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className={errors.email ? 'input-error' : ''}
           />
-          {errors.username && <span className="error-message">{errors.username}</span>}
+          {errors.email && <span className="error-message">{errors.email}</span>}
         </div>
 
         <div className="form-group">

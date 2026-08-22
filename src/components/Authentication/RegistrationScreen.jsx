@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { User } from 'lucide-react';
-import { AuthService } from '../../services/AuthService';
+import { useAuth } from '../../context/AuthContext';
 
 export default function RegistrationScreen({ onNavigate }) {
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    password: '',
     phone: '',
     city: '',
     country: '',
@@ -26,8 +28,16 @@ export default function RegistrationScreen({ onNavigate }) {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Invalid email format';
     }
+
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
     
-    if (formData.phone && !/^\+?[\d\s-]{7,15}$/.test(formData.phone)) {
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone Number is required';
+    } else if (!/^\+?[\d\s-]{7,15}$/.test(formData.phone)) {
       newErrors.phone = 'Invalid phone format';
     }
     
@@ -46,9 +56,17 @@ export default function RegistrationScreen({ onNavigate }) {
     setNotification(null);
     
     try {
-      const response = await AuthService.register(formData);
-      setNotification({ type: 'success', message: response.message });
-      setTimeout(() => onNavigate('login'), 1500);
+      const response = await register(formData);
+      
+      if (response.autoLoggedIn) {
+        // Auto-login succeeded — redirect to home
+        setNotification({ type: 'success', message: 'Account created! Redirecting...' });
+        setTimeout(() => onNavigate('home'), 800);
+      } else {
+        // Auto-login failed — redirect to login page
+        setNotification({ type: 'success', message: response.message || 'Registration successful! Please log in.' });
+        setTimeout(() => onNavigate('login'), 1500);
+      }
     } catch (error) {
       setNotification({ type: 'error', message: error.message || 'Registration failed' });
     } finally {
@@ -114,6 +132,20 @@ export default function RegistrationScreen({ onNavigate }) {
           </div>
           <div className="form-group">
             <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className={errors.password ? 'input-error' : ''}
+            />
+            {errors.password && <span className="error-message">{errors.password}</span>}
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <input
               type="tel"
               name="phone"
               placeholder="Phone Number"
@@ -123,9 +155,6 @@ export default function RegistrationScreen({ onNavigate }) {
             />
             {errors.phone && <span className="error-message">{errors.phone}</span>}
           </div>
-        </div>
-
-        <div className="form-row">
           <div className="form-group">
             <input
               type="text"
@@ -137,6 +166,9 @@ export default function RegistrationScreen({ onNavigate }) {
             />
             {errors.city && <span className="error-message">{errors.city}</span>}
           </div>
+        </div>
+
+        <div className="form-row">
           <div className="form-group">
             <input
               type="text"

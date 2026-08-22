@@ -7,12 +7,14 @@ import CreateTrip from './components/Trips/CreateTrip';
 import BuildItinerary from './components/Itinerary/BuildItinerary';
 import ProfilePage from './components/Profile/ProfilePage';
 import CalendarPage from './components/Calendar/CalendarPage';
+import AdminPanel from './components/Admin/AdminPanel';
 import './index.css';
 
 function getScreenFromHashOrPath() {
   const hash = window.location.hash.toLowerCase().replace('#', '');
   if (hash === 'calendar') return 'calendar';
   if (hash === 'profile') return 'profile';
+  if (hash === 'admin' || hash === 'adminpanel' || hash === 'admin-panel') return 'admin';
   if (hash === 'login') return 'login';
   if (hash === 'register' || hash === 'signup') return 'register';
   if (hash === 'create-trip' || hash === 'createtrip') return 'createTrip';
@@ -21,6 +23,7 @@ function getScreenFromHashOrPath() {
   const path = window.location.pathname.toLowerCase();
   if (path === '/calendar') return 'calendar';
   if (path === '/profile') return 'profile';
+  if (path === '/admin' || path === '/admin-panel') return 'admin';
   if (path === '/login') return 'login';
   if (path === '/register' || path === '/signup') return 'register';
   if (path === '/create-trip') return 'createTrip';
@@ -62,6 +65,7 @@ function MainApp() {
       {currentScreen === 'login' && <LoginScreen onNavigate={handleNavigate} />}
       {currentScreen === 'register' && <RegistrationScreen onNavigate={handleNavigate} />}
       {currentScreen === 'profile' && <ProfilePage onNavigate={handleNavigate} />}
+      {currentScreen === 'admin' && <AdminPanel onNavigate={handleNavigate} />}
       {(currentScreen === 'createTrip' || currentScreen === 'create-trip') && (
         <CreateTrip onNavigate={handleNavigate} />
       )}

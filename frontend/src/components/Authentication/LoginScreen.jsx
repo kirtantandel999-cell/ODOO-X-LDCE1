@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
-import { User, Lock } from 'lucide-react';
+import { User, Lock, Mail } from 'lucide-react';
 import { AuthService } from '../../services/AuthService';
+import { useAuth } from '../../context/AuthContext';
 
 export default function LoginScreen({ onNavigate }) {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(null);
+  
+  let authContext = null;
+  try {
+    authContext = useAuth();
+  } catch (err) {
+    // Fallback if not inside AuthProvider
+  }
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.username.trim()) newErrors.username = 'Username is required';
-    if (!formData.password) newErrors.password = 'Password is required';
+    const emailVal = formData.email?.trim();
+    if (!emailVal) {
+      newErrors.email = 'Email is required';
+    }
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -24,12 +37,29 @@ export default function LoginScreen({ onNavigate }) {
     setNotification(null);
     
     try {
-      const response = await AuthService.login(formData.username, formData.password);
-      setNotification({ type: 'success', message: response.message });
-      // In a real app, you would save the token/session and redirect to the dashboard.
-      setTimeout(() => alert('Redirecting to Dashboard...'), 1000);
+      const emailOrUsername = formData.email.trim();
+      let response;
+      if (authContext && authContext.login) {
+        response = await authContext.login(emailOrUsername, formData.password);
+      } else {
+        response = await AuthService.login(emailOrUsername, formData.password);
+      }
+
+      setNotification({
+        type: 'success',
+        message: response.message || 'Logged in successfully! Redirecting...',
+      });
+
+      setTimeout(() => {
+        if (onNavigate) {
+          onNavigate('home');
+        }
+      }, 1000);
     } catch (error) {
-      setNotification({ type: 'error', message: error.message });
+      setNotification({
+        type: 'error',
+        message: error.message || 'Login failed. Please check your credentials.',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -49,16 +79,17 @@ export default function LoginScreen({ onNavigate }) {
         </div>
       )}
 
-      <form className="auth-form" onSubmit={handleSubmit}>
+      <form className="auth-form" onSubmit={handleSubmit} noValidate>
         <div className="form-group">
           <input
-            type="text"
-            placeholder="Username"
-            value={formData.username}
-            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-            className={errors.username ? 'input-error' : ''}
+            type="email"
+            placeholder="Email address"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className={errors.email ? 'input-error' : ''}
+            autoComplete="email"
           />
-          {errors.username && <span className="error-message">{errors.username}</span>}
+          {errors.email && <span className="error-message">{errors.email}</span>}
         </div>
 
         <div className="form-group">
@@ -68,6 +99,7 @@ export default function LoginScreen({ onNavigate }) {
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             className={errors.password ? 'input-error' : ''}
+            autoComplete="current-password"
           />
           {errors.password && <span className="error-message">{errors.password}</span>}
         </div>

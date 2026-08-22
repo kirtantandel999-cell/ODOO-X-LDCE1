@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { AuthService } from '../../services/AuthService';
 import './ProfilePage.css';
-
-const DEFAULT_PROFILE = {
-  fullName: 'Aarav Sharma',
-  username: 'aarav_travels',
-  email: 'aarav.sharma@example.com',
-  phone: '+91 98765 43210',
-  location: 'Ahmedabad, Gujarat, India',
-  bio: 'Passionate globetrotter exploring architectural wonders, Himalayan treks, and coastal culture across India and around the globe.',
-  photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-  memberSince: 'March 2024',
-  preferences: ['Heritage', 'Nature', 'Food', 'Adventure', 'Culture'],
-};
 
 const INITIAL_PREPLANNED_TRIPS = [
   {
@@ -110,62 +100,146 @@ const INITIAL_PREVIOUS_TRIPS = [
 ];
 
 export default function ProfilePage({ onNavigate }) {
-  const [profile, setProfile] = useState(() => {
-    const saved = localStorage.getItem('globetrotter_user_profile');
-    return saved ? JSON.parse(saved) : DEFAULT_PROFILE;
-  });
+  const { user, token, logout, updateUser } = useAuth();
 
-  const [preplannedTrips, setPreplannedTrips] = useState(INITIAL_PREPLANNED_TRIPS);
-  const [previousTrips, setPreviousTrips] = useState(INITIAL_PREVIOUS_TRIPS);
+  // Profile data from the backend
+  const [profile, setProfile] = useState(null);
+  const [profileLoading, setProfileLoading] = useState(true);
+
+  const [preplannedTrips] = useState(INITIAL_PREPLANNED_TRIPS);
+  const [previousTrips] = useState(INITIAL_PREVIOUS_TRIPS);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [editFormData, setEditFormData] = useState(profile);
+  const [editFormData, setEditFormData] = useState({});
   const [notification, setNotification] = useState(null);
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [selectedTripDetails, setSelectedTripDetails] = useState(null);
+  const [saveLoading, setSaveLoading] = useState(false);
 
+  // ── Fetch profile from backend on mount ──────
   useEffect(() => {
-    const saved = localStorage.getItem('globetrotter_user_profile');
-    if (saved) {
-      try {
-        setProfile(JSON.parse(saved));
-      } catch (e) {
-        console.error('Failed to parse saved profile', e);
+    const fetchProfile = async () => {
+      if (!token) {
+        setProfileLoading(false);
+        return;
       }
-    }
-  }, []);
+      try {
+        const userData = await AuthService.getProfile(token);
+        setProfile(userData);
+      } catch (err) {
+        console.error('Failed to fetch profile:', err);
+        // Fallback to context user data
+        if (user) {
+          setProfile(user);
+        }
+      } finally {
+        setProfileLoading(false);
+      }
+    };
+    fetchProfile();
+  }, [token, user]);
 
+  // ── Helpers ──────────────────────────────────
+  const getFullName = () => {
+    if (profile?.firstName && profile?.lastName) return `${profile.firstName} ${profile.lastName}`;
+    if (profile?.firstName) return profile.firstName;
+    if (profile?.name) return profile.name;
+    return 'User';
+  };
+
+  const getInitial = () => {
+    const name = getFullName();
+    return name.charAt(0).toUpperCase();
+  };
+
+  const getMemberSince = () => {
+    if (profile?.createdAt) {
+      const d = new Date(profile.createdAt);
+      return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    }
+    return 'Recently joined';
+  };
+
+  // ── Edit Profile ─────────────────────────────
   const handleOpenEdit = () => {
-    setEditFormData({ ...profile });
+    setEditFormData({
+      firstName: profile?.firstName || '',
+      lastName: profile?.lastName || '',
+      email: profile?.email || '',
+      phoneNumber: profile?.phoneNumber || '',
+      city: profile?.city || '',
+      country: profile?.country || '',
+      additionalInformation: profile?.additionalInformation || '',
+      photo: profile?.photo || '',
+    });
     setIsEditing(true);
     setNotification(null);
   };
 
-  const handleSaveProfile = (e) => {
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
-    if (!editFormData.fullName.trim() || !editFormData.email.trim()) {
-      alert('Full Name and Email are required.');
+    if (!editFormData.firstName?.trim() || !editFormData.email?.trim()) {
+      alert('First Name and Email are required.');
       return;
     }
 
-    setProfile(editFormData);
-    localStorage.setItem('globetrotter_user_profile', JSON.stringify(editFormData));
-    setIsEditing(false);
-    setNotification('Profile details updated successfully!');
-    setTimeout(() => setNotification(null), 3500);
+    setSaveLoading(true);
+    try {
+      const result = await AuthService.updateProfile(token, {
+        firstName: editFormData.firstName,
+        lastName: editFormData.lastName,
+        phoneNumber: editFormData.phoneNumber,
+        city: editFormData.city,
+        country: editFormData.country,
+        additionalInformation: editFormData.additionalInformation,
+        photo: editFormData.photo,
+      });
+
+      // Update local profile state
+      setProfile(result.user);
+
+      // Update global AuthContext so navbar everywhere updates immediately
+      updateUser(result.user);
+
+      setIsEditing(false);
+      setNotification('Profile details updated successfully!');
+      setTimeout(() => setNotification(null), 3500);
+    } catch (err) {
+      alert(err.message || 'Failed to update profile');
+    } finally {
+      setSaveLoading(false);
+    }
   };
 
-  const handlePreferenceToggle = (pref) => {
-    setEditFormData((prev) => {
-      const current = prev.preferences || [];
-      const updated = current.includes(pref)
-        ? current.filter((p) => p !== pref)
-        : [...current, pref];
-      return { ...prev, preferences: updated };
-    });
+  const handleLogout = async () => {
+    setAvatarMenuOpen(false);
+    await logout();
+    onNavigate && onNavigate('home');
   };
 
-  const ALL_PREFERENCES = ['Heritage', 'Nature', 'Food', 'Adventure', 'Culture', 'Beaches', 'Photography', 'Nightlife'];
+  // ── Loading / Not authenticated states ───────
+  if (profileLoading) {
+    return (
+      <div className="profile-page-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+        <p style={{ fontSize: '18px', color: '#55666c' }}>Loading profile...</p>
+      </div>
+    );
+  }
+
+  if (!profile && !user) {
+    return (
+      <div className="profile-page-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '16px' }}>
+        <p style={{ fontSize: '18px', color: '#55666c' }}>Please log in to view your profile.</p>
+        <button
+          type="button"
+          style={{ padding: '12px 28px', background: '#c1622d', color: '#fff', border: 'none', borderRadius: '999px', cursor: 'pointer', fontWeight: 600, fontSize: '15px' }}
+          onClick={() => onNavigate && onNavigate('login')}
+        >
+          Go to Login
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -220,10 +294,10 @@ export default function ProfilePage({ onNavigate }) {
                   setAvatarMenuOpen((o) => !o);
                 }}
               >
-                {profile.photo ? (
-                  <img src={profile.photo} alt={profile.fullName} />
+                {profile?.photo ? (
+                  <img src={profile.photo} alt={getFullName()} />
                 ) : (
-                  profile.fullName.charAt(0)
+                  getInitial()
                 )}
               </button>
 
@@ -265,10 +339,7 @@ export default function ProfilePage({ onNavigate }) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setAvatarMenuOpen(false);
-                    onNavigate && onNavigate('login');
-                  }}
+                  onClick={handleLogout}
                 >
                   Log Out
                 </button>
@@ -279,7 +350,7 @@ export default function ProfilePage({ onNavigate }) {
       </nav>
 
       <main className="wrap">
-        {/* ---------- PAGE HEAD / HERO (Short card structure matching image) ---------- */}
+        {/* ---------- PAGE HEAD / HERO ---------- */}
         <header className="page-head">
           <span className="eyebrow">✈ Personal Traveler Profile</span>
           <h1>My Profile</h1>
@@ -298,15 +369,15 @@ export default function ProfilePage({ onNavigate }) {
         <section className="profile-hero-card">
           <div className="profile-main-grid">
             <div className="profile-avatar-container">
-              {profile.photo ? (
+              {profile?.photo ? (
                 <img
                   src={profile.photo}
-                  alt={profile.fullName}
+                  alt={getFullName()}
                   className="profile-avatar-img"
                 />
               ) : (
                 <div className="profile-avatar-fallback">
-                  {profile.fullName.charAt(0)}
+                  {getInitial()}
                 </div>
               )}
               <span className="profile-badge-online" title="Active Traveler"></span>
@@ -314,44 +385,38 @@ export default function ProfilePage({ onNavigate }) {
 
             <div className="profile-details-column">
               <div className="profile-name-row">
-                <h2 className="profile-user-name">{profile.fullName}</h2>
-                <span className="profile-handle">@{profile.username}</span>
+                <h2 className="profile-user-name">{getFullName()}</h2>
+                {profile?.email && <span className="profile-handle">{profile.email}</span>}
               </div>
 
-              <p className="profile-bio">{profile.bio}</p>
+              {profile?.additionalInformation && (
+                <p className="profile-bio">{profile.additionalInformation}</p>
+              )}
 
               <div className="profile-info-grid">
-                <div className="info-item">
-                  <span className="info-icon">📍</span>
-                  <span>{profile.location}</span>
-                </div>
-                <div className="info-item">
-                  <span className="info-icon">✉</span>
-                  <span>{profile.email}</span>
-                </div>
-                <div className="info-item">
-                  <span className="info-icon">📞</span>
-                  <span>{profile.phone}</span>
-                </div>
+                {(profile?.city || profile?.country) && (
+                  <div className="info-item">
+                    <span className="info-icon">📍</span>
+                    <span>{[profile.city, profile.country].filter(Boolean).join(', ')}</span>
+                  </div>
+                )}
+                {profile?.email && (
+                  <div className="info-item">
+                    <span className="info-icon">✉</span>
+                    <span>{profile.email}</span>
+                  </div>
+                )}
+                {profile?.phoneNumber && (
+                  <div className="info-item">
+                    <span className="info-icon">📞</span>
+                    <span>{profile.phoneNumber}</span>
+                  </div>
+                )}
                 <div className="info-item">
                   <span className="info-icon">🗓</span>
-                  <span>Member since {profile.memberSince}</span>
+                  <span>Member since {getMemberSince()}</span>
                 </div>
               </div>
-
-              {profile.preferences && profile.preferences.length > 0 && (
-                <div className="profile-prefs-group">
-                  <span className="prefs-label">Travel Style:</span>
-                  {profile.preferences.map((pref) => {
-                    const tagClass = pref.toLowerCase().replace(/[^a-z]/g, '');
-                    return (
-                      <span key={pref} className={`pref-tag ${tagClass}`}>
-                        {pref}
-                      </span>
-                    );
-                  })}
-                </div>
-              )}
             </div>
 
             <button
@@ -532,23 +597,23 @@ export default function ProfilePage({ onNavigate }) {
             <form onSubmit={handleSaveProfile} className="modal-form">
               <div className="form-row-2">
                 <div className="form-field-group">
-                  <label>Full Name *</label>
+                  <label>First Name *</label>
                   <input
                     type="text"
                     required
-                    value={editFormData.fullName}
+                    value={editFormData.firstName}
                     onChange={(e) =>
-                      setEditFormData({ ...editFormData, fullName: e.target.value })
+                      setEditFormData({ ...editFormData, firstName: e.target.value })
                     }
                   />
                 </div>
                 <div className="form-field-group">
-                  <label>Username / Handle</label>
+                  <label>Last Name</label>
                   <input
                     type="text"
-                    value={editFormData.username}
+                    value={editFormData.lastName}
                     onChange={(e) =>
-                      setEditFormData({ ...editFormData, username: e.target.value })
+                      setEditFormData({ ...editFormData, lastName: e.target.value })
                     }
                   />
                 </div>
@@ -561,33 +626,44 @@ export default function ProfilePage({ onNavigate }) {
                     type="email"
                     required
                     value={editFormData.email}
-                    onChange={(e) =>
-                      setEditFormData({ ...editFormData, email: e.target.value })
-                    }
+                    disabled
+                    title="Email cannot be changed"
+                    style={{ opacity: 0.6, cursor: 'not-allowed' }}
                   />
                 </div>
                 <div className="form-field-group">
                   <label>Phone Number</label>
                   <input
                     type="tel"
-                    value={editFormData.phone}
+                    value={editFormData.phoneNumber}
                     onChange={(e) =>
-                      setEditFormData({ ...editFormData, phone: e.target.value })
+                      setEditFormData({ ...editFormData, phoneNumber: e.target.value })
                     }
                   />
                 </div>
               </div>
 
-              <div className="form-field-group">
-                <label>Location / City, Country</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Ahmedabad, Gujarat, India"
-                  value={editFormData.location}
-                  onChange={(e) =>
-                    setEditFormData({ ...editFormData, location: e.target.value })
-                  }
-                />
+              <div className="form-row-2">
+                <div className="form-field-group">
+                  <label>City</label>
+                  <input
+                    type="text"
+                    value={editFormData.city}
+                    onChange={(e) =>
+                      setEditFormData({ ...editFormData, city: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="form-field-group">
+                  <label>Country</label>
+                  <input
+                    type="text"
+                    value={editFormData.country}
+                    onChange={(e) =>
+                      setEditFormData({ ...editFormData, country: e.target.value })
+                    }
+                  />
+                </div>
               </div>
 
               <div className="form-field-group">
@@ -603,41 +679,15 @@ export default function ProfilePage({ onNavigate }) {
               </div>
 
               <div className="form-field-group">
-                <label>Bio & Travel Motto</label>
+                <label>Bio & Additional Information</label>
                 <textarea
                   rows="3"
                   placeholder="Tell other travelers about your passions, favorite destinations, and travel style..."
-                  value={editFormData.bio}
+                  value={editFormData.additionalInformation}
                   onChange={(e) =>
-                    setEditFormData({ ...editFormData, bio: e.target.value })
+                    setEditFormData({ ...editFormData, additionalInformation: e.target.value })
                   }
                 />
-              </div>
-
-              <div className="form-field-group">
-                <label>Select Travel Preferences</label>
-                <div className="profile-prefs-group" style={{ marginTop: '6px' }}>
-                  {ALL_PREFERENCES.map((pref) => {
-                    const active = (editFormData.preferences || []).includes(pref);
-                    const tagClass = pref.toLowerCase().replace(/[^a-z]/g, '');
-                    return (
-                      <button
-                        key={pref}
-                        type="button"
-                        onClick={() => handlePreferenceToggle(pref)}
-                        className={`pref-tag ${tagClass}`}
-                        style={{
-                          cursor: 'pointer',
-                          opacity: active ? 1 : 0.45,
-                          transform: active ? 'scale(1.05)' : 'scale(1)',
-                          borderStyle: active ? 'solid' : 'dashed',
-                        }}
-                      >
-                        {active ? `✓ ${pref}` : `+ ${pref}`}
-                      </button>
-                    );
-                  })}
-                </div>
               </div>
 
               <div className="modal-actions">
@@ -651,8 +701,9 @@ export default function ProfilePage({ onNavigate }) {
                 <button
                   type="submit"
                   className="btn-save-modal"
+                  disabled={saveLoading}
                 >
-                  Save Changes
+                  {saveLoading ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             </form>

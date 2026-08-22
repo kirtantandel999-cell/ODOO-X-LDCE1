@@ -357,3 +357,90 @@
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;}
   }
+
+  /* ---------- NAV USER DROPDOWN (Auth-aware) ---------- */
+  .home-page-wrapper .nav-user-item {
+    position: relative;
+  }
+  .home-page-wrapper .nav-user-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .home-page-wrapper .nav-user-btn:hover {
+    background: rgba(255,255,255,0.15);
+  }
+  .home-page-wrapper .nav.scrolled .nav-user-btn:hover {
+    background: rgba(0,0,0,0.06);
+  }
+  .home-page-wrapper .nav-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.6);
+  }
+  .home-page-wrapper .nav.scrolled .nav-user-avatar {
+    border-color: var(--ocean);
+  }
+  .home-page-wrapper .nav-user-initial {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .home-page-wrapper .nav-user-name {
+    color: var(--white);
+    font-weight: 500;
+    font-size: 15px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .home-page-wrapper .nav.scrolled .nav-user-name {
+    color: var(--indigo-deep);
+  }
+  .home-page-wrapper .nav-user-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 190px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 12px 36px -10px rgba(23,38,43,0.25);
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 200;
+  }
+  .home-page-wrapper .nav-user-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .home-page-wrapper .nav-user-dropdown a {
+    display: block;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink) !important;
+    transition: background 0.15s ease;
+  }
+  .home-page-wrapper .nav-user-dropdown a:hover {
+    background: var(--sand);
+  }
