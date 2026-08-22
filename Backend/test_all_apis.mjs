@@ -523,7 +523,32 @@ async function runCompleteTestSuite() {
   });
   test(commDel.status === 200, "DELETE /api/community/:id");
 
-  // 14. SECURITY GUARDS
+  // 14. SCREEN 11: CALENDAR VIEW
+  const calDefault = await request("/api/calendar", { headers: authHeaders });
+  test(calDefault.status === 200 && Array.isArray(calDefault.data.data.events), "GET /api/calendar (Default month)");
+
+  const calAug = await request("/api/calendar?year=2026&month=8", { headers: authHeaders });
+  test(calAug.status === 200 && Array.isArray(calAug.data.data.events), "GET /api/calendar?year=2026&month=8");
+
+  const calOct = await request("/api/calendar?year=2026&month=10", { headers: authHeaders });
+  test(calOct.status === 200 && calOct.data.data.events.length >= 1, "GET /api/calendar?year=2026&month=10");
+
+  const calSearch = await request("/api/calendar?year=2026&month=8&search=tokyo", { headers: authHeaders });
+  test(calSearch.status === 200, "GET /api/calendar?search=tokyo");
+
+  const calSort = await request("/api/calendar?year=2026&month=8&sort=start_date_desc", { headers: authHeaders });
+  test(calSort.status === 200, "GET /api/calendar?sort=start_date_desc");
+
+  const calGroup = await request("/api/calendar?year=2026&month=8&groupBy=day", { headers: authHeaders });
+  test(calGroup.status === 200 && typeof calGroup.data.data.events === "object", "GET /api/calendar?groupBy=day");
+
+  const calActs = await request("/api/calendar?year=2026&month=8&includeActivities=true", { headers: authHeaders });
+  test(calActs.status === 200, "GET /api/calendar?includeActivities=true");
+
+  const calHelper = await request("/api/calendar/current", { headers: authHeaders });
+  test(calHelper.status === 200, "GET /api/calendar/current");
+
+  // 15. SECURITY GUARDS
   const unauth = await request("/api/trips/my");
   test(unauth.status === 401, "Guard: 401 Unauthorized");
 

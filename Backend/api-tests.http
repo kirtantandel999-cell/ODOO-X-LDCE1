@@ -1144,6 +1144,128 @@ Content-Type: {{contentType}}
   "content": "Content"
 }
 
+###
+
+
+### ====================================================================
+### SCREEN 11: CALENDAR VIEW (ALL SCENARIOS)
+### ====================================================================
+
+### STEP 1: Get Current Month Calendar Data
+# @name getCalendarCurrent
+GET {{baseUrl}}/api/calendar
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 2: Get Specific Month Calendar Data (August 2026)
+# @name getCalendarAugust2026
+GET {{baseUrl}}/api/calendar?year=2026&month=8
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 3: Get Previous Month Calendar Data (July 2026)
+# @name getCalendarPreviousMonth
+GET {{baseUrl}}/api/calendar?year=2026&month=7
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 4: Get Next Month Calendar Data (September 2026)
+# @name getCalendarNextMonth
+GET {{baseUrl}}/api/calendar?year=2026&month=9
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 5: Search Trips in Calendar (e.g. search=tokyo)
+# @name searchCalendar
+GET {{baseUrl}}/api/calendar?year=2026&month=8&search=tokyo
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 6: Filter Calendar by Status (e.g. status=upcoming)
+# @name filterCalendarStatus
+GET {{baseUrl}}/api/calendar?year=2026&month=8&status=upcoming
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 7: Filter Calendar by Destination ID
+# @name filterCalendarDestination
+GET {{baseUrl}}/api/calendar?year=2026&month=8&destinationId=1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 8a: Sort Calendar Events by Start Date Ascending
+# @name sortCalendarStartDateAsc
+GET {{baseUrl}}/api/calendar?year=2026&month=8&sort=start_date_asc
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 8b: Sort Calendar Events by Start Date Descending
+# @name sortCalendarStartDateDesc
+GET {{baseUrl}}/api/calendar?year=2026&month=8&sort=start_date_desc
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 9: Group Calendar Events by Day of Month
+# @name groupCalendarByDay
+GET {{baseUrl}}/api/calendar?year=2026&month=8&groupBy=day
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 10: Group Calendar Events by Destination
+# @name groupCalendarByDestination
+GET {{baseUrl}}/api/calendar?year=2026&month=8&groupBy=destination
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 11: Include Itinerary Activity Events in Calendar
+# @name includeActivitiesCalendar
+GET {{baseUrl}}/api/calendar?year=2026&month=8&includeActivities=true
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### STEP 12: Combined Calendar Query (Search + Status + Sort + GroupBy)
+# @name combinedCalendarQuery
+GET {{baseUrl}}/api/calendar?year=2026&month=8&search=japan&status=upcoming&sort=start_date_asc&groupBy=day
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+
+
+### ====================================================================
+### SCREEN 11 VALIDATION & SECURITY CHECKS
+### ====================================================================
+
+### 13a. Invalid Month > 12 -> Expects 400 Bad Request
+# @name testInvalidMonth13
+GET {{baseUrl}}/api/calendar?year=2026&month=13
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13b. Invalid Month = 0 -> Expects 400 Bad Request
+# @name testInvalidMonthZero
+GET {{baseUrl}}/api/calendar?year=2026&month=0
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13c. Invalid Sort -> Expects 400 Bad Request
+# @name testInvalidCalendarSort
+GET {{baseUrl}}/api/calendar?year=2026&month=8&sort=invalid_sort
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13d. Invalid GroupBy -> Expects 400 Bad Request
+# @name testInvalidCalendarGroupBy
+GET {{baseUrl}}/api/calendar?year=2026&month=8&groupBy=invalid_group
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### 13e. Unauthorized Calendar Access (No Token) -> Expects 401 Unauthorized
+# @name testUnauthorizedCalendar
+GET {{baseUrl}}/api/calendar?year=2026&month=8
+Content-Type: {{contentType}}
+
+
 
 
 
