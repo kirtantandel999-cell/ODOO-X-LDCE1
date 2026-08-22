@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Trips · GlobalTrotter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="trip-listing.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">GT</span> GlobalTrotter</a>
+    <div class="topbar-right">
+      <span class="crumb">My Trips</span>
+      <div class="avatar-wrap">
+        <button class="avatar-btn" id="avatarBtn" aria-label="Account menu">A</button>
+        <div class="avatar-menu" id="avatarMenu">
+          <a href="#">My Profile</a>
+          <a href="#">My Trips</a>
+          <a href="#">Log Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HEAD -->
+<div class="page-head">
+  <div class="wrap">
+    <h1>Your trips</h1>
+    <p>Everything you're planning, packing for, or looking back on — all in one place.</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-field">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="tripSearch" placeholder="Search bar ......" aria-label="Search your trips">
+    </div>
+    <div class="toolbar-selects">
+      <select id="groupBySelect" aria-label="Group by">
+        <option value="status">Group by: Status</option>
+        <option value="none">Group by: None</option>
+      </select>
+      <select id="filterSelect" aria-label="Filter">
+        <option value="all">Filter: All</option>
+        <option value="ongoing">Filter: Ongoing</option>
+        <option value="upcoming">Filter: Up-coming</option>
+        <option value="completed">Filter: Completed</option>
+      </select>
+      <select id="sortBySelect" aria-label="Sort by">
+        <option value="date">Sort by: Date</option>
+        <option value="name">Sort by: Name</option>
+        <option value="budget">Sort by: Budget</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ONGOING -->
+  <section class="trip-group" data-group="ongoing">
+    <div class="group-head">
+      <span class="status-dot ongoing"></span>
+      <h2>Ongoing</h2>
+      <span class="group-count" data-count>1</span>
+    </div>
+    <div class="trip-list" data-list>
+      <article class="trip-card" data-trip data-name="Rajasthan Heritage Circuit" data-status="ongoing" data-start="2026-08-18" data-end="2026-08-27" data-budget="42000" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=300&q=70" alt="City Palace, Udaipur"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Rajasthan Heritage Circuit</div>
+              <div class="trip-route">Udaipur → Jodhpur → Jaipur</div>
+            </div>
+            <span class="status-pill ongoing">Ongoing</span>
+          </div>
+          <p class="trip-overview">Palaces, forts and a backwater‑style lake cruise — day 4 of 9, currently in Jodhpur.</p>
+          <div class="trip-foot">
+            <span>18 – 27 Aug 2026</span>
+            <span>3 stops</span>
+            <span class="budget">₹42,000</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="group-empty" data-empty>No ongoing trips match your search.</p>
+  </section>
+
+  <!-- UP-COMING -->
+  <section class="trip-group" data-group="upcoming">
+    <div class="group-head">
+      <span class="status-dot upcoming"></span>
+      <h2>Up-coming</h2>
+      <span class="group-count" data-count>1</span>
+    </div>
+    <div class="trip-list" data-list>
+      <article class="trip-card" data-trip data-name="Kerala Backwaters Escape" data-status="upcoming" data-start="2026-10-05" data-end="2026-10-11" data-budget="35000" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=300&q=70" alt="Kerala backwaters"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Kerala Backwaters Escape</div>
+              <div class="trip-route">Kochi → Alleppey → Kumarakom</div>
+            </div>
+            <span class="status-pill upcoming">Up-coming</span>
+          </div>
+          <p class="trip-overview">A slow houseboat trip through palm-lined canals, with two nights on the water.</p>
+          <div class="trip-foot">
+            <span>5 – 11 Oct 2026</span>
+            <span>3 stops</span>
+            <span class="budget">₹35,000</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="group-empty" data-empty>No up-coming trips match your search.</p>
+  </section>
+
+  <!-- COMPLETED -->
+  <section class="trip-group" data-group="completed">
+    <div class="group-head">
+      <span class="status-dot completed"></span>
+      <h2>Completed</h2>
+      <span class="group-count" data-count>2</span>
+    </div>
+    <div class="trip-list" data-list>
+      <article class="trip-card" data-trip data-name="Goa Coastal Weekend" data-status="completed" data-start="2026-02-13" data-end="2026-02-16" data-budget="18000" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=300&q=70" alt="Goa beach"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Goa Coastal Weekend</div>
+              <div class="trip-route">Panaji → Palolem</div>
+            </div>
+            <span class="status-pill completed">Completed</span>
+          </div>
+          <p class="trip-overview">Quiet beaches, a sunset shack dinner, and a lazy morning market walk.</p>
+          <div class="trip-foot">
+            <span>13 – 16 Feb 2026</span>
+            <span>2 stops</span>
+            <span class="budget">₹18,000</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card" data-trip data-name="Himachal Ridge Trek" data-status="completed" data-start="2025-11-02" data-end="2025-11-09" data-budget="27000" tabindex="0">
+        <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=300&q=70" alt="Himalayan ridge trek"></div>
+        <div class="trip-main">
+          <div class="trip-top">
+            <div>
+              <div class="trip-title">Himachal Ridge Trek</div>
+              <div class="trip-route">Manali → Kasol</div>
+            </div>
+            <span class="status-pill completed">Completed</span>
+          </div>
+          <p class="trip-overview">A seven-day trek with panoramic valley views and two nights of camping.</p>
+          <div class="trip-foot">
+            <span>2 – 9 Nov 2025</span>
+            <span>2 stops</span>
+            <span class="budget">₹27,000</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="group-empty" data-empty>No completed trips match your search.</p>
+  </section>
+
+</main>
+
+<button class="fab" id="planTripBtn" onclick="window.location.href='create-trip.html'">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  <span class="fab-label">Plan a Trip</span>
+</button>
+
+<script src="trip-listing.js"></script>
+</body>
+</html>
